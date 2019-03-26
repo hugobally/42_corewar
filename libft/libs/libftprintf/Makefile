@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/30 09:24:07 by hbally            #+#    #+#              #
-#    Updated: 2019/03/26 14:29:36 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/26 15:05:00 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,6 @@ $(OBJS)				: 	$(OBJSDIR)/%.o : $(SRCSDIR)/%.c
 
 .PHONY				:	clean
 clean				:
-						rm -f $(OBJS) $(DEPENDENCIES)
 						rm -rf $(OBJSDIR)
 
 .PHONY				:	fclean

@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/15 17:12:52 by hbally            #+#    #+#              #
-#    Updated: 2019/03/26 14:37:49 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/26 15:08:47 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,19 +30,19 @@ modules		:
 
 .PHONY		:	libft
 libft		:
-				make -C libft
+				$($(MAKE) -C libft | grep -v "Nothing" || true)
 
 # Cleanup
 
 .PHONY		:	clean
 clean		:
-				@$(foreach MODULE, $(MODULES), $(MAKE) -C $(MODULE) clean ;)
-				@$(foreach LIB, $(LIBDIRS), $(MAKE) -C $(LIB) clean ;)
+				@$(foreach MODULE, $(MODULES), $(MAKE) clean -C $(MODULE);)
+				@$(foreach LIB, $(LIBS), $(MAKE) clean -C $(LIB);)
 
 .PHONY		:	fclean
 fclean		:	clean
-				@$(foreach MODULE, $(MODULES), $(MAKE) -C $(MODULE) fclean ;)
-				@$(foreach LIB, $(LIBDIRS), $(MAKE) -C $(LIB) fclean ;)
+				@$(foreach MODULE, $(MODULES), $(MAKE) fclean -C $(MODULE);)
+				@$(foreach LIB, $(LIBS), $(MAKE) fclean -C $(LIB);)
 
 .PHONY		:	re
 re			:	fclean all
