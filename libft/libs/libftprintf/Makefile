@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/30 09:24:07 by hbally            #+#    #+#              #
-#    Updated: 2019/03/26 13:54:45 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/26 14:29:36 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME				=	libftprintf.a
 
 LIBFT				=	../..
 
-SRCSDIR   			=	srcs
+SRCSDIR   			=	src
 
 SRCS				:=	$(SRCSDIR)/ft_printf.c				\
 						$(SRCSDIR)/ft_dprintf.c				\
@@ -38,14 +38,14 @@ SRCS				:=	$(SRCSDIR)/ft_printf.c				\
 						$(SRCSDIR)/reset.c					\
 						$(SRCSDIR)/exit_clean.c
 
-OBJSDIR   			=	objs
+OBJSDIR   			=	obj
 
 OBJS				:=	$(SRCS:$(SRCSDIR)/%.c=$(OBJSDIR)/%.o)
 
 DEPENDENCIES		=	$(OBJS:%.o=%.d)
 
-INCLUDES			=	-I $(LIBFT)/includes/ 				\
-						-I includes/						\
+INC					=	-I $(LIBFT)/inc/ 				\
+						-I inc/							\
 
 CC					=	gcc
 
@@ -59,8 +59,8 @@ $(NAME)				: 	$(OBJS)
 -include $(DEPENDENCIES)
 
 $(OBJS)				: 	$(OBJSDIR)/%.o : $(SRCSDIR)/%.c
-						@mkdir -p objs
-						$(CC) -o $@ $(CFLAGS) $(INCLUDES) -MMD -c $<
+						@mkdir -p $(OBJSDIR)
+						$(CC) -o $@ $(CFLAGS) $(INC) -MMD -c $<
 
 .PHONY				:	clean
 clean				:

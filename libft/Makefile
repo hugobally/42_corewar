@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 13:48:37 by hbally            #+#    #+#              #
-#    Updated: 2019/03/26 13:55:28 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/26 14:30:47 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,15 @@ NAME				=	libft.a
 
 # Dir Variables
 
-SRCSDIR   			=	srcs
+SRCSDIR   			=	src
 
-OBJSDIR   			=	objs
+OBJSDIR   			=	obj
 
-MAIN_LIBDIR			=	libs
+LIBSPATH			=	libs
 
-LIBDIRS				:=	$(MAIN_LIBDIR)/libftprintf
+LIBS				:=	$(LIBSPATH)/libftprintf
 
-INCLUDES			=	-I includes
+INC					=	-I inc
 
 # File Variables
 
@@ -119,9 +119,9 @@ SRCS				:=	$(SRCS_RAW:%.c=$(SRCSDIR)/%.c)
 
 OBJS  				:=	$(SRCS:$(SRCSDIR)/%.c=$(OBJSDIR)/%.o)
 
-LIBOBJS				:=	$(patsubst %, %/objs/*.o, $(LIBDIRS))
+LIBOBJS				:=	$(patsubst %, %/obj/*.o, $(LIBS))
 
-LIBFILES			:=	$(foreach LIB, $(LIBDIRS), $(LIB)/$(notdir $(LIB)).a)
+LIBFILES			:=	$(foreach LIB, $(LIBS), $(LIB)/$(notdir $(LIB)).a)
 
 DEPENDENCIES		:=	$(OBJS:%.o=%.d)
 
@@ -133,7 +133,7 @@ CFLAGS				+=	-Wall -Werror -Wextra
 
 # Main Target
 
-all					:	makelibs $(NAME)
+all					:	sublibs $(NAME)
 
 
 $(NAME)				: 	$(OBJS) $(LIBFILES)
@@ -141,32 +141,31 @@ $(NAME)				: 	$(OBJS) $(LIBFILES)
 						ar rc $@ $(LIBOBJS)
 						ranlib $@
 
-# Make Subsystems
+# Make SubLibs
 
-.PHONY				:	makelibs
-makelibs			:
-						@$(foreach LIBDIR, $(LIBDIRS), make -C $(LIBDIR);)
+.PHONY				:	sublibs
+sublibs				:
+						@$(foreach LIB, $(LIBS), make -C $(LIB);)
 
 # Compile Objs
 
 -include $(DEPENDENCIES)
 
 $(OBJS)				: 	$(OBJSDIR)/%.o : $(SRCSDIR)/%.c
-						@mkdir -p objs
-						$(CC) -o $@ $(CFLAGS) $(INCLUDES) -MMD -c $<
+						@mkdir -p $(OBJSDIR)
+						$(CC) -o $@ $(CFLAGS) $(INC) -MMD -c $<
 
 # Cleanup
 
 .PHONY				:	clean
 clean				:
-						rm -f $(OBJS) $(DEPENDENCIES)
 						rm -rf $(OBJSDIR)
-						@$(foreach LIBDIR, $(LIBDIRS), make clean -C $(LIBDIR);)
+						@$(foreach LIB, $(LIBS), make clean -C $(LIB);)
 
 .PHONY				:	fclean
 fclean				:	clean
 						rm -f $(NAME)
-						@$(foreach LIBDIR, $(LIBDIRS), make fclean -C $(LIBDIR);)
+						@$(foreach LIB, $(LIBS), make fclean -C $(LIB);)
 
 .PHONY				:	re
 re					:	fclean all
