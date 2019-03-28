@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/03/26 14:58:06 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/28 14:07:22 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ OBJSDIR   			=	obj
 
 LIBSPATH			=	..
 
-LIBS				:=	$(LIBSPATH)/libft
+LIBS				:=	$(LIBSPATH)/libft				\
+						$(LIBSPATH)/libcorewar
 
 INCDIR				:=	$(LIBS:%=%/inc) 				\
 						inc
