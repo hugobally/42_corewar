@@ -16,8 +16,7 @@ typedef enum			e_errors
 
 typedef enum			e_instruction
 {
-	live = 10,
-	frites,
+	live,
 	fork
 }						t_instruction;
 
