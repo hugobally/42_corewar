@@ -48,6 +48,7 @@ typedef struct			s_process
 	unsigned int		remaining_cycles;
 	t_params			params;
 	uint8_t				regs[REG_NUMBER][REG_SIZE];
+	t_bool				is_alive;
 	struct s_process	*next;
 }						t_process;
 
