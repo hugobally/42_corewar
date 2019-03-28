@@ -6,16 +6,15 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/03/28 14:07:22 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/28 13:06:44 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				=	../corewar
+NAME				=	./libcorewar.a
 
 # Raw Sources
 
-SRCS_RAW			:=	main.c							\
-						arguments.c						\
+SRCS_RAW			:=	op.c							\
 
 # Directories
 
@@ -25,8 +24,7 @@ OBJSDIR   			=	obj
 
 LIBSPATH			=	..
 
-LIBS				:=	$(LIBSPATH)/libft				\
-						$(LIBSPATH)/libcorewar
+LIBS				:=	$(LIBSPATH)/libft
 
 INCDIR				:=	$(LIBS:%=%/inc) 				\
 						inc
@@ -56,7 +54,8 @@ INCLIBS				:=	$(foreach LIB,$(LIBS),-L $(LIB) $(subst lib,-l,$(notdir $(LIB))))
 all					:	libs $(NAME)
 
 $(NAME)				: 	$(OBJS) $(LIBFILES)
-						@$(CC) -o $@ $(CFLAGS) $(INCLIBS) $(OBJS)
+						ar rc $@ $(OBJS)
+						ranlib $@
 
 # Make Libs
 

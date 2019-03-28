@@ -56,4 +56,5 @@ corewar
 asm
 obj
 *.cor
+*.s
 *.sw*
