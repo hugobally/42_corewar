@@ -16,7 +16,8 @@ NAME				=	../corewar
 
 SRCS_RAW			:=	main.c							\
 						arguments.c						\
-
+						players.c						\
+						
 # Directories
 
 SRCSDIR   			=	src
