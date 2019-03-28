@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 13:52:53 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/28 14:02:57 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/28 14:18:36 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define OP_TYPE_H
 
 # include <stdint.h>
+
+typedef enum		e_bool
+{
+	false,
+	true
+}					t_bool;
 
 typedef struct		s_op
 {
