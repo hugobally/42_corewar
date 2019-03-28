@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 14:03:12 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/28 14:04:52 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/28 14:39:10 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define LIBCOREWAR_H
 
 # include "op.h"
-# include "op_type.h"
+# include "shared_types.h"
 
 #endif
