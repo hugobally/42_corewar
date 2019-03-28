@@ -15,6 +15,7 @@ NAME				=	../corewar
 # Raw Sources
 
 SRCS_RAW			:=	main.c							\
+						arguments.c						\
 
 # Directories
 
