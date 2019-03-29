@@ -23,8 +23,8 @@ typedef enum			e_instruction
 	live,
 	load,
 	store,
-	addition,
-	soustration,
+	add,
+	sub,
 	and,
 	or,
 	xor,
@@ -62,7 +62,8 @@ typedef struct			s_process
 	unsigned int		remaining_cycles;
 	t_params			params;
 	uint8_t				regs[REG_NUMBER][REG_SIZE];
-	int					is_alive[2];
+	t_bool				is_alive;
+	int					player_last_live;
 	struct s_process	*next;
 }						t_process;
 
