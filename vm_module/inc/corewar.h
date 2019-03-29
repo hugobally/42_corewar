@@ -4,6 +4,10 @@
 # include "../../libft/inc/libft.h"
 # include "../../libcorewar/inc/libcorewar.h"
 
+# define REG 1
+# define IND 2
+# define DIR 3
+
 typedef enum			e_errors
 {
 	ok,
@@ -17,7 +21,21 @@ typedef enum			e_errors
 typedef enum			e_instruction
 {
 	live,
-	fork
+	load,
+	store,
+	addition,
+	soustration,
+	and,
+	or,
+	xor,
+	zjmp,
+	ldi,
+	sti,
+	fork,
+	lid,
+	lldi,
+	lfork,
+	aff,
 }						t_instruction;
 
 typedef struct			s_params
@@ -44,7 +62,7 @@ typedef struct			s_process
 	unsigned int		remaining_cycles;
 	t_params			params;
 	uint8_t				regs[REG_NUMBER][REG_SIZE];
-	t_bool				is_alive;
+	int					is_alive[2];
 	struct s_process	*next;
 }						t_process;
 
