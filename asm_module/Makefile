@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/03/28 14:06:49 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/29 16:54:01 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,12 @@ NAME				=	../asm
 
 # Raw Sources
 
-SRCS_RAW			:=	main.c							\
+SRCS_RAW			:=	main.c				\
+						lexer_get.c			\
+						lexer_tokens.c		\
+						lexer_tokens_str.c	\
+						lexer_exit.c		\
+						error_handler.c
 
 # Directories
 
@@ -55,7 +60,7 @@ INCLIBS				:=	$(foreach LIB,$(LIBS),-L $(LIB) $(subst lib,-l,$(notdir $(LIB))))
 all					:	libs $(NAME)
 
 $(NAME)				: 	$(OBJS) $(LIBFILES)
-						@$(CC) -o $@ $(CFLAGS) $(INCLIBS) $(OBJS)
+						$(CC) -o $@ $(CFLAGS) $(INCLIBS) $(OBJS)
 
 # Make Libs
 
