@@ -16,6 +16,7 @@ int		main(int ac, char **av)
 {
     t_core		core;
 	t_errors	ret;
+	
 	ft_bzero(&core, sizeof(t_core));
 	if ((ret = get_arguments(&core, ac, av)))
 		leave(&core, ret);

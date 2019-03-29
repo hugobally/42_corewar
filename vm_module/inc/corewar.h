@@ -30,11 +30,8 @@ typedef struct			s_params
 
 typedef	struct			s_player
 {
+	header_t			head;
 	unsigned int		p;
-	int				 	fd;
-	char				*name;
-	char				*desc;
-	int					size;
 	unsigned char		*proc;
 	struct s_player		*next;
 }						t_player;
@@ -73,4 +70,11 @@ t_errors				get_arguments(t_core *core, int ac, char **av);
 */
 
 t_errors 				new_player(t_core *core, char *av);
+
+/*
+** arena.c
+*/
+
+t_errors				make_arena(t_core *core);
+
 #endif

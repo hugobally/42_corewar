@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/03/28 14:07:22 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/29 12:00:41 by rle-ru           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME				=	../corewar
 SRCS_RAW			:=	main.c							\
 						arguments.c						\
 						players.c						\
+						arena.c							\
 						
 # Directories
 
