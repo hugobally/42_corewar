@@ -32,7 +32,7 @@ typedef	struct			s_player
 {
 	header_t			head;
 	unsigned int		p;
-	unsigned char		*proc;
+	unsigned char		proc[CHAMP_MAX_SIZE];
 	struct s_player		*next;
 }						t_player;
 
@@ -50,13 +50,12 @@ typedef struct			s_process
 
 typedef struct			s_core
 {
-	unsigned char		*arena;
+	unsigned char		arena[MEM_SIZE];
 	unsigned int		next_player;
 	t_player			*players;
 	t_process			*process;
 	unsigned int		dump;
 	unsigned int		max_cycle_to_die;
-
 }             			t_core;
 
 /*
@@ -76,5 +75,17 @@ t_errors 				new_player(t_core *core, char *av);
 */
 
 t_errors				make_arena(t_core *core);
+
+/*
+** process.c
+*/
+
+t_errors				make_process(t_core *core, uint32_t pc);
+
+/*
+** game.c
+*/
+
+t_errors				the_game(t_core *core);
 
 #endif

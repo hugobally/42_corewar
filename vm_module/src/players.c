@@ -4,15 +4,22 @@
 
 void		push_player(t_core *core, t_player *new)
 {
-	new->next = core->players;
-	core->players = new;
+	t_player	*tmp;
+
+	tmp = core->players;
+	while (tmp && tmp->next)
+		tmp = tmp->next;
+	if (tmp)
+		tmp->next = new;
+	else
+		core->players = new;
 }
 
 t_errors	read_proc(int fd, t_player *new)
 {
-	if (!(new->proc = malloc(new->head.prog_size)))
-		return (falloc);
 	if (read(fd, new->proc, new->head.prog_size) < new->head.prog_size)
+		return (badfile);
+	if (read(fd, NULL, 1) > 0)
 		return (badfile);
 	return (ok);
 }
@@ -45,6 +52,7 @@ t_errors	new_player(t_core *core, char *av)
 		return (ret);
 	}
 	close(fd);
+	new->p = core->next_player ? core->next_player : 1;
 	push_player(core, new);
 	return (ok);
 }

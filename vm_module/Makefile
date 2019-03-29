@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/03/29 12:00:41 by rle-ru           ###   ########.fr        #
+#    Updated: 2019/03/29 13:56:16 by rle-ru           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRCS_RAW			:=	main.c							\
 						arguments.c						\
 						players.c						\
 						arena.c							\
+						process.c						\
+						game.c							\
 						
 # Directories
 
