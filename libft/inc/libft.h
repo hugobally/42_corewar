@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 13:46:20 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/26 13:47:03 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/29 09:59:06 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <time.h>
 
 # define GNL_BUFFSIZE 1024
+# define GNL_MAX_LINE_LEN 10000
 
 /*
 ** list functions
