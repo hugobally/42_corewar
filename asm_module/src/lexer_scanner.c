@@ -41,6 +41,7 @@ t_code					token_add(t_tokenlst *lst, const t_token *template,
 	new->type = template->type;
 	new->pos = template->pos;
 	new->pad = template->pad;
+	new->previous = lst->end;
 	if (!lst->start)
 		lst->start = new;
 	if (lst->end)
@@ -56,8 +57,7 @@ t_code					token_add(t_tokenlst *lst, const t_token *template,
 static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 {
 	uint16_t			j;
-	static t_dispatch	tab[4] =
-	{
+	static t_dispatch	tab[4] = {
 		{char_label, &token_single},
 		{char_dir, &token_single},
 		{char_sep, &token_single},
@@ -71,17 +71,17 @@ static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 			return (tab[j].handler(tab[j].type, line, lst));
 		j++;
 	}
-	return (token_str_wrapper(unknown, line, lst));
+	return (token_unknown(unknown, line, lst));
 }
 
 static t_code			process_line(t_line *line, t_tokenlst *lst)
 {
-	t_code	 		   	ret_code;
+	t_code				ret_code;
 
 	line->index = 0;
 	while (line->str[line->index])
 		if ((ret_code = dispatcher(line, lst)) == error)
-			break;
+			break ;
 	if (ret_code == done)
 		ret_code = token_single(char_eol, line, lst);
 	ft_memdel((void**)&(line->str));
@@ -98,18 +98,12 @@ t_code					lexer_scanner(const int fd)
 	ft_bzero(&line, sizeof(t_line));
 	while ((ret = get_next_line(fd, &(line.str))) > 0)
 	{
-		if (line.str[0])
-		{
-			if (process_line(&line, &lst) == error)
-				return (lexer_exit(&lst, err));
-		}
+		if (line.str[0] && process_line(&line, &lst) == error)
+			return (lexer_exit(&lst, err));
 		line.num++;
 	}
-	if (ret == -1)
-		return (lexer_exit(&lst, read_crash));
-	if (ret == -2)
-		return (lexer_exit(&lst, read_linesize));
-	debug_printtokenlst(&lst);
-	//Call Lexer_Check
-	return (lexer_exit(&lst, no_err)); //gnl avec -1 et null pour clean le static
+	if (ret < 0)
+		return (lexer_exit(&lst, ret));
+	return (lexer_exit(&lst, lexer_checker(&lst) == done ? no_err : err));
+			//gnl avec -1 et null pour clean le static dans lexer exit
 }
