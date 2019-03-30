@@ -71,7 +71,7 @@ static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 			return (tab[j].handler(tab[j].type, line, lst));
 		j++;
 	}
-	return (token_str_wrapper(value_unknown, line, lst));
+	return (token_str_wrapper(unknown, line, lst));
 }
 
 static t_code			process_line(t_line *line, t_tokenlst *lst)

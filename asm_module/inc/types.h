@@ -21,12 +21,15 @@ typedef struct		s_line
 
 typedef enum		e_toktype
 {
+	//CHAR values are for debug only
 	cmd = 'C',
-	value_unknown = 'U',
-	value_label = 'L',
-	value_opcode = 'O',
+	unknown = 'U',
+	label = 'L',
+	opcode = 'O',
+	number = 'N',
 	value_reg = 'R',
-	value_number = 'N',
+	value_dir = 'D',
+	value_ind = 'I',
 	char_dir = DIRECT_CHAR,
 	char_label = LABEL_CHAR,
 	char_sep = SEPARATOR_CHAR,
