@@ -98,9 +98,9 @@ t_code					lexer_scanner(const int fd)
 	ft_bzero(&line, sizeof(t_line));
 	while ((ret = get_next_line(fd, &(line.str))) > 0)
 	{
+		line.num++;
 		if (line.str[0] && process_line(&line, &lst) == error)
 			return (lexer_exit(&lst, err));
-		line.num++;
 	}
 	if (ret < 0)
 		return (lexer_exit(&lst, ret));
