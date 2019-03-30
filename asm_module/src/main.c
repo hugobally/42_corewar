@@ -6,15 +6,21 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 12:20:49 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/29 12:22:08 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 11:34:17 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int					main(void)
+#include <fcntl.h>//move if open is moved elsewhere
+#include "libft.h"//debug
+
+int					main(int argc, char **argv)
 {
 	//TEMPORARY
-	lexer_get(0);
+	int fd;
+	(void)argc;
+	fd = open(argv[1], O_RDONLY);
+	lexer_get(fd);
 	//END TEMPORARY
 }
