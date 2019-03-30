@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 14:56:40 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/29 16:37:01 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 11:15:13 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ typedef struct		s_line
 
 typedef enum		e_toktype
 {
-	value_string,
-	value_label,
-	value_opcode,
-	value_reg,
-	value_number,
+	cmd = 'C',
+	value_string = 'S',
+	value_label = 'L',
+	value_opcode = 'O',
+	value_reg = 'R',
+	value_number = 'N',
 	char_dir = DIRECT_CHAR,
 	char_label = LABEL_CHAR,
 	char_sep = SEPARATOR_CHAR,
 	char_eol = EOL_CHAR,
-	quote = QUOTE_CHAR,
-	cmd,
+	quote = QUOTE_CHAR
 }					t_toktype;
 
 typedef struct		s_token
@@ -79,6 +79,7 @@ typedef enum		e_errors
 	read_linesize,
 	filesize,
 	strsize,//no token
+	quote_unterminated, //no token
 	err,
 	no_err
 }					t_errors;
