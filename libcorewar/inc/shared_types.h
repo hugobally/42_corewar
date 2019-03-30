@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 13:52:53 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/28 14:39:01 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 17:19:02 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ typedef struct		s_op
 	uint8_t			boolvalue2_no_idea_wtf_it_does;
 }					t_op;
 
-extern t_op 		op_tab[17];
+extern t_op 		g_op_tab[17];
 
 #endif
