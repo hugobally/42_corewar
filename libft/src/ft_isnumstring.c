@@ -6,19 +6,37 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:25:03 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/30 18:14:51 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 18:45:49 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static uint8_t	check_sizes(char *string, size_t string_len,
+								int32_t number, int8_t negative)
+{
+	size_t		number_len;
+
+	number_len = 1;
+	while (ft_abs32(number) >= 10)
+	{
+		number /= 10;
+		number_len++;
+	}
+	return (number_len + (negative || string[0] == '+') == string_len);
+}
+
 uint8_t			ft_isnumstring(char *string, int32_t number)
 {
 	int32_t		i;
 	int8_t		negative;
+	size_t		len;
 
 	negative = number < 0;
-	i = (int32_t)(ft_strlen(string) - 1);
+	len = ft_strlen(string);
+	if (!string || !check_sizes(string, len, number, negative))
+		return (0);
+	i = (int32_t)(len - 1);
 	while (i >= 0)
 	{
 		if (ft_abs32(number % 10) != string[i] - '0')
