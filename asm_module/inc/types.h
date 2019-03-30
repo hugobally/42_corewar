@@ -15,6 +15,7 @@ typedef struct		s_line
 	uint16_t		num;
 	uint16_t		index;
 }					t_line;
+
 /*
 ** Tokens
 */
@@ -22,11 +23,12 @@ typedef struct		s_line
 typedef enum		e_toktype
 {
 	//CHAR values are for debug only
-	cmd = 'C',
+	cmd_name = 'C',
+	cmd_comment = 'C',
 	unknown = 'U',
 	label = 'L',
 	opcode = 'O',
-	number = 'N',
+	value_num = 'N',
 	value_reg = 'R',
 	value_dir = 'D',
 	value_ind = 'I',
@@ -73,6 +75,9 @@ typedef enum		e_errors
 	strsize,//no token, critical
 	quote_unterminated, //no token -- no critical
 	label_badchar,
+	value_reg_badvalue,
+//	value_num_range, // possibly unused
+	unknown_token,
 	err,
 	no_err
 }					t_errors;
