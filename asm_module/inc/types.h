@@ -22,7 +22,7 @@ typedef struct		s_line
 typedef enum		e_toktype
 {
 	cmd = 'C',
-	value_string = 'S',
+	value_unknown = 'U',
 	value_label = 'L',
 	value_opcode = 'O',
 	value_reg = 'R',
