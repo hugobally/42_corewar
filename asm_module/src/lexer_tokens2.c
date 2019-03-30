@@ -13,9 +13,9 @@ static uint8_t		endofstr(char c)
 				|| ft_iswhitespace(c));
 }
 
-static t_code		token_str(const t_toktype type,
-								t_line *line,
-								t_tokenlst *lst)
+static t_code		tokenize_string(const t_toktype type,
+											t_line *line,
+											t_tokenlst *lst)
 {
 	t_token			template;
 	uint16_t		start;
@@ -36,7 +36,12 @@ static t_code		token_str(const t_toktype type,
 		return (token_add(lst, &template, ft_strlen(template.value)));
 }
 
-t_code				token_str_wrapper(const t_toktype type,
+/*
+** If current char is not whitespace or a comment,
+** we add a new token containing an unknown string
+*/
+
+t_code				token_unknown(const t_toktype type,
 										t_line *line,
 										t_tokenlst *lst)
 {
@@ -48,6 +53,6 @@ t_code				token_str_wrapper(const t_toktype type,
 			line->index++;
 	}
 	else
-		return (token_str(type, line, lst));
+		return (tokenize_string(type, line, lst));
 	return (done);
 }
