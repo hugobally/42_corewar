@@ -25,6 +25,9 @@ t_code			lexer_checker(t_tokenlst *lst)
 	tokens_foreach(lst, &find_labels_pass1);
 	tokens_foreach(lst, &find_labels_pass2);
 	tokens_foreach(lst, &find_opcodes);
+	tokens_foreach(lst, &find_registers);
+	tokens_foreach(lst, &find_commands);
+	tokens_foreach(lst, &find_values);
 	debug_printtokenlst(lst);
 	return (done);
 }
