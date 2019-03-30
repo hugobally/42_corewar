@@ -44,6 +44,7 @@ typedef struct		s_token
 	uint32_t		pos;
 	uint8_t			pad;
 	struct s_token	*next;
+	struct s_token	*previous;
 }					t_token;
 
 typedef struct		s_tokenlst
@@ -65,12 +66,13 @@ typedef enum		e_code
 
 typedef enum		e_errors
 {
-	malloc,//no token
-	read_crash,
-	read_linesize,
-	filesize,
-	strsize,//no token
-	quote_unterminated, //no token
+	read_linesize = -2,//no token, critical
+	read_crash = -1,//no token, critical
+	malloc,//no token, critical
+	filesize, //no token, critical
+	strsize,//no token, critical
+	quote_unterminated, //no token -- no critical
+	label_badchar,
 	err,
 	no_err
 }					t_errors;
