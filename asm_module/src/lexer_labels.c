@@ -11,7 +11,10 @@ static void		check_label_badchar(t_token *token)
 	while (token->value[i])
 	{
 		if (!strchr(LABEL_CHARS, token->value[i]))
+		{//
+			ft_printf("bad chars in label name on line %d\n", token->pos & 0x0000FFFF);// debug
 			error_handler(label_badchar, token, 0);
+		}//
 		i++;
 	}
 }
