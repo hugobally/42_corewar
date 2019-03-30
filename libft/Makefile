@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 13:48:37 by hbally            #+#    #+#              #
-#    Updated: 2019/03/26 15:01:06 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/30 17:55:53 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,7 @@ SRCS_RAW			:=	ft_atoi.c 				\
 						ft_iswhitespace.c		\
 						ft_strclen.c			\
 						ft_strcdup.c			\
+						ft_isnumstring.c		\
 						get_next_line.c
 
 # 						END OF SRCS_RAW

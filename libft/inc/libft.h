@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 13:46:20 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/29 09:59:06 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 17:55:23 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_iswhitespace(int c);
+uint8_t				ft_isnumstring(char *string, int32_t number);
 
 int					ft_tolower(int c);
 int					ft_toupper(int c);
