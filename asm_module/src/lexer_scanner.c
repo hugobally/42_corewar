@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/28 15:08:39 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/30 12:14:49 by hbally           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 #include "libcorewar.h"
 #include "types.h"
@@ -100,7 +88,7 @@ static t_code			process_line(t_line *line, t_tokenlst *lst)
 	return (ret_code);
 }
 
-t_code					lexer_get(const int fd)
+t_code					lexer_scanner(const int fd)
 {
 	int32_t				ret;
 	t_line				line;

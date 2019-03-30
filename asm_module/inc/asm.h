@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 13:29:36 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/30 11:26:12 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 13:41:58 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			debug_printtokenlst(t_tokenlst *lst);//
 ** Lexer Pass 1
 */
 
-t_code			lexer_get(const int fd);
+t_code			lexer_scanner(const int fd);
 t_code			lexer_exit(t_tokenlst *lst, t_errors code);
 
 /*
