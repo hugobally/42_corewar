@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 16:14:00 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/29 16:56:54 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 11:18:23 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_code		token_str(const t_toktype type,
 	if (!(template.value))
 		return (error_handler(malloc, 0, 0));
 	else
-		return (token_add(lst, &template));
+		return (token_add(lst, &template, ft_strlen(template.value)));
 }
 
 t_code				token_str_wrapper(const t_toktype type,
@@ -60,6 +60,6 @@ t_code				token_str_wrapper(const t_toktype type,
 			line->index++;
 	}
 	else
-		return (token_string(type, line, lst));
+		return (token_str(type, line, lst));
 	return (done);
 }
