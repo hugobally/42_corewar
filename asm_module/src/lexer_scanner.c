@@ -22,7 +22,7 @@ void			debug_printtokenlst(t_tokenlst *lst)
 }
 
 /*
-** Lexer Pass 1 : Acquire tokens as either
+** Lexer -> Pass 1 - SCANNER : Acquire all the tokens, either as
 ** 					1) special single char
 **					2) anything else in between
 **				  Comments and whitespace are discarded
@@ -56,22 +56,22 @@ t_code					token_add(t_tokenlst *lst, const t_token *template,
 static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 {
 	uint16_t			j;
-	static t_dispatch	tab[5] =
+	static t_dispatch	tab[4] =
 	{
 		{char_label, &token_single},
 		{char_dir, &token_single},
 		{char_sep, &token_single},
 		{quote, &token_quote},
-		{value_string, &token_str_wrapper}
 	};
 
 	j = 0;
-	while (1)
+	while (j < 4)
 	{
-		if (line->str[line->index] == (char)(tab[j].type) || j == 4)
+		if (line->str[line->index] == (char)(tab[j].type))
 			return (tab[j].handler(tab[j].type, line, lst));
 		j++;
 	}
+	return (token_str_wrapper(value_unknown, line, lst));
 }
 
 static t_code			process_line(t_line *line, t_tokenlst *lst)
