@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/03/30 17:10:46 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/30 21:19:06 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SRCS_RAW			:=	main.c						\
 						lexer_tokens2.c				\
 						lexer_exit.c				\
 						lexer_checker.c				\
-						lexer_labels.c				\
-						lexer_opcodes.c				\
+						lexer_find1.c				\
+						lexer_find2.c				\
 						error_handler.c
 
 # Directories
