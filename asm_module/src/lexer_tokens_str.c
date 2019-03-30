@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 16:14:00 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/30 11:18:23 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 12:25:37 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static t_code		token_str(const t_toktype type,
 	uint16_t		start;
 
 	template_init(&template, type, line);
-	start = (line->index)++;
+	start = line->index;
 	while (line->str[line->index + 1] && !endofstr(line->str[line->index + 1]))
 	{
+		ft_printf("looking at char -%c-\n", line->str[line->index + 1]);
 		line->index++;
 		if (line->index - start > MAX_TOKEN_STR_SIZE)
 			return (error_handler(strsize, 0, line));
