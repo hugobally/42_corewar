@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 15:08:39 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/30 11:25:38 by hbally           ###   ########.fr       */
+/*   Updated: 2019/03/30 12:14:49 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void			debug_printtokenlst(t_tokenlst *lst)
 	node = lst->start;
 	while (node)
 	{
-		ft_printf("%c | %s | %d, %d | %d\n", \
+		ft_printf("%30s | %c | pos %03d-%03d | pad %3d\n", \
+				node->value ? node->value : \
+					node->type != '\n' ? (char*)(&(node->type)) : "EOL", \
 				(char)(node->type) != '\n' ? (char)(node->type) : '\\', \
-				node->value ? node->value : "_____", \
 				node->pos & 0x0000FFFFu, \
 				(node->pos & 0xFFFF0000u) >> 16, \
 				node->pad);
@@ -109,10 +110,12 @@ t_code					lexer_get(const int fd)
 	ft_bzero(&line, sizeof(t_line));
 	while ((ret = get_next_line(fd, &(line.str))) > 0)
 	{
-		if (process_line(&line, &lst) == error)
-			return (lexer_exit(&lst, err));
+		if (line.str[0])
+		{
+			if (process_line(&line, &lst) == error)
+				return (lexer_exit(&lst, err));
+		}
 		line.num++;
-		if (line.num == 10) break;//debug
 	}
 	if (ret == -1)
 		return (lexer_exit(&lst, read_crash));
