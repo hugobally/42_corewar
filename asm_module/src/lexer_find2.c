@@ -47,8 +47,14 @@ void				find_commands(t_token *token)
 	{
 		if (!ft_strcmp(token->value, NAME_CMD_STRING))
 			token->type = cmd_name;
-		if (!ft_strcmp(token->value, COMMENT_CMD_STRING))
+		else if (!ft_strcmp(token->value, COMMENT_CMD_STRING))
 			token->type = cmd_comment;
+		else
+		{//
+			token->type = cmd;
+			ft_printf("unknown cmd on line %d\n", token->pos & 0x0000FFFF);//debug
+			error_handler(cmd_unknown, token, 0);
+		}//
 	}
 }
 

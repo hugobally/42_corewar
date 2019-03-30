@@ -23,6 +23,7 @@ typedef struct		s_line
 typedef enum		e_toktype
 {
 	//CHAR values are for debug only
+	cmd = 'C',
 	cmd_name = 'C',
 	cmd_comment = 'C',
 	unknown = 'U',
@@ -77,6 +78,7 @@ typedef enum		e_errors
 	label_badchar,
 	value_reg_badvalue,
 //	value_num_range, // possibly unused
+	cmd_unknown,
 	unknown_token,
 	err,
 	no_err
