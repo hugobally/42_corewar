@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/03/30 13:37:55 by hbally           ###   ########.fr        #
+#    Updated: 2019/03/30 17:10:46 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,14 @@ NAME				=	./asm
 
 # Raw Sources
 
-SRCS_RAW			:=	main.c				\
-						lexer_scanner.c		\
-						lexer_tokens.c		\
-						lexer_tokens_str.c	\
-						lexer_exit.c		\
+SRCS_RAW			:=	main.c						\
+						lexer_scanner.c				\
+						lexer_tokens1.c				\
+						lexer_tokens2.c				\
+						lexer_exit.c				\
+						lexer_checker.c				\
+						lexer_labels.c				\
+						lexer_opcodes.c				\
 						error_handler.c
 
 # Directories
