@@ -13,12 +13,20 @@
 */
 
 # define NUMERIC_CHARS			"-0123456789"
+
 /*
 ** Padding Flags
 */
 
 # define PAD_RIGHT 				1
 # define PAD_LEFT 				2
+
+/*
+** Masks to extract line and column from int64 during error reporting
+*/
+
+# define LINE_MASK 0x0000FFFF
+# define COL_MASK 0xFFFF0000
 
 /*
 ** Size Restrictions
