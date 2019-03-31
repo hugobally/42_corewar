@@ -2,6 +2,7 @@
 # define ASM_H
 
 # include "types.h"
+# include "errors.h"
 # include "string.h"
 
 /*
@@ -45,7 +46,7 @@ t_op			*find_op(char *string);
 ** Errors
 */
 
-t_code			error_handler(t_errors error, t_token *token, t_line *line);
+t_code			error_handler(t_errors error, t_token *token, t_file *file);
 
 /*
 ** Free
