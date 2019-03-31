@@ -22,17 +22,19 @@ typedef struct		s_line
 
 typedef enum		e_toktype
 {
-	//CHAR values are for debug only
+	//CHAR literal values are for debug only
+	//Assign big values to make sure there's no overlap
 	cmd = 'C',
 	cmd_name = 'C',
 	cmd_comment = 'C',
 	unknown = 'U',
 	label = 'L',
 	opcode = 'O',
-	value_num = 'N',
-	value_reg = 'R',
-	value_dir = 'D',
-	value_ind = 'I',
+	reg = 'R',
+	dir_num = 'D',
+	ind_num = 'I',
+	dir_label = 'D',
+	ind_label = 'I',
 	char_dir = DIRECT_CHAR,
 	char_label = LABEL_CHAR,
 	char_sep = SEPARATOR_CHAR,
@@ -69,17 +71,19 @@ typedef enum		e_code
 
 typedef enum		e_errors
 {
-	read_linesize = -2,//no token, critical
+	read_linesize = -2,//no token, critical -- one line is > than max line size
 	read_crash = -1,//no token, critical
 	malloc,//no token, critical
-	filesize, //no token, critical
-	strsize,//no token, critical
+	filesize, //no token, critical -- more than max_token tokens
+	strsize,//no token, critical -- unknown token value > 512
 	quote_unterminated, //no token -- no critical
-	label_badchar,
-	value_reg_badvalue,
+	label_badchar,//forbidden chars
+	label_badformat,//example : 'label : (...)' '%: label'
+	dir_badformat, //example : '  % 50  ' ' % ' ' % :label'
+	reg_badvalue,//r100, rBLA, etc
 //	value_num_range, // possibly unused
-	cmd_unknown,
-	unknown_token,
+	cmd_unknown,//.toto
+	unknown_token,//djsafkashf
 	err,
 	no_err
 }					t_errors;

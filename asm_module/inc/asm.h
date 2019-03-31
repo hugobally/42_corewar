@@ -34,11 +34,10 @@ t_code			token_quote(const t_toktype type,
 */
 
 t_code			lexer_checker(t_tokenlst *lst);
-void			find_labels_pass1(t_token *token);
-void			find_labels_pass2(t_token *token);
+void			find_labels(t_token *token);
 void			find_opcodes(t_token *token);
 void			find_registers(t_token *token);
-void			find_values(t_token *token);
+void			find_num(t_token *token);
 void			find_commands(t_token *token);
 t_op			*find_op(char *string);
 
@@ -47,5 +46,11 @@ t_op			*find_op(char *string);
 */
 
 t_code			error_handler(t_errors error, t_token *token, t_line *line);
+
+/*
+** Free
+*/
+
+void			token_del(t_token *token, t_tokenlst *lst);
 
 #endif
