@@ -1,5 +1,6 @@
 #include "libft.h"
 #include "types.h"
+#include "errors.h"
 #include "libcorewar.h"
 #include "asm.h"
 

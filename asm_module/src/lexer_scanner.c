@@ -1,6 +1,7 @@
 #include "libft.h"
 #include "libcorewar.h"
 #include "types.h"
+#include "errors.h"
 #include "macros.h"
 #include "asm.h"
 
@@ -47,9 +48,8 @@ t_code					token_add(t_tokenlst *lst, const t_token *template,
 	if (lst->end)
 		lst->end->next = new;
 	lst->end = new;
-	lst->size += 1;
 	stored_size += value_size;
-	if (lst->size > MAX_TOKEN_LIST_SIZE || stored_size > MAX_INPUT_FILE_SIZE)
+	if (stored_size > MAX_INPUT_FILE_SIZE)
 		return (error_handler(filesize, 0, 0));
 	return (done);
 }
