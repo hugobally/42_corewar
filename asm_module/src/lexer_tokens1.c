@@ -1,5 +1,6 @@
 #include "libft.h"
 #include "types.h"
+#include "errors.h"
 #include "macros.h"
 #include "asm.h"
 
@@ -42,16 +43,16 @@ t_code			token_quote(const t_toktype type,
 	uint16_t	start;
 
 	template_init(&template, type, line);
-	line->index++;
-	start = line->index;
+	start = ++(line->index);
 	while (line->str[line->index] && line->str[line->index] != QUOTE_CHAR)
 		line->index++;
-	if (!(line->str[line->index]))
-		return (error_handler(quote_unterminated, 0, line));
-	get_right_pad(&template, line);
-	template.value = ft_strsub(line->str, start, (line->index)++ - start);
-	if (!(template.value))
-		return (error_handler(malloc, 0, 0));
+	template.value = ft_strsub(line->str, start, line->index - start);
+	if (line->str[line->index] == QUOTE_CHAR)
+	{
+		line->index++;
+		template.pad = 1;
+	}
 	else
-		return (token_add(lst, &template, ft_strlen(template.value)));
+		template.pad = 0;
+	return (token_add(lst, &template, ft_strlen(template.value)));
 }
