@@ -29,15 +29,15 @@ void				find_registers(t_token *token)
 
 	if (token->type == unknown && token->value[0] == 'r')
 	{
-		token->type = value_reg;
+		token->type = reg;
 		reg_number = ft_atoi(&(token->value[1]));
 		if (!ft_isnumstring(&(token->value[1]), reg_number)
-				|| reg_number < 1 || reg_number > REG_NUMBER
+				|| reg_number < 1
+				|| reg_number > REG_NUMBER
 				|| reg_number > 255)
-		{//
-			ft_printf("bad value on reg value line %d\n", token->pos & 0x0000FFFF);//debug
-			error_handler(value_reg_badvalue, token, 0);
-		}//
+		{
+			error_handler(reg_badvalue, token, 0);
+		}
 	}
 }
 
@@ -50,15 +50,14 @@ void				find_commands(t_token *token)
 		else if (!ft_strcmp(token->value, COMMENT_CMD_STRING))
 			token->type = cmd_comment;
 		else
-		{//
+		{
 			token->type = cmd;
-			ft_printf("unknown cmd on line %d\n", token->pos & 0x0000FFFF);//debug
 			error_handler(cmd_unknown, token, 0);
-		}//
+		}
 	}
 }
 
-void				find_values(t_token *token)
+void				find_num(t_token *token)
 {
 	int				number;
 	int				i;
@@ -70,11 +69,13 @@ void				find_values(t_token *token)
 			i++;
 		number = ft_atoi(&(token->value[i]));
 		if (!ft_isnumstring(&(token->value[i]), number))
-		{//
-			ft_printf("line %d col %d : invalid token '%s'\n", token->pos & 0x0000FFFF, (token->pos & 0xFFFF0000) >> 16, token->value);//
 			error_handler(unknown_token, token, 0);
-		}//
 		else
-			token->type = value_num;
+		{
+			if (token->previous && token->previous->type == char_dir)
+				token->type = dir_num;
+			else
+				token->type = ind_num;
+		}
 	}
 }
