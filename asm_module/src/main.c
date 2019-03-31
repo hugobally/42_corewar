@@ -4,13 +4,21 @@
 
 int					main(int argc, char **argv)
 {
+	t_file			file;
+
 	//TEMPORARY
-	int fd;
 	(void)argc;
 	if (argc == 2)
-		fd = open(argv[1], O_RDONLY);
+	{
+		file.name = argv[1];
+		file.fd = open(file.name, O_RDONLY);
+		if (file.fd == -1)
+			error_handler(open_error, 0, &file);
+		error_handler(no_err, 0, &file);
+	}
 	else
-		fd = 0;
-	lexer_scanner(fd);
+		file.fd = 0;
+	lexer_scanner(file.fd);
+//	close(file.fd);
 	//END TEMPORARY
 }
