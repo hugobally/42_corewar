@@ -82,7 +82,7 @@ static t_code			process_line(t_line *line, t_tokenlst *lst)
 	while (line->str[line->index])
 		if ((ret_code = dispatcher(line, lst)) == error)
 			break ;
-	if (ret_code == done)
+	if (ret_code == done && !(lst->end && lst->end->type == char_eol))
 		ret_code = token_single(char_eol, line, lst);
 	ft_memdel((void**)&(line->str));
 	return (ret_code);
