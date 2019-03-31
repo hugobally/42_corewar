@@ -1,4 +1,5 @@
 #include "types.h"
+#include "errors.h"
 #include "libft.h"
 
 void			token_del(t_token *token, t_tokenlst *lst)
