@@ -41,6 +41,8 @@ static int			ft_bufparse(char *buf, char **line, int fd)
 	static int		size;
 	static int		ret;
 
+	if (fd == -1)
+		return (clean(&i, &j, &size, -1));
 	if (i == 0)
 		if ((ret = (int)read(fd, buf, GNL_BUFFSIZE)) < 1)
 			return (clean(&i, &j, &size, (ret == -1 ? -1 : 0 + *line[0] != 0)));
@@ -76,7 +78,7 @@ int					get_next_line(const int fd, char **line)
 			ft_memdel((void**)&buf);
 		if (line && *line)
 			ft_memdel((void**)line);
-		return (-1);
+		return (ft_bufparse(0, 0, -1));
 	}
 	ret = ft_bufparse(buf, line, fd);
 	if (ret != 1)
