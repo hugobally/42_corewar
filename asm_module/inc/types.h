@@ -6,6 +6,16 @@
 # include "libcorewar.h"
 
 /*
+** File Information Container
+*/
+
+typedef struct		s_file
+{
+	char			*name;
+	int				fd;
+}					t_file;
+
+/*
 ** Line Information Container
 */
 
@@ -56,7 +66,6 @@ typedef struct		s_tokenlst
 {
 	t_token			*start;
 	t_token			*end;
-	uint32_t		size;
 }					t_tokenlst;
 
 /*
@@ -68,25 +77,6 @@ typedef enum		e_code
 	done,
 	error
 }					t_code;
-
-typedef enum		e_errors
-{
-	read_linesize = -2,//no token, critical -- one line is > than max line size
-	read_crash = -1,//no token, critical
-	malloc,//no token, critical
-	filesize, //no token, critical -- more than max_token tokens
-	strsize,//no token, critical -- unknown token value > 512
-	quote_unterminated, //no token -- no critical
-	label_badchar,//forbidden chars
-	label_badformat,//example : 'label : (...)' '%: label'
-	dir_badformat, //example : '  % 50  ' ' % ' ' % :label'
-	reg_badvalue,//r100, rBLA, etc
-//	value_num_range, // possibly unused
-	cmd_unknown,//.toto
-	unknown_token,//djsafkashf
-	err,
-	no_err
-}					t_errors;
 
 /*
 ** Dispatcher Table
