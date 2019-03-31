@@ -1,5 +1,6 @@
 #include "macros.h"
 #include "types.h"
+#include "errors.h"
 #include "libft.h"
 #include "libcorewar.h"
 #include "asm.h"
