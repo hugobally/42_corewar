@@ -1,8 +1,8 @@
-#include "types.h"
 #include "asm.h"
+#include "types.h"
+#include "errors.h"
 
-#include "libft.h"//DEBUG
-
+#include <stdio.h>//debug
 /*
 ** Lexer -> Pass 2 - IDENTIFIER : Determine what each unknown token is
 **								  and identify errors
@@ -57,6 +57,6 @@ t_code			lexer_checker(t_tokenlst *lst)
 	tokens_foreach(lst, &find_commands);
 	tokens_foreach(lst, &find_num);
 	tokens_clear(lst);
-	debug_printtokenlst(lst);
+//	debug_printtokenlst(lst);
 	return (done);
 }
