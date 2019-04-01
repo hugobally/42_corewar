@@ -56,6 +56,5 @@ t_code			lexer(t_tokenlst *lst, const t_file *file)
 	tokens_foreach(lst, &find_num);
 	tokens_clear(lst);
 //	debug_printtokenlst(lst);
-	parser(lst, file);
-	return (done);
+	return (parser(lst, file));
 }
