@@ -21,7 +21,6 @@ void		get_params3(t_core *core, t_process *pro, uint32_t i, uint8_t code)
 		pro->instruction_size += DIR_SIZE;
 		i+= DIR_SIZE;
 	}
-	return (i);
 }
 
 int			get_params2(t_core *core, t_process *pro, uint32_t i, uint8_t code)
@@ -93,14 +92,17 @@ void		read_instructions(t_core *core, t_process *pro)
 {
 	uint32_t	i;
 
-	ft_bzero(pro->params, sizeof(t_params));
+	pro->params.bytecode = 0;
+	pro->params.p1 = 0;
+	pro->params.p2 = 0;
+	pro->params.p3 = 0;
 	pro->instruction_size = 1;
 	i = pro->pc;
 	pro->instruction = core->arena[get_pc(i)] > 16 ? 0 : core->arena[get_pc(i)];
 	++i;
 	if (g_op_tab[pro->instruction - 1].has_ocp)
 	{
-		pro->bytecode = core->arena[i++];
+		pro->params.bytecode = core->arena[i++];
 		++pro->instruction_size;
 		get_params(core, pro, i);
 	}

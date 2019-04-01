@@ -126,7 +126,7 @@ int						ft_store(t_core *core, t_process *process);
 int						ft_add(t_core *core, t_process *process);
 int						ft_sub(t_core *core, t_process *process);
 int						ft_and(t_core *core, t_process *process);
-
+void					read_instructions(t_core *core, t_process *pro);
 
 int						get_pc(uint32_t i);
 

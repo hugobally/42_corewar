@@ -24,4 +24,5 @@ int			ft_instructions(t_core *core, t_process *process)
 	if (op == sub)
 		ft_and(core, process);
 	process->pc += process->instruction_size;
+	return (0);
 }
