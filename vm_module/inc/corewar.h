@@ -32,19 +32,19 @@ typedef enum			e_instruction
 	zjmp,
 	ldi,
 	sti,
-	fork,
+	forky,
 	lid,
 	lldi,
-	lfork,
+	lforky,
 	aff,
 }						t_instruction;
 
 typedef struct			s_params
 {
 	unsigned char		bytecode;
-	short				p1;
-	short				p2;
-	short				p3;
+	int					p1;
+	int					p2;
+	int					p3;
 }						t_params;
 
 typedef	struct			s_player

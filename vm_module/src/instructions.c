@@ -27,7 +27,7 @@ int			ft_load(t_core *core, t_process *process)
 	if (p1 == 3)
 		process->regs[r - 1] = params.p1;
 	else if (p1 == 2)
-		process->regs[r - 1] = core->arena[process->pc + r % IDX_MOD];
+		process->regs[r - 1] = core->arena[get_pc(process->pc + r % IDX_MOD)];
 	process->carry = 1;
 	return (0);
 }
@@ -46,7 +46,7 @@ int			ft_store(t_core *core, t_process *process)
 	if (p2 == REG)
 		process->regs[params.p2 - 1] = (int)process->regs[params.p1 - 1];
 	else if (p2 == IND)
-		core->arena[process->pc + params.p1 % IDX_MOD] = process->regs[params.p1 - 1];
+		core->arena[get_pc(process->pc + params.p1 % IDX_MOD)] = process->regs[params.p1 - 1];
 	return (0);
 }
 
