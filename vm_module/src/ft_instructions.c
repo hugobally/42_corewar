@@ -1,3 +1,5 @@
+#include "corewar.h"
+
 int			ft_instructions(t_core *core, t_process *process)
 {
 	int op;
