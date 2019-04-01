@@ -114,5 +114,11 @@ t_errors				the_game(t_core *core);
 */
 
 int						ft_instructions(t_core *core, t_process *process);
+int 					ft_live(t_core *core, t_process *process);
+int						ft_load(t_core *core, t_process *process);
+int						ft_store(t_core *core, t_process *process);
+int						ft_add(t_core *core, t_process *process);
+int						ft_sub(t_core *core, t_process *process);
+int						ft_and(t_core *core, t_process *process);
 
 #endif
