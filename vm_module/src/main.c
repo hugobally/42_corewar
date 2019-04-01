@@ -1,4 +1,39 @@
 #include "corewar.h"
+#include <stdlib.h>
+
+void	del_process(t_core *core)
+{
+	t_process	*tmp;
+	t_process	*pro;
+
+	pro = core->process;
+	while (pro)
+	{
+		tmp = pro;
+		pro = pro->next;
+		free(tmp);
+	}
+}
+
+void	del_players(t_core *core)
+{
+	t_player	*tmp;
+	t_player	*pla;
+
+	pla = core->players;
+	while (pla)
+	{
+		tmp = pla;
+		pla = pla->next;
+		free(tmp);
+	}
+}
+
+void	print_error(t_errors ret)
+{
+	(void)ret;
+	ft_printf("Error\n");
+}
 
 void	leave(t_core *core, t_errors ret)
 {

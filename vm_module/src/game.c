@@ -46,11 +46,23 @@ void		call_instructions(t_core *core)
 	tmp = core->process;
 	while (tmp)
 	{
-		--tmp->remaining_cycles;
-		ft_instructions(core, tmp);
+		if (tmp->remaining_cycles)
+			--tmp->remaining_cycles;
+		else
+			ft_instructions(core, tmp);
+		tmp = tmp->next;
 	}
 }
 
+void		find_winner(t_core *core)
+{
+	t_player	*tmp;
+
+	tmp = core->players;
+	while (tmp && tmp->p != core->last_live_done_by)
+		tmp = tmp->next;
+	ft_printf("The magnificent winner is %s\n", tmp->head.prog_name);
+}
 
 t_errors	the_game(t_core *core)
 {
@@ -69,5 +81,6 @@ t_errors	the_game(t_core *core)
 		}
 		proc = core->process;
 	}
+	find_winner(core);
 	return (ok);
 }

@@ -20,7 +20,7 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 				core->next_player = ft_atoi(av[++i]);
 		}
 		else
-			if (ret = new_player(core, av[i]) != ok)
+			if ((ret = new_player(core, av[i])) != ok)
 				return (ret);
 	}
 	return (ok);
