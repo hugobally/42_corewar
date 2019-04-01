@@ -31,8 +31,16 @@ void	del_players(t_core *core)
 
 void	print_error(t_errors ret)
 {
-	(void)ret;
-	ft_printf("Error\n");
+	if (ret == falloc)
+		ft_putendl_fd("Malloc failed", 2);
+	else if (ret == badarg)
+		ft_putendl_fd("Bad argument", 2);
+	else if (ret == badchamp)
+		ft_putendl_fd("Bad champ", 2);
+	else if (ret == badfile)
+		ft_putendl_fd("Bad file", 2);
+	else if (ret == badopen)
+		ft_putendl_fd("Bad open", 2);
 }
 
 void	leave(t_core *core, t_errors ret)
@@ -51,10 +59,12 @@ int		main(int ac, char **av)
 	t_errors	ret;
 
 	ft_bzero(&core, sizeof(t_core));
-	if ((ret = get_arguments(&core, ac, av)))
+	if ((ret = get_arguments(&core, ac, av)) != ok)
 		leave(&core, ret);
-	if ((ret = make_arena(&core)))
+	ft_printf("Arguments done\n");
+	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
+	ft_printf("Arena made");
 	if ((ret = the_game(&core) != ok))
 		leave(&core, ret);
 	return (0);

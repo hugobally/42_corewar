@@ -1,9 +1,5 @@
 #include "corewar.h"
 
-/*
-** recupere les arguments, decide du placement des process.
-*/
-
 t_errors	get_arguments(t_core *core, int ac, char **av)
 {
 	int			i;

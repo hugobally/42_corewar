@@ -62,7 +62,7 @@ void		find_winner(t_core *core)
 	tmp = core->players;
 	while (tmp && tmp->p != core->last_live_done_by)
 		tmp = tmp->next;
-	ft_printf("The magnificent winner is %s\n", tmp->head.prog_name);
+	ft_printf("The magnificent winner is %s\n", tmp ? tmp->head.prog_name : "Ta soeur");
 }
 
 t_errors	the_game(t_core *core)
