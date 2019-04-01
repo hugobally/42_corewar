@@ -17,6 +17,8 @@ typedef enum		e_errors
 	read_crash = -1,//no token, critical
 	malloc = 0,//no token, critical
 	filesize, //no token, critical -- more than max_token tokens
+	no_instructions,
+	header_missing,//name/comment not at top
 
 	scanner_error,
 
@@ -29,7 +31,6 @@ typedef enum		e_errors
 
 	lexer_error,
 	
-	header_missing,//name/comment not at top
 	header_noquote,//missing quote after cmd
 	header_badquote,//unterminated or empty quote
 	header_namesize,
@@ -37,6 +38,7 @@ typedef enum		e_errors
 	header_duplicate,//.name (...) .name
 	
 	expected_eol,
+
 	parser_error,
 	//special codes
 	query, // query error_handler to see if errors have occured

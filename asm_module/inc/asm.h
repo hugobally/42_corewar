@@ -43,6 +43,13 @@ void			find_commands(t_token *token);
 t_op			*find_op(char *string);
 
 /*
+** Parser
+*/
+
+t_code				syntax(t_tokenlst *lst, const t_file *file);
+t_code				get_header(t_tokenlst *lst, header_t *header);
+
+/*
 ** Errors
 */
 
