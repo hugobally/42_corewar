@@ -11,14 +11,15 @@ int					main(int argc, char **argv)
 	if (argc == 2)
 	{
 		file.name = argv[1];
+		error_handler(no_err, 0, &file);
 		file.fd = open(file.name, O_RDONLY);
 		if (file.fd == -1)
-			error_handler(open_error, 0, &file);
-		error_handler(no_err, 0, &file);
+			error_handler(open_error, 0, 0);
 	}
 	else
 		file.fd = 0;
 	scanner(&file);
 //	close(file.fd);
 	//END TEMPORARY
+	return (0);
 }
