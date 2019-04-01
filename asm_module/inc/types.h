@@ -6,6 +6,16 @@
 # include "libcorewar.h"
 
 /*
+** Label Table
+*/
+
+typedef struct		s_label
+{
+	char			*string;
+	uint32_t		offset;
+}					t_label;
+
+/*
 ** File Information Container
 */
 
@@ -66,6 +76,7 @@ typedef struct		s_tokenlst
 {
 	t_token			*start;
 	t_token			*end;
+	t_token			*prog_start;
 }					t_tokenlst;
 
 /*

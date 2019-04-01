@@ -26,11 +26,17 @@ typedef enum		e_errors
 	reg_badvalue,//r100, rBLA, etc
 	cmd_unknown,//.toto
 	unknown_token,//djsafkashf
-	quote_unterminated, //no token -- no critical
-	quote_empty,
 
 	lexer_error,
 	
+	header_missing,//name/comment not at top
+	header_noquote,//missing quote after cmd
+	header_badquote,//unterminated or empty quote
+	header_namesize,
+	header_commentsize,
+	header_duplicate,//.name (...) .name
+	
+	expected_eol,
 	parser_error,
 	//special codes
 	query, // query error_handler to see if errors have occured
