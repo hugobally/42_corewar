@@ -12,10 +12,10 @@
 void			debug_printtokenlst(t_tokenlst *lst);//
 
 /*
-** Lexer Scanner
+** Scanner
 */
 
-t_code			scanner(const int fd);
+t_code			scanner(const t_file *file);
 t_code			scanner_exit(t_tokenlst *lst, t_errors code);
 void			template_init(t_token *template, t_toktype type, t_line *line);
 void			get_right_pad(t_token *template, t_line *line);
@@ -31,10 +31,10 @@ t_code			token_quote(const t_toktype type,
 								t_tokenlst *lst);
 
 /*
-** Lexer Checker
+** Lexer
 */
 
-t_code			lexer(t_tokenlst *lst);
+t_code			lexer(t_tokenlst *lst, const t_file *file);
 void			find_labels(t_token *token);
 void			find_opcodes(t_token *token);
 void			find_registers(t_token *token);

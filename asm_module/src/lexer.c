@@ -47,7 +47,7 @@ void			tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 	}
 }
 
-t_code			lexer(t_tokenlst *lst)
+t_code			lexer(t_tokenlst *lst, const t_file *file)
 {
 	tokens_foreach(lst, &find_labels);
 	tokens_foreach(lst, &find_opcodes);
@@ -56,5 +56,6 @@ t_code			lexer(t_tokenlst *lst)
 	tokens_foreach(lst, &find_num);
 	tokens_clear(lst);
 //	debug_printtokenlst(lst);
+	parser(lst, file);
 	return (done);
 }

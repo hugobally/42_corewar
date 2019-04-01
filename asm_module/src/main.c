@@ -18,7 +18,7 @@ int					main(int argc, char **argv)
 	}
 	else
 		file.fd = 0;
-	scanner(file.fd);
+	scanner(file);
 //	close(file.fd);
 	//END TEMPORARY
 }
