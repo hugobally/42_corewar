@@ -2,11 +2,14 @@
 #include "types.h"
 #include "errors.h"
 
-#include <stdio.h>//debug
+///////////////////////////////////////////////////////////////
+
 /*
-** Lexer -> Pass 2 - IDENTIFIER : Determine what each unknown token is
-**								  and identify errors
+** Lexer Pass 2 : - Assign a type to all unknown tokens
+**				  - Remove '%' and ':' tokens (no need for them anymore)
 */
+
+///////////////////////////////////////////////////////////////
 
 void			tokens_clear(t_tokenlst *lst)
 {
@@ -44,12 +47,7 @@ void			tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 	}
 }
 
-/*
-** Lexer Pass 2 : - Assign a type to all unknown tokens
-**				  - Remove '%' and ':' tokens (no need for them anymore)
-*/
-
-t_code			lexer_checker(t_tokenlst *lst)
+t_code			lexer(t_tokenlst *lst)
 {
 	tokens_foreach(lst, &find_labels);
 	tokens_foreach(lst, &find_opcodes);

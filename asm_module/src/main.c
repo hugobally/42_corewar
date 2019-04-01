@@ -18,7 +18,7 @@ int					main(int argc, char **argv)
 	}
 	else
 		file.fd = 0;
-	lexer_scanner(file.fd);
+	scanner(file.fd);
 //	close(file.fd);
 	//END TEMPORARY
 }
