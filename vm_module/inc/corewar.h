@@ -49,7 +49,7 @@ typedef struct			s_params
 typedef	struct			s_player
 {
 	header_t			head;
-	unsigned int		p;
+	int					p;
 	unsigned char		proc[CHAMP_MAX_SIZE];
 	struct s_player		*next;
 }						t_player;
@@ -61,7 +61,7 @@ typedef struct			s_process
 	unsigned int		instruction;
 	unsigned int		remaining_cycles;
 	t_params			params;
-	uint8_t				regs[REG_NUMBER][REG_SIZE];
+	int32_t				regs[REG_NUMBER];
 	t_bool				is_alive;
 	int					player_last_live;
 	struct s_process	*next;
@@ -70,11 +70,12 @@ typedef struct			s_process
 typedef struct			s_core
 {
 	unsigned char		arena[MEM_SIZE];
-	unsigned int		next_player;
+	int					next_player;
 	t_player			*players;
 	t_process			*process;
 	unsigned int		dump;
 	unsigned int		max_cycle_to_die;
+	int					last_live_done_by;
 }             			t_core;
 
 /*
@@ -106,5 +107,11 @@ t_errors				make_process(t_core *core, uint32_t pc);
 */
 
 t_errors				the_game(t_core *core);
+
+/*
+** Instructions
+*/
+
+int						ft_instructions(t_core *core, t_process *process);
 
 #endif

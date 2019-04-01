@@ -24,9 +24,9 @@ int			ft_load(t_core *core, t_process *process)
 	p1 = ft_type_param(bytecode, 1);
 	r = params.p2;
 	if (p1 == 3)
-		process->regs[r - 1][0] = params.p1;
+		process->regs[r - 1] = params.p1;
 	else if (p1 == 2)
-		process->regs[r - 1][0] = core->arena[process->pc + r % IDX_MOD];
+		process->regs[r - 1] = core->arena[process->pc + r % IDX_MOD];
 	process->carry = 1;
 	return (0);
 }
@@ -43,9 +43,9 @@ int			ft_store(t_core *core, t_process *process)
 	p2 = ft_type_param(bytecode, 2);
 	r = params.p1;
 	if (p2 == REG)
-		process->regs[params.p2 - 1][0] = process->regs[params.p1 - 1][0];
+		process->regs[params.p2 - 1] = (int)process->regs[params.p1 - 1];
 	else if (p2 == IND)
-		core->arena[process->pc + params.p1 % IDX_MOD] = process->regs[params.p1 - 1][0];
+		core->arena[process->pc + params.p1 % IDX_MOD] = process->regs[params.p1 - 1];
 	return (0);
 }
 
@@ -54,7 +54,7 @@ int			ft_add(t_core *core, t_process *process)
 	t_params params;
 
 	params = process->params;
-	process->regs[params.p3 - 1][0] = process->regs[params.p2 - 1][0] + process->regs[params.p1 - 1][0];
+	process->regs[params.p3 - 1] = process->regs[params.p2 - 1] + process->regs[params.p1 - 1];
 	return(0);
 }
 
