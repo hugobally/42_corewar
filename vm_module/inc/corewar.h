@@ -107,6 +107,7 @@ t_errors				make_arena(t_core *core);
 */
 
 t_errors				make_process(t_core *core, uint32_t pc);
+void					push_process(t_core *core, t_process *new);
 
 /*
 ** game.c
@@ -142,6 +143,7 @@ int						ft_aff(t_core *core, t_process *process);
 typedef int				(*t_inst_tab)(t_core *, t_process *);
 extern	t_inst_tab		g_op_inst_tab[17];
 
+void					read_instructions(t_core *core, t_process *pro);
 
 
 int						get_pc(uint32_t i);

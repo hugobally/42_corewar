@@ -19,4 +19,4 @@ t_inst_tab			g_op_inst_tab[17] =
 	&ft_lldi,
 	&ft_lfork,
 	&ft_aff
-}
+};

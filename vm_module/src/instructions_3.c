@@ -2,6 +2,7 @@
 
 int			ft_zjmp(t_core *core, t_process *process)
 {
+	(void)core;
 	if (process->carry == true)
 		process->pc = process->pc + process->params.p1;
 	return (0);
@@ -19,24 +20,25 @@ int			ft_ldi(t_core *core, t_process *process)
 	if (p1 == REG)
 	{
 		if (p2 == REG)
-			process->regs[params.p3 - 1] = core->arena + get_pc((process->regs[params.p1 - 1] + process->regs[params.p2 - 1]) % IDX_MOD);
+			process->regs[params.p3 - 1] = core->arena[get_pc((process->regs[params.p1 - 1] + process->regs[params.p2 - 1]) % IDX_MOD)];
 		if (p2 == DIR)
-			process->regs[params.p3 - 1] = core->arena + get_pc((process->regs[params.p1 - 1] + params.p2) % IDX_MOD);
+			process->regs[params.p3 - 1] = core->arena[get_pc((process->regs[params.p1 - 1] + params.p2) % IDX_MOD)];
 	}
 	if (p1 == DIR)
 	{
 		if (p2 == REG)
-			process->regs[params.p3 - 1] = core->arena + get_pc((params.p1 + process->regs[params.p2 - 1]) % IDX_MOD);
+			process->regs[params.p3 - 1] = core->arena[get_pc((params.p1 + process->regs[params.p2 - 1]) % IDX_MOD)];
 		if (p2 == DIR)
-			process->regs[params.p3 - 1] = core->arena + get_pc((params.p1 + params.p2) % IDX_MOD);
+			process->regs[params.p3 - 1] = core->arena[get_pc((params.p1 + params.p2) % IDX_MOD)];
 	}
 	if (p1 == IND)
 	{
 		if (p2 == REG)
-			process->regs[params.p3 - 1] = core->arena + get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + process->regs[params.p2 - 1]) % IDX_MOD);
+			process->regs[params.p3 - 1] = core->arena[get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + process->regs[params.p2 - 1]) % IDX_MOD)];
 		if (p2 == DIR)
-			process->regs[params.p3 - 1] = core->arena + get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + params.p2) % IDX_MOD);
+			process->regs[params.p3 - 1] = core->arena[get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + params.p2) % IDX_MOD)];
 	}
+	return (0);
 }
 
 int			ft_sti(t_core *core, t_process *process)
@@ -69,6 +71,7 @@ int			ft_sti(t_core *core, t_process *process)
 		if (p3 == DIR)
 			core->arena[get_pc((core->arena[get_pc(process->pc + params.p2 % IDX_MOD)] + params.p3) % IDX_MOD)] = process->regs[params.p1];
 	}
+	return (0);
 }
 
 int			ft_fork(t_core *core, t_process *process)

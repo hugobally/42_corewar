@@ -4,8 +4,9 @@ int			ft_sub(t_core *core, t_process *process)
 {
 	t_params params;
 
+	(void)core;
 	params = process->params;
-	process->regs[params.p3 - 1][0] = process->regs[params.p1 - 1] - process->regs[params.p2 - 1];
+	process->regs[params.p3 - 1] = process->regs[params.p1 - 1] - process->regs[params.p2 - 1];
 	return(0);
 }
 
