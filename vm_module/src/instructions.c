@@ -7,7 +7,8 @@ int 		ft_live(t_core *core, t_process *process)
 
 	params = process->params;
 	process->is_alive = 1;
-	process->player_last_live = params.p1;
+	core->last_live_done_by = params.p1;
+	core->nbr_live++;
 	player = params.p1;
 	return (player);
 }
@@ -56,26 +57,4 @@ int			ft_add(t_core *core, t_process *process)
 	params = process->params;
 	process->regs[params.p3 - 1] = process->regs[params.p2 - 1] + process->regs[params.p1 - 1];
 	return(0);
-}
-
-int			ft_instructions(t_core *core, t_process *process)
-{
-	int op;
-
-	if (process->remaining_cycles != 0)
-		return(0);
-	process->remaining_cycles = -1;
-	op = process->instruction;
-	if (op == live)
-		return (ft_live(core, process));
-	if (op == load)
-		return(ft_load(core, process));
-	if (op == store)
-		return(ft_store(core, process));
-	if (op == add)
-		return(ft_add(core, process));
-	if (op == sub)
-		return(ft_sub(core, process));
-	if (op == and)
-		return(ft_and(core, process));
 }

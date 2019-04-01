@@ -1,5 +1,19 @@
 #include "corewar.h"
 
+void		check_delta(t_core *core)
+{
+	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)
+	{
+		if (core->max_cycle_to_die > CYCLE_DELTA)
+			core->max_cycle_to_die -= CYCLE_DELTA;
+		else
+			core->max_cycle_to_die = 0;
+		core->max_checks = MAX_CHECKS;
+	}
+	core->nbr_live = 0;
+}
+
+
 void		kill_process(t_core *core)
 {
 	t_process	*pre;
@@ -23,7 +37,21 @@ void		kill_process(t_core *core)
 		tmp = tmp->next;
 		next = tmp->next;
 	}
+	check_delta(core);
 }
+
+void		call_instructions(t_core *core)
+{
+	t_process	*tmp;
+
+	tmp = core->process;
+	while (tmp)
+	{
+		--tmp->remaining_cycles;
+		ft_instructions(core, tmp);
+	}
+}
+
 
 t_errors	the_game(t_core *core)
 {
@@ -34,6 +62,7 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
+		call_instructions(core);
 		if (--cycles == 0)
 		{
 			kill_process(core);

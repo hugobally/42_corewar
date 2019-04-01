@@ -11,17 +11,21 @@ void		add_process(t_player *pl, t_core *core, uint32_t pc)
 
 t_errors	make_arena(t_core *core)
 {
+	int			cur;
 	t_player	*pl;
 	t_errors	ret;
 
+	cur = 0;
 	pl = core->players;
 	core->max_cycle_to_die = CYCLE_TO_DIE;
+	core->max_checks = MAX_CHECKS;
 	while (pl)
 	{
-		add_process(pl, core, 10);
-		if ((ret = make_process(core, 10)) != ok)
+		add_process(pl, core, cur);
+		if ((ret = make_process(core, cur)) != ok)
 			return (ret);
 		pl = pl->next;
+		cur += MEM_SIZE / core->nb_players;
 	}
 	return (ok);
 }
