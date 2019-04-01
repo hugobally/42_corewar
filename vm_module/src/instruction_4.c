@@ -45,3 +45,17 @@ int			ft_lfork(t_core *core, t_process *process)
 	push_process(core, new_process);
 	return (0);
 }
+
+int			ft_aff(t_core *core, t_process *process)
+{
+	t_params params;
+
+	params = process->params;
+	ft_putchar((char)process->regs[params.p1 - 1] % 256);
+	return (0);
+}
+
+int			ft_error(t_core *core, t_process *process)
+{
+	return (0);
+}

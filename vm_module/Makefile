@@ -20,9 +20,13 @@ SRCS_RAW			:=	main.c							\
 						arena.c							\
 						process.c						\
 						game.c							\
+						decoding.c 						\
 						instructions.c					\
 						instructions_2.c				\
+						instructions_3.c				\
+						instructions_4.c				\
 						ft_instructions.c				\
+						functions_tab.c 				\
 						get_pc.c						\
 						
 # Directories

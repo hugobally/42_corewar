@@ -83,7 +83,6 @@ typedef struct			s_core
 	unsigned int		nbr_live;
 }             			t_core;
 
-typedef int				(*f)(t_core *, t_process *);
 
 /*
 ** arguments.c
@@ -120,12 +119,29 @@ t_errors				the_game(t_core *core);
 */
 
 int						ft_instructions(t_core *core, t_process *process);
+int						ft_type_param(unsigned char bytecode, int p);
+int						ft_error(t_core *core, t_process *process);
 int 					ft_live(t_core *core, t_process *process);
 int						ft_load(t_core *core, t_process *process);
 int						ft_store(t_core *core, t_process *process);
 int						ft_add(t_core *core, t_process *process);
 int						ft_sub(t_core *core, t_process *process);
 int						ft_and(t_core *core, t_process *process);
+int						ft_or(t_core *core, t_process *process);
+int						ft_xor(t_core *core, t_process *process);
+int						ft_zjmp(t_core *core, t_process *process);
+int						ft_ldi(t_core *core, t_process *process);
+int						ft_sti(t_core *core, t_process *process);
+int						ft_fork(t_core *core, t_process *process);
+int						ft_lld(t_core *core, t_process *process);
+int						ft_lldi(t_core *core, t_process *process);
+int						ft_lfork(t_core *core, t_process *process);
+int						ft_aff(t_core *core, t_process *process);
+
+
+typedef int				(*t_inst_tab)(t_core *, t_process *);
+extern	t_inst_tab		g_op_inst_tab[17];
+
 
 
 int						get_pc(uint32_t i);
