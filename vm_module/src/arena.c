@@ -16,6 +16,7 @@ t_errors	make_arena(t_core *core)
 
 	pl = core->players;
 	core->max_cycle_to_die = CYCLE_TO_DIE;
+	core->max_checks = MAX_CHECKS;
 	while (pl)
 	{
 		add_process(pl, core, 10);

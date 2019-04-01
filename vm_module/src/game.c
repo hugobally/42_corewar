@@ -25,6 +25,18 @@ void		kill_process(t_core *core)
 	}
 }
 
+void		call_instructions(t_core *core)
+{
+	t_process	*tmp;
+
+	tmp = core->process;
+	while (tmp)
+	{
+		--tmp->remaining_cycles;
+		ft_instructions(core, tmp);
+	}
+}
+
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
@@ -34,6 +46,7 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
+		call_instructions(core);
 		if (--cycles == 0)
 		{
 			kill_process(core);
