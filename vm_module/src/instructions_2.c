@@ -20,5 +20,16 @@ int			ft_and(t_core *core, t_process *process)
 	p1 = ft_type_param(params.bytecode, 1);
 	p2 = ft_type_param(params.bytecode, 2);
 	p3 = ft_type_param(params.bytecode, 3);
+	if (p3 == REG)
+	{
+		if (p1 == REG)
+		{
+			if (p2 == REG)
+				process->regs[params.p3 - 1] = process->regs[params.p1 - 1] && process->regs[params.p2 - 1];
+			if (p2 == DIR)
+				process->regs[params.p3 - 1] = process->regs[params.p1 - 1] && params.p2;
+			if (p2 == IND)
+		}
+	}
 	
 }

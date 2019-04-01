@@ -108,4 +108,10 @@ t_errors				make_process(t_core *core, uint32_t pc);
 
 t_errors				the_game(t_core *core);
 
+/*
+** Instructions
+*/
+
+int						ft_instructions(t_core *core, t_process *process);
+
 #endif
