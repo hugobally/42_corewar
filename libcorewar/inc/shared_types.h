@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 13:52:53 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/30 17:19:02 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/01 12:09:02 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct		s_op
 	uint8_t			opcode;
 	uint32_t		cycles;
 	char			*info;
-	uint8_t			boolvalue1_no_idea_wtf_it_does;
+	uint8_t			has_ocp;
 	uint8_t			boolvalue2_no_idea_wtf_it_does;
 }					t_op;
 

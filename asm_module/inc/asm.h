@@ -47,6 +47,12 @@ t_op			*find_op(char *string);
 */
 
 t_code			error_handler(t_errors error, t_token *token, t_file *file);
+void			error_scanner(t_errors err, t_file *file);
+void			error_parser(t_errors err, t_token *token, t_file *file);
+void			error_lexer(t_errors err, t_token *token, t_file *file);
+void			build_errstr_notok(t_errors error, t_errstr *tab, t_file *file);
+void			build_errstr_tok(t_errors error, t_token *token,
+									t_errstr *tab, t_file *file);
 
 /*
 ** Free
