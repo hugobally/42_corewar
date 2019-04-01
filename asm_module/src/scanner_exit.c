@@ -17,7 +17,7 @@ void			token_del(t_token *token, t_tokenlst *lst)
 	ft_memdel((void**)&(token));
 }
 
-t_code			lexer_exit(t_tokenlst *lst, t_errors code)
+t_code			scanner_exit(t_tokenlst *lst, t_errors code)
 {
 	(void)lst;
 	(void)code;

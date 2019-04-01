@@ -1,9 +1,10 @@
 #include "libft.h"
-#include "libcorewar.h"
 #include "types.h"
 #include "errors.h"
 #include "macros.h"
 #include "asm.h"
+
+///////////////////////////////////////////////////////////////
 
 void			debug_printtokenlst(t_tokenlst *lst)
 {
@@ -21,6 +22,7 @@ void			debug_printtokenlst(t_tokenlst *lst)
 		node = node->next;
 	}
 }
+///////////////////////////////////////////////////////////////
 
 /*
 ** Lexer -> Pass 1 - SCANNER : Acquire all the tokens, either as
@@ -30,29 +32,7 @@ void			debug_printtokenlst(t_tokenlst *lst)
 **				  We store info about whitespace inside each token
 */
 
-t_code					token_add(t_tokenlst *lst, const t_token *template,
-									const size_t value_size)
-{
-	t_token				*new;
-	static size_t		stored_size;
-
-	if (!(new = (t_token*)ft_memalloc(sizeof(t_token))))
-		return (error_handler(malloc, 0, 0));
-	new->value = template->value;
-	new->type = template->type;
-	new->pos = template->pos;
-	new->pad = template->pad;
-	new->previous = lst->end;
-	if (!lst->start)
-		lst->start = new;
-	if (lst->end)
-		lst->end->next = new;
-	lst->end = new;
-	stored_size += value_size;
-	if (stored_size > MAX_INPUT_FILE_SIZE)
-		return (error_handler(filesize, 0, 0));
-	return (done);
-}
+///////////////////////////////////////////////////////////////
 
 static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 {
@@ -71,7 +51,7 @@ static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 			return (tab[j].handler(tab[j].type, line, lst));
 		j++;
 	}
-	return (token_unknown(unknown, line, lst));
+	return (token_unknown_wrapper(unknown, line, lst));
 }
 
 static t_code			process_line(t_line *line, t_tokenlst *lst)
@@ -88,7 +68,7 @@ static t_code			process_line(t_line *line, t_tokenlst *lst)
 	return (ret_code);
 }
 
-t_code					lexer_scanner(const int fd)
+t_code					scanner(const int fd)
 {
 	int32_t				ret;
 	t_line				line;
@@ -100,10 +80,10 @@ t_code					lexer_scanner(const int fd)
 	{
 		line.num++;
 		if (line.str[0] && process_line(&line, &lst) == error)
-			return (lexer_exit(&lst, err));
+			return (scanner_exit(&lst, err));
 	}
 	if (ret < 0)
-		return (lexer_exit(&lst, ret));
-	return (lexer_exit(&lst, lexer_checker(&lst) == done ? no_err : err));
+		return (scanner_exit(&lst, ret));
+	return (scanner_exit(&lst, lexer(&lst) == done ? no_err : err));
 			//gnl avec -1 et null pour clean le static dans lexer exit
 }
