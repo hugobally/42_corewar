@@ -22,19 +22,31 @@ void					error_lexer(t_errors err, t_token *token, t_file *file)
 
 void					error_parser(t_errors err, t_token *token, t_file *file)
 {
-	(void)err;
-	(void)token;
-	(void)file;
+	static t_errstr		tab[7] = {
+		{header_noquote, "Missing command parameter after", 0, 0, 0},
+		{header_badquote, "Bad quote format", 0, 0, 0},
+		{header_namesize, "Name is too long (Max ", 1, PROG_NAME_LENGTH, ")"},
+		{header_commentsize, "Comment is too long (Max ", 1,
+														COMMENT_LENGTH, ")"},
+		{header_duplicate, "Duplicate command", 0, 0, 0},
+		{expected_eol, "Expected end of instruction after ", 0, 0, 0},
+		{0, 0, 0, 0, 0}
+	};
+
+	if (token && file)
+		build_errstr_tok(err, token, tab, file);
 }
 
 void					error_scanner(t_errors err, t_file *file)
 {
-	static t_errstr		tab[6] = {
+	static t_errstr		tab[8] = {
 		{malloc, "Malloc", 0, 0, 0},
 		{open_error, "File could not be opened", 0, 0, 0},
 		{read_crash, "Read Failure", 0, 0, 0},
 		{read_linesize, "Line too big (Max", 1, GNL_MAX_LINE_LEN, "b)"},
 		{filesize, "Input file too big (Max", 1, MAX_INPUT_FILE_SIZE, "b)"},
+		{no_instructions, "No instructions found", 0, 0, 0},
+		{header_missing, "Missing header command", 0, 0, 0},
 		{0, 0, 0, 0, 0}
 	};
 

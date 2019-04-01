@@ -56,6 +56,8 @@ void					print_error(char *error, uint8_t has_pos,
 		ft_printf("%s%s:", WHT, file->name);
 		if (has_pos)
 			ft_printf("%d:%d: ", pos & LINE_MASK, (pos & COL_MASK) >> 16);
+		else
+			ft_printf(" ");
 		ft_printf("%serror: %s%s%s\n", RED, WHT, error, RESET);
 		if (has_pos)
 			print_line(file, pos);
