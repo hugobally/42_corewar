@@ -46,8 +46,11 @@ void		call_instructions(t_core *core)
 	tmp = core->process;
 	while (tmp)
 	{
-		--tmp->remaining_cycles;
-		ft_instructions(core, tmp);
+		if (tmp->remaining_cycles)
+			--tmp->remaining_cycles;
+		else
+			ft_instructions(core, tmp);
+		tmp = tmp->next;
 	}
 }
 
