@@ -33,6 +33,8 @@ typedef struct		s_op
 	uint8_t			boolvalue2_no_idea_wtf_it_does;
 }					t_op;
 
+typedef int			(*f)(t_core *, t_process *);
+
 extern t_op 		g_op_tab[17];
 
 #endif

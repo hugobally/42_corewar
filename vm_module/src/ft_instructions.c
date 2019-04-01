@@ -4,7 +4,7 @@ int			ft_instructions(t_core *core, t_process *process)
 {
 	int op;
 
-	if (process->remaining_cycles != 0)
+	if (process->remaining_cycles != 0 || process->instruction == 0)
 		return(0);
 	op = process->instruction;
 	if (op == live)
@@ -21,4 +21,5 @@ int			ft_instructions(t_core *core, t_process *process)
 		ft_and(core, process);
 	if (op == sub)
 		ft_and(core, process);
+	//avancer process de instruct_size 
 }

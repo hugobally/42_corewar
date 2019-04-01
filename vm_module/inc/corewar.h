@@ -20,6 +20,7 @@ typedef enum			e_errors
 
 typedef enum			e_instruction
 {
+	error,
 	live,
 	load,
 	store,
