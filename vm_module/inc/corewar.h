@@ -76,6 +76,8 @@ typedef struct			s_core
 	unsigned int		dump;
 	unsigned int		max_cycle_to_die;
 	int					last_live_done_by;
+	unsigned int		max_checks;
+	unsigned int		nbr_live;
 }             			t_core;
 
 /*
