@@ -26,7 +26,7 @@ t_errors	read_proc(int fd, t_player *new)
 
 t_errors	read_header(int fd, t_player *new)
 {
-	if (read(fd, (unsigned char*)new, sizeof(header_t)) < sizeof(header_t))
+	if (read(fd, (unsigned char*)new, sizeof(header_t)) < (ssize_t)sizeof(header_t))
 		return (badfile);
 	return (ok);
 }

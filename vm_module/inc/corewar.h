@@ -8,6 +8,7 @@
 # define IND 2
 # define DIR 3
 
+
 typedef enum			e_errors
 {
 	ok,
@@ -82,6 +83,8 @@ typedef struct			s_core
 	unsigned int		nbr_live;
 }             			t_core;
 
+typedef int				(*f)(t_core *, t_process *);
+
 /*
 ** arguments.c
 */
@@ -125,6 +128,6 @@ int						ft_sub(t_core *core, t_process *process);
 int						ft_and(t_core *core, t_process *process);
 
 
-int						get_pc(i);
+int						get_pc(uint32_t i);
 
 #endif

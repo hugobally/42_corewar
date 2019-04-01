@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_type.h                                          :+:      :+:    :+:   */
+/*   shared_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 13:52:53 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/01 12:09:02 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/01 16:50:28 by rle-ru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ typedef struct		s_op
 	uint8_t			has_ocp;
 	uint8_t			boolvalue2_no_idea_wtf_it_does;
 }					t_op;
-
-typedef int			(*f)(t_core *, t_process *);
 
 extern t_op 		g_op_tab[17];
 
