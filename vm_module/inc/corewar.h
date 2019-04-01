@@ -64,6 +64,7 @@ typedef struct			s_process
 	t_params			params;
 	int32_t				regs[REG_NUMBER];
 	t_bool				is_alive;
+	int					instruction_size;
 	struct s_process	*next;
 }						t_process;
 
@@ -122,5 +123,8 @@ int						ft_store(t_core *core, t_process *process);
 int						ft_add(t_core *core, t_process *process);
 int						ft_sub(t_core *core, t_process *process);
 int						ft_and(t_core *core, t_process *process);
+
+
+int						get_pc(i);
 
 #endif

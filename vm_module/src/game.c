@@ -13,7 +13,6 @@ void		check_delta(t_core *core)
 	core->nbr_live = 0;
 }
 
-
 void		kill_process(t_core *core)
 {
 	t_process	*pre;
