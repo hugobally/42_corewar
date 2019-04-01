@@ -23,8 +23,8 @@ t_code			token_add(t_tokenlst *lst, const t_token *template,
 									const size_t value_size);
 t_code			token_single(const t_toktype type,
 								t_line *line, t_tokenlst *lst);
-t_code			token_unknown(const t_toktype type,
-									t_line *line, t_tokenlst *lst);
+t_code			token_unknown_wrapper(const t_toktype type,
+											t_line *line, t_tokenlst *lst);
 t_code			token_newline(t_line *line, t_tokenlst *lst);
 t_code			token_quote(const t_toktype type,
 								t_line *line,
