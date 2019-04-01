@@ -63,7 +63,6 @@ typedef struct			s_process
 	t_params			params;
 	int32_t				regs[REG_NUMBER];
 	t_bool				is_alive;
-	int					player_last_live;
 	struct s_process	*next;
 }						t_process;
 

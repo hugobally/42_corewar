@@ -36,11 +36,19 @@ int			ft_and(t_core *core, t_process *process)
 			if (p2 == REG)
 				process->regs[params.p3 - 1] = params.p1 && process->regs[params.p2 - 1];
 			if (p2 == DIR)
-				process->regs[params.p3 - 1] = process->regs[params.p1 - 1] && params.p2;
+				process->regs[params.p3 - 1] = params.p1 && params.p2;
 			if (p2 == IND)
-				process->regs[params.p3 - 1] = process->regs[params.p1 - 1] && core->arena[process->pc + params.p2 % IDX_MOD];
-
+				process->regs[params.p3 - 1] = params.p1 && core->arena[process->pc + params.p2 % IDX_MOD];
+		}
+		if (p1 == IND)
+		{
+			if (p2 == REG)
+				process->regs[params.p3 - 1] = core->arena[process->pc + params.p1 % IDX_MOD] && process->regs[params.p2 - 1];
+			if (p2 == DIR)
+				process->regs[params.p3 - 1] = core->arena[process->pc + params.p1 % IDX_MOD] && params.p2;
+			if (p2 == IND)
+				process->regs[params.p3 - 1] = core->arena[process->pc + params.p1 % IDX_MOD] && core->arena[process->pc + params.p2 % IDX_MOD];
 		}
 	}
-	
+	return(0);
 }

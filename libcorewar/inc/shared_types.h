@@ -29,7 +29,7 @@ typedef struct		s_op
 	uint8_t			opcode;
 	uint32_t		cycles;
 	char			*info;
-	uint8_t			boolvalue1_no_idea_wtf_it_does;
+	uint8_t			has_ocp;
 	uint8_t			boolvalue2_no_idea_wtf_it_does;
 }					t_op;
 
