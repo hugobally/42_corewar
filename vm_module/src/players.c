@@ -17,17 +17,24 @@ void		push_player(t_core *core, t_player *new)
 
 t_errors	read_proc(int fd, t_player *new)
 {
+	ft_printf("TEST_READ_PROC_IN\n");
 	if (read(fd, new->proc, new->head.prog_size) < new->head.prog_size)
 		return (badfile);
 	if (read(fd, NULL, 1) > 0)
 		return (badfile);
+	ft_printf("READ_PROC_OUT\n");
 	return (ok);
 }
 
+#include <stdlib.h>
+
 t_errors	read_header(int fd, t_player *new)
 {
-	if (read(fd, (unsigned char*)new, sizeof(header_t)) < sizeof(header_t))
-		return (badfile);
+	ft_printf("Read : %d\n", read(fd, new, sizeof(header_t)));
+	ft_printf("%d\n", sizeof(header_t));
+	ft_printf("Magic : %x\nProg size : %x\n", new->head.magic, new->head.prog_size);
+	ft_printf("TEST_READ_HEADER\n");
+	ft_printf("Magic : %u\nProg name : %s\nProg_size : %u\nComment : %s\n", new->head.magic, new->head.prog_name, new->head.prog_size, new->head.comment);
 	return (ok);
 }
 

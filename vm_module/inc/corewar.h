@@ -8,6 +8,7 @@
 # define IND 2
 # define DIR 3
 
+
 typedef enum			e_errors
 {
 	ok,
@@ -20,6 +21,7 @@ typedef enum			e_errors
 
 typedef enum			e_instruction
 {
+	error,
 	live,
 	load,
 	store,
@@ -31,19 +33,19 @@ typedef enum			e_instruction
 	zjmp,
 	ldi,
 	sti,
-	fork,
+	forky,
 	lid,
 	lldi,
-	lfork,
+	lforky,
 	aff,
 }						t_instruction;
 
 typedef struct			s_params
 {
 	unsigned char		bytecode;
-	short				p1;
-	short				p2;
-	short				p3;
+	int					p1;
+	int					p2;
+	int					p3;
 }						t_params;
 
 typedef	struct			s_player
@@ -63,6 +65,7 @@ typedef struct			s_process
 	t_params			params;
 	int32_t				regs[REG_NUMBER];
 	t_bool				is_alive;
+	int					instruction_size;
 	struct s_process	*next;
 }						t_process;
 
@@ -79,6 +82,7 @@ typedef struct			s_core
 	unsigned int		max_checks;
 	unsigned int		nbr_live;
 }             			t_core;
+
 
 /*
 ** arguments.c
@@ -103,6 +107,7 @@ t_errors				make_arena(t_core *core);
 */
 
 t_errors				make_process(t_core *core, uint32_t pc);
+void					push_process(t_core *core, t_process *new);
 
 /*
 ** game.c
@@ -115,11 +120,32 @@ t_errors				the_game(t_core *core);
 */
 
 int						ft_instructions(t_core *core, t_process *process);
+int						ft_type_param(unsigned char bytecode, int p);
+int						ft_error(t_core *core, t_process *process);
 int 					ft_live(t_core *core, t_process *process);
 int						ft_load(t_core *core, t_process *process);
 int						ft_store(t_core *core, t_process *process);
 int						ft_add(t_core *core, t_process *process);
 int						ft_sub(t_core *core, t_process *process);
 int						ft_and(t_core *core, t_process *process);
+int						ft_or(t_core *core, t_process *process);
+int						ft_xor(t_core *core, t_process *process);
+int						ft_zjmp(t_core *core, t_process *process);
+int						ft_ldi(t_core *core, t_process *process);
+int						ft_sti(t_core *core, t_process *process);
+int						ft_fork(t_core *core, t_process *process);
+int						ft_lld(t_core *core, t_process *process);
+int						ft_lldi(t_core *core, t_process *process);
+int						ft_lfork(t_core *core, t_process *process);
+int						ft_aff(t_core *core, t_process *process);
+
+
+typedef int				(*t_inst_tab)(t_core *, t_process *);
+extern	t_inst_tab		g_op_inst_tab[17];
+
+void					read_instructions(t_core *core, t_process *pro);
+
+
+int						get_pc(uint32_t i);
 
 #endif

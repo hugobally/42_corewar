@@ -1,3 +1,5 @@
+#include "corewar.h"
+
 int		ft_type_param(unsigned char bytecode, int p)
 {
 	unsigned char mask;
