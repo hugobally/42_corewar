@@ -70,6 +70,7 @@ typedef struct			s_core
 {
 	unsigned char		arena[MEM_SIZE];
 	int					next_player;
+	int					nb_players;
 	t_player			*players;
 	t_process			*process;
 	unsigned int		dump;

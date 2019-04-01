@@ -19,6 +19,6 @@ int			ft_instructions(t_core *core, t_process *process)
 		ft_sub(core, process);
 	if (op == and)
 		ft_and(core, process);
-	if (op == or)
-		ft_or(core, process);
+	if (op == sub)
+		ft_and(core, process);
 }
