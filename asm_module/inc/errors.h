@@ -18,7 +18,7 @@ typedef enum		e_errors
 	malloc = 0,//no token, critical
 	filesize, //no token, critical -- more than max_token tokens
 
-	critical_error,
+	scanner_error,
 
 	label_badchar,//forbidden chars
 	label_badformat,//example : 'label : (...)' '%: label'
@@ -31,7 +31,7 @@ typedef enum		e_errors
 
 	lexer_error,
 	
-	syntax_error,
+	parser_error,
 	//special codes
 	query, // query error_handler to see if errors have occured
 	err,
