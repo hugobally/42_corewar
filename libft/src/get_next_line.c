@@ -6,23 +6,12 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 15:37:23 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/29 10:00:29 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/01 19:27:41 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
-
-static int			ft_maxlinelen(int j)
-{
-	static int		line_len;
-
-	if (j < 0)
-		line_len = 0;
-	else
-		line_len += j;
-	return (line_len > GNL_MAX_LINE_LEN);
-}
 
 static int			clean(int *i, int *j, int *size, int ret)
 {
@@ -30,7 +19,6 @@ static int			clean(int *i, int *j, int *size, int ret)
 		*i = 0;
 	*j = 0;
 	*size = 0;
-	ft_maxlinelen(-1);
 	return (ret);
 }
 
@@ -48,7 +36,7 @@ static int			ft_bufparse(char *buf, char **line, int fd)
 			return (clean(&i, &j, &size, (ret == -1 ? -1 : 0 + *line[0] != 0)));
 	while (i < ret && i < GNL_BUFFSIZE && buf[i] != '\n')
 		(*line)[j++] = buf[i++];
-	if (ft_maxlinelen(j))
+	if (j > GNL_MAX_LINE_LEN)
 		return (clean(&i, &j, &size, -2));
 	if (i == GNL_BUFFSIZE && buf[i - 1] != '\n')
 	{
