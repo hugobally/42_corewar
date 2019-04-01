@@ -1,4 +1,5 @@
 #include "corewar.h"
+#include <stdlib.h>
 
 void		check_delta(t_core *core)
 {
