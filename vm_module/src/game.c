@@ -2,12 +2,12 @@
 
 void		check_delta(t_core *core)
 {
-	if (core->nbr_live >= NBR_LIVE)
-		core->max_cycle_to_die -= CYCLE_DELTA;
-	
-	if (--core->max_checks == 0)
+	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)
 	{
-		core->max_cycle_to_die = core->max_cycle_to_die > CYCLE_DELTA ? core->max_cycle_to_die -= CYCLE_DELTA : 0;
+		if (core->max_cycle_to_die > CYCLE_DELTA)
+			core->max_cycle_to_die -= CYCLE_DELTA;
+		else
+			core->max_cycle_to_die = 0;
 		core->max_checks = MAX_CHECKS;
 	}
 	core->nbr_live = 0;
