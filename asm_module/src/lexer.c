@@ -22,10 +22,9 @@ void			tokens_clear(t_tokenlst *lst)
 		next = node->next;
 		if (node->type == char_dir)
 		{
-			if (!(node->next)
-					|| !(node->next->type == dir_num
-						|| node->next->type == dir_label)
-					|| (node->pad & PAD_RIGHT))
+			if ((node->pad & PAD_RIGHT) || !node->next
+					|| (node->next->type != dir_num
+						&& node->next->type != char_label))
 				error_handler(dir_badformat, node, 0);
 			token_del(node, lst);
 		}
@@ -49,14 +48,13 @@ void			tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 
 t_code			lexer(t_tokenlst *lst, const t_file *file)
 {
+	if (!lst->start)
+		return (error_handler(no_instructions, 0, 0));
 	tokens_foreach(lst, &find_labels);
 	tokens_foreach(lst, &find_opcodes);
 	tokens_foreach(lst, &find_registers);
 	tokens_foreach(lst, &find_commands);
 	tokens_foreach(lst, &find_num);
 	tokens_clear(lst);
-//	debug_printtokenlst(lst);
-//	return (parser(lst, file));
-	(void)file;
-	return (done);
+	return (syntax(lst, file));
 }
