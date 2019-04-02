@@ -10,6 +10,7 @@
 */
 
 void			debug_printtokenlst(t_tokenlst *lst);//
+void			debug_print_label_tab(t_label **label_tab);//
 
 /*
 ** Scanner
@@ -48,6 +49,10 @@ t_op			*find_op(char *string);
 
 t_code				syntax(t_tokenlst *lst, const t_file *file);
 t_code				get_header(t_tokenlst *lst, header_t *header);
+t_code				build_label_tab(t_tokenlst *lst, t_label **label_tab);
+t_label				*get_label(t_token *token, t_label **label_tab);
+t_code				syntax_prog(t_tokenlst *lst, t_label **label_tab, 
+									header_t *header);
 
 /*
 ** Errors

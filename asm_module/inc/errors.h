@@ -1,6 +1,8 @@
 #ifndef ERRORS_H
 # define ERRORS_H
 
+# include <stdint.h>
+
 # define RED   "\033[1;31m"
 # define GRN   "\033[1;32m"
 # define YEL   "\033[33m"
@@ -38,6 +40,8 @@ typedef enum		e_errors
 	header_duplicate,//.name (...) .name
 	
 	expected_eol,
+	label_duplicate, //same label appears more than once
+	bytesize, //champion too big or huge file
 
 	parser_error,
 	//special codes

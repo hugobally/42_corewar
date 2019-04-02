@@ -6,16 +6,6 @@
 # include "libcorewar.h"
 
 /*
-** Label Table
-*/
-
-typedef struct		s_label
-{
-	char			*string;
-	uint32_t		offset;
-}					t_label;
-
-/*
 ** File Information Container
 */
 
@@ -76,8 +66,20 @@ typedef struct		s_tokenlst
 {
 	t_token			*start;
 	t_token			*end;
+	t_token			*current;
 	t_token			*prog_start;
+	uint32_t		label_counter;
 }					t_tokenlst;
+
+/*
+** Label Table
+*/
+
+typedef struct		s_label
+{
+	t_token			*token;
+	int32_t			offset;
+}					t_label;
 
 /*
 ** Control Flow Enums
