@@ -30,7 +30,6 @@ void		kill_process(t_core *core)
 	next = tmp->next;
 	while (tmp != NULL)
 	{
-		ft_printf("%d\n", tmp->is_alive);
 		if (tmp->is_alive == false)
 		{
 			if (pre)
@@ -40,12 +39,7 @@ void		kill_process(t_core *core)
 			free(tmp);
 		}
 		else
-		{
 			tmp->is_alive = false;
-			// ft_putendl("J'etais vivant");
-
-		// ft_printf("La preuve : %d\n", tmp->is_alive);
-		}
 		pre = tmp;
 		tmp = tmp->next;
 		if (tmp != NULL)
@@ -64,7 +58,6 @@ void		call_instructions(t_core *core)
 	{
 		if (tmp->remaining_cycles != 0)
 		{
-			ft_printf("Remaining cycles : %u\n", tmp->remaining_cycles);
 			--tmp->remaining_cycles;
 		}
 		else
@@ -105,7 +98,6 @@ t_errors	the_game(t_core *core)
 				hexdump(core);
 				break ;
 			}
-			// ft_putendl("TEST");
 	}
 	ft_putendl("YOlo");
 	find_winner(core);
