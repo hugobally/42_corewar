@@ -66,7 +66,7 @@ typedef struct		s_tokenlst
 {
 	t_token			*start;
 	t_token			*end;
-	t_token			*current;
+	t_token			*now;
 	t_token			*prog_start;
 	uint32_t		label_counter;
 }					t_tokenlst;
@@ -78,7 +78,7 @@ typedef struct		s_tokenlst
 typedef struct		s_label
 {
 	t_token			*token;
-	int32_t			offset;
+	uint32_t		offset;
 }					t_label;
 
 /*

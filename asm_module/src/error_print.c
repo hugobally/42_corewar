@@ -38,7 +38,7 @@ static void				print_line(t_file *file, uint32_t pos)
 		if (line_num == (pos & LINE_MASK))
 		{
 			ft_printf("%s\n%s%*s%s\n", line, GRN, get_offset(line, pos),
-										"~~~~~~", RESET);
+										"", RESET);
 			ft_memdel((void**)&line);
 			break ;
 		}
