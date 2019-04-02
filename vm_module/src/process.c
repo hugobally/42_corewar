@@ -32,11 +32,7 @@ t_errors	nb_player_spec(t_core *core, t_player *new)
 	while (player != NULL)
 	{
 		if (player->p == nb)
-		{
-			ft_printf("player->p :%d, nb :%d\n", player->p, nb);
-			ft_printf("here\n");
 			return (badarg);
-		}
 		player = player->next;
 	}
 	core->next_player = 0;

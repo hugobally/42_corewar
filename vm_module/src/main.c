@@ -57,17 +57,10 @@ int		main(int ac, char **av)
 {
     t_core		core;
 	t_errors	ret;
-	t_player	*player;
 
 	ft_bzero(&core, sizeof(t_core));
 	if ((ret = get_arguments(&core, ac, av)) != ok)
 		leave(&core, ret);
-	player = core.players;
-	while (player != NULL)
-	{
-		ft_printf("Player number:%d\n", player->p);
-		player = player->next;
-	}
 	ft_printf("Arguments done\n");
 	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
