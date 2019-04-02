@@ -64,7 +64,7 @@ int		main(int ac, char **av)
 	ft_printf("Arguments done\n");
 	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
-	ft_printf("Arena made");
+	ft_printf("Arena made\n");
 	if ((ret = the_game(&core) != ok))
 		leave(&core, ret);
 	return (0);

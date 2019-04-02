@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/01 17:54:37 by rle-ru           ###   ########.fr        #
+#    Updated: 2019/04/02 11:45:08 by rle-ru           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS_RAW			:=	main.c							\
 						ft_instructions.c				\
 						read_instruction.c				\
 						get_pc.c						\
+						dump.c							\
 						
 # Directories
 

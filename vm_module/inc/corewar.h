@@ -148,4 +148,6 @@ void					read_instructions(t_core *core, t_process *pro);
 
 int						get_pc(uint32_t i);
 
+void					hexdump(t_core *core);
+
 #endif
