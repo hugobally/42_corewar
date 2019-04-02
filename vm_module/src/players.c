@@ -65,7 +65,9 @@ t_errors	new_player(t_core *core, char *av)
 		return (ret);
 	}
 	close(fd);
-	new->p = core->next_player ? core->next_player : 1;
+	//new->p = core->next_player ? core->next_player : 1;
+	if ((ret = nb_player(core, new)) != ok)
+		return (ret);
 	push_player(core, new);
 	++core->nb_players;
 	return (ok);
