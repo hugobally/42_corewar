@@ -57,13 +57,13 @@ t_code			check_empty(t_tokenlst *lst)
 
 t_code			lexer(t_tokenlst *lst, const t_file *file)
 {
-	if (check_empty(lst) == error)
-		return (error);
 	tokens_foreach(lst, &find_labels);
 	tokens_foreach(lst, &find_opcodes);
 	tokens_foreach(lst, &find_registers);
 	tokens_foreach(lst, &find_commands);
 	tokens_foreach(lst, &find_num);
 	tokens_clear(lst);
+	if (check_empty(lst) == error)
+		return (error);
 	return (syntax(lst, file));
 }
