@@ -74,6 +74,7 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
+		ft_printf("TEST\n");
 		call_instructions(core);
 		if (--cycles == 0)
 		{
@@ -81,6 +82,12 @@ t_errors	the_game(t_core *core)
 			cycles = core->max_cycle_to_die;
 		}
 		proc = core->process;
+		if (core->dump != 0)
+			if (--core->dump == 0)
+			{
+				hexdump(core);
+				break ;
+			}
 	}
 	find_winner(core);
 	return (ok);
