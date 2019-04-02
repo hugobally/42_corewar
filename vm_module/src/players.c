@@ -2,6 +2,17 @@
 #include <unistd.h>
 #include "corewar.h"
 
+uint32_t	reverse_endian(uint32_t	num)
+{
+	uint32_t	swapped;
+
+	swapped = ((num>>24)&0xff);
+	swapped |= ((num<<8)&0xff0000);
+	swapped |= ((num>>8)&0xff00);
+	swapped |= ((num<<24)&0xff000000);
+	return (swapped);
+}
+
 void		push_player(t_core *core, t_player *new)
 {
 	t_player	*tmp;
@@ -32,6 +43,8 @@ t_errors	read_header(int fd, t_player *new)
 {
 	ft_printf("Read : %d\n", read(fd, new, sizeof(header_t)));
 	ft_printf("%d\n", sizeof(header_t));
+	new->head.magic = reverse_endian(new->head.magic);
+	new->head.prog_size = reverse_endian(new->head.prog_size);
 	ft_printf("Magic : %x\nProg size : %x\n", new->head.magic, new->head.prog_size);
 	ft_printf("TEST_READ_HEADER\n");
 	ft_printf("Magic : %u\nProg name : %s\nProg_size : %u\nComment : %s\n", new->head.magic, new->head.prog_name, new->head.prog_size, new->head.comment);
