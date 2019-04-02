@@ -28,10 +28,12 @@ void		kill_process(t_core *core)
 	pre = NULL;
 	tmp = core->process;
 	next = tmp->next;
+	ft_printf("kill, %d\n", tmp->pc);
 	while (tmp != NULL)
 	{
 		if (tmp->is_alive == false)
 		{
+			ft_printf("killed, %d\n", tmp->regs[0]);
 			if (pre)
 				pre->next = next;
 			else
@@ -39,7 +41,10 @@ void		kill_process(t_core *core)
 			free(tmp);
 		}
 		else
+		{
+			ft_printf("not killed, %d\n", tmp->regs[0]);
 			tmp->is_alive = false;
+		}
 		pre = tmp;
 		tmp = tmp->next;
 		if (tmp != NULL)
