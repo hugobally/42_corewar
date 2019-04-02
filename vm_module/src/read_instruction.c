@@ -79,19 +79,23 @@ void		get_params(t_core *core, t_process *pro, uint32_t i)
 	if (!code)
 	{
 		pro->instruction = 0;
+	ft_putendl("TEST");
 		pro->instruction_size = 1;
 		return ;
 	}
+	ft_putendl("TEST");
 	i = get_params1(core, pro, i, pro->params.bytecode >> 6);
 	i = get_params2(core, pro, i, pro->params.bytecode >> 4);
 	get_params3(core, pro, i, pro->params.bytecode >> 2);
 	pro->remaining_cycles = g_op_tab[pro->instruction - 1].cycles;
+	ft_printf("On vient de dire remaining cycles : %u\n", pro->remaining_cycles);
 }
 
 void		read_instructions(t_core *core, t_process *pro)
 {
 	uint32_t	i;
 
+	pro->instruction = 0;
 	pro->params.bytecode = 0;
 	pro->params.p1 = 0;
 	pro->params.p2 = 0;
@@ -100,13 +104,15 @@ void		read_instructions(t_core *core, t_process *pro)
 	i = pro->pc;
 	pro->instruction = core->arena[get_pc(i)] > 16 ? 0 : core->arena[get_pc(i)];
 	++i;
+
+	ft_putendl("TEST");
 	if (pro->instruction != 0 && g_op_tab[pro->instruction - 1].has_ocp)
 	{
 		pro->params.bytecode = core->arena[i++];
 		++pro->instruction_size;
 		get_params(core, pro, i);
 	}
-	else
+	else if (pro->instruction != 0)
 	{
 		pro->params.p1 = (int32_t)core->arena[get_pc(i)];
 		pro->instruction_size += DIR_SIZE;
