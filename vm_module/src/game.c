@@ -14,6 +14,11 @@ void		check_delta(t_core *core)
 	core->nbr_live = 0;
 }
 
+// void		del_one_pro(t_process *pro)
+// {
+
+// }
+
 void		kill_process(t_core *core)
 {
 	t_process	*pre;
@@ -23,7 +28,7 @@ void		kill_process(t_core *core)
 	pre = NULL;
 	tmp = core->process;
 	next = tmp->next;
-	while (tmp)
+	while (tmp != NULL)
 	{
 		if (tmp->is_alive == false)
 		{
@@ -33,10 +38,14 @@ void		kill_process(t_core *core)
 				core->process = next;
 			free(tmp);
 		}
+		else
+			tmp->is_alive = false;
 		pre = tmp;
 		tmp = tmp->next;
-		next = tmp->next;
+		if (tmp != NULL)
+			next = tmp->next;
 	}
+		ft_printf("Max cycles : %d\n", core->max_cycle_to_die);
 	check_delta(core);
 }
 
@@ -48,7 +57,9 @@ void		call_instructions(t_core *core)
 	while (tmp)
 	{
 		if (tmp->remaining_cycles != 0)
+		{
 			--tmp->remaining_cycles;
+		}
 		else
 			ft_instructions(core, tmp);
 		tmp = tmp->next;
@@ -88,6 +99,7 @@ t_errors	the_game(t_core *core)
 				break ;
 			}
 	}
+	ft_putendl("YOlo");
 	find_winner(core);
 	return (ok);
 }
