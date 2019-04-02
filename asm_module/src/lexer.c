@@ -46,10 +46,19 @@ void			tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 	}
 }
 
-t_code			lexer(t_tokenlst *lst, const t_file *file)
+t_code			check_empty(t_tokenlst *lst)
 {
+	if (lst->start && lst->start->type == char_eol)
+		token_del(lst->start, lst);
 	if (!lst->start)
 		return (error_handler(no_instructions, 0, 0));
+	return (done);
+}
+
+t_code			lexer(t_tokenlst *lst, const t_file *file)
+{
+	if (check_empty(lst) == error)
+		return (error);
 	tokens_foreach(lst, &find_labels);
 	tokens_foreach(lst, &find_opcodes);
 	tokens_foreach(lst, &find_registers);
