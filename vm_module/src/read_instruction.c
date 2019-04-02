@@ -113,5 +113,5 @@ void		read_instructions(t_core *core, t_process *pro)
 		pro->params.p1 = (int32_t)core->arena[get_pc(i)];
 		pro->instruction_size += DIR_SIZE;
 	}
-	if (pro->instruction_size > 1)
+	// if (pro->instruction_size > 1)
 }
