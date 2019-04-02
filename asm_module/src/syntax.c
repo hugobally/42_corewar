@@ -13,8 +13,7 @@ t_code				syntax(t_tokenlst *lst, const t_file *file)
 	if (get_header(lst, &header) == error)
 		return (error);
 	build_label_tab(lst, &label_tab);
-//	debug_printtokenlst(lst);
-//	syntax_prog(lst, &label_tab, &header);
+	syntax_prog(lst, &label_tab, &header);
 
 	(void)file;
 //	if no error

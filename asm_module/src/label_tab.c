@@ -30,6 +30,8 @@ t_label				*label_tab_fetch(t_token *token, t_label **label_tab)
 	uint32_t		index;
 
 	index = 0;
+	if (!*label_tab)
+		return (NULL);
 	while ((*label_tab)[index].token)
 	{
 		if (token->value == (*label_tab)[index].token->value)

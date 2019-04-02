@@ -22,7 +22,7 @@ void					error_lexer(t_errors err, t_token *token, t_file *file)
 
 void					error_parser(t_errors err, t_token *token, t_file *file)
 {
-	static t_errstr		tab[11] = {
+	static t_errstr		tab[12] = {
 		{header_noquote, "Missing command parameter after", 0, 0, 0},
 		{header_badquote, "Bad quote format", 0, 0, 0},
 		{header_namesize, "Name is too long (Max ", 1, PROG_NAME_LENGTH, ")"},
@@ -31,9 +31,10 @@ void					error_parser(t_errors err, t_token *token, t_file *file)
 		{header_duplicate, "Duplicate command", 0, 0, 0},
 		{expected_eol, "Expected end of instruction after ", 0, 0, 0},
 		{label_duplicate, "Duplicate label", 0, 0, 0},
+		{label_no_match, "No matching label found for ", 0, 0, 0},
 		{bytesize, "Invalid champion size (Max ", 1, CHAMP_MAX_SIZE, "bytes )"},
-		{expected_opcode, "Expected instruction code", 0, 0, 0},
-		{param_invalid, "Invalid parameter for instruction ", 0, 0, 0},
+		{expected_opcode, "Expected opcode here", 0, 0, 0},
+		{param_invalid, "Invalid parameters for instruction ", 0, 0, 0},
 		{0, 0, 0, 0, 0}
 	};
 

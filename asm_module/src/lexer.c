@@ -79,7 +79,6 @@ t_code			lexer(t_tokenlst *lst, const t_file *file)
 	tokens_foreach(lst, &find_num);
 	tokens_clear_dir_char(lst);
 	tokens_clear_lab_char(lst);
-	debug_printtokenlst(lst);
 	if (check_empty(lst) == error)
 		return (error);
 	return (syntax(lst, file));
