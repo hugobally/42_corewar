@@ -28,12 +28,10 @@ void		push_player(t_core *core, t_player *new)
 
 t_errors	read_proc(int fd, t_player *new)
 {
-	ft_printf("TEST_READ_PROC_IN\n");
 	if (read(fd, new->proc, new->head.prog_size) < new->head.prog_size)
 		return (badfile);
 	if (read(fd, NULL, 1) > 0)
 		return (badfile);
-	ft_printf("READ_PROC_OUT\n");
 	return (ok);
 }
 
