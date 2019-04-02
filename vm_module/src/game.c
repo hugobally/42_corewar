@@ -47,7 +47,7 @@ void		call_instructions(t_core *core)
 	tmp = core->process;
 	while (tmp)
 	{
-		if (tmp->remaining_cycles)
+		if (tmp->remaining_cycles != 0)
 			--tmp->remaining_cycles;
 		else
 			ft_instructions(core, tmp);
@@ -74,7 +74,6 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-		ft_printf("TEST\n");
 		call_instructions(core);
 		if (--cycles == 0)
 		{

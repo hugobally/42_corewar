@@ -35,8 +35,6 @@ t_errors	read_proc(int fd, t_player *new)
 	return (ok);
 }
 
-#include <stdlib.h>
-
 t_errors	read_header(int fd, t_player *new)
 {
 	if (read(fd, new, sizeof(header_t)) < (ssize_t)sizeof(header_t))

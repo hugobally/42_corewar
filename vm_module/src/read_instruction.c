@@ -100,7 +100,7 @@ void		read_instructions(t_core *core, t_process *pro)
 	i = pro->pc;
 	pro->instruction = core->arena[get_pc(i)] > 16 ? 0 : core->arena[get_pc(i)];
 	++i;
-	if (g_op_tab[pro->instruction - 1].has_ocp)
+	if (pro->instruction != 0 && g_op_tab[pro->instruction - 1].has_ocp)
 	{
 		pro->params.bytecode = core->arena[i++];
 		++pro->instruction_size;
