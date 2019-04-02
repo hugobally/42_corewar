@@ -12,10 +12,10 @@ void	printx(unsigned char c)
 
 void	hexdump(t_core *core)
 {
-	int	i;
-	int	col;
+	uint32_t	i;
+	int			col;
 
-	i = -1;
+	i = 0;
 	while (i < MEM_SIZE)
 	{
 		col = -1;
