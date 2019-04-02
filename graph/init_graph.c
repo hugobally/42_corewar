@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:29:22 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/02 17:50:20 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/02 18:09:45 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	init_ncurse(void)
 	keypad(stdscr, TRUE);
 	noecho();
 	refresh();
-	//start_color();
+	start_color();
+	use_default_colors();
 	//CHEKC COLOR AND EXIT
 }
 
@@ -45,8 +46,8 @@ void	create_arena_win(t_graph *g)
 	row = 1;
 	g->arena_win = create_new_win(ARENA_ROW, ARENA_COL, 0, 0);
 	mvwprintw(g->arena_win, 0, (ARENA_COL / 2) - 11, "%s", " - ARENA - ");
-	//init_pair(1, COLOR_BLACK, COLOR_BLACK);
-	//attron(1);
+	init_pair(1, COLOR_BLACK, -1);
+	wattron(g->arena_win, COLOR_PAIR(1));
 	while(i < MEM_SIZE)
 	{
 		mvwprintw(g->arena_win,row,col, "%s", "00 ");
@@ -58,7 +59,8 @@ void	create_arena_win(t_graph *g)
 		}
 		i++;
 	}
-	attroff(1);
+	wattroff(g->arena_win, COLOR_PAIR(1));
+	//wattroff(g->arena_win, ,COLOR_PAIR(1));
 	wrefresh(g->arena_win);
 }
 
