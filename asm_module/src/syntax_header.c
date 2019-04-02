@@ -63,9 +63,7 @@ t_code				get_header(t_tokenlst *lst, header_t *header)
 	cmd_count = 0;
 	while (node && cmd_count < 2)
 	{
-		if (node->type == char_eol)
-			node = node->next;
-		else if (is_valid_cmd(node) != error)
+		if (is_valid_cmd(node) != error)
 		{
 			node = node->next;
 			if (get_header_value(node, header) == error)
