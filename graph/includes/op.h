@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2019/04/02 16:11:17 by rle-ru           ###   ########.fr       */
+/*   Updated: 2013/11/06 14:21:46 by zaz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 
 #define REG_NUMBER				16
 
-#define CYCLE_TO_DIE			2
+#define CYCLE_TO_DIE			1536
 #define CYCLE_DELTA				50
 #define NBR_LIVE				21
 #define MAX_CHECKS				10
@@ -69,8 +69,8 @@ typedef char	t_arg_type;
 
 typedef struct		header_s
 {
-	unsigned int		magic;
-	char				prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int		prog_size;
-	char				comment[COMMENT_LENGTH + 1];
+  unsigned int		magic;
+  char				prog_name[PROG_NAME_LENGTH + 1];
+  unsigned int		prog_size;
+  char				comment[COMMENT_LENGTH + 1];
 }					header_t;

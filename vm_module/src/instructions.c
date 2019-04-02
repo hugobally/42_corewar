@@ -6,7 +6,7 @@ int 		ft_live(t_core *core, t_process *process)
 	t_params	params;
 
 	params = process->params;
-	process->is_alive = 1;
+	process->is_alive = true;
 	core->last_live_done_by = params.p1;
 	core->nbr_live++;
 	player = params.p1;

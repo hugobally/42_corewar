@@ -92,23 +92,26 @@ void		read_instructions(t_core *core, t_process *pro)
 {
 	uint32_t	i;
 
+	pro->instruction = 0;
 	pro->params.bytecode = 0;
 	pro->params.p1 = 0;
 	pro->params.p2 = 0;
 	pro->params.p3 = 0;
 	pro->instruction_size = 1;
 	i = pro->pc;
-	pro->instruction = core->arena[get_pc(i)] > 16 ? 0 : core->arena[get_pc(i)];
-	++i;
+	pro->instruction = core->arena[i] > 16 ? 0 : core->arena[i];
+	if (pro->instruction)
+		++i;
 	if (pro->instruction != 0 && g_op_tab[pro->instruction - 1].has_ocp)
 	{
 		pro->params.bytecode = core->arena[i++];
 		++pro->instruction_size;
 		get_params(core, pro, i);
 	}
-	else
+	else if (pro->instruction != 0)
 	{
 		pro->params.p1 = (int32_t)core->arena[get_pc(i)];
 		pro->instruction_size += DIR_SIZE;
 	}
+	// if (pro->instruction_size > 1)
 }

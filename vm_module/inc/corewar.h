@@ -95,6 +95,7 @@ t_errors				get_arguments(t_core *core, int ac, char **av);
 */
 
 t_errors 				new_player(t_core *core, char *av);
+t_errors				nb_player(t_core *core, t_player *new);
 
 /*
 ** arena.c
