@@ -14,11 +14,6 @@ void		check_delta(t_core *core)
 	core->nbr_live = 0;
 }
 
-// void		del_one_pro(t_process *pro)
-// {
-
-// }
-
 void		kill_process(t_core *core)
 {
 	t_process	*pre;
@@ -28,7 +23,8 @@ void		kill_process(t_core *core)
 	pre = NULL;
 	tmp = core->process;
 	next = tmp->next;
-	ft_printf("kill, %d\n", tmp->pc);
+	// ft_printf("kill, %d\n", tmp->pc);
+	ft_putendl("Kill_process IN");
 	while (tmp != NULL)
 	{
 		if (tmp->is_alive == false)
@@ -52,6 +48,7 @@ void		kill_process(t_core *core)
 	}
 		ft_printf("Max cycles : %d\n", core->max_cycle_to_die);
 	check_delta(core);
+	ft_putendl("Kill_process OUT");
 }
 
 void		call_instructions(t_core *core)
@@ -61,6 +58,8 @@ void		call_instructions(t_core *core)
 	tmp = core->process;
 	while (tmp)
 	{
+		ft_printf("%x, %u\n", tmp, tmp->remaining_cycles);
+		ft_putendl("coucou");
 		if (tmp->remaining_cycles != 0)
 		{
 			--tmp->remaining_cycles;
@@ -90,10 +89,13 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
+		ft_putendl("Start of the loop");
 		call_instructions(core);
+		ft_putendl("Called instructions");
 		if (--cycles == 0)
 		{
 			kill_process(core);
+			ft_putendl("Got out of kill_process");
 			cycles = core->max_cycle_to_die;
 		}
 		proc = core->process;
