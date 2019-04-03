@@ -10,13 +10,14 @@ void		push_process(t_core *core, t_process *new)
 ** Reste a initialiser les valeurs.
 */
 
-t_errors	make_process(t_core *core, uint32_t pc)
+t_errors	make_process(t_core *core, uint32_t pc, t_player *pl)
 {
 	t_process	*new;
 
 	if (!(new = ft_memalloc(sizeof(t_process))))
 		return (falloc);
 	new->pc = pc;
+	new->regs[0] = pl->p;
 	push_process(core, new);
 	return (ok);
 }

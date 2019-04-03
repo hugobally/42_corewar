@@ -18,7 +18,7 @@ t_errors	make_arena(t_core *core)
 	while (pl)
 	{
 		add_process(pl, core, cur);
-		if ((ret = make_process(core, cur)) != ok)
+		if ((ret = make_process(core, cur, pl)) != ok)
 			return (ret);
 		pl = pl->next;
 		cur += MEM_SIZE / core->nb_players;

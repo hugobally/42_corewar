@@ -91,6 +91,7 @@ void		read_instructions(t_core *core, t_process *pro)
 {
 	uint32_t	i;
 
+	ft_printf("read_instruction IN\n");
 	pro->instruction = 0;
 	pro->params.bytecode = 0;
 	pro->params.p1 = 0;
@@ -101,18 +102,21 @@ void		read_instructions(t_core *core, t_process *pro)
 	pro->instruction = core->arena[i] > 16 ? 0 : core->arena[i];
 	if (pro->instruction)
 		++i;
+	ft_printf("read_instruction MID\n");
 	if (pro->instruction != 0 && g_op_tab[pro->instruction - 1].has_ocp)
 	{
 		pro->params.bytecode = core->arena[i++];
 		++pro->instruction_size;
+		ft_printf("read_instruction MID_0.5\n");
 		get_params(core, pro, i);
+		ft_printf("read_instruction MID_1\n");
 	}
 	else if (pro->instruction != 0)
 	{
 		pro->params.p1 = (int32_t)core->arena[get_pc(i)];
 		pro->instruction_size += DIR_SIZE;
+		ft_printf("read_instruction MID_2\n IMPRESSION pro->instruction %d\n", pro->instruction);
+		pro->remaining_cycles = g_op_tab[pro->instruction - 1].cycles;
 	}
-	pro->remaining_cycles = g_op_tab[pro->instruction - 1].cycles;
-	ft_printf("Cycles for read instruction : %u\n", pro->remaining_cycles);
-	// if (pro->instruction_size > 1)
+	ft_printf("read_instruction OUT\n");
 }

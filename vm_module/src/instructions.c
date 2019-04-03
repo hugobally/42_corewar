@@ -20,6 +20,7 @@ int			ft_load(t_core *core, t_process *process)
 	int p1;
 	int r;
 
+	ft_printf("ft_load IN\n");
 	params = process->params;
 	bytecode = params.bytecode;
 	p1 = ft_type_param(bytecode, 1);
@@ -29,6 +30,7 @@ int			ft_load(t_core *core, t_process *process)
 	else if (p1 == 2)
 		process->regs[r - 1] = core->arena[get_pc(process->pc + r % IDX_MOD)];
 	process->carry = 1;
+	ft_printf("ft_load OUT\n");
 	return (0);
 }
 
@@ -39,6 +41,7 @@ int			ft_store(t_core *core, t_process *process)
 	int p2;
 	int r;
 
+	ft_printf("ft_store IN\n");
 	params = process->params;
 	bytecode = params.bytecode;
 	p2 = ft_type_param(bytecode, 2);
@@ -47,6 +50,7 @@ int			ft_store(t_core *core, t_process *process)
 		process->regs[params.p2 - 1] = (int)process->regs[params.p1 - 1];
 	else if (p2 == IND)
 		core->arena[get_pc(process->pc + params.p1 % IDX_MOD)] = process->regs[params.p1 - 1];
+	ft_printf("ft_store OUT\n");
 	return (0);
 }
 

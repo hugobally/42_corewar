@@ -107,7 +107,7 @@ t_errors				make_arena(t_core *core);
 ** process.c
 */
 
-t_errors				make_process(t_core *core, uint32_t pc);
+t_errors				make_process(t_core *core, uint32_t pc, t_player *pl);
 void					push_process(t_core *core, t_process *new);
 
 /*
