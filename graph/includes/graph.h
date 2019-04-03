@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/02 17:40:24 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/03 13:40:16 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,23 @@
 # define INFO_COL 44
 # define INFO_ROW 7
 
+# define CHAMP_COL 64
+# define CHAMP_ROW 7
+
 # define PRO_COL 53
 # define PRO_ROW 49
 
 # define REG_COL 53
 # define REG_ROW 17
+
+enum				e_collors
+{
+	BASE,
+	CHAMP1,
+	CHAMP2,
+	CHAMP3,
+	CHAMP4,
+};
 
 typedef struct		s_graph
 {
@@ -37,6 +49,7 @@ typedef struct		s_graph
 	WINDOW			*info_win;
 	WINDOW			*pro_win;
 	WINDOW			*reg_win;
+	WINDOW			*champ_win;
 	int				fps;
 	int				laps;
 	char			pause;

@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:29:22 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/02 18:09:45 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/03 13:39:34 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	init_ncurse(void)
 	refresh();
 	start_color();
 	use_default_colors();
+	init_pair(CHAMP1, COLOR_RED, -1);
+	init_pair(CHAMP2, COLOR_BLUE, -1);
+	init_pair(CHAMP3, COLOR_GREEN, -1);
+	init_pair(CHAMP4, COLOR_YELLOW, -1);
 	//CHEKC COLOR AND EXIT
 }
 
@@ -46,8 +50,8 @@ void	create_arena_win(t_graph *g)
 	row = 1;
 	g->arena_win = create_new_win(ARENA_ROW, ARENA_COL, 0, 0);
 	mvwprintw(g->arena_win, 0, (ARENA_COL / 2) - 11, "%s", " - ARENA - ");
-	init_pair(1, COLOR_BLACK, -1);
-	wattron(g->arena_win, COLOR_PAIR(1));
+	init_pair(5, COLOR_BLACK, -1);
+	wattron(g->arena_win, COLOR_PAIR(5));
 	while(i < MEM_SIZE)
 	{
 		mvwprintw(g->arena_win,row,col, "%s", "00 ");
@@ -59,8 +63,7 @@ void	create_arena_win(t_graph *g)
 		}
 		i++;
 	}
-	wattroff(g->arena_win, COLOR_PAIR(1));
-	//wattroff(g->arena_win, ,COLOR_PAIR(1));
+	wattroff(g->arena_win, COLOR_PAIR(5));
 	wrefresh(g->arena_win);
 }
 
@@ -122,6 +125,22 @@ void	create_registers_win(t_graph *g)
 	wrefresh(g->reg_win);
 }
 
+void	create_champions_win(t_graph *g)
+{
+	g->champ_win = create_new_win(CHAMP_ROW, CHAMP_COL, 
+			INFO_COL + CTRL_COL, ARENA_ROW);
+	mvwprintw(g->champ_win, 0, (CHAMP_COL / 2) - 9, " - CHAMPIONS - ");
+	wattron(g->champ_win, COLOR_PAIR(CHAMP1));
+	mvwprintw(g->champ_win, 1, 2, "%-20s%-30.30s%10s", "Nom du champion", "je suis la description", "ALIVE");
+	wattron(g->champ_win, COLOR_PAIR(CHAMP2));
+	mvwprintw(g->champ_win, 2, 2, "%-20s%-30.30s%10s", "Coucou", "je sais dire bonjour dans 58 langues :D", "ALIVE");
+	wattron(g->champ_win, COLOR_PAIR(CHAMP3));
+	mvwprintw(g->champ_win, 3, 2, "%-20s%-30.30s%10s", "Lolol", "haha", "WINNNER");
+	wattron(g->champ_win, COLOR_PAIR(CHAMP4));
+	mvwprintw(g->champ_win, 4, 2, "%-20s%-30.30s%10s", "MAIS", "BOUHOUHOU", "DEAD");
+	wrefresh(g->champ_win);
+}
+
 int		main(void)
 {
 	int		ch;
@@ -134,6 +153,7 @@ int		main(void)
 	create_infos_win(g);
 	create_process_win(g);
 	create_registers_win(g);
+	create_champions_win(g);
 	while((ch = getch()) != KEY_F(1))
 	{
 
