@@ -17,12 +17,12 @@ static uint32_t	get_param(t_token *token, uint32_t now,
 	else
 		val = ft_atoi(&(token->value[1]));
 	val = reverse_endian(val);//
-	if (token->type == dir_num || token->type == dir_label)
-		val_size = 4;
+	if (token->type == reg)
+		val_size = 1;
 	else if (token->type == ind_num || token->type == ind_label)
 		val_size = 2;
 	else
-		val_size = 1;
+		val_size = 4;
 	ft_memcpy(buffer, (uint8_t*)&val + (4 - val_size), val_size);
 	return (val_size);
 }
@@ -75,4 +75,4 @@ t_code			write_instruction(t_token *token, t_label **label_tab,
 	if (file != DUMMY_WRITE)
 		return (write(file->out_fd, buffer, index) != -1 ? done : error);
 	return (done);
-*
+}
