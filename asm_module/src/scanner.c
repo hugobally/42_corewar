@@ -68,7 +68,7 @@ static t_code			process_line(t_line *line, t_tokenlst *lst)
 	return (ret_code);
 }
 
-t_code					scanner(const t_file *file)
+t_code					scanner(t_file *file)
 {
 	int32_t				ret;
 	t_line				line;
@@ -80,10 +80,14 @@ t_code					scanner(const t_file *file)
 	{
 		line.num++;
 		if (line.str[0] && process_line(&line, &lst) == error)
-			return (scanner_exit(&lst, err));
+			return (scanner_exit(&lst, scanner_error));
 	}
 	if (ret < 0)
 		return (scanner_exit(&lst, ret));
-	return (scanner_exit(&lst, lexer(&lst, file) == done ? no_err : err));
-			//gnl avec -1 et null pour clean le static dans lexer exit
+	if (lexer(&lst, file) == error)
+		return (scanner_exit(&lst, lexer_error));
+	else
+		return (scanner_exit(&lst, no_error));
 }
+
+//gnl avec -1 et null pour clean le static dans lexer exit
