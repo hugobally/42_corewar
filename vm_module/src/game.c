@@ -23,7 +23,6 @@ void		kill_process(t_core *core)
 	pre = NULL;
 	tmp = core->process;
 	next = tmp->next;
-	// ft_printf("kill, %d\n", tmp->pc);
 	ft_putendl("Kill_process IN");
 	while (tmp != NULL)
 	{
@@ -34,7 +33,7 @@ void		kill_process(t_core *core)
 				pre->next = next;
 			else
 				core->process = next;
-			free(tmp);
+			//free(tmp);
 		}
 		else
 		{
@@ -46,7 +45,6 @@ void		kill_process(t_core *core)
 		if (tmp != NULL)
 			next = tmp->next;
 	}
-		ft_printf("Max cycles : %d\n", core->max_cycle_to_die);
 	check_delta(core);
 	ft_putendl("Kill_process OUT");
 }
@@ -58,8 +56,6 @@ void		call_instructions(t_core *core)
 	tmp = core->process;
 	while (tmp)
 	{
-		ft_printf("%x, %u\n", tmp, tmp->remaining_cycles);
-		ft_putendl("coucou");
 		if (tmp->remaining_cycles != 0)
 		{
 			--tmp->remaining_cycles;
