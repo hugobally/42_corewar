@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:29:22 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/03 13:39:34 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/03 13:54:31 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,18 @@ void	create_process_win(t_graph *g)
 {
 	g->pro_win = create_new_win(PRO_ROW, PRO_COL, ARENA_COL, 0);
 	mvwprintw(g->pro_win, 0, (PRO_COL / 2) - 7, " - PROCESS - ");
+	wattron(g->pro_win, COLOR_PAIR(CHAMP1));
 	mvwprintw(g->pro_win, 1, 2, "#%-5d%-2dx%-2d [%c][%c]%5s in%4d laps.",
 			1, 33,25,'L','C',"zjmp",14);
+	wattron(g->pro_win, COLOR_PAIR(CHAMP2));
 	mvwprintw(g->pro_win, 2, 2, "#%-5d%-2dx%-2d [%c][%c]%5s in%4d laps.",
 			2, 1,25,'L','C',"zjmp",14);
+	wattron(g->pro_win, COLOR_PAIR(CHAMP3));
+	mvwprintw(g->pro_win, 3, 2, "#%-5d%-2dx%-2d [%c][%c]%5s in%4d laps.",
+			3, 1,25,'L','C',"zjmp",14);
+	wattron(g->pro_win, COLOR_PAIR(CHAMP4));
+	mvwprintw(g->pro_win, 4, 2, "#%-5d%-2dx%-2d [%c][%c]%5s in%4d laps.",
+			4, 1,25,'L','C',"zjmp",14);
 	wrefresh(g->pro_win);
 }
 
@@ -131,13 +139,17 @@ void	create_champions_win(t_graph *g)
 			INFO_COL + CTRL_COL, ARENA_ROW);
 	mvwprintw(g->champ_win, 0, (CHAMP_COL / 2) - 9, " - CHAMPIONS - ");
 	wattron(g->champ_win, COLOR_PAIR(CHAMP1));
-	mvwprintw(g->champ_win, 1, 2, "%-20s%-30.30s%10s", "Nom du champion", "je suis la description", "ALIVE");
+	mvwprintw(g->champ_win, 1, 2, "%-20s%-30.30s%10s",
+			"Nom du champion", "je suis la description", "ALIVE");
 	wattron(g->champ_win, COLOR_PAIR(CHAMP2));
-	mvwprintw(g->champ_win, 2, 2, "%-20s%-30.30s%10s", "Coucou", "je sais dire bonjour dans 58 langues :D", "ALIVE");
+	mvwprintw(g->champ_win, 2, 2, "%-20s%-30.30s%10s",
+			"Coucou", "je sais dire bonjour dans 58 langues :D", "ALIVE");
 	wattron(g->champ_win, COLOR_PAIR(CHAMP3));
-	mvwprintw(g->champ_win, 3, 2, "%-20s%-30.30s%10s", "Lolol", "haha", "WINNNER");
+	mvwprintw(g->champ_win, 3, 2, "%-20s%-30.30s%10s",
+			"Lolol", "haha", "WINNNER");
 	wattron(g->champ_win, COLOR_PAIR(CHAMP4));
-	mvwprintw(g->champ_win, 4, 2, "%-20s%-30.30s%10s", "MAIS", "BOUHOUHOU", "DEAD");
+	mvwprintw(g->champ_win, 4, 2, "%-20s%-30.30s%10s",
+			"MAIS", "BOUHOUHOU", "DEAD");
 	wrefresh(g->champ_win);
 }
 
