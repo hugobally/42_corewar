@@ -70,7 +70,7 @@ t_code			check_empty(t_tokenlst *lst)
 	return (done);
 }
 
-t_code			lexer(t_tokenlst *lst, const t_file *file)
+t_code			lexer(t_tokenlst *lst, t_file *file)
 {
 	tokens_foreach(lst, &find_labels);
 	tokens_foreach(lst, &find_opcodes);
