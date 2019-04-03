@@ -18,6 +18,7 @@ typedef enum		e_errors
 	read_linesize = -2,//no token, critical -- one line is > than max line size
 	read_crash = -1,//no token, critical
 	malloc = 0,//no token, critical
+	write_crash,
 	filesize, //no token, critical -- more than max_token tokens
 	no_instructions,
 	header_missing,//name/comment not at top
@@ -49,8 +50,7 @@ typedef enum		e_errors
 	parser_error,
 	//special codes
 	query, // query error_handler to see if errors have occured
-	err,
-	no_err
+	no_error
 }					t_errors;
 
 typedef struct		s_errstr

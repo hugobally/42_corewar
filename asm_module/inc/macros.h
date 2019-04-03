@@ -1,6 +1,5 @@
 #ifndef MACROS_H
 # define MACROS_H
-
 /*
 ** Special characters not defined in op.h
 */
@@ -37,5 +36,11 @@
 # define MAX_TOKEN_LIST_SIZE 	10000 * 80
 # define MAX_INPUT_FILE_SIZE	MAX_TOKEN_STR_SIZE * MAX_TOKEN_LIST_SIZE
 # define MAX_OUTPUT_BYTE_SIZE	0x7FFFFFFF
+
+/*
+** Misc Code Clarity
+*/
+
+# define DUMMY_WRITE NULL
 
 #endif

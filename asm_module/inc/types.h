@@ -13,6 +13,8 @@ typedef struct		s_file
 {
 	char			*name;
 	int				fd;
+	char			*out_name;
+	int				out_fd;
 }					t_file;
 
 /*
@@ -78,7 +80,7 @@ typedef struct		s_tokenlst
 typedef struct		s_label
 {
 	t_token			*token;
-	uint32_t		offset;
+	int32_t			offset;
 }					t_label;
 
 /*

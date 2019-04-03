@@ -27,6 +27,9 @@ SRCS_RAW			:=	main.c						\
 						syntax.c					\
 						syntax_header.c				\
 						syntax_prog.c				\
+						syntax_exit.c				\
+						output_file.c				\
+						output_instruction.c		\
 						label_tab.c
 
 # Directories
