@@ -22,19 +22,14 @@ t_token				*find_before(t_token *start, t_toktype type)
 static uint8_t		is_valid_param(t_token *token, uint8_t ref,
 									t_label **label_tab)
 {
-	uint8_t			status;
-
-	status = 0;
 	if (((token->type == dir_num || token->type == dir_label)
 			&& (ref & T_DIR))
 		|| ((token->type == ind_num || token->type == ind_label)
 			&& (ref & T_IND))
 		|| (token->type == reg && (ref & T_REG)))
-		status = 1;
-	if ((token->type == dir_label || token->type == ind_label)
-			&& !(label_tab_fetch(token, label_tab)))
-		error_handler(label_no_match, token, 0);
-	return (status);
+		return (1);
+	else
+		return (0);
 }
 
 /*
@@ -51,14 +46,17 @@ static t_code		parse_parameters(t_token *node, t_label **label_tab)//
 	while (i++ < op->param_num)
 	{
 		node = node->next;
+
 		if (!is_valid_param(node, op->param_types[i - 1], label_tab))
-			return (error_handler(param_invalid,
-									find_before(node, opcode), 0));
+			return (error_handler(param_invalid, find_before(node, opcode), 0));
+
+		if ((node->type == dir_label || node->type == ind_label) && !(label_tab_fetch(node, label_tab)))
+			return (error_handler(label_no_match, node, 0));
+
 		node = node->next;
-		if ((i < op->param_num && node->type != char_sep)
-				|| (i == op->param_num && node->type != char_eol))
-			return (error_handler(param_invalid,
-									find_before(node, opcode), 0));
+
+		if ((i < op->param_num && node->type != char_sep) || (i == op->param_num && node->type != char_eol))
+			return (error_handler(param_invalid, find_before(node, opcode), 0));
 	}
 	return (done);
 }

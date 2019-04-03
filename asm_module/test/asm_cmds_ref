@@ -1,13 +1,13 @@
 .name "toto"
 .comment "toto"
 
-# live
+## live
 l1:
 
 live %TEST_DIR
 live %:l1
 
-# load
+## load
 
 l2:
 
@@ -17,7 +17,7 @@ ld %:l1, TEST_REG
 ld TEST_IND, TEST_REG
 ld :l1, TEST_REG
 
-# store
+## store
 
 l3:
 
@@ -26,7 +26,7 @@ st TEST_REG, TEST_REG
 st TEST_REG, TEST_IND
 st TEST_REG, :l1
 
-# add / sub
+## add / sub
 
 l4:
 
@@ -34,7 +34,7 @@ add TEST_REG, TEST_REG, TEST_REG
 sub TEST_REG, TEST_REG, TEST_REG
 
 l5:
-# and
+## and
 #
 #and %TEST_DIR, TEST_REG, TEST_REG
 #and %:l1, TEST_REG, TEST_REG
@@ -62,7 +62,7 @@ l5:
 #or TEST_REG, TEST_IND, TEST_REG
 #or TEST_REG, :l1, TEST_REG
 #
-## or
+## xor
 #
 #xor %TEST_DIR, TEST_REG, TEST_REG
 #xor %:l1, TEST_REG, TEST_REG
@@ -76,14 +76,14 @@ l5:
 #xor TEST_REG, TEST_IND, TEST_REG
 #xor TEST_REG, :l1, TEST_REG
 
-# zjump
+## zjump
 
 l6:
 
 zjmp %TEST_DIR
 zjmp %:l1
 
-# load index
+## load index
 
 l7:
 
@@ -96,15 +96,15 @@ l7:
 #ldi TEST_REG, %TEST_DIR, TEST_REG
 #ldi TEST_REG, %:l1, TEST_REG
 
-# store index
+## store index
 
 l8:
 
-#sti TEST_REG, %TEST_DIR, REG
-#sti TEST_REG, %:l1, REG
+#sti TEST_REG, %TEST_DIR, TEST_REG
+#sti TEST_REG, %:l1, TEST_REG
 #
-#sti TEST_REG, TEST_IND, REG
-#sti TEST_REG, :l1, REG
+#sti TEST_REG, TEST_IND, TEST_REG
+#sti TEST_REG, :l1, TEST_REG
 #
 #sti TEST_REG, %TEST_DIR, %TEST_DIR
 #sti TEST_REG, %:l1, %TEST_DIR
@@ -112,14 +112,14 @@ l8:
 #sti TEST_REG, TEST_IND, %TEST_DIR
 #sti TEST_REG, :l1, %TEST_DIR
 
-# fork
+## fork
 
 l9:
 
 fork %TEST_DIR
 fork %:l1
 
-# long load
+## long load
 
 l10:
 
@@ -129,7 +129,7 @@ lld %:l1, TEST_REG
 lld TEST_IND, TEST_REG
 lld :l1, TEST_REG
 
-# long load index
+## long load index
 
 l11:
 
@@ -142,14 +142,14 @@ l11:
 #lldi TEST_REG, %TEST_DIR, TEST_REG
 #lldi TEST_REG, %:l1, TEST_REG
 
-# long fork
+## long fork
 
 l12:
 
 lfork %TEST_DIR
 lfork %:l1
 
-# aff
+## aff
 
 l13:
 

@@ -6,7 +6,7 @@
 
 static uint32_t	get_param(t_token *token, uint32_t now,
 							t_label **label_tab, uint8_t *buffer)
-{//ENDIAN ??
+{//ENDIAN
 	int32_t		val;
 	uint32_t	val_size;
 
@@ -75,4 +75,4 @@ t_code			write_instruction(t_token *token, t_label **label_tab,
 	if (file != DUMMY_WRITE)
 		return (write(file->out_fd, buffer, index) != -1 ? done : error);
 	return (done);
-}
+*
