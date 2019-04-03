@@ -34,7 +34,7 @@ t_label				*label_tab_fetch(t_token *token, t_label **label_tab)
 		return (NULL);
 	while ((*label_tab)[index].token)
 	{
-		if (token->value == (*label_tab)[index].token->value)
+		if (!ft_strcmp(token->value, (*label_tab)[index].token->value))
 			return (&((*label_tab)[index]));
 		index++;
 	}

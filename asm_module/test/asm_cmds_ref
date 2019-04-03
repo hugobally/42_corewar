@@ -1,0 +1,156 @@
+.name "toto"
+.comment "toto"
+
+# live
+l1:
+
+live %TEST_DIR
+live %:l1
+
+# load
+
+l2:
+
+ld %TEST_DIR, TEST_REG
+ld %:l1, TEST_REG
+
+ld TEST_IND, TEST_REG
+ld :l1, TEST_REG
+
+# store
+
+l3:
+
+st TEST_REG, TEST_REG
+
+st TEST_REG, TEST_IND
+st TEST_REG, :l1
+
+# add / sub
+
+l4:
+
+add TEST_REG, TEST_REG, TEST_REG
+sub TEST_REG, TEST_REG, TEST_REG
+
+l5:
+# and
+#
+#and %TEST_DIR, TEST_REG, TEST_REG
+#and %:l1, TEST_REG, TEST_REG
+#
+#and TEST_IND, TEST_REG, TEST_REG
+#and :l1, TEST_REG, TEST_REG
+#
+#and TEST_REG, %TEST_DIR, TEST_REG
+#and TEST_REG, %:l1, TEST_REG
+#
+#and TEST_REG, TEST_IND, TEST_REG
+#and TEST_REG, :l1, TEST_REG
+#
+## or
+#
+#or %TEST_DIR, TEST_REG, TEST_REG
+#or %:l1, TEST_REG, TEST_REG
+#
+#or TEST_IND, TEST_REG, TEST_REG
+#or :l1, TEST_REG, TEST_REG
+#
+#or TEST_REG, %TEST_DIR, TEST_REG
+#or TEST_REG, %:l1, TEST_REG
+#
+#or TEST_REG, TEST_IND, TEST_REG
+#or TEST_REG, :l1, TEST_REG
+#
+## or
+#
+#xor %TEST_DIR, TEST_REG, TEST_REG
+#xor %:l1, TEST_REG, TEST_REG
+#
+#xor TEST_IND, TEST_REG, TEST_REG
+#xor :l1, TEST_REG, TEST_REG
+#
+#xor TEST_REG, %TEST_DIR, TEST_REG
+#xor TEST_REG, %:l1, TEST_REG
+#
+#xor TEST_REG, TEST_IND, TEST_REG
+#xor TEST_REG, :l1, TEST_REG
+
+# zjump
+
+l6:
+
+zjmp %TEST_DIR
+zjmp %:l1
+
+# load index
+
+l7:
+
+#ldi %TEST_DIR, TEST_REG, TEST_REG
+#ldi %:l1, TEST_REG, TEST_REG
+#
+#ldi TEST_IND, TEST_REG, TEST_REG
+#ldi :l1, TEST_REG, TEST_REG
+#
+#ldi TEST_REG, %TEST_DIR, TEST_REG
+#ldi TEST_REG, %:l1, TEST_REG
+
+# store index
+
+l8:
+
+#sti TEST_REG, %TEST_DIR, REG
+#sti TEST_REG, %:l1, REG
+#
+#sti TEST_REG, TEST_IND, REG
+#sti TEST_REG, :l1, REG
+#
+#sti TEST_REG, %TEST_DIR, %TEST_DIR
+#sti TEST_REG, %:l1, %TEST_DIR
+#
+#sti TEST_REG, TEST_IND, %TEST_DIR
+#sti TEST_REG, :l1, %TEST_DIR
+
+# fork
+
+l9:
+
+fork %TEST_DIR
+fork %:l1
+
+# long load
+
+l10:
+
+lld %TEST_DIR, TEST_REG
+lld %:l1, TEST_REG
+
+lld TEST_IND, TEST_REG
+lld :l1, TEST_REG
+
+# long load index
+
+l11:
+
+#lldi %TEST_DIR, TEST_REG, TEST_REG
+#lldi %:l1, TEST_REG, TEST_REG
+#
+#lldi TEST_IND, TEST_REG, TEST_REG
+#lldi :l1, TEST_REG, TEST_REG
+#
+#lldi TEST_REG, %TEST_DIR, TEST_REG
+#lldi TEST_REG, %:l1, TEST_REG
+
+# long fork
+
+l12:
+
+lfork %TEST_DIR
+lfork %:l1
+
+# aff
+
+l13:
+
+aff TEST_REG

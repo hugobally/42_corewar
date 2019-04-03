@@ -16,13 +16,14 @@ static uint32_t	get_param(t_token *token, uint32_t now,
 		val = ft_atoi(token->value);
 	else
 		val = ft_atoi(&(token->value[1]));
+	val = reverse_endian(val);//
 	if (token->type == dir_num || token->type == dir_label)
-		val_size = sizeof(int32_t);
+		val_size = 4;
 	else if (token->type == ind_num || token->type == ind_label)
-		val_size = sizeof(int16_t);
+		val_size = 2;
 	else
-		val_size = sizeof(int8_t);
-	ft_memcpy(buffer, &val, val_size);
+		val_size = 1;
+	ft_memcpy(buffer, (uint8_t*)&val + (4 - val_size), val_size);
 	return (val_size);
 }
 

@@ -33,10 +33,7 @@ static uint8_t		is_valid_param(t_token *token, uint8_t ref,
 		status = 1;
 	if ((token->type == dir_label || token->type == ind_label)
 			&& !(label_tab_fetch(token, label_tab)))
-	{
 		error_handler(label_no_match, token, 0);
-		status = 0;
-	}
 	return (status);
 }
 

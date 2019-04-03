@@ -61,6 +61,7 @@ t_code			output_file(t_tokenlst *lst,
 								t_file *file);
 t_code			write_instruction(t_token *token, t_label **label_tab,
 									t_file *file, uint32_t *offset);
+uint32_t		reverse_endian(uint32_t number);
 
 /*
 ** Errors
