@@ -11,10 +11,27 @@
 
 ///////////////////////////////////////////////////////////////
 
-void			tokens_clear(t_tokenlst *lst)
+#include "libft.h" // DEBUG
+
+static void			tokens_clear_lab_char(t_tokenlst *lst)
 {
-	t_token		*node;
-	t_token		*next;
+	t_token			*node;
+	t_token			*next;
+
+	node = lst->start;
+	while (node)
+	{
+		next = node->next;
+		if (node->type == char_label)
+			token_del(node, lst);
+		node = next;
+	}
+}
+
+static void			tokens_clear_dir_char(t_tokenlst *lst)
+{
+	t_token			*node;
+	t_token			*next;
 
 	node = lst->start;
 	while (node)
@@ -28,8 +45,6 @@ void			tokens_clear(t_tokenlst *lst)
 				error_handler(dir_badformat, node, 0);
 			token_del(node, lst);
 		}
-		if (node->type == char_label)
-			token_del(node, lst);
 		node = next;
 	}
 }
@@ -62,7 +77,8 @@ t_code			lexer(t_tokenlst *lst, const t_file *file)
 	tokens_foreach(lst, &find_registers);
 	tokens_foreach(lst, &find_commands);
 	tokens_foreach(lst, &find_num);
-	tokens_clear(lst);
+	tokens_clear_dir_char(lst);
+	tokens_clear_lab_char(lst);
 	if (check_empty(lst) == error)
 		return (error);
 	return (syntax(lst, file));

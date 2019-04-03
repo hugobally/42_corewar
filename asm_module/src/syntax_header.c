@@ -3,22 +3,6 @@
 #include "types.h"
 #include "asm.h"
 
-/*
-t_token				*find_before(t_token *start, t_toktype type)
-{
-	t_token			*node;
-
-	node = start;
-	while (node)
-	{
-		if (node->type == type)
-			return (node);
-		node = node->previous;
-	}
-	return (start);
-}
-*/
-
 static t_code		get_header_value(t_token *node, header_t *header)
 {
 	if (node->previous->type == cmd_name)

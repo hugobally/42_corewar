@@ -85,7 +85,6 @@ void		get_params(t_core *core, t_process *pro, uint32_t i)
 	i = get_params1(core, pro, i, pro->params.bytecode >> 6);
 	i = get_params2(core, pro, i, pro->params.bytecode >> 4);
 	get_params3(core, pro, i, pro->params.bytecode >> 2);
-	pro->remaining_cycles = g_op_tab[pro->instruction - 1].cycles;
 }
 
 void		read_instructions(t_core *core, t_process *pro)
@@ -113,5 +112,7 @@ void		read_instructions(t_core *core, t_process *pro)
 		pro->params.p1 = (int32_t)core->arena[get_pc(i)];
 		pro->instruction_size += DIR_SIZE;
 	}
+	pro->remaining_cycles = g_op_tab[pro->instruction - 1].cycles;
+	ft_printf("Cycles for read instruction : %u\n", pro->remaining_cycles);
 	// if (pro->instruction_size > 1)
 }

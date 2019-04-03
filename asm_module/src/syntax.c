@@ -13,9 +13,11 @@ t_code				syntax(t_tokenlst *lst, const t_file *file)
 	if (get_header(lst, &header) == error)
 		return (error);
 	build_label_tab(lst, &label_tab);
-	(void)file;
 	syntax_prog(lst, &label_tab, &header);
+
+	(void)file;
 //	if no error
+	//check if prog size != 0 (only labels)
 	//output
 //	syntax_exit(&label_tab);
 	return (done);

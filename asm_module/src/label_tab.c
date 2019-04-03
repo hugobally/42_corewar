@@ -25,11 +25,13 @@ void			debug_print_label_tab(t_label **label_tab)
 ** Retrieve Label
 */
 
-t_label				*get_label(t_token *token, t_label **label_tab)
+t_label				*label_tab_fetch(t_token *token, t_label **label_tab)
 {
 	uint32_t		index;
 
 	index = 0;
+	if (!*label_tab)
+		return (NULL);
 	while ((*label_tab)[index].token)
 	{
 		if (token->value == (*label_tab)[index].token->value)

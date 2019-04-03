@@ -40,8 +40,11 @@ typedef enum		e_errors
 	header_duplicate,//.name (...) .name
 	
 	expected_eol,
+	expected_opcode,
 	label_duplicate, //same label appears more than once
+	label_no_match, //:label1 but label1 not found in file
 	bytesize, //champion too big or huge file
+	param_invalid,//wrong parameter for instruction
 
 	parser_error,
 	//special codes

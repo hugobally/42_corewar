@@ -5,10 +5,6 @@ void		add_process(t_player *pl, t_core *core, uint32_t pc)
 	ft_memcpy(&core->arena[pc], pl->proc, pl->head.prog_size);
 }
 
-/*
-**	Manque la repartition des pc.
-*/
-
 t_errors	make_arena(t_core *core)
 {
 	int			cur;
