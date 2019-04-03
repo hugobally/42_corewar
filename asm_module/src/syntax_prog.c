@@ -81,7 +81,7 @@ static t_code		parse_instruction(t_tokenlst *lst, t_label **label_tab)
 	return (status);
 }
 
-void				parse_line(t_tokenlst *lst, t_label **label_tab,
+static void			parse_line(t_tokenlst *lst, t_label **label_tab,
 							header_t *header)
 {
 	if (lst->now->type == label)
@@ -92,7 +92,8 @@ void				parse_line(t_tokenlst *lst, t_label **label_tab,
 	if (lst->now->type != char_eol)
 	{
 		if (parse_instruction(lst, label_tab) != error)
-			header->prog_size += 1;//output_instruction(opcode_token, query);
+			write_instruction(lst->now, label_tab, DUMMY_WRITE,
+								&(header->prog_size));
 		while (lst->now->type != char_eol)
 			lst->now = lst->now->next;
 	}
