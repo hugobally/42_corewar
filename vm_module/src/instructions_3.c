@@ -47,6 +47,7 @@ int			ft_sti(t_core *core, t_process *process)
 	int			p2;
 	int			p3;
 
+	ft_printf("ft_sti IN\n");
 	params = process->params;
 	p2 = ft_type_param(params.bytecode, 2);
 	p3 = ft_type_param(params.bytecode, 3);
@@ -71,6 +72,7 @@ int			ft_sti(t_core *core, t_process *process)
 		if (p3 == DIR)
 			core->arena[get_pc((core->arena[get_pc(process->pc + params.p2 % IDX_MOD)] + params.p3) % IDX_MOD)] = process->regs[params.p1];
 	}
+	ft_printf("ft_sti OUT\n");
 	return (0);
 }
 

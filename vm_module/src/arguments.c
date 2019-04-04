@@ -8,6 +8,7 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 	i = 0;
 	while (++i < ac)
 	{
+		ft_printf("arguments lloop ?\n");
 		if (av[i][0] == '-')
 		{
 			if (av[i][1] == 'd')
