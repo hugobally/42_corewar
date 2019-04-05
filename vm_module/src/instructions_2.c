@@ -4,9 +4,12 @@ int			ft_sub(t_core *core, t_process *process)
 {
 	t_params params;
 
+	ft_printf("sub IN by %d\n", process->regs[0]);
 	(void)core;
 	params = process->params;
+	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	process->regs[params.p3 - 1] = process->regs[params.p1 - 1] - process->regs[params.p2 - 1];
+	ft_printf("sub OUT by %d\n", process->regs[0]);
 	return(0);
 }
 
@@ -17,7 +20,9 @@ int			ft_and(t_core *core, t_process *process)
 	int			p2;
 	int			p3;
 
+	ft_printf("and IN by %d\n", process->regs[0]);
 	params = process->params;
+	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	p1 = ft_type_param(params.bytecode, 1);
 	p2 = ft_type_param(params.bytecode, 2);
 	p3 = ft_type_param(params.bytecode, 3);
@@ -51,6 +56,7 @@ int			ft_and(t_core *core, t_process *process)
 				process->regs[params.p3 - 1] = core->arena[get_pc(process->pc + params.p1 % IDX_MOD)] && core->arena[get_pc(process->pc + params.p2 % IDX_MOD)];
 		}
 	}
+	ft_printf("and OUT by %d\n", process->regs[0]);
 	return (0);
 }
 
@@ -61,7 +67,9 @@ int			ft_or(t_core *core, t_process *process)
 	int			p2;
 	int			p3;
 
+	ft_printf("or IN by %d\n", process->regs[0]);
 	params = process->params;
+	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	p1 = ft_type_param(params.bytecode, 1);
 	p2 = ft_type_param(params.bytecode, 2);
 	p3 = ft_type_param(params.bytecode, 3);
@@ -95,6 +103,7 @@ int			ft_or(t_core *core, t_process *process)
 				process->regs[params.p3 - 1] = core->arena[get_pc(process->pc + params.p1 % IDX_MOD)] | core->arena[get_pc(process->pc + params.p2 % IDX_MOD)];
 		}
 	}
+	ft_printf("or OUT by %d\n", process->regs[0]);
 	return(0);
 }
 
@@ -105,7 +114,9 @@ int			ft_xor(t_core *core, t_process *process)
 	int			p2;
 	int			p3;
 
+	ft_printf("xor IN by %d\n", process->regs[0]);
 	params = process->params;
+	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	p1 = ft_type_param(params.bytecode, 1);
 	p2 = ft_type_param(params.bytecode, 2);
 	p3 = ft_type_param(params.bytecode, 3);
@@ -139,5 +150,6 @@ int			ft_xor(t_core *core, t_process *process)
 				process->regs[params.p3 - 1] = core->arena[get_pc(process->pc + params.p1 % IDX_MOD)] ^ core->arena[get_pc(process->pc + params.p2 % IDX_MOD)];
 		}
 	}
+	ft_printf("xor OUT by %d\n", process->regs[0]);
 	return(0);
 }

@@ -8,7 +8,7 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 	i = 0;
 	while (++i < ac)
 	{
-		ft_printf("arguments lloop ?\n");
+		//ft_printf("arguments lloop ?\n");
 		if (av[i][0] == '-')
 		{
 			if (av[i][1] == 'd')
@@ -19,6 +19,7 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 		else
 			if ((ret = new_player(core, av[i])) != ok)
 				return (ret);
+		//ft_printf("fin de la argument loop\n");
 	}
 	return (ok);
 }
