@@ -12,7 +12,6 @@ int 		ft_live(t_core *core, t_process *process)
 	core->nbr_live++;
 	player = params.p1;
 	ft_printf("Live done by %d or by %d tot nb_live %d\n ", player, process->regs[0], core->nbr_live);
-	getchar();
 	return (player);
 }
 

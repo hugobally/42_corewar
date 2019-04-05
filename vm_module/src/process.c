@@ -47,26 +47,20 @@ t_errors	nb_player(t_core *core, t_player *new)
 	t_player *start;
 	t_player *player;
 
-	//ft_printf("nb_player IN\n");
 	nb = 0;
 	player = core->players;
 	start = player;
 	if (core->next_player)
 		return (nb_player_spec(core, new));
-	//ft_printf("nb_player MID\n");
 	while (player)
 	{
-		//ft_printf("nb_player MID_1\n");
 		if (player->p == nb)
 		{
-			//ft_printf("nb_player MID_1.5\n");
 			nb++;
 			player = start;
 		}
 		player = player->next;
-		//ft_printf("nb_player MID_2\n");
 	}
 	new->p = nb;
-	//ft_printf("nb_player OUT\n");
 	return (ok);
 }
