@@ -1,119 +1,75 @@
 #include "corewar.h"
 
-void		get_params3(t_core *core, t_process *pro, uint32_t i, uint8_t code)
+void				add_parameter(t_core *core, t_process *p, t_op *op,
+									uint8_t index)
 {
-	if (T_IND & g_op_tab[pro->instruction - 1].param_types[2])
-		if (code & IND_CODE)
-			pro->params.p1 = (int16_t)core->arena[i];
-	if (T_DIR & g_op_tab[pro->instruction - 1].param_types[2])
-		if (code & DIR_CODE)
-			pro->params.p1 = (int32_t)core->arena[i];
-	if (T_REG & g_op_tab[pro->instruction - 1].param_types[2])
-		if (code & REG_CODE)
-			pro->params.p1 = (int32_t)core->arena[i];
-	if (code & T_IND)
+	uint8_t			type;
+	uint8_t			*val;
+
+	val = &(core->arena[get_pc(p->pc + p->opsize)]);
+	type = (p->params.bytecode & (0xC0 >> index * 2)) >> (6 - index * 2);
+	if (type == REG_CODE)
 	{
-		pro->instruction_size += IND_SIZE;
-		i += IND_SIZE;
+		*(&(p->params.p1) + index) = (int32_t)(*val);
+		p->opsize += REG_SIZE;
 	}
+	else if (type == IND_CODE || (type == DIR_CODE && op->compact))
+	{
+		*(&(p->params.p1) + index) = (int32_t)*((int16_t*)val);
+		p->opsize += IND_SIZE;
+	}
+	else if (type == DIR_CODE)
+	{
+		*(&(p->params.p1) + index) = *((int32_t*)val);
+		p->opsize += DIR_SIZE;
+	}
+	if ((type == REG_CODE && !(op->param_types[index] & T_REG))
+			|| (type == IND_CODE && !(op->param_types[index] & T_IND))
+			|| (type == DIR_CODE && !(op->param_types[index] & T_DIR))
+			|| type == 0)
+		p->instruction = 0;
+}
+
+uint8_t				fake_bytecode(uint8_t code)
+{
+	if (code & T_REG)
+		return (0x55);
 	else if (code & T_DIR)
+		return (0xAA);
+	else
+		return (0xFF);
+}
+
+void				store_parameters(t_core *core, t_process *p)
+{
+	uint8_t			index;
+	t_op			*op;
+
+	op = &(g_op_tab[p->instruction - 1]);
+	if (op->has_ocp)
 	{
-		pro->instruction_size += DIR_SIZE;
-		i+= DIR_SIZE;
+		p->params.bytecode = core->arena[get_pc(p->pc + p->opsize)];
+		p->opsize++;
+	}
+	index = 0;
+	while (index < op->param_num)
+	{
+		if (!(op->has_ocp))
+			p->params.bytecode = fake_bytecode(op->param_types[index]);
+		add_parameter(core, p, op, index);
+		index++;
 	}
 }
 
-int			get_params2(t_core *core, t_process *pro, uint32_t i, uint8_t code)
+void				read_instruction(t_core *core, t_process *p)
 {
-	if (T_IND & g_op_tab[pro->instruction - 1].param_types[1])
-		if (code & IND_CODE)
-			pro->params.p1 = (int16_t)core->arena[i];
-	if (T_DIR & g_op_tab[pro->instruction - 1].param_types[1])
-		if (code & DIR_CODE)
-			pro->params.p1 = (int32_t)core->arena[i];
-	if (T_REG & g_op_tab[pro->instruction - 1].param_types[1])
-		if (code & REG_CODE)
-			pro->params.p1 = (int32_t)core->arena[i];
-	if (code & T_IND)
+	ft_bzero(&(p->params), sizeof(t_params));
+	p->opsize = 1;
+	if (core->arena[get_pc(p->pc)] > (sizeof(g_op_tab) / sizeof(t_op)) - 1)
 	{
-		pro->instruction_size += IND_SIZE;
-		i += IND_SIZE;
+		p->instruction = core->arena[get_pc(p->pc)];
+		store_parameters(core, p);
 	}
-	else if (code & T_DIR)
-	{
-		pro->instruction_size += DIR_SIZE;
-		i+= DIR_SIZE;
-	}
-	return (i);
-}
-
-int			get_params1(t_core *core, t_process *pro, uint32_t i, uint8_t code)
-{
-	if (T_IND & g_op_tab[pro->instruction - 1].param_types[0])
-		if (code & IND_CODE)
-			pro->params.p1 = (int16_t)core->arena[i];
-	if (T_DIR & g_op_tab[pro->instruction - 1].param_types[0])
-		if (code & DIR_CODE)
-			pro->params.p1 = (int32_t)core->arena[i];
-	if (T_REG & g_op_tab[pro->instruction - 1].param_types[0])
-		if (code & REG_CODE)
-			pro->params.p1 = (int32_t)core->arena[i];
-	if (code & T_IND)
-	{
-		pro->instruction_size += IND_SIZE;
-		i += IND_SIZE;
-	}
-	else if (code & T_DIR)
-	{
-		pro->instruction_size += DIR_SIZE;
-		i+= DIR_SIZE;
-	}
-	return (i);
-}
-
-void		get_params(t_core *core, t_process *pro, uint32_t i)
-{
-	uint8_t		code;
-
-	code = pro->params.bytecode >> 6;
-	if (!code)
-	{
-		pro->instruction = 0;
-		pro->instruction_size = 1;
-		return ;
-	}
-	i = get_params1(core, pro, i, pro->params.bytecode >> 6);
-	i = get_params2(core, pro, i, pro->params.bytecode >> 4);
-	get_params3(core, pro, i, pro->params.bytecode >> 2);
-}
-
-void		read_instructions(t_core *core, t_process *pro)
-{
-	uint32_t	i;
-
-	//ft_printf("read_instruction IN\n");
-	pro->instruction = 0;
-	pro->params.bytecode = 0;
-	pro->params.p1 = 0;
-	pro->params.p2 = 0;
-	pro->params.p3 = 0;
-	pro->instruction_size = 1;
-	i = pro->pc;
-	pro->instruction = core->arena[i] > 16 ? 0 : core->arena[i];
-	if (pro->instruction)
-		++i;
-	if (pro->instruction != 0 && g_op_tab[pro->instruction - 1].has_ocp)
-	{
-		pro->params.bytecode = core->arena[i++];
-		++pro->instruction_size;
-		get_params(core, pro, i);
-	}
-	else if (pro->instruction != 0)
-	{
-		pro->params.p1 = (int32_t)core->arena[get_pc(i)];
-		pro->instruction_size += DIR_SIZE;
-		//ft_printf("read_instruction MID_2\n IMPRESSION pro->instruction %d\n", pro->instruction);
-		pro->remaining_cycles = g_op_tab[pro->instruction - 1].cycles;
-	}
-	//ft_printf("read_instruction OUT\n");
+	else
+		p->instruction = 0;
 }

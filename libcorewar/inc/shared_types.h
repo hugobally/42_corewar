@@ -6,7 +6,7 @@
 /*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 13:52:53 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/02 15:34:19 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/05 13:51:45 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct		s_op
 	uint32_t		cycles;
 	char			*info;
 	uint8_t			has_ocp;
-	uint8_t			unknown_bool;
+	uint8_t			compact;
 }					t_op;
 
 extern t_op 		g_op_tab[17];

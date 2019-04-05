@@ -62,11 +62,11 @@ typedef struct			s_process
 	unsigned int		pc;
 	t_bool				carry;
 	unsigned int		instruction;
-	unsigned int		remaining_cycles;
+	int					opsize;
 	t_params			params;
+	unsigned int		remaining_cycles;
 	int32_t				regs[REG_NUMBER];
 	t_bool				is_alive;
-	int					instruction_size;
 	struct s_process	*next;
 }						t_process;
 
@@ -145,7 +145,7 @@ int						ft_aff(t_core *core, t_process *process);
 typedef int				(*t_inst_tab)(t_core *, t_process *);
 extern	t_inst_tab		g_op_inst_tab[17];
 
-void					read_instructions(t_core *core, t_process *pro);
+void					read_instruction(t_core *core, t_process *pro);
 
 
 int						get_pc(uint32_t i);
