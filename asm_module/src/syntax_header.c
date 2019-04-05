@@ -33,7 +33,8 @@ static t_code		is_valid_cmd(t_token *node)
 	if (!(node->next && node->next->type == quote))
 		return (error_handler(header_noquote, node, 0));
 	node = node->next;
-	if (!ft_strlen(node->value) || !node->pad)
+	if ((node->previous->type == cmd_name && !ft_strlen(node->value))
+			|| !node->pad)
 		return (error_handler(header_badquote, node, 0));
 	return (done);
 }

@@ -6,7 +6,7 @@
 # define RED   "\033[1;31m"
 # define GRN   "\033[1;32m"
 # define YEL   "\033[33m"
-# define BLU   "\033[34m"
+# define BLU   "\033[1;34m"
 # define MAG   "\033[35m"
 # define CYN   "\033[36m"
 # define WHT   "\033[1;37m"
@@ -27,6 +27,7 @@ typedef enum		e_errors
 
 	label_badchar,//forbidden chars
 	label_badformat,//example : 'label : (...)' '%: label'
+	out_of_range, //> max int 
 	dir_badformat, //example : '  % 50  ' ' % ' ' % :label'
 	reg_badvalue,//r100, rBLA, etc
 	cmd_unknown,//.toto

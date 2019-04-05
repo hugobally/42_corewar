@@ -6,13 +6,14 @@
 
 void					error_lexer(t_errors err, t_token *token, t_file *file)
 {
-	static t_errstr		tab[7] = {
+	static t_errstr		tab[8] = {
 		{label_badchar, "Forbidden char in label", 0, 0, 0},
 		{label_badformat, "Bad formatting around symbol ':'", 0, 0, 0},
 		{dir_badformat, "Bad formatting around symbol '%'", 0, 0, 0},
 		{reg_badvalue, "Bad register [1 -", 1, REG_NUMBER, "]"},
 		{cmd_unknown, "Unknown command", 0, 0, 0},
 		{unknown_token, "Invalid token", 0, 0, 0},
+		{out_of_range, "Value out of range", 0, 0, 0},
 		{0, 0, 0, 0, 0}
 	};
 
@@ -24,7 +25,7 @@ void					error_parser(t_errors err, t_token *token, t_file *file)
 {
 	static t_errstr		tab[12] = {
 		{header_noquote, "Missing command parameter after", 0, 0, 0},
-		{header_badquote, "Bad quote format", 0, 0, 0},
+		{header_badquote, "Empty quote / Bad quote format", 0, 0, 0},
 		{header_namesize, "Name is too long (Max ", 1, PROG_NAME_LENGTH, ")"},
 		{header_commentsize, "Comment is too long (Max ", 1,
 														COMMENT_LENGTH, ")"},

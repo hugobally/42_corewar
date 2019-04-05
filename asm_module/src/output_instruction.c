@@ -4,38 +4,48 @@
 #include "macros.h"
 #include "asm.h"
 
-static uint32_t	get_param(t_token *token, uint32_t now,
-							t_label **label_tab, uint8_t *buffer)
-{//ENDIAN
-	int32_t		val;
-	uint32_t	val_size;
+// Check endian of architecture ?
 
-	if (token->type == dir_label || token->type == ind_label)
-		val = label_tab_fetch(token, label_tab)->offset - (int32_t)now;
-	else if (token->type != reg)
-		val = ft_atoi(token->value);
-	else
-		val = ft_atoi(&(token->value[1]));
-	val = reverse_endian(val);//
+static uint32_t		store_value(t_token *token, t_op *op,
+									int32_t val, uint8_t *buffer)
+{
+	uint32_t		val_size;
+
 	if (token->type == reg)
 		val_size = 1;
-	else if (token->type == ind_num || token->type == ind_label)
+	else if (token->type == ind_num || token->type == ind_label
+				|| op->compact)
 		val_size = 2;
 	else
 		val_size = 4;
-	ft_memcpy(buffer, (uint8_t*)&val + (4 - val_size), val_size);
+	ft_memcpy(buffer, (uint8_t*)(&val) + (4 - val_size), val_size);
 	return (val_size);
 }
 
-static uint8_t	get_encoding(t_token *token, uint8_t param_num)
+static int32_t		convert_value(t_token *token, uint32_t offset,
+									t_label **label_tab)
 {
-	uint8_t		param;
-	uint8_t		encoding;
-	uint8_t		code;
+	int32_t			val;
+
+	if (token->type == reg)
+		val = ft_atoi(&(token->value[1]));
+	else if (token->type == dir_label || token->type == ind_label)
+		val = label_tab_fetch(token, label_tab)->offset - (int32_t)offset;
+	else
+		val = ft_atoi(token->value);
+	val = reverse_endian(val);
+	return (val);
+}
+
+static int32_t		get_encoding(t_token *token, t_op *op, uint8_t *buffer)
+{
+	uint8_t			i;
+	uint8_t			encoding;
+	uint8_t			code;
 
 	encoding = 0;
-	param = 0;
-	while (param < param_num)
+	i = 0;
+	while (i < op->param_num)
 	{
 		if (token->type == dir_num || token->type == dir_label)
 			code = DIR_CODE;
@@ -43,36 +53,38 @@ static uint8_t	get_encoding(t_token *token, uint8_t param_num)
 			code = IND_CODE;
 		else
 			code = REG_CODE;
-		encoding |= code << (6 - 2 * param);
+		encoding |= code << (6 - 2 * i);
 		token = token->next->next;
-		param++;
+		i++;
 	}
-	return (encoding);
+	buffer[1] = encoding;
+	return (2);
 }
 
-t_code			write_instruction(t_token *token, t_label **label_tab,
-									t_file *file, uint32_t *offset)
+t_code				write_instruction(t_token *token, t_label **label_tab,
+											t_file *file, uint32_t *offset)
 {
-	t_op		*op;
-	int32_t		index;
-	uint8_t		param;
-	uint8_t		buffer[2 + 3 * DIR_SIZE];
+	t_op			*op;
+	int32_t			opsize;
+	uint8_t			i;
+	uint8_t			buffer[2 + 3 * DIR_SIZE];
+	int32_t			val;
 
 	op = find_op(token->value);
 	buffer[0] = op->opcode;
-	index = 1;
-	if (op->has_ocp)
-		buffer[index++] = get_encoding(token->next, op->param_num);
-	param = 0;
 	token = token->next;
-	while (param < op->param_num)
+	opsize = op->has_ocp ? get_encoding(token, op, buffer) : 1;
+	i = 0;
+	while (i < op->param_num)
 	{
-		param++;
-		index += get_param(token, *offset, label_tab, &(buffer[index]));
+		val = convert_value(token, *offset, label_tab);
+		opsize += store_value(token, op, val, &(buffer[opsize]));
 		token = token->next->next;
+		i++;
 	}
-	*offset += index;
+	*offset += opsize;
 	if (file != DUMMY_WRITE)
-		return (write(file->out_fd, buffer, index) != -1 ? done : error);
-	return (done);
+		return (write(file->out_fd, buffer, opsize) != -1 ? done : error);
+	else
+		return (done);
 }

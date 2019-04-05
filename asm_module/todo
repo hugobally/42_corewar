@@ -1,5 +1,5 @@
 quote peut etre vide
-int max apres % renvoie 2 erreurs
+gestion des values min max
 params dir traites comme ind
 syntax_exit et scanner_exit
 pas d'instructions > output header

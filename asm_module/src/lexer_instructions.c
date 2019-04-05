@@ -70,7 +70,14 @@ void				find_num(t_token *token)
 			i++;
 		number = ft_atoi(&(token->value[i]));
 		if (!ft_isnumstring(&(token->value[i]), number))
-			error_handler(unknown_token, token, 0);
+		{
+			if (token->previous && (token->previous->type == char_dir
+					|| token->previous->type == opcode))
+				error_handler(out_of_range, token, 0);
+			else
+				error_handler(unknown_token, token, 0);
+			token->type = dir_num;
+		}
 		else
 		{
 			if (token->previous && token->previous->type == char_dir)

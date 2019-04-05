@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "libft.h"
+#include "errors.h"
 #include "types.h"
 #include "asm.h"
 
@@ -75,6 +76,8 @@ t_code			output_file(t_tokenlst *lst,
 		if ((file->out_fd = open(file->out_name, O_CREAT | O_WRONLY
 									| O_TRUNC | O_APPEND, 0644)) != -1)
 		{
+			ft_printf("%s%s: %sWriting output to %s%s%s\n",
+						WHT, file->name, BLU, WHT, file->out_name, RESET);
 			if (write(file->out_fd, (void*)header, sizeof(header_t)) != -1)
 				return (output_instructions(lst, label_tab, file));
 		}
@@ -88,4 +91,4 @@ t_code			output_file(t_tokenlst *lst,
 	//check when name is only '.s'
 	//check when open dir
 
-//lst->now at zero on exit in scanner
+//set lst->now to NULL on exit in scanner
