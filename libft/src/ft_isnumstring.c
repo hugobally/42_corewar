@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 17:25:03 by hbally            #+#    #+#             */
-/*   Updated: 2019/03/30 18:45:49 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/05 19:09:08 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ uint8_t			ft_isnumstring(char *string, int32_t number)
 	int8_t		negative;
 	size_t		len;
 
+	if (number == -2147483648)
+		return (ft_strcmp(string, "-2147483648") == 0);
 	negative = number < 0;
 	len = ft_strlen(string);
 	if (!string || !check_sizes(string, len, number, negative))
 		return (0);
-	i = (int32_t)(len - 1);
+	i = len - 1;
 	while (i >= 0)
 	{
 		if (ft_abs32(number % 10) != string[i] - '0')
@@ -48,7 +50,7 @@ uint8_t			ft_isnumstring(char *string, int32_t number)
 			number /= 10;
 	}
 	if (negative)
-		return (!(i != 0 || string[0] != '-'));
+		return (i == 0 && string[0] == '-');
 	else
-		return (!(i >= 0 && !(i == 0 && string[0] == '+')));
+		return (i < 0 || (i == 0 && string[0] == '+'));
 }
