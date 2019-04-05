@@ -19,8 +19,7 @@ t_token				*find_before(t_token *start, t_toktype type)
 	return (start);
 }
 
-static uint8_t		is_valid_param(t_token *token, uint8_t ref,
-									t_label **label_tab)
+static uint8_t		is_valid_param(t_token *token, uint8_t ref)
 {
 	if (((token->type == dir_num || token->type == dir_label)
 			&& (ref & T_DIR))
@@ -47,7 +46,7 @@ static t_code		parse_parameters(t_token *node, t_label **label_tab)//
 	{
 		node = node->next;
 
-		if (!is_valid_param(node, op->param_types[i - 1], label_tab))
+		if (!is_valid_param(node, op->param_types[i - 1]))
 			return (error_handler(param_invalid, find_before(node, opcode), 0));
 
 		if ((node->type == dir_label || node->type == ind_label) && !(label_tab_fetch(node, label_tab)))
