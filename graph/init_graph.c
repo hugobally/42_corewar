@@ -6,10 +6,12 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:29:22 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/03 13:54:31 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/05 16:19:20 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "libft.h"
 #include "graph.h"
 #include "op.h"
 
@@ -26,18 +28,63 @@ WINDOW	*create_new_win(int h, int w, int x, int y)
 void	init_ncurse(void)
 {
 	initscr();
+	curs_set(0);
+	if(has_colors() == FALSE)
+	{    
+		endwin();
+		ft_printf("Your terminal does not support color\n");
+		exit(1);
+	}
+	start_color();
 	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
 	refresh();
-	start_color();
 	use_default_colors();
 	init_pair(CHAMP1, COLOR_RED, -1);
 	init_pair(CHAMP2, COLOR_BLUE, -1);
 	init_pair(CHAMP3, COLOR_GREEN, -1);
 	init_pair(CHAMP4, COLOR_YELLOW, -1);
-	//CHEKC COLOR AND EXIT
 }
+
+void	get_col_row(int addr, int *col, int *row)
+{
+	*row = addr / 64;
+	*col = (addr % 64) - 1;
+	if (*col == -1)
+	{
+		*col = 63;
+		*row -= 1;
+	}
+	*col = *col + 2 + (*col * 2);
+	*row += 1;
+}
+
+void	write_on_arena(int addr, int v, int champ, t_graph *g)
+{
+	int		col;
+	int		row;
+
+	get_col_row(addr, &col, &row);
+	wattron(g->arena_win, COLOR_PAIR(champ));
+	mvwprintw(g->arena_win, row, col, "%.2hhx", v);
+	wattroff(g->arena_win, COLOR_PAIR(champ));
+	wrefresh(g->arena_win);
+}
+
+/*void	move_proccess(int addr, int new_addr, t_graph *g)
+{
+	int		col;
+	int		row;
+
+	(void)new_addr;
+	get_col_row(addr, &col, &row);
+	ft_printf("%d %d\n", col, row);
+	mvwchgat(g->arena_win, row, col, 2, A_BOLD, COLOR_PAIR(2), NULL);
+	get_col_row(new_addr, &col, &row);
+	mvwchgat(g->arena_win, row, col, 2, A_BOLD, COLOR_PAIR(2), NULL);
+	wrefresh(g->arena_win);
+}*/
 
 void	create_arena_win(t_graph *g)
 {
@@ -96,16 +143,16 @@ void	create_process_win(t_graph *g)
 	g->pro_win = create_new_win(PRO_ROW, PRO_COL, ARENA_COL, 0);
 	mvwprintw(g->pro_win, 0, (PRO_COL / 2) - 7, " - PROCESS - ");
 	wattron(g->pro_win, COLOR_PAIR(CHAMP1));
-	mvwprintw(g->pro_win, 1, 2, "#%-5d%-2dx%-2d [%c][%c]%5s in%4d laps.",
+	mvwprintw(g->pro_win, 1, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5s in%4d laps.",
 			1, 33,25,'L','C',"zjmp",14);
 	wattron(g->pro_win, COLOR_PAIR(CHAMP2));
-	mvwprintw(g->pro_win, 2, 2, "#%-5d%-2dx%-2d [%c][%c]%5s in%4d laps.",
+	mvwprintw(g->pro_win, 2, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5s in%4d laps.",
 			2, 1,25,'L','C',"zjmp",14);
 	wattron(g->pro_win, COLOR_PAIR(CHAMP3));
-	mvwprintw(g->pro_win, 3, 2, "#%-5d%-2dx%-2d [%c][%c]%5s in%4d laps.",
+	mvwprintw(g->pro_win, 3, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5s in%4d laps.",
 			3, 1,25,'L','C',"zjmp",14);
 	wattron(g->pro_win, COLOR_PAIR(CHAMP4));
-	mvwprintw(g->pro_win, 4, 2, "#%-5d%-2dx%-2d [%c][%c]%5s in%4d laps.",
+	mvwprintw(g->pro_win, 4, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5s in%4d laps.",
 			4, 1,25,'L','C',"zjmp",14);
 	wrefresh(g->pro_win);
 }
@@ -166,9 +213,12 @@ int		main(void)
 	create_process_win(g);
 	create_registers_win(g);
 	create_champions_win(g);
+	int i = 0;
+	while (i++ < MEM_SIZE)
+		write_on_arena(i, i, 1, g);
+	//move_proccess(1, 56, g);
 	while((ch = getch()) != KEY_F(1))
 	{
-
 	}
 	free_graph(g);
 	endwin();
