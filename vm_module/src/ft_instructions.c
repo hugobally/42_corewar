@@ -9,8 +9,8 @@ int			ft_instructions(t_core *core, t_process *process)
 		return (0);
 	op = process->instruction;
 	g_op_inst_tab[op](core, process);
-	process->pc = get_pc(process->pc += process->instruction_size);
-	read_instructions(core, process);
+	process->pc = get_pc(process->pc += process->opsize);
+	read_instruction(core, process);
 	//ft_printf("ft_instructions OUT\n");
 	return (0);
 }
