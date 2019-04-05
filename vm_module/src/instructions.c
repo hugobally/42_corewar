@@ -7,6 +7,7 @@ int 		ft_live(t_core *core, t_process *process)
 
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	getchar();
 	process->is_alive = true;
 	core->last_live_done_by = params.p1;
 	core->nbr_live++;
@@ -26,6 +27,7 @@ int			ft_load(t_core *core, t_process *process)
 	ft_printf("ft_load IN by %d\n", process->regs[0]);
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	getchar();
 	bytecode = params.bytecode;
 	p1 = ft_type_param(bytecode, 1);
 	r = params.p2;

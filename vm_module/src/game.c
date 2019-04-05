@@ -33,7 +33,7 @@ void		kill_process(t_core *core)
 				pre->next = next;
 			else
 				core->process = next;
-			//free(tmp);
+			//free (tmp);
 		}
 		else
 		{
@@ -44,10 +44,13 @@ void		kill_process(t_core *core)
 		tmp = tmp->next;
 		if (tmp != NULL)
 			next = tmp->next;
+		else
+			next = NULL;
+		
 	}
 	check_delta(core);
 	ft_printf("Kill_process OUT cycles_to die %d, max_checks %d\n", core->max_cycle_to_die, core->max_checks);
-	getchar();
+	//getchar();
 }
 
 void		call_instructions(t_core *core)
@@ -55,14 +58,18 @@ void		call_instructions(t_core *core)
 	t_process	*tmp;
 
 	tmp = core->process;
-	while (tmp)
+	ft_printf("call_instruction IN\n");
+	while (tmp != NULL)
 	{
+		ft_printf("start of loop \n");
 		if (tmp->remaining_cycles != 0)
 		{
 			--tmp->remaining_cycles;
+			ft_printf("call_instruction MID\n");
 		}
 		else
 			ft_instructions(core, tmp);
+		ft_printf("end of loop \n");
 		tmp = tmp->next;
 	}
 }
@@ -88,7 +95,7 @@ t_errors	the_game(t_core *core)
 	{
 		ft_printf("Start of the loop: cycles %d\n", cycles);
 		call_instructions(core);
-		//ft_putendl("Called instructions");
+		ft_putendl("Called instructions");
 		if (--cycles == 0)
 		{
 			kill_process(core);
