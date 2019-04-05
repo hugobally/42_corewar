@@ -33,7 +33,7 @@ void		kill_process(t_core *core)
 				pre->next = next;
 			else
 				core->process = next;
-			//free (tmp);
+			//free(tmp);
 		}
 		else
 		{
@@ -44,21 +44,17 @@ void		kill_process(t_core *core)
 		tmp = tmp->next;
 		if (tmp != NULL)
 			next = tmp->next;
-		else
-			next = NULL;
-		
 	}
 	check_delta(core);
-	ft_printf("Kill_process OUT cycles_to die %d, max_checks %d\n", core->max_cycle_to_die, core->max_checks);
-	//getchar();
+	ft_putendl("Kill_process OUT");
 }
 
 void		call_instructions(t_core *core)
 {
 	t_process	*tmp;
 
-	tmp = core->process;
 	ft_printf("call_instruction IN\n");
+	tmp = core->process;
 	while (tmp != NULL)
 	{
 		ft_printf("start of loop \n");
