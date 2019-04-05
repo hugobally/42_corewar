@@ -19,7 +19,6 @@ void		kill_process(t_core *core)
 	t_process	*pre;
 	t_process	*tmp;
 	t_process	*next;
-	int			i;
 
 	pre = NULL;
 	tmp = core->process;
@@ -27,38 +26,27 @@ void		kill_process(t_core *core)
 	ft_putendl("Kill_process IN");
 	while (tmp != NULL)
 	{
-		i = 0;
 		if (tmp->is_alive == false)
 		{
 			ft_printf("killed, %d\n", tmp->regs[0]);
 			if (pre)
-			{
-				ft_printf("pre\n");
 				pre->next = next;
-				free (tmp);
-				tmp = pre;
-			}
 			else
-			{
-				ft_printf("pas de pre\n");
 				core->process = next;
-				free (tmp);
-				tmp = NULL;
-				tmp = next;
-				i = 1;
-			}
+			//free (tmp);
 		}
 		else
 		{
 			ft_printf("not killed, %d\n", tmp->regs[0]);
 			tmp->is_alive = false;
 		}
-		ft_printf("end of loop\n");
 		pre = tmp;
-		if (i != 1)
-			tmp = tmp->next;
+		tmp = tmp->next;
 		if (tmp != NULL)
 			next = tmp->next;
+		else
+			next = NULL;
+		
 	}
 	check_delta(core);
 	ft_printf("Kill_process OUT cycles_to die %d, max_checks %d\n", core->max_cycle_to_die, core->max_checks);
@@ -71,7 +59,7 @@ void		call_instructions(t_core *core)
 
 	tmp = core->process;
 	ft_printf("call_instruction IN\n");
-	while (tmp)
+	while (tmp != NULL)
 	{
 		ft_printf("start of loop \n");
 		if (tmp->remaining_cycles != 0)
@@ -105,9 +93,9 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-		//ft_printf("Start of the loop: cycles %d\n", cycles);
+		ft_printf("Start of the loop: cycles %d\n", cycles);
 		call_instructions(core);
-		//ft_putendl("Called instructions");
+		ft_putendl("Called instructions");
 		if (--cycles == 0)
 		{
 			kill_process(core);
