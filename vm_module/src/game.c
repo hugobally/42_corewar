@@ -46,7 +46,8 @@ void		kill_process(t_core *core)
 			next = tmp->next;
 	}
 	check_delta(core);
-	ft_putendl("Kill_process OUT");
+	ft_printf("Kill_process OUT cycles_to die %d, max_checks %d\n", core->max_cycle_to_die, core->max_checks);
+	getchar();
 }
 
 void		call_instructions(t_core *core)
@@ -85,13 +86,13 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-		ft_putendl("Start of the loop");
+		ft_printf("Start of the loop: cycles %d\n", cycles);
 		call_instructions(core);
-		ft_putendl("Called instructions");
+		//ft_putendl("Called instructions");
 		if (--cycles == 0)
 		{
 			kill_process(core);
-			ft_putendl("Got out of kill_process");
+			//ft_putendl("Got out of kill_process");
 			cycles = core->max_cycle_to_die;
 		}
 		proc = core->process;
@@ -102,7 +103,6 @@ t_errors	the_game(t_core *core)
 				break ;
 			}
 	}
-	ft_putendl("YOlo");
 	find_winner(core);
 	return (ok);
 }

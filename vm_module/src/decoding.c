@@ -6,7 +6,7 @@ int		ft_type_param(unsigned char bytecode, int p)
 	unsigned char tmp_byte;
 	int p_tmp;
 
-	ft_printf("ft_type_param IN\n");
+	//ft_printf("ft_type_param IN\n");
 	p_tmp = p;
 	mask = 192;
 	while (p > 1)
@@ -22,6 +22,6 @@ int		ft_type_param(unsigned char bytecode, int p)
 		tmp_byte = tmp_byte >> 4;
 	else if (p == 3)
 		tmp_byte = tmp_byte >> 2;
-	ft_printf("ft_type_param OUT\n");
+	//ft_printf("ft_type_param OUT\n");
 	return ((int)tmp_byte);
 }

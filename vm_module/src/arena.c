@@ -15,20 +15,20 @@ t_errors	make_arena(t_core *core)
 	pl = core->players;
 	core->max_cycle_to_die = CYCLE_TO_DIE;
 	core->max_checks = MAX_CHECKS;
-	ft_printf("make arena IN\n");
+	//ft_printf("make arena IN\n");
 	while (pl)
 	{
-		ft_printf("make arena MID_0\n");
+		//ft_printf("make arena MID_0\n");
 		add_process(pl, core, cur);
-		ft_printf("make arena MID_0.5\n");
+		//ft_printf("make arena MID_0.5\n");
 		if ((ret = make_process(core, cur, pl)) != ok)
 			return (ret);
-		ft_printf("make arena MID\n");
+		//ft_printf("make arena MID\n");
 		pl = pl->next;
-		ft_printf("make arena MID_1\n");
+		//ft_printf("make arena MID_1\n");
 		cur += MEM_SIZE / core->nb_players;
-		ft_printf("make arena MID_2\n");
+		//ft_printf("make arena MID_2\n");
 	}
-	ft_printf("make arena OUT\n");
+	//ft_printf("make arena OUT\n");
 	return (ok);
 }
