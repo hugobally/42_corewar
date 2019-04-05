@@ -1,6 +1,4 @@
 #include "corewar.h"
-#include "libft.h"//DEBUG
-#include <stdlib.h>//DEBUG
 
 void				add_parameter(t_core *core, t_process *p, t_op *op,
 									uint8_t index)
@@ -48,13 +46,13 @@ void				store_parameters(t_core *core, t_process *p)
 	t_op			*op;
 
 	op = &(g_op_tab[p->instruction - 1]);
-	ft_printf("op name is '%s'\n", op->name);
+	//ft_printf("op name is '%s'\n", op->name);
 	if (op->has_ocp)
 	{
 		p->params.bytecode = core->arena[get_pc(p->pc + p->opsize)];
 		p->opsize++;
 	}
-	ft_printf("bytecode is %#x\n", p->params.bytecode);
+	//ft_printf("bytecode is %#x\n", p->params.bytecode);
 	index = 0;
 	while (index < op->param_num)
 	{
@@ -63,15 +61,15 @@ void				store_parameters(t_core *core, t_process *p)
 		add_parameter(core, p, op, index);
 		index++;
 	}
-	ft_printf("params : %d -- %d -- %d\n", p->params.p1, p->params.p2, p->params.p3);
-	ft_printf("opcode is %d\n", p->instruction);
+	//ft_printf("params : %d -- %d -- %d\n", p->params.p1, p->params.p2, p->params.p3);
+	//ft_printf("opcode is %d\n", p->instruction);
 }
 
 void				read_instruction(t_core *core, t_process *p)
 {
 	ft_bzero(&(p->params), sizeof(t_params));
 	p->opsize = 1;
-	ft_printf("--- READ INSTRUCTION ---\n");
+	//ft_printf("--- READ INSTRUCTION ---\n");
 	if (core->arena[get_pc(p->pc)] && (core->arena[get_pc(p->pc)]
 			<= (sizeof(g_op_tab) / sizeof(t_op)) - 1))
 	{
@@ -80,7 +78,7 @@ void				read_instruction(t_core *core, t_process *p)
 	}
 	else
 		p->instruction = 0;
-	ft_printf("PC points to %p, value : %#x\n", &(core->arena[get_pc(p->pc + p->opsize)]), core->arena[get_pc(p->pc + p->opsize)]);
-	ft_printf("--- END READ INSTRUCTION ---\n");
-	exit(0);
+	//ft_printf("PC points to %p, value : %#x\n", &(core->arena[get_pc(p->pc + p->opsize)]), core->arena[get_pc(p->pc + p->opsize)]);
+	//ft_printf("--- END READ INSTRUCTION ---\n");
+	//exit(0);
 }
