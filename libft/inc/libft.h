@@ -129,6 +129,7 @@ char				*ft_ldtoa(long double n);
 char				*ft_round_double(char *s, size_t p);
 
 int					ft_atoi(const char *str);
+uint32_t			ft_atoui(const char *str);
 long				ft_atol(const char *str);
 long long			ft_atoll(const char *str);
 

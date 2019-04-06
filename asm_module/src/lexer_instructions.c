@@ -60,30 +60,23 @@ void				find_commands(t_token *token)
 
 void				find_num(t_token *token)
 {
-	int				number;
 	int				i;
 
 	if (token->type == unknown)
 	{
-		i = 0;
-		while (token->value[i] == '0' && token->value[i + 1])
-			i++;
-		number = ft_atoi(&(token->value[i]));
-		if (!ft_isnumstring(&(token->value[i]), number))
-		{
-			if (token->previous && (token->previous->type == char_dir
-					|| token->previous->type == opcode))
-				error_handler(out_of_range, token, 0);
-			else
-				error_handler(unknown_token, token, 0);
-			token->type = dir_num;
-		}
+		i = token->value[0] != '-' ? 0 : 1;
+		if (!ft_isdigit(token->value[i]))
+			error_handler(unknown_token, token, 0);
 		else
 		{
-			if (token->previous && token->previous->type == char_dir)
-				token->type = dir_num;
-			else
-				token->type = ind_num;
+			while (ft_isdigit(token->value[i]))
+				i++;
+			if (token->value[i])
+				error_handler(unknown_token, token, 0);
 		}
+		if (token->previous && token->previous->type == char_dir)
+			token->type = dir_num;
+		else
+			token->type = ind_num;
 	}
 }

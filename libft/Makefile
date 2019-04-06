@@ -27,6 +27,7 @@ INC					=	-I inc
 # File Variables
 
 SRCS_RAW			:=	ft_atoi.c 				\
+						ft_atoui.c				\
 						ft_bzero.c 				\
 						ft_isalnum.c 			\
 						ft_isalpha.c 			\

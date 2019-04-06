@@ -26,13 +26,19 @@ static int32_t		convert_value(t_token *token, uint32_t offset,
 									t_label **label_tab)
 {
 	int32_t			val;
+	char			*string;
 
+	string = token->value;
 	if (token->type == reg)
-		val = ft_atoi(&(token->value[1]));
+		val = ft_atoi(&(string[1]));
 	else if (token->type == dir_label || token->type == ind_label)
 		val = label_tab_fetch(token, label_tab)->offset - (int32_t)offset;
 	else
-		val = ft_atoi(token->value);
+	{
+		val = (int32_t)ft_atoui(&(string[string[0] == '-']));
+		if (string[0] == '-')
+			val *= -1;
+	}
 	val = reverse_endian(val);
 	return (val);
 }
