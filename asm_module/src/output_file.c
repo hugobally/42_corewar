@@ -76,7 +76,7 @@ t_code			output_file(t_tokenlst *lst,
 		if ((file->out_fd = open(file->out_name, O_CREAT | O_WRONLY
 									| O_TRUNC | O_APPEND, 0644)) != -1)
 		{
-			ft_printf("%s%s: %sWriting output to %s%s%s\n",
+			ft_dprintf(1, "%s%s: %sWriting output to %s%s%s\n",
 						WHT, file->name, BLU, WHT, file->out_name, RESET);
 			if (write(file->out_fd, (void*)header, sizeof(header_t)) != -1)
 				return (output_instructions(lst, label_tab, file));
@@ -84,11 +84,3 @@ t_code			output_file(t_tokenlst *lst,
 	}
 	return (error);
 }
-
-//TODO
-	//free file output name
-	//handle bad names
-	//check when name is only '.s'
-	//check when open dir
-
-//set lst->now to NULL on exit in scanner

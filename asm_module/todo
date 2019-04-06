@@ -1,5 +1,4 @@
-quote peut etre vide
-gestion des values min max
-params dir traites comme ind
 syntax_exit et scanner_exit
-pas d'instructions > output header
+free file output name
+check when open dir
+Set lst->now to NULL on exit in scanner

@@ -18,10 +18,12 @@ typedef enum		e_errors
 	read_linesize = -2,//no token, critical -- one line is > than max line size
 	read_crash = -1,//no token, critical
 	malloc = 0,//no token, critical
+	bad_filename,
 	write_crash,
 	filesize, //no token, critical -- more than max_token tokens
 	no_instructions,
 	header_missing,//name/comment not at top
+	output_max_size,
 
 	scanner_error,
 
@@ -45,10 +47,11 @@ typedef enum		e_errors
 	expected_opcode,
 	label_duplicate, //same label appears more than once
 	label_no_match, //:label1 but label1 not found in file
-	bytesize, //champion too big or huge file
 	param_invalid,//wrong parameter for instruction
 
 	parser_error,
+	warning,
+	bytesize, //champion too big
 	//special codes
 	query, // query error_handler to see if errors have occured
 	no_error

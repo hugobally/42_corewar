@@ -31,10 +31,6 @@ static uint8_t		is_valid_param(t_token *token, uint8_t ref)
 		return (0);
 }
 
-/*
-** TODO better error handling in parse_parameters
-*/ 
-
 static t_code		parse_parameters(t_token *node, t_label **label_tab)//
 {
 	t_op			*op;
@@ -98,15 +94,22 @@ t_code				syntax_prog(t_tokenlst *lst,
 							t_label **label_tab, 
 							header_t *header)
 {
+	t_bool			warning_triggered;
+
+	warning_triggered = false;
 	lst->now = lst->prog_start;
 	if (!lst->now)
 		return (error_handler(no_instructions, 0, 0));
 	while (lst->now)
 	{
 		parse_line(lst, label_tab, header);
-		if (header->prog_size > CHAMP_MAX_SIZE
-				|| header->prog_size > MAX_OUTPUT_BYTE_SIZE)
-			return (error_handler(bytesize, lst->now, 0));
+		if (header->prog_size > CHAMP_MAX_SIZE && warning_triggered == false)
+		{
+			error_handler(bytesize, lst->now, 0);
+			warning_triggered = true;
+		}
+		if (header->prog_size > MAX_OUTPUT_BYTE_SIZE)
+			return (error_handler(output_max_size, 0, 0));
 	}
 	return (done);
 }

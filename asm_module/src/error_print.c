@@ -4,9 +4,7 @@
 #include "types.h"
 #include "macros.h"
 
-//TODO Fix offset bug
-
-static uint32_t			get_offset(char *line, uint32_t pos)
+static void				print_offset(char *line, uint32_t pos, int fd)
 {
 	uint32_t			i;
 	uint32_t			offset;
@@ -14,19 +12,14 @@ static uint32_t			get_offset(char *line, uint32_t pos)
 	i = 0;
 	offset = 0;
 	pos = (pos & COL_MASK) >> 16;
-	while (pos && line[i])
+	while (line[i] && i < pos - 1)
 	{
-		if (line[i] == '\t')
-			offset += 7;
-		else
-			offset++;
-		pos--;
+		ft_dprintf(fd, "%s", line[i] == '\t' ? "\t" : " ");
 		i++;
 	}
-	return (offset);
 }
 
-static void				print_line(t_file *file, uint32_t pos)
+static void				print_line(t_file *file, uint32_t pos, int fd)
 {
 	char				*line;
 	uint32_t			line_num;
@@ -37,8 +30,9 @@ static void				print_line(t_file *file, uint32_t pos)
 	{
 		if (line_num == (pos & LINE_MASK))
 		{
-			ft_printf("%s\n%s%*s%s\n", line, GRN, get_offset(line, pos),
-										"", RESET);
+			ft_dprintf(fd, "%s\n", line);
+			print_offset(line, pos, fd);
+			ft_dprintf(fd, "%s^\n%s", RED, RESET);
 			ft_memdel((void**)&line);
 			break ;
 		}
@@ -51,16 +45,22 @@ static void				print_line(t_file *file, uint32_t pos)
 void					print_error(char *error, uint8_t has_pos,
 										uint32_t pos, t_file *file)
 {
+	int					fd;
+
 	if (error)
 	{
-		ft_printf("%s%s:", WHT, file->name);
+		fd = error[0] == '/' ? 1 : 2;
+		ft_dprintf(fd, "%s%s:", WHT, file->name);
 		if (has_pos)
-			ft_printf("%d:%d: ", pos & LINE_MASK, (pos & COL_MASK) >> 16);
+			ft_dprintf(fd, "%d:%d: ", pos & LINE_MASK, (pos & COL_MASK) >> 16);
 		else
-			ft_printf(" ");
-		ft_printf("%serror: %s%s%s\n", RED, WHT, error, RESET);
+			ft_dprintf(fd, " ");
+		if (fd == 1)
+			ft_dprintf(fd, "%swarning: %s%s%s\n", MAG, WHT, &(error[1]), RESET);
+		else
+			ft_dprintf(fd, "%serror: %s%s%s\n", RED, WHT, error, RESET);
 		if (has_pos)
-			print_line(file, pos);
+			print_line(file, pos, fd);
 	}
 }
 

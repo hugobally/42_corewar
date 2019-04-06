@@ -29,13 +29,11 @@
 
 /*
 ** Size Restrictions
-** (Max is 10000 lines at 80 tokens / line without comments, max token length 512)
 */
 
 # define MAX_TOKEN_STR_SIZE		512
-# define MAX_TOKEN_LIST_SIZE 	10000 * 80
-# define MAX_INPUT_FILE_SIZE	MAX_TOKEN_STR_SIZE * MAX_TOKEN_LIST_SIZE
-# define MAX_OUTPUT_BYTE_SIZE	0x7FFFFFFF
+# define MAX_INPUT_FILE_SIZE	10000000
+# define MAX_OUTPUT_BYTE_SIZE	32767
 
 /*
 ** Misc Code Clarity
