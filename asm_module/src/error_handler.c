@@ -62,7 +62,7 @@ void					error_parser(t_errors err, t_token *token, t_file *file)
 
 void					error_scanner(t_errors err, t_file *file)
 {
-	static t_errstr		tab[10] = {
+	static t_errstr		tab[11] = {
 		{malloc, "Malloc", 0, 0, 0},
 		{bad_filename, "Bad file suffix", 0, 0, 0},
 		{open_error, "File could not be opened or does not exist", 0, 0, 0},
@@ -71,6 +71,7 @@ void					error_scanner(t_errors err, t_file *file)
 		{filesize, "File too big (>", 1, MAX_INPUT_FILE_SIZE / 1000000, "MB)"},
 		{no_instructions, "No instructions found", 0, 0, 0},
 		{header_missing, "Missing header command", 0, 0, 0},
+		{write_crash, "Write Failure", 0, 0, 0},
 		{output_max_size, "Output is bigger than max IND value -",
 			1, MAX_OUTPUT_BYTE_SIZE, ""},
 		{0, 0, 0, 0, 0}

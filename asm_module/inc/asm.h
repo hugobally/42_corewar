@@ -80,7 +80,7 @@ void		build_errstr_tok(t_errors error, t_token *token, t_errstr *tab,
 */
 
 void		token_del(t_token *token, t_tokenlst *lst);
-t_code		syntax_exit(t_label **label_tab, header_t *header, t_errors error);
+t_code		syntax_exit(t_label **label_tab, t_errors error);
 t_code		scanner_exit(t_tokenlst *lst, t_errors code);
 
 #endif
