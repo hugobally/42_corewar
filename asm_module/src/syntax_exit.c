@@ -1,11 +1,26 @@
+#include "asm.h"
+#include "libft.h"
 #include "types.h"
 #include "errors.h"
 
-t_code				syntax_exit(t_label **label_tab, header_t *header,
-								t_errors error)
+t_code				syntax_exit(t_label **label_tab, t_errors error)
 {
-	(void)label_tab;
-	(void)header;
-	(void)error;
-	return (done);
+	int				i;
+
+	i = 0;
+	if (*label_tab)
+	{
+		while ((*label_tab)[i].token)
+		{
+			((*label_tab)[i].token = NULL);
+			i++;
+		}
+		ft_memdel((void**)label_tab);
+	}
+	if (error == write_crash)
+		error_handler(write_crash, 0, 0);
+	if (error == parser_error)
+		return (error);
+	else
+		return (done);
 }

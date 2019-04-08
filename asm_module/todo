@@ -2,3 +2,4 @@ syntax_exit et scanner_exit
 free file output name
 check when open dir
 Set lst->now to NULL on exit in scanner
+endianness en fonction du cpu
