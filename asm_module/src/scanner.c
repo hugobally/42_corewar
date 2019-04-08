@@ -81,6 +81,8 @@ t_code					scanner(t_file *file)
 		line.num++;
 		if (line.str[0] && process_line(&line, &lst) == error)
 			return (scanner_exit(&lst, scanner_error));
+		else
+			ft_memdel((void**)&(line.str));
 	}
 	if (ret < 0)
 		return (scanner_exit(&lst, ret));
@@ -89,5 +91,3 @@ t_code					scanner(t_file *file)
 	else
 		return (scanner_exit(&lst, no_error));
 }
-
-//gnl avec -1 et null pour clean le static dans lexer exit
