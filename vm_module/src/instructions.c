@@ -31,7 +31,10 @@ t_errors		ft_load(t_core *core, t_process *process)
 	if (p1 == DIR)
 		process->regs[r - 1] = params.p1;
 	else if (p1 == IND)
-		process->regs[r - 1] = *((int32_t*)&(core->arena[get_pc(process->pc + params.p1 % IDX_MOD)]));
+	{
+		//process->regs[r - 1] = *((int32_t*)&(core->arena[get_pc(process->pc + params.p1 % IDX_MOD)]));
+		process->regs[r - 1] = read_val(core, process->pc + params.p1 % IDX_MOD, 4);
+	}
 	ft_carry(process, process->regs[r - 1]);
 	ft_printf("ft_load OUT by %d\n", process->regs[0]);
 	return (ok);
@@ -53,7 +56,10 @@ t_errors		ft_store(t_core *core, t_process *process)
 	if (p2 == REG)
 		process->regs[params.p2 - 1] = (int)process->regs[params.p1 - 1];
 	else if (p2 == IND)
-		*((int32_t*)&(core->arena[get_pc(process->pc + params.p1 % IDX_MOD)])) = process->regs[params.p1 - 1];
+	{
+		//*((int32_t*)&(core->arena[get_pc(process->pc + params.p1 % IDX_MOD)])) = process->regs[params.p1 - 1];
+		write_val(core, get_pc(process->pc + params.p1 % IDX_MOD), 4, process->regs[params.p1 - 1]);
+	}
 	ft_printf("ft_store OUT\n");
 	return (ok);
 }
