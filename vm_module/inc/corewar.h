@@ -147,6 +147,9 @@ typedef int				(*t_inst_tab)(t_core *, t_process *);
 extern	t_inst_tab		g_op_inst_tab[17];
 
 void					read_instruction(t_core *core, t_process *pro);
+void					write_val(t_core *core, uint32_t pc, uint32_t size,
+								int32_t val);
+int32_t					read_val(t_core *core, uint32_t pc, uint32_t size);
 
 
 int						get_pc(uint32_t i);
