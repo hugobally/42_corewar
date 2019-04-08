@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-int 		ft_live(t_core *core, t_process *process)
+t_errors 		ft_live(t_core *core, t_process *process)
 {
 	int			player;
 	t_params	params;
@@ -12,10 +12,10 @@ int 		ft_live(t_core *core, t_process *process)
 	core->nbr_live++;
 	player = params.p1;
 	ft_printf("Live done by %d or by %d tot nb_live %d\n ", player, process->regs[0], core->nbr_live);
-	return (player);
+	return (ok);
 }
 
-int			ft_load(t_core *core, t_process *process)
+t_errors		ft_load(t_core *core, t_process *process)
 {
 	t_params params;
 	unsigned char bytecode;
@@ -28,16 +28,16 @@ int			ft_load(t_core *core, t_process *process)
 	bytecode = params.bytecode;
 	p1 = ft_type_param(bytecode, 1);
 	r = params.p2;
-	if (p1 == 3)
+	if (p1 == DIR)
 		process->regs[r - 1] = params.p1;
-	else if (p1 == 2)
-		process->regs[r - 1] = core->arena[get_pc(process->pc + r % IDX_MOD)];
-	process->carry = 1;
+	else if (p1 == IND)
+		process->regs[r - 1] = *((int32_t*)&(core->arena[get_pc(process->pc + params.p1 % IDX_MOD)]));
+	ft_carry(process, process->regs[r - 1]);
 	ft_printf("ft_load OUT by %d\n", process->regs[0]);
-	return (0);
+	return (ok);
 }
 
-int			ft_store(t_core *core, t_process *process)
+t_errors		ft_store(t_core *core, t_process *process)
 {
 	t_params params;
 	unsigned char bytecode;
@@ -53,12 +53,12 @@ int			ft_store(t_core *core, t_process *process)
 	if (p2 == REG)
 		process->regs[params.p2 - 1] = (int)process->regs[params.p1 - 1];
 	else if (p2 == IND)
-		core->arena[get_pc(process->pc + params.p1 % IDX_MOD)] = process->regs[params.p1 - 1];
+		*((int32_t*)&(core->arena[get_pc(process->pc + params.p1 % IDX_MOD)])) = process->regs[params.p1 - 1];
 	ft_printf("ft_store OUT\n");
-	return (0);
+	return (ok);
 }
 
-int			ft_add(t_core *core, t_process *process)
+t_errors		ft_add(t_core *core, t_process *process)
 {
 	t_params params;
 
@@ -67,6 +67,7 @@ int			ft_add(t_core *core, t_process *process)
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	process->regs[params.p3 - 1] = process->regs[params.p2 - 1] + process->regs[params.p1 - 1];
+	ft_carry(process, process->regs[params.p3 - 1]);
 	ft_printf("ft_add OUT by %d\n", process->regs[0]);
-	return(0);
+	return(ok);
 }

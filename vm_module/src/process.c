@@ -1,5 +1,13 @@
 #include "corewar.h"
 
+void		ft_carry(t_process *process, int res)
+{
+	if (res == 0)
+		process->carry = true;
+	if (res != 0)
+		process->carry = false;
+}
+
 void		push_process(t_core *core, t_process *new)
 {
 	new->next = core->process;

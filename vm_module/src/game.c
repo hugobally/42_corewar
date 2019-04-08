@@ -49,9 +49,10 @@ void		kill_process(t_core *core)
 	ft_putendl("Kill_process OUT");
 }
 
-void		call_instructions(t_core *core)
+t_errors	call_instructions(t_core *core)
 {
 	t_process	*tmp;
+	t_errors	res;
 
 	//ft_printf("call_instruction IN\n");
 	tmp = core->process;
@@ -64,10 +65,12 @@ void		call_instructions(t_core *core)
 			//ft_printf("call_instruction MID\n");
 		}
 		else
-			ft_instructions(core, tmp);
+			if ((res = ft_instructions(core, tmp)) != ok)
+				return (res);
 		//ft_printf("end of loop \n");
 		tmp = tmp->next;
 	}
+	return (ok);
 }
 
 void		find_winner(t_core *core)

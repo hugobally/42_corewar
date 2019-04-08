@@ -6,8 +6,8 @@
 # include "../../libcorewar/inc/libcorewar.h"
 
 # define REG 1
-# define IND 2
-# define DIR 3
+# define DIR 2
+# define IND 3
 
 
 typedef enum			e_errors
@@ -122,28 +122,29 @@ t_errors				the_game(t_core *core);
 ** Instructions
 */
 
-int						ft_instructions(t_core *core, t_process *process);
+t_errors				ft_instructions(t_core *core, t_process *process);
 int						ft_type_param(unsigned char bytecode, int p);
-int						ft_error(t_core *core, t_process *process);
-int 					ft_live(t_core *core, t_process *process);
-int						ft_load(t_core *core, t_process *process);
-int						ft_store(t_core *core, t_process *process);
-int						ft_add(t_core *core, t_process *process);
-int						ft_sub(t_core *core, t_process *process);
-int						ft_and(t_core *core, t_process *process);
-int						ft_or(t_core *core, t_process *process);
-int						ft_xor(t_core *core, t_process *process);
-int						ft_zjmp(t_core *core, t_process *process);
-int						ft_ldi(t_core *core, t_process *process);
-int						ft_sti(t_core *core, t_process *process);
-int						ft_fork(t_core *core, t_process *process);
-int						ft_lld(t_core *core, t_process *process);
-int						ft_lldi(t_core *core, t_process *process);
-int						ft_lfork(t_core *core, t_process *process);
-int						ft_aff(t_core *core, t_process *process);
+t_errors				ft_error(t_core *core, t_process *process);
+t_errors				ft_live(t_core *core, t_process *process);
+t_errors				ft_load(t_core *core, t_process *process);
+t_errors				ft_store(t_core *core, t_process *process);
+t_errors				ft_add(t_core *core, t_process *process);
+t_errors				ft_sub(t_core *core, t_process *process);
+t_errors				ft_and(t_core *core, t_process *process);
+t_errors				ft_or(t_core *core, t_process *process);
+t_errors				ft_xor(t_core *core, t_process *process);
+t_errors				ft_zjmp(t_core *core, t_process *process);
+t_errors				ft_ldi(t_core *core, t_process *process);
+t_errors				ft_sti(t_core *core, t_process *process);
+t_errors				ft_fork(t_core *core, t_process *process);
+t_errors				ft_lld(t_core *core, t_process *process);
+t_errors				ft_lldi(t_core *core, t_process *process);
+t_errors				ft_lfork(t_core *core, t_process *process);
+t_errors				ft_aff(t_core *core, t_process *process);
+void					ft_carry(t_process *process, int res);
 
 
-typedef int				(*t_inst_tab)(t_core *, t_process *);
+typedef t_errors		(*t_inst_tab)(t_core *, t_process *);
 extern	t_inst_tab		g_op_inst_tab[17];
 
 void					read_instruction(t_core *core, t_process *pro);
