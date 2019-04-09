@@ -11,7 +11,7 @@ t_errors 		ft_live(t_core *core, t_process *process)
 	core->last_live_done_by = params.p1;
 	core->nbr_live++;
 	player = params.p1;
-	ft_printf("Live done by %d or by %d tot nb_live %d\n", player, process->regs[0], core->nbr_live);
+	ft_printf("Live for %d BY %d tot nb_live %d\n", player, process->player, core->nbr_live);
 	return (ok);
 }
 

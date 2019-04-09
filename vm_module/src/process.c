@@ -26,6 +26,7 @@ t_errors	make_process(t_core *core, uint32_t pc, t_player *pl)
 		return (falloc);
 	new->pc = pc;
 	new->regs[0] = pl->p;
+	new->player = pl->p;
 	push_process(core, new);
 	return (ok);
 }

@@ -62,6 +62,7 @@ typedef struct			s_process
 	unsigned int		pc;
 	t_bool				carry;
 	unsigned int		instruction;
+	int					player;
 	int					opsize;
 	t_params			params;
 	unsigned int		remaining_cycles;
