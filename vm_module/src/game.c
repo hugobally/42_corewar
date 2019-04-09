@@ -103,11 +103,13 @@ t_errors	the_game(t_core *core)
 		}
 		proc = core->process;
 		if (core->dump != 0)
+		{
 			if (--core->dump == 0)
 			{
 				hexdump(core);
 				break ;
 			}
+		}
 	}
 	find_winner(core);
 	return (ok);

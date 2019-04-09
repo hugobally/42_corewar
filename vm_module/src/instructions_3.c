@@ -84,7 +84,7 @@ t_errors			ft_sti(t_core *core, t_process *process)
 		{
 			//*((int32_t*)&(core->arena[get_pc((params.p2 + params.p3) % IDX_MOD)])) = process->regs[params.p1 - 1];
 			write_val(core, get_pc(process->pc + (params.p2 + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
-			ft_printf("STOCK live arg %d\n", read_val(core, get_pc((params.p2 + params.p3) % IDX_MOD), 4));
+			ft_printf("STOCK live arg %d\n", read_val(core, get_pc(process->pc + (params.p2 + params.p3) % IDX_MOD), 4));
 		}
 	}
 	if (p2 == IND)
@@ -92,16 +92,16 @@ t_errors			ft_sti(t_core *core, t_process *process)
 		if (p3 == REG)
 		{
 			//*((int32_t*)&(core->arena[get_pc((core->arena[get_pc(process->pc + params.p2 % IDX_MOD)] + process->regs[params.p3 - 1]) % IDX_MOD)])) = process->regs[params.p1 - 1];
-			write_val(core, get_pc((read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1]);
+			write_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1]);
 		}
 		if (p3 == DIR)
 		{
 			//*((int32_t*)&(core->arena[get_pc((core->arena[get_pc(process->pc + params.p2 % IDX_MOD)] + params.p3) % IDX_MOD)])) = process->regs[params.p1 - 1];
-			write_val(core, get_pc((read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
+			write_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
 		}
 	}
-	hexdump(core);
-	getchar();
+	//hexdump(core);
+	//getchar();
 	ft_printf("ft_sti OUT by %d\n", process->regs[0]);
 	return (ok);
 }

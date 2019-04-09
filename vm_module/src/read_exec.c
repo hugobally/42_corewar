@@ -1,9 +1,11 @@
+
 #include "corewar.h"
 
 t_errors		ft_instructions(t_core *core, t_process *process)
 {
 	int op;
 	t_errors res;
+	t_op *tab;
 
 	//ft_printf("ft_instructions IN %d\n", process->instruction);
 	if (process->remaining_cycles != 0)
@@ -15,6 +17,8 @@ t_errors		ft_instructions(t_core *core, t_process *process)
 	if (op != zjmp)
 		process->pc = get_pc(process->pc += process->opsize);
 	read_instruction(core, process);
-	//ft_printf("ft_instructions OUT\n");
+	tab = &(g_op_tab[process->instruction - 1]);
+	process->remaining_cycles = tab->cycles;
+	//ft_printf("ft_instructions OUT remaing_cycles %d\n", process->remaining_cycles);
 	return (ok);
 }

@@ -26,7 +26,7 @@ SRCS_RAW			:=	main.c							\
 						instructions_3.c				\
 						instructions_4.c				\
 						functions_tab.c 				\
-						ft_instructions.c				\
+						read_exec.c						\
 						read_instruction.c				\
 						get_pc.c						\
 						dump.c							\
