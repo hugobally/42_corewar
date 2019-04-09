@@ -12,7 +12,8 @@ t_errors		ft_instructions(t_core *core, t_process *process)
 		op = 0;
 	if ((res = g_op_inst_tab[op](core, process)) != ok)
 		return (res);
-	process->pc = get_pc(process->pc += process->opsize);
+	if (op != zjmp)
+		process->pc = get_pc(process->pc += process->opsize);
 	read_instruction(core, process);
 	//ft_printf("ft_instructions OUT\n");
 	return (ok);

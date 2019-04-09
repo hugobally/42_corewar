@@ -23,7 +23,7 @@ t_errors	ft_and(t_core *core, t_process *process)
 
 	ft_printf("and IN by %d\n", process->regs[0]);
 	params = process->params;
-	ft_printf("params p1:%d, p2:%d, p3:%d, bytecode: %x\n", params.p1, params.p2, params.p3, params.bytecode);
+	ft_printf("params p1:%d, p2:%d, p3:%d, bytecode: %x, pc:%d\n", params.p1, params.p2, params.p3, params.bytecode, process->pc);
 	p1 = ft_type_param(params.bytecode, 1);
 	p2 = ft_type_param(params.bytecode, 2);
 	p3 = ft_type_param(params.bytecode, 3);

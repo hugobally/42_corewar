@@ -6,12 +6,12 @@ t_errors 		ft_live(t_core *core, t_process *process)
 	t_params	params;
 
 	params = process->params;
-	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	ft_printf("Live in\nparams p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
 	process->is_alive = true;
 	core->last_live_done_by = params.p1;
 	core->nbr_live++;
 	player = params.p1;
-	ft_printf("Live done by %d or by %d tot nb_live %d\n ", player, process->regs[0], core->nbr_live);
+	ft_printf("Live done by %d or by %d tot nb_live %d\n", player, process->regs[0], core->nbr_live);
 	return (ok);
 }
 
