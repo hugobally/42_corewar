@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/02 11:45:08 by rle-ru           ###   ########.fr        #
+#    Updated: 2019/04/09 16:53:29 by tlesven          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,15 @@ SRCS_RAW			:=	main.c							\
 						read_instruction.c				\
 						get_pc.c						\
 						dump.c							\
-						
+						graph_init.c					\
+						graph_struct.c					\
+						graph_champions.c				\
+						graph_registers.c				\
+						graph_process.c					\
+						graph_infos.c					\
+						graph_ctrl.c					\
+						graph_arena.c					\
+						graph_tools.c					\
 # Directories
 
 SRCSDIR   			=	src
@@ -65,12 +73,14 @@ INCLUDES			:=	$(addprefix -I ,$(INCDIR))
 
 INCLIBS				:=	$(foreach LIB,$(LIBS),-L $(LIB) $(subst lib,-l,$(notdir $(LIB))))
 
+NCURSES = -lncurses
+
 # Main Target
 
 all					:	libs $(NAME)
 
 $(NAME)				: 	$(OBJS) $(LIBFILES)
-						$(CC) -o $@ $(CFLAGS) $(INCLIBS) $(OBJS)
+						$(CC) -o $@ $(CFLAGS) $(INCLIBS) $(OBJS) $(NCURSES)
 
 # Make Libs
 
