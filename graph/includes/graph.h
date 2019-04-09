@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/03 13:40:16 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:16:38 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,15 @@
 enum				e_collors
 {
 	BASE,
+	EMPTY,
 	CHAMP1,
 	CHAMP2,
 	CHAMP3,
 	CHAMP4,
+	P1,
+	P2,
+	P3,
+	P4
 };
 
 typedef struct		s_graph
@@ -55,6 +60,27 @@ typedef struct		s_graph
 	char			pause;
 }					t_graph;
 
+WINDOW				*create_new_win(int h, int w, int x, int y);
+
 t_graph				*init_graph(void);
 void				free_graph(t_graph *g);
+
+void				create_champions_win(t_graph *g);
+
+void				create_registers_win(t_graph *g);
+
+void				create_process_win(t_graph *g);
+
+void				create_infos_win(t_graph *g);
+
+void				create_controls_win(t_graph *g);
+
+void				write_on_arena(int addr, int v, int champ, t_graph *g);
+void				add_procces_to_arena(int addr, t_graph *g);
+void				remove_procces_to_arena(int addr, t_graph *g);
+void				move_proccess_on_arena(int addr, int new_addr, t_graph *g);
+void				create_arena_win(t_graph *g);
+
+void				get_col_row(int addr, int *col, int *row);
+WINDOW				*create_new_win(int h, int w, int x, int y);
 #endif

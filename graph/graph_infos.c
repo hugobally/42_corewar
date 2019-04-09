@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_graph.c                                     :+:      :+:    :+:   */
+/*   graph_infos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 11:32:49 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/09 14:31:53 by tlesven          ###   ########.fr       */
+/*   Created: 2019/04/09 14:03:13 by tlesven           #+#    #+#             */
+/*   Updated: 2019/04/09 14:22:21 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "op.h"
 #include "graph.h"
 
-t_graph		*init_graph(void)
+void	create_infos_win(t_graph *g)
 {
-	t_graph		*g;
-
-	g = (t_graph*)ft_memalloc(sizeof(t_graph));
-	g->fps = 32;
-	g->laps = 1;
-	g->pause = 1;
-	create_arena_win(g);
-	create_controls_win(g);
-	create_infos_win(g);
-	create_process_win(g);
-	create_registers_win(g);
-	create_champions_win(g);
-	return (g);
-}
-
-void		free_graph(t_graph *g)
-{
-	ft_memdel((void*)&g);
+	g->info_win = create_new_win(INFO_ROW, INFO_COL, CTRL_COL, ARENA_ROW);
+	mvwprintw(g->info_win, 0, (INFO_COL / 2) - 6, " - INFOS - ");
+	mvwprintw(g->info_win, 1, 2, "%-25s%15d", "CYCLE:", 10000);
+	mvwprintw(g->info_win, 2, 2, "%-25s%15d", "CYCLE_MOD:", 45);
+	mvwprintw(g->info_win, 3, 2, "%-25s%15d", "CYCLE_TO_DIE:", CYCLE_TO_DIE);
+	wrefresh(g->info_win);
 }

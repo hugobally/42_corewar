@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_graph.c                                     :+:      :+:    :+:   */
+/*   graph_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 11:32:49 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/09 14:31:53 by tlesven          ###   ########.fr       */
+/*   Created: 2019/04/09 14:16:51 by tlesven           #+#    #+#             */
+/*   Updated: 2019/04/09 14:28:06 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "graph.h"
 
-t_graph		*init_graph(void)
+WINDOW	*create_new_win(int h, int w, int x, int y)
 {
-	t_graph		*g;
+	WINDOW	*win;
 
-	g = (t_graph*)ft_memalloc(sizeof(t_graph));
-	g->fps = 32;
-	g->laps = 1;
-	g->pause = 1;
-	create_arena_win(g);
-	create_controls_win(g);
-	create_infos_win(g);
-	create_process_win(g);
-	create_registers_win(g);
-	create_champions_win(g);
-	return (g);
+	win = newwin(h, w, y, x);
+	box(win, 0, 0);
+	wrefresh(win);
+	return (win);
 }
 
-void		free_graph(t_graph *g)
+void	get_col_row(int addr, int *col, int *row)
 {
-	ft_memdel((void*)&g);
+	*row = addr / 64;
+	*col = (addr % 64) - 1;
+	if (*col == -1)
+	{
+		*col = 63;
+		*row -= 1;
+	}
+	*col = *col + 2 + (*col * 2);
+	*row += 1;
 }

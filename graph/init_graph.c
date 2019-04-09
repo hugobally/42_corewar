@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 14:29:22 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/05 16:19:20 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:32:04 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 #include "libft.h"
 #include "graph.h"
 #include "op.h"
-
-WINDOW	*create_new_win(int h, int w, int x, int y)
-{
-	WINDOW	*win;
-
-	win = newwin(h, w, y, x);
-	box(win, 0 , 0);
-	wrefresh(win);
-	return (win);
-}
 
 void	init_ncurse(void)
 {
@@ -45,160 +35,12 @@ void	init_ncurse(void)
 	init_pair(CHAMP2, COLOR_BLUE, -1);
 	init_pair(CHAMP3, COLOR_GREEN, -1);
 	init_pair(CHAMP4, COLOR_YELLOW, -1);
+	init_pair(P1, COLOR_RED, COLOR_WHITE);
+	init_pair(P2, COLOR_BLUE, COLOR_WHITE);
+	init_pair(P3, COLOR_GREEN, COLOR_WHITE);
+	init_pair(P4, COLOR_YELLOW, COLOR_WHITE);
 }
 
-void	get_col_row(int addr, int *col, int *row)
-{
-	*row = addr / 64;
-	*col = (addr % 64) - 1;
-	if (*col == -1)
-	{
-		*col = 63;
-		*row -= 1;
-	}
-	*col = *col + 2 + (*col * 2);
-	*row += 1;
-}
-
-void	write_on_arena(int addr, int v, int champ, t_graph *g)
-{
-	int		col;
-	int		row;
-
-	get_col_row(addr, &col, &row);
-	wattron(g->arena_win, COLOR_PAIR(champ));
-	mvwprintw(g->arena_win, row, col, "%.2hhx", v);
-	wattroff(g->arena_win, COLOR_PAIR(champ));
-	wrefresh(g->arena_win);
-}
-
-/*void	move_proccess(int addr, int new_addr, t_graph *g)
-{
-	int		col;
-	int		row;
-
-	(void)new_addr;
-	get_col_row(addr, &col, &row);
-	ft_printf("%d %d\n", col, row);
-	mvwchgat(g->arena_win, row, col, 2, A_BOLD, COLOR_PAIR(2), NULL);
-	get_col_row(new_addr, &col, &row);
-	mvwchgat(g->arena_win, row, col, 2, A_BOLD, COLOR_PAIR(2), NULL);
-	wrefresh(g->arena_win);
-}*/
-
-void	create_arena_win(t_graph *g)
-{
-	int		i;
-	int		row;
-	int		col;
-
-	i = 0;
-	col = 2;
-	row = 1;
-	g->arena_win = create_new_win(ARENA_ROW, ARENA_COL, 0, 0);
-	mvwprintw(g->arena_win, 0, (ARENA_COL / 2) - 11, "%s", " - ARENA - ");
-	init_pair(5, COLOR_BLACK, -1);
-	wattron(g->arena_win, COLOR_PAIR(5));
-	while(i < MEM_SIZE)
-	{
-		mvwprintw(g->arena_win,row,col, "%s", "00 ");
-		col += 3;
-		if (col > 192)
-		{
-			row += 1;
-			col = 2;
-		}
-		i++;
-	}
-	wattroff(g->arena_win, COLOR_PAIR(5));
-	wrefresh(g->arena_win);
-}
-
-void	create_controls_win(t_graph *g)
-{
-	g->ctrl_win = create_new_win(CTRL_ROW, CTRL_COL, 0, ARENA_ROW);
-	mvwprintw(g->ctrl_win, 0, (CTRL_COL / 2) - 8," - CONTROLS - ");
-	mvwprintw(g->ctrl_win, 1, 2,"%-25s%-10d%s", 
-			"FRAME PER SECOND:", g->fps, "[ << 'o'] ['p' >> ]");
-	mvwprintw(g->ctrl_win, 2, 2, "%-25s%-10d%s",
-			"LAPS PER FRAME:", g->laps, "[ << 'k'] ['l' >> ]");
-	mvwprintw(g->ctrl_win, 3, 2, "%-35s%s",
-			"LIST OF PROCESS:",  "[ << 'n'] ['m' >> ]");
-	mvwprintw(g->ctrl_win, 4, 2, "%-25s%-10s%s","PAUSE:", "ON", "[' ']");
-	mvwprintw(g->ctrl_win, 5, 2, "%-35s%s","QUIT:", "['F1']");
-	wrefresh(g->ctrl_win);
-}
-void	create_infos_win(t_graph *g)
-{
-	g->info_win = create_new_win(INFO_ROW, INFO_COL, CTRL_COL, ARENA_ROW);
-	mvwprintw(g->info_win, 0, (INFO_COL / 2) - 6," - INFOS - ");
-	mvwprintw(g->info_win, 1, 2, "%-25s%15d", "CYCLE:", 10000);
-	mvwprintw(g->info_win, 2, 2, "%-25s%15d", "CYCLE_MOD:", 45);
-	mvwprintw(g->info_win, 3, 2, "%-25s%15d", "CYCLE_TO_DIE:", CYCLE_TO_DIE);
-	wrefresh(g->info_win);
-}
-
-void	create_process_win(t_graph *g)
-{
-	g->pro_win = create_new_win(PRO_ROW, PRO_COL, ARENA_COL, 0);
-	mvwprintw(g->pro_win, 0, (PRO_COL / 2) - 7, " - PROCESS - ");
-	wattron(g->pro_win, COLOR_PAIR(CHAMP1));
-	mvwprintw(g->pro_win, 1, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5s in%4d laps.",
-			1, 33,25,'L','C',"zjmp",14);
-	wattron(g->pro_win, COLOR_PAIR(CHAMP2));
-	mvwprintw(g->pro_win, 2, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5s in%4d laps.",
-			2, 1,25,'L','C',"zjmp",14);
-	wattron(g->pro_win, COLOR_PAIR(CHAMP3));
-	mvwprintw(g->pro_win, 3, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5s in%4d laps.",
-			3, 1,25,'L','C',"zjmp",14);
-	wattron(g->pro_win, COLOR_PAIR(CHAMP4));
-	mvwprintw(g->pro_win, 4, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5s in%4d laps.",
-			4, 1,25,'L','C',"zjmp",14);
-	wrefresh(g->pro_win);
-}
-
-void	create_registers_win(t_graph *g)
-{
-	g->reg_win = create_new_win(REG_ROW, REG_COL, ARENA_COL, PRO_ROW);
-	mvwprintw(g->reg_win, 0, (REG_COL / 2) - 9, " - REGISTERS - ");
-	mvwprintw(g->reg_win, 1, 2, "REGISTER [0] = %5d", -1);
-	mvwprintw(g->reg_win, 3, 2, "REGISTER [1] = %5d", 0);
-	mvwprintw(g->reg_win, 5, 2, "REGISTER [2] = %5d", 568);
-	mvwprintw(g->reg_win, 7, 2, "REGISTER [3] = %5d", 485);
-	mvwprintw(g->reg_win, 9, 2, "REGISTER [4] = %5d", 245);
-	mvwprintw(g->reg_win, 11, 2, "REGISTER [5] = %5d", 1);
-	mvwprintw(g->reg_win, 13, 2, "REGISTER [6] = %5d", 0);
-	mvwprintw(g->reg_win, 15, 2, "REGISTER [7] = %5d", 0);
-	mvwprintw(g->reg_win, 1, 30, "REGISTER [8] = %5d", -1);
-	mvwprintw(g->reg_win, 3, 30, "REGISTER [9] = %5d", 0);
-	mvwprintw(g->reg_win, 5, 30, "REGISTER [10] = %5d", 568);
-	mvwprintw(g->reg_win, 7, 30, "REGISTER [11] = %5d", 485);
-	mvwprintw(g->reg_win, 9, 30, "REGISTER [12] = %5d", 245);
-	mvwprintw(g->reg_win, 11, 30, "REGISTER [13] = %5d", 1);
-	mvwprintw(g->reg_win, 13, 30, "REGISTER [14] = %5d", 0);
-	mvwprintw(g->reg_win, 15, 30, "REGISTER [15] = %5d", 0);
-	wrefresh(g->reg_win);
-}
-
-void	create_champions_win(t_graph *g)
-{
-	g->champ_win = create_new_win(CHAMP_ROW, CHAMP_COL, 
-			INFO_COL + CTRL_COL, ARENA_ROW);
-	mvwprintw(g->champ_win, 0, (CHAMP_COL / 2) - 9, " - CHAMPIONS - ");
-	wattron(g->champ_win, COLOR_PAIR(CHAMP1));
-	mvwprintw(g->champ_win, 1, 2, "%-20s%-30.30s%10s",
-			"Nom du champion", "je suis la description", "ALIVE");
-	wattron(g->champ_win, COLOR_PAIR(CHAMP2));
-	mvwprintw(g->champ_win, 2, 2, "%-20s%-30.30s%10s",
-			"Coucou", "je sais dire bonjour dans 58 langues :D", "ALIVE");
-	wattron(g->champ_win, COLOR_PAIR(CHAMP3));
-	mvwprintw(g->champ_win, 3, 2, "%-20s%-30.30s%10s",
-			"Lolol", "haha", "WINNNER");
-	wattron(g->champ_win, COLOR_PAIR(CHAMP4));
-	mvwprintw(g->champ_win, 4, 2, "%-20s%-30.30s%10s",
-			"MAIS", "BOUHOUHOU", "DEAD");
-	wrefresh(g->champ_win);
-}
 
 int		main(void)
 {
@@ -207,16 +49,11 @@ int		main(void)
 
 	init_ncurse();
 	g = init_graph();
-	create_arena_win(g);
-	create_controls_win(g);
-	create_infos_win(g);
-	create_process_win(g);
-	create_registers_win(g);
-	create_champions_win(g);
 	int i = 0;
 	while (i++ < MEM_SIZE)
-		write_on_arena(i, i, 1, g);
-	//move_proccess(1, 56, g);
+		write_on_arena(i, i, 2, g);
+	add_procces_to_arena(1, g);
+	move_proccess_on_arena(1, 56, g);
 	while((ch = getch()) != KEY_F(1))
 	{
 	}

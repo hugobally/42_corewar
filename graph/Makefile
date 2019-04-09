@@ -6,7 +6,7 @@
 #    By: tlesven <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 14:29:27 by tlesven           #+#    #+#              #
-#    Updated: 2019/04/02 11:53:11 by tlesven          ###   ########.fr        #
+#    Updated: 2019/04/09 14:18:12 by tlesven          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,14 @@ RM = rm -rf
 NAME = graph
 
 SRC = init_graph.c \
-	  struct_graph.c
+	  struct_graph.c\
+	  graph_champions.c\
+	  graph_registers.c\
+	  graph_process.c\
+	  graph_infos.c\
+	  graph_ctrl.c\
+	  graph_arena.c\
+	  graph_tools.c
 
 PATH_SRC = .
 
