@@ -77,15 +77,15 @@ int		main(int ac, char **av)
 	if ((ret = get_arguments(&core, ac, av)) != ok)
 		leave(&core, ret);
 	ft_printf("Arguments done\n");
-	if ((ret= make_graph(&core)) != ok)
-		leave(&core, ret);
+	//if ((ret= make_graph(&core)) != ok)
+	//	leave(&core, ret);
 	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
 	ft_printf("Arena made\n");
 	if ((ret = the_game(&core)) != ok)
-	make_win(&core);
-	ncurses_loop();
-	//if ((ret = the_game(&core) != ok))
+	//make_win(&core);
+	//ncurses_loop();
+	if ((ret = the_game(&core) != ok))
 		leave(&core, ret);
 	return (0);
 }
