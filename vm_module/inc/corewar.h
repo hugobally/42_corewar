@@ -83,6 +83,7 @@ typedef struct		s_graph
 	WINDOW			*champ_win;
 	int				fps;
 	int				laps;
+	int				nb_cycle;
 	char			pause;
 }					t_graph;
 

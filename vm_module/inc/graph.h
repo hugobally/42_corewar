@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/10 15:17:08 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/10 16:59:34 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,15 @@ void				make_win(t_core *c);
 t_graph				*init_graph(void);
 void				free_graph(t_graph *g);
 
-void				create_champions_win(t_graph *g);
+void				create_champions_win(t_graph *g, t_player *p);
+void				print_champions(t_graph *g, t_player *p);
 
 void				create_registers_win(t_graph *g);
 
 void				create_process_win(t_graph *g, t_process *p);
 
-void				create_infos_win(t_graph *g);
+void				print_infos(t_graph *g, t_core *c, int cycle_mod);
+void				create_infos_win(t_graph *g, t_core *c);
 
 void				create_controls_win(t_graph *g);
 
