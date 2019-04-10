@@ -14,11 +14,13 @@ t_errors		ft_instructions(t_core *core, t_process *process)
 		op = 0;
 	if ((res = g_op_inst_tab[op](core, process)) != ok)
 		return (res);
-	//ft_printf("after fonction\n");
-	if (op != zjmp)
+	ft_printf("after fonction pc %d, inst %d, carry %d\n", process->pc, process->instruction, process->carry);
+	if ((op != zjmp) || (op == zjmp && process->carry == false)) 
 		process->pc = get_pc(process->pc += process->opsize);
 	//ft_printf("after pc\n");
+	ft_printf("after jmp pc %d, inst %d, carry %d\n", process->pc, process->instruction, process->carry);
 	read_instruction(core, process);
+	ft_printf("after read pc %d, inst %d, carry %d\n", process->pc, process->instruction, process->carry);
 	//ft_printf("after read %d\n", process->instruction - 1);
 	if (process->instruction != 0)
 	{

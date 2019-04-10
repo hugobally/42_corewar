@@ -76,7 +76,7 @@ t_errors				ft_aff(t_core *core, t_process *process)
 	params = process->params;
 	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
 		return (ret);
-	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	ft_printf("params p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
 	ft_printf("AFF :%d\n", process->regs[params.p1 - 1] % 256);
 	ft_printf("aff OUT by %d\n", process->regs[0]);
 	return (ok);
@@ -91,22 +91,17 @@ t_errors				ft_error(t_core *core, t_process *process)
 
 t_errors				ft_reg(t_params params, int *p1, int *p2, int *p3)
 {
-	ft_printf("reg\n");
 	*p1 = ft_type_param(params.bytecode, 1);
 	*p2 = ft_type_param(params.bytecode, 2);
 	*p3 = ft_type_param(params.bytecode, 3);
-	ft_printf("reg post_param\n");
 	if (*p1 == REG)
 		if (params.p1 <= 0 || params.p1 > REG_NUMBER)
 			return (badchamp);
-	ft_printf("reg1\n");
 	if (*p2 == REG)
 		if (params.p2 <= 0 || params.p2 > REG_NUMBER)
 			return (badchamp);
-	ft_printf("reg2\n");
 	if (*p3 == REG)
 		if (params.p3 <= 0 || params.p3 > REG_NUMBER)
 			return (badchamp);
-	ft_printf("reg3\n");
 	return (ok);
 }

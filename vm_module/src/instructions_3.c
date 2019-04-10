@@ -30,23 +30,42 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 	if (p1 == REG)
 	{
 		if (p2 == REG)
-			process->regs[params.p3 - 1] = core->arena[get_pc((process->regs[params.p1 - 1] + process->regs[params.p2 - 1]) % IDX_MOD)];
+		{
+			//process->regs[params.p3 - 1] = core->arena[get_pc((process->regs[params.p1 - 1] + process->regs[params.p2 - 1]) % IDX_MOD)];
+			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (process->regs[params.p1 - 1] + process->regs[params.p2 - 1]) % IDX_MOD), 4);
+		}
 		if (p2 == DIR)
-			process->regs[params.p3 - 1] = core->arena[get_pc((process->regs[params.p1 - 1] + params.p2) % IDX_MOD)];
+		{
+			//process->regs[params.p3 - 1] = core->arena[get_pc((process->regs[params.p1 - 1] + params.p2) % IDX_MOD)];
+			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (process->regs[params.p1 - 1] + params.p2) % IDX_MOD), 4);
+		}
 	}
 	if (p1 == DIR)
 	{
 		if (p2 == REG)
-			process->regs[params.p3 - 1] = core->arena[get_pc((params.p1 + process->regs[params.p2 - 1]) % IDX_MOD)];
+		{
+			//process->regs[params.p3 - 1] = core->arena[get_pc((params.p1 + process->regs[params.p2 - 1]) % IDX_MOD)];
+			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (params.p1 + process->regs[params.p2 - 1]) % IDX_MOD), 4);
+		}
 		if (p2 == DIR)
-			process->regs[params.p3 - 1] = core->arena[get_pc((params.p1 + params.p2) % IDX_MOD)];
+		{
+			//process->regs[params.p3 - 1] = core->arena[get_pc((params.p1 + params.p2) % IDX_MOD)];
+			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (params.p1 + params.p2) % IDX_MOD), 4);
+		}
 	}
 	if (p1 == IND)
 	{
 		if (p2 == REG)
-			process->regs[params.p3 - 1] = core->arena[get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + process->regs[params.p2 - 1]) % IDX_MOD)];
+		{
+			//process->regs[params.p3 - 1] = core->arena[get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + process->regs[params.p2 - 1]) % IDX_MOD)];
+			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p1 % IDX_MOD), 4) + process->regs[params.p2 - 1]) % IDX_MOD), 4);
+		}
 		if (p2 == DIR)
-			process->regs[params.p3 - 1] = core->arena[get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + params.p2) % IDX_MOD)];
+		{
+			ft_printf("p1 IND, p2 DIR\n");
+			//process->regs[params.p3 - 1] = core->arena[get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + params.p2) % IDX_MOD)];
+			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p1 % IDX_MOD), 4) + params.p2) % IDX_MOD), 4);
+		}
 	}
 	ft_printf("ldi OUT by %d\n", process->regs[0]);
 	return (ok);
