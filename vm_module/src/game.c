@@ -70,6 +70,7 @@ t_errors	call_instructions(t_core *core)
 		//ft_printf("end of loop \n");
 		tmp = tmp->next;
 	}
+	//ft_printf("call_instruction OUT\n");
 	return (ok);
 }
 
@@ -80,13 +81,17 @@ void		find_winner(t_core *core)
 	tmp = core->players;
 	while (tmp && tmp->p != core->last_live_done_by)
 		tmp = tmp->next;
-	ft_printf("The magnificent winner is %s\n", tmp ? tmp->head.prog_name : "Ta soeur");
+	if (tmp && core->winner)
+		ft_printf("The magnificent winner is %s\n", tmp->head.prog_name);
+	else
+		ft_printf("No one has won\n");
 }
 
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
 	uint32_t	cycles;
+	int			res;
 
 	cycles = core->max_cycle_to_die;
 	proc = core->process;
@@ -95,7 +100,10 @@ t_errors	the_game(t_core *core)
 		ft_printf("Start of the loop: cycles %d\n", cycles);
 		--cycles;
 		if (cycles > 0)
-			call_instructions(core);
+		{
+			if ((res = call_instructions(core)) != ok)
+				return (res);
+		}
 		else
 		{
 			while (cycles <= 0 && proc)

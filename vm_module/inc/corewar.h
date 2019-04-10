@@ -55,6 +55,7 @@ typedef	struct			s_player
 	int					p;
 	unsigned char		proc[CHAMP_MAX_SIZE];
 	struct s_player		*next;
+	unsigned int		orig_pc;
 }						t_player;
 
 typedef struct			s_process
@@ -81,6 +82,7 @@ typedef struct			s_core
 	unsigned int		dump;
 	unsigned int		max_cycle_to_die;
 	int					last_live_done_by;
+	int					winner;
 	unsigned int		max_checks;
 	unsigned int		nbr_live;
 }             			t_core;
@@ -143,6 +145,7 @@ t_errors				ft_lldi(t_core *core, t_process *process);
 t_errors				ft_lfork(t_core *core, t_process *process);
 t_errors				ft_aff(t_core *core, t_process *process);
 void					ft_carry(t_process *process, int res);
+t_errors				ft_reg(t_params params, int *p1, int *p2, int *p3);
 
 
 typedef t_errors		(*t_inst_tab)(t_core *, t_process *);

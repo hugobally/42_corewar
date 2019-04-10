@@ -61,7 +61,6 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 	i = 0;
 	while (++i < ac)
 	{
-		//ft_printf("arguments lloop ?\n");
 		if (av[i][0] == '-')
 		{
 			if (av[i][1] == 'd')
@@ -78,7 +77,6 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 				return (ret);
 		if (core->nb_players > MAX_PLAYERS)
 			return(badarg);
-		//ft_printf("fin de la argument loop\n");
 	}
 	if (ft_total_size(core) > MEM_SIZE)
 		return (badchamp);

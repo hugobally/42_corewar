@@ -14,11 +14,18 @@ t_errors		ft_instructions(t_core *core, t_process *process)
 		op = 0;
 	if ((res = g_op_inst_tab[op](core, process)) != ok)
 		return (res);
+	//ft_printf("after fonction\n");
 	if (op != zjmp)
 		process->pc = get_pc(process->pc += process->opsize);
+	//ft_printf("after pc\n");
 	read_instruction(core, process);
-	tab = &(g_op_tab[process->instruction - 1]);
-	process->remaining_cycles = tab->cycles;
+	//ft_printf("after read %d\n", process->instruction - 1);
+	if (process->instruction != 0)
+	{
+		tab = &(g_op_tab[process->instruction - 1]);
+		//ft_printf("after tab tab->cycles %d\n", tab->cycles);
+		process->remaining_cycles = tab->cycles;
+	}
 	//ft_printf("ft_instructions OUT remaing_cycles %d\n", process->remaining_cycles);
 	return (ok);
 }
