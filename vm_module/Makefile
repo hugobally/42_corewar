@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/09 16:53:29 by tlesven          ###   ########.fr        #
+#    Updated: 2019/04/10 14:22:38 by tlesven          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS_RAW			:=	main.c							\
 						graph_ctrl.c					\
 						graph_arena.c					\
 						graph_tools.c					\
+						graph_win.c					\
 # Directories
 
 SRCSDIR   			=	src

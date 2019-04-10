@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graph_struct.c                                     :+:      :+:    :+:   */
+/*   graph_win.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 16:16:25 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/10 16:54:20 by tlesven          ###   ########.fr       */
+/*   Created: 2019/04/10 13:47:56 by tlesven           #+#    #+#             */
+/*   Updated: 2019/04/10 16:57:37 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "graph.h"
 
-t_graph		*init_graph(void)
+void	make_win(t_core *c)
 {
-	t_graph		*g;
-
-	g = (t_graph*)ft_memalloc(sizeof(t_graph));
-	g->fps = 32;
-	g->laps = 1;
-	g->pause = 1;
-	g->nb_cycle = 0;
-	return (g);
-}
-
-void		free_graph(t_graph *g)
-{
-	ft_memdel((void*)&g);
+	create_arena_win(c->graph);
+	create_controls_win(c->graph);
+	create_infos_win(c->graph, c);
+	create_process_win(c->graph, c->process);
+	create_registers_win(c->graph);
+	create_champions_win(c->graph, c->players);
+/*	while(c->process)
+	{
+		ft_printf("process->p :%d", c->process->player);
+		c->process = c->process->next;
+	}*/
 }
