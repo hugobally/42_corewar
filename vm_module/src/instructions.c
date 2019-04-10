@@ -58,7 +58,7 @@ t_errors		ft_store(t_core *core, t_process *process)
 	else if (p2 == IND)
 	{
 		//*((int32_t*)&(core->arena[get_pc(process->pc + params.p1 % IDX_MOD)])) = process->regs[params.p1 - 1];
-		write_val(core, get_pc(process->pc + params.p1 % IDX_MOD), 4, process->regs[params.p1 - 1]);
+		write_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4, process->regs[params.p1 - 1]);
 	}
 	ft_printf("ft_store OUT\n");
 	return (ok);

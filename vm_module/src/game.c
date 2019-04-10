@@ -23,12 +23,12 @@ void		kill_process(t_core *core)
 	pre = NULL;
 	tmp = core->process;
 	next = tmp->next;
-	//ft_putendl("Kill_process IN");
+	ft_putendl("Kill_process IN");
 	while (tmp != NULL)
 	{
 		if (tmp->is_alive == false)
 		{
-			ft_printf("killed, %d\n", tmp->regs[0]);
+			ft_printf("killed, %d\n", tmp->player);
 			if (pre)
 				pre->next = next;
 			else
@@ -37,7 +37,7 @@ void		kill_process(t_core *core)
 		}
 		else
 		{
-			ft_printf("not killed, %d\n", tmp->regs[0]);
+			ft_printf("not killed, %d\n", tmp->player);
 			tmp->is_alive = false;
 		}
 		pre = tmp;
@@ -92,16 +92,20 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-		//ft_printf("Start of the loop: cycles %d\n", cycles);
-		call_instructions(core);
-		//ft_putendl("Called instructions");
-		if (--cycles == 0)
+		ft_printf("Start of the loop: cycles %d\n", cycles);
+		--cycles;
+		if (cycles > 0)
+			call_instructions(core);
+		else
 		{
-			kill_process(core);
-			ft_putendl("Got out of kill_process");
-			cycles = core->max_cycle_to_die;
+			while (cycles <= 0 && proc)
+			{
+				kill_process(core);
+				ft_printf("Got out of kill_process max_cycle :%d\n", core->max_cycle_to_die);
+				cycles = core->max_cycle_to_die;
+				proc = core->process;
+			}
 		}
-		proc = core->process;
 		if (core->dump != 0)
 		{
 			if (--core->dump == 0)
