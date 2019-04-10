@@ -6,11 +6,10 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/09 14:27:13 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/10 14:20:22 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
 #include "graph.h"
 
 void	write_on_arena(int addr, int v, int champ, t_graph *g)

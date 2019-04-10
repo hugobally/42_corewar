@@ -4,7 +4,7 @@
 # include <stdio.h>
 # include "../../libft/inc/libft.h"
 # include "../../libcorewar/inc/libcorewar.h"
-# include "graph.h"
+# include <ncurses.h>
 
 # define REG 1
 # define DIR 2
@@ -72,6 +72,19 @@ typedef struct			s_process
 	t_bool				is_alive;
 	struct s_process	*next;
 }						t_process;
+
+typedef struct		s_graph
+{
+	WINDOW			*arena_win;
+	WINDOW			*ctrl_win;
+	WINDOW			*info_win;
+	WINDOW			*pro_win;
+	WINDOW			*reg_win;
+	WINDOW			*champ_win;
+	int				fps;
+	int				laps;
+	char			pause;
+}					t_graph;
 
 typedef struct			s_core
 {

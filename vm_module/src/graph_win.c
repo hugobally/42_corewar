@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graph_infos.c                                      :+:      :+:    :+:   */
+/*   graph_win.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 14:03:13 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/10 14:21:27 by tlesven          ###   ########.fr       */
+/*   Created: 2019/04/10 13:47:56 by tlesven           #+#    #+#             */
+/*   Updated: 2019/04/10 15:29:26 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-void	create_infos_win(t_graph *g)
+void	make_win(t_core *c)
 {
-	g->info_win = create_new_win(INFO_ROW, INFO_COL, CTRL_COL, ARENA_ROW);
-	mvwprintw(g->info_win, 0, (INFO_COL / 2) - 6, " - INFOS - ");
-	mvwprintw(g->info_win, 1, 2, "%-25s%15d", "CYCLE:", 10000);
-	mvwprintw(g->info_win, 2, 2, "%-25s%15d", "CYCLE_MOD:", 45);
-	mvwprintw(g->info_win, 3, 2, "%-25s%15d", "CYCLE_TO_DIE:", CYCLE_TO_DIE);
-	wrefresh(g->info_win);
+	create_arena_win(c->graph);
+	create_controls_win(c->graph);
+	create_infos_win(c->graph);
+	create_process_win(c->graph, c->process);
+	create_registers_win(c->graph);
+	create_champions_win(c->graph);
+/*	while(c->process)
+	{
+		ft_printf("process->p :%d", c->process->player);
+		c->process = c->process->next;
+	}*/
 }

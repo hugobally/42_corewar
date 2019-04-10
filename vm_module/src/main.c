@@ -61,6 +61,13 @@ void	leave(t_core *core, t_errors ret)
 	exit(0);
 }
 
+void	ncurses_loop(void)
+{
+	int		ch;
+
+	while((ch = getch()) != KEY_F(1)) { }
+}
+
 int		main(int ac, char **av)
 {
     t_core		core;
@@ -75,7 +82,9 @@ int		main(int ac, char **av)
 	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
 	ft_printf("Arena made\n");
-	if ((ret = the_game(&core) != ok))
+	make_win(&core);
+	ncurses_loop();
+	//if ((ret = the_game(&core) != ok))
 		leave(&core, ret);
 	return (0);
 }
