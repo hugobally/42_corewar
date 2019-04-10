@@ -6,25 +6,22 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:16:49 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/09 16:16:57 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/10 12:32:09 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "corewar.h"
 #include "libft.h"
 #include "graph.h"
 #include "op.h"
 
-void	init_ncurse(void)
+int		init_ncurse(void)
 {
 	initscr();
 	curs_set(0);
 	if(has_colors() == FALSE)
-	{    
-		endwin();
-		ft_printf("Your terminal does not support color\n");
-		exit(1);
-	}
+		return(no_color);
 	start_color();
 	cbreak();
 	keypad(stdscr, TRUE);
@@ -42,14 +39,18 @@ void	init_ncurse(void)
 }
 
 
-int		main_graph(void)
+int		make_graph(t_core *c)
 {
-	int		ch;
+	int		err;
 	t_graph	*g;
 
-	init_ncurse();
-	g = init_graph();
-	int i = 0;
+
+	if (err = init_ncurse())
+		return (err);
+	c->graph = init_graph();
+	if (!c->graph)
+		return (falloc);
+	/*int i = 0;
 	while (i++ < MEM_SIZE)
 		write_on_arena(i, i, 2, g);
 	add_procces_to_arena(1, g);
@@ -58,6 +59,6 @@ int		main_graph(void)
 	{
 	}
 	free_graph(g);
-	endwin();
+	endwin();*/
 	return (0);
 }

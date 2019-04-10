@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include "../../libft/inc/libft.h"
 # include "../../libcorewar/inc/libcorewar.h"
+# include "graph.h"
 
 # define REG 1
 # define DIR 2
@@ -17,7 +18,8 @@ typedef enum			e_errors
 	badarg,
 	badchamp,
 	badfile,
-	badopen
+	badopen,
+	no_color,
 }						t_errors;
 
 typedef enum			e_instruction
@@ -78,6 +80,7 @@ typedef struct			s_core
 	int					nb_players;
 	t_player			*players;
 	t_process			*process;
+	t_graph				*graph;
 	unsigned int		dump;
 	unsigned int		max_cycle_to_die;
 	int					last_live_done_by;

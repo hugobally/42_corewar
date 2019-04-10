@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/09 16:40:40 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/10 13:18:17 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GRAPH_H
 
 # include <ncurses.h>
+# include "corewar.h"
 
 # define ARENA_COL 195 // HAVE TO CHANGE, MEM_SIZE
 # define ARENA_ROW 66 // HAVE TO CHANGE, MEM_SIZE
@@ -63,7 +64,7 @@ typedef struct		s_graph
 WINDOW				*create_new_win(int h, int w, int x, int y);
 
 void				init_ncurse(void);
-int					main_graph(void);
+int					make_graph(t_core *c);
 
 t_graph				*init_graph(void);
 void				free_graph(t_graph *g);

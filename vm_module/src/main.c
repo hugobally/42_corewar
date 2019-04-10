@@ -1,4 +1,5 @@
 #include "corewar.h"
+#include "graph.h"
 #include <stdlib.h>
 
 void	del_process(t_core *core)
@@ -41,6 +42,8 @@ void	print_error(t_errors ret)
 		ft_putendl_fd("Bad file", 2);
 	else if (ret == badopen)
 		ft_putendl_fd("Bad open", 2);
+	else if (ret == no_color)
+		ft_putendl_fd("Terminal does not support color", 2);
 }
 
 void	leave(t_core *core, t_errors ret)
@@ -49,6 +52,11 @@ void	leave(t_core *core, t_errors ret)
 		del_process(core);
 	if (core->players)
 		del_players(core);
+	if (core->graph)
+	{
+		free_graph(core->graph);
+		endwin();
+	}
 	print_error(ret);
 	exit(0);
 }
@@ -62,6 +70,8 @@ int		main(int ac, char **av)
 	if ((ret = get_arguments(&core, ac, av)) != ok)
 		leave(&core, ret);
 	ft_printf("Arguments done\n");
+	if ((ret= make_graph(&core)) != ok)
+		leave(&core, ret);
 	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
 	ft_printf("Arena made\n");
