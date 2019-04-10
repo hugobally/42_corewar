@@ -6,13 +6,14 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/09 16:40:40 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/10 16:59:34 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPH_H
 # define GRAPH_H
 
+# include "corewar.h"
 # include <ncurses.h>
 
 # define ARENA_COL 195 // HAVE TO CHANGE, MEM_SIZE
@@ -47,34 +48,25 @@ enum				e_collors
 	P4
 };
 
-typedef struct		s_graph
-{
-	WINDOW			*arena_win;
-	WINDOW			*ctrl_win;
-	WINDOW			*info_win;
-	WINDOW			*pro_win;
-	WINDOW			*reg_win;
-	WINDOW			*champ_win;
-	int				fps;
-	int				laps;
-	char			pause;
-}					t_graph;
-
 WINDOW				*create_new_win(int h, int w, int x, int y);
 
-void				init_ncurse(void);
-int					main_graph(void);
+int					init_ncurse(void);
+int					make_graph(t_core *c);
+
+void				make_win(t_core *c);
 
 t_graph				*init_graph(void);
 void				free_graph(t_graph *g);
 
-void				create_champions_win(t_graph *g);
+void				create_champions_win(t_graph *g, t_player *p);
+void				print_champions(t_graph *g, t_player *p);
 
 void				create_registers_win(t_graph *g);
 
-void				create_process_win(t_graph *g);
+void				create_process_win(t_graph *g, t_process *p);
 
-void				create_infos_win(t_graph *g);
+void				print_infos(t_graph *g, t_core *c, int cycle_mod);
+void				create_infos_win(t_graph *g, t_core *c);
 
 void				create_controls_win(t_graph *g);
 
