@@ -35,17 +35,15 @@ static t_code	output_instructions(t_tokenlst *lst, t_label **label_tab,
 	node = lst->prog_start;
 	while (node)
 	{
-		if (node->type == label && node->next->type != char_eol)
+		if (node->type == label && node->next->type == opcode)
 			node = node->next;
 		else if (node->type == label)
-			node = node->next->next;
+			node = skip_eol(node);
 		else
 		{
 			if (write_instruction(node, label_tab, file, &offset) == error)
 				return (error);
-			node = node->next;
-			while (node && node->previous->type != char_eol)
-				node = node->next;
+			node = skip_eol(node);
 		}
 	}
 	return (done);

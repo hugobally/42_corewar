@@ -3,6 +3,20 @@
 #include "types.h"
 #include "asm.h"
 
+t_token				*skip_eol(t_token *node)
+{
+	if (node)
+	{
+		if (node->type != char_eol)
+			while (node && node->type != char_eol)
+				node = node->next;
+		while (node && node->type == char_eol)
+			node = node->next;
+		return (node);
+	}
+	return (NULL);
+}
+
 t_code				syntax(t_tokenlst *lst, t_file *file)
 {
 	header_t		header;

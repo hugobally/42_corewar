@@ -2,29 +2,6 @@
 #include "types.h"
 #include "asm.h"
 
-/*
-** Debug
-*/
-
-void			debug_print_label_tab(t_label **label_tab)
-{
-	uint32_t	index;
-
-	index = 0;
-	ft_printf("//Dump of label_tab//\n");
-	while ((*label_tab)[index].token)
-	{
-		ft_printf("%s | offset : %d\n",
-				(*label_tab)[index].token->value,
-				(*label_tab)[index].offset);
-		index++;
-	}
-}
-
-/*
-** Retrieve Label
-*/
-
 t_label				*label_tab_fetch(t_token *token, t_label **label_tab)
 {
 	uint32_t		index;

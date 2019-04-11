@@ -6,11 +6,11 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/05 11:07:52 by hbally           ###   ########.fr        #
+#    Updated: 2019/04/11 15:34:54 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				=	../asm
+NAME				=	test/asm
 
 # Raw Sources
 
@@ -22,6 +22,7 @@ SRCS_RAW			:=	main.c						\
 						lexer.c						\
 						lexer_labels.c				\
 						lexer_instructions.c		\
+						lexer_values.c				\
 						error_handler.c				\
 						error_print.c				\
 						syntax.c					\
