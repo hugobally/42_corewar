@@ -59,15 +59,6 @@ void			tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 	}
 }
 
-t_code			check_empty(t_tokenlst *lst)
-{
-	if (lst->start && lst->start->type == char_eol)
-		token_del(lst->start, lst);
-	if (!lst->start)
-		return (error_handler(no_instructions, 0, 0));
-	return (done);
-}
-
 t_code			lexer(t_tokenlst *lst, t_file *file)
 {
 	tokens_foreach(lst, &find_labels);
@@ -77,7 +68,8 @@ t_code			lexer(t_tokenlst *lst, t_file *file)
 	tokens_foreach(lst, &find_num);
 	tokens_clear_dir_char(lst);
 	tokens_clear_lab_char(lst);
-	if (check_empty(lst) == error)
-		return (error);
-	return (syntax(lst, file));
+	if (!lst->start)
+		return (error_handler(no_instructions, 0, 0));
+	else
+		return (syntax(lst, file));
 }

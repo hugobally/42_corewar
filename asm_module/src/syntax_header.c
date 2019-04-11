@@ -96,7 +96,10 @@ t_code				get_header(t_tokenlst *l, header_t *h)
 
 	cmd_count = 0;
 	is_duplicate(unknown, NULL, 1);
-	l->now = l->start;
+	if (l->start->type == char_eol)
+		l->now = skip_eol(l->start);
+	else
+		l->now = l->start;
 	while (l->now && cmd_count < 2)
 	{
 		if ((t = is_valid_cmd(l)) == unknown)
