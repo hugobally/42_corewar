@@ -1,4 +1,5 @@
 #include "corewar.h"
+#include "graph.h"
 #include <stdlib.h>
 
 void		check_delta(t_core *core)
@@ -97,31 +98,36 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
+		//if (controls(core->graph))
+		//	return (f1_exit);
 		// ft_printf("Start of the loop: cycles %d\n", cycles);
-		--cycles;
-		if (cycles > 0)
-		{
-			if ((res = call_instructions(core)) != ok)
-				return (res);
-		}
-		else
-		{
-			while (cycles <= 0 && proc)
+		//if (!core->graph->pause)
+		//{
+			--cycles;
+			if (cycles > 0)
 			{
-				kill_process(core);
+				if ((res = call_instructions(core)) != ok)
+					return (res);
+			}
+			else
+			{
+				while (cycles <= 0 && proc)
+				{
+					kill_process(core);
 				// ft_printf("Got out of kill_process max_cycle :%d\n", core->max_cycle_to_die);
-				cycles = core->max_cycle_to_die;
-				proc = core->process;
+					cycles = core->max_cycle_to_die;
+					proc = core->process;
+				}
 			}
-		}
-		if (core->dump != 0)
-		{
-			if (--core->dump == 0)
+			if (core->dump != 0)
 			{
-				hexdump(core);
-				return (ok) ;
+				if (--core->dump == 0)
+				{
+					hexdump(core);
+					return (ok) ;
+				}
 			}
-		}
+		//}
 	}
 	find_winner(core);
 	return (ok);

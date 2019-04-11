@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/11 14:58:45 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/11 15:52:21 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void				create_process_win(t_graph *g, t_process *p);
 void				print_infos(t_graph *g, t_core *c, int cycle_mod);
 void				create_infos_win(t_graph *g, t_core *c);
 
+int					controls(t_graph *g);
 void				create_controls_win(t_graph *g);
 
 void				write_on_arena(int addr, int v, int champ, t_graph *g);

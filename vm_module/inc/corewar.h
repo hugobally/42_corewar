@@ -20,6 +20,7 @@ typedef enum			e_errors
 	badfile,
 	badopen,
 	no_color,
+	f1_exit
 }						t_errors;
 
 typedef enum			e_instruction
