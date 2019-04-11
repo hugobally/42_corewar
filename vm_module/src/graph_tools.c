@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:16:51 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/09 14:28:06 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/11 14:58:11 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ WINDOW	*create_new_win(int h, int w, int x, int y)
 
 void	get_col_row(int addr, int *col, int *row)
 {
+	addr += 1;
 	*row = addr / 64;
 	*col = (addr % 64) - 1;
 	if (*col == -1)

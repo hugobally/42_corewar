@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:01:27 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/10 16:47:30 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/11 15:00:25 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_process(t_graph *g, t_process *p)
 		get_col_row(tmp->pc, &col, &row);
 		wattron(g->pro_win, COLOR_PAIR(tmp->player + 2));
 		mvwprintw(g->pro_win, i, 2, "#%-5d%-2.2dx%-2.2d [%c][%c]%5d in%4d laps.",
-			i, row, col, tmp->is_alive ? 'L' : ' ', 
+			i, row - 1, col - 2, tmp->is_alive ? 'L' : ' ', 
 			tmp->carry ? 'C' : ' ', tmp->instruction, tmp->remaining_cycles);
 		tmp = tmp->next;
 		++i;
