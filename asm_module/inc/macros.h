@@ -20,6 +20,9 @@
 # define PAD_RIGHT 				1
 # define PAD_LEFT 				2
 
+# define END_QUOTE				1
+# define NO_END_QUOTE			0
+
 /*
 ** Masks to extract line and column from int64 during error reporting
 */

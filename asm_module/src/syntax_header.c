@@ -3,64 +3,115 @@
 #include "types.h"
 #include "asm.h"
 
-static t_code		get_header_value(t_token *node, header_t *header)
+static uint8_t		is_duplicate(t_toktype type, t_tokenlst *l, int reset)
 {
-	if (node->previous->type == cmd_name)
+	static int		found_name;
+	static int		found_comment;
+
+	if (reset == 1)
 	{
-		if (ft_strlen(node->value) > PROG_NAME_LENGTH)
-			return (error_handler(header_namesize, node, 0));
-		if (header->prog_name[0])
-			return (error_handler(header_duplicate, node->previous, 0));
-		ft_strcpy(header->prog_name, node->value);
+		found_name = 0;
+		found_comment = 0;
+		return (0);
 	}
-	if (node->previous->type == cmd_comment)
+	ft_printf("reset is %d, found_name is %d, found_comment is %d\n", reset, found_name, found_comment);
+	ft_printf("l->now->value is %s\n", l->now->value);
+	if (type == cmd_name)
+		found_name++;
+	if (type == cmd_comment)
+		found_comment++;
+	ft_printf("BLI\n");
+	if (found_name > 1 || found_comment > 1)
 	{
-		if (ft_strlen(node->value) > COMMENT_LENGTH)
-			return (error_handler(header_commentsize, node, 0));
-		if (header->comment[0])
-			return (error_handler(header_duplicate, node->previous, 0));
-		ft_strcpy(header->comment, node->value);
+		error_handler(header_duplicate, l->now->previous, 0);
+		ft_printf("BLA\n");
+		return (1);
 	}
-	if (!node->next || node->next->type != char_eol)
-		return (error_handler(expected_eol, node, 0));
-	return (done);
+	ft_printf("BLA\n");
+	return (0);
 }
 
-static t_code		is_valid_cmd(t_token *node)
+static uint8_t		is_valid_size(size_t len, size_t to_add,
+									t_toktype t, t_tokenlst *l)
 {
-	if (!node || !(node->type == cmd_name || node->type == cmd_comment))
-		return (error_handler(header_missing, 0, 0));
-	if (!(node->next && node->next->type == quote))
-		return (error_handler(header_noquote, node, 0));
-	node = node->next;
-	if ((node->previous->type == cmd_name && !ft_strlen(node->value))
-			|| !node->pad)
-		return (error_handler(header_badquote, node, 0));
-	return (done);
+	t_code			status;
+
+	len += to_add;
+	status = done;
+	if (t == cmd_name && len > PROG_NAME_LENGTH)
+		status = error_handler(header_namesize, l->now, 0);
+	else if (t == cmd_comment && len > COMMENT_LENGTH)
+		status = error_handler(header_commentsize, l->now, 0);
+	return (status != error ? 1 : 0);
 }
 
-t_code				get_header(t_tokenlst *lst, header_t *header)
+static t_toktype	is_valid_cmd(t_tokenlst *l)
 {
-	t_token			*node;
-	int				cmd_count;
+	t_toktype		type;
 
-	node = lst->start;
-	cmd_count = 0;
-	while (node && cmd_count < 2)
+	if (!l->now || !(l->now->type == cmd_name || l->now->type == cmd_comment))
 	{
-		if (is_valid_cmd(node) != error)
+		error_handler(header_missing, 0, 0);
+		return (unknown);
+	}
+	if (!(l->now->next && l->now->next->type == quote))
+	{
+		error_handler(header_noquote, l->now, 0);
+		return (unknown);
+	}
+	type = l->now->type;
+	l->now = l->now->next;
+	return (type);
+}
+
+static t_code		copy_val(t_tokenlst *l, char *dst, t_toktype type)
+{
+	size_t			len;
+	
+	len = 0;
+	if (is_duplicate(type, l, 0))
+		return (error);
+	while (l->now)
+	{
+		if (l->now->type == char_eol && is_valid_size(len, 1, type, l))
+				dst[len++] = '\n';
+		else if (l->now->type == quote)
 		{
-			node = node->next;
-			if (get_header_value(node, header) == error)
+			if (!is_valid_size(len, ft_strlen(l->now->value), type, l))
 				return (error);
-			node = node->next->next;
-			cmd_count++;
+			ft_strcpy(&(dst[len]), l->now->value);
+			len += ft_strlen(l->now->value);
+			if (l->now->pad == END_QUOTE)
+				return (done);
 		}
-		else
-			return (error);
+		l->now = l->now->next;
 	}
-	if (cmd_count != 2)
+	return (error_handler(header_badquote, l->now, 0));
+}
+
+t_code				get_header(t_tokenlst *l, header_t *h)
+{
+	int				cmd_count;
+	t_toktype		t;
+
+	cmd_count = 0;
+	is_duplicate(unknown, NULL, 0);
+	l->now = l->start;
+	while (l->now && cmd_count < 2)
+	{
+		if ((t = is_valid_cmd(l)) == unknown)
+			return (error);
+		if (copy_val(l, t == cmd_name ? h->prog_name : h->comment, t) == error)
+			return (error);
+		if (l->now->next && l->now->next->type != char_eol)
+			return (error_handler(expected_eol, l->now, 0));
+		l->now = skip_eol(l->now);
+		cmd_count++;
+	}
+	if (cmd_count < 2)
 		return (error_handler(header_missing, 0, 0));
-	lst->prog_start = node;
+	if (h->prog_name[0] == '\0')
+		return (error_handler(header_badquote, l->now, 0));
+	l->prog_start = l->now;
 	return (done);
 }

@@ -26,6 +26,7 @@ typedef struct		s_line
 	char			*str;
 	uint16_t		num;
 	uint16_t		index;
+	uint8_t			is_quote;
 }					t_line;
 
 /*

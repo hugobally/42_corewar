@@ -44,6 +44,8 @@ static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 		{quote, &token_quote},
 	};
 
+	if (line->is_quote)
+		return (token_quote(quote, line, lst));
 	j = 0;
 	while (j < 4)
 	{
@@ -59,10 +61,14 @@ static t_code			process_line(t_line *line, t_tokenlst *lst)
 	t_code				ret_code;
 
 	line->index = 0;
-	while (line->str[line->index])
-		if ((ret_code = dispatcher(line, lst)) == error)
-			break ;
-	if (ret_code == done && !(lst->end && lst->end->type == char_eol))
+	ret_code = done;
+	if (line->str[0])
+	{
+		while (line->str[line->index])
+			if ((ret_code = dispatcher(line, lst)) == error)
+				break ;
+	}
+	if (ret_code == done)
 		ret_code = token_single(char_eol, line, lst);
 	ft_memdel((void**)&(line->str));
 	return (ret_code);
@@ -79,10 +85,8 @@ t_code					scanner(t_file *file)
 	while ((ret = get_next_line(file->fd, &(line.str))) > 0)
 	{
 		line.num++;
-		if (line.str[0] && process_line(&line, &lst) == error)
+		if (process_line(&line, &lst) == error)
 			return (scanner_exit(&lst, scanner_error));
-		else
-			ft_memdel((void**)&(line.str));
 	}
 	if (ret < 0)
 		return (scanner_exit(&lst, ret));

@@ -11,8 +11,6 @@
 
 ///////////////////////////////////////////////////////////////
 
-#include "libft.h" // DEBUG
-
 static void			tokens_clear_lab_char(t_tokenlst *lst)
 {
 	t_token			*node;

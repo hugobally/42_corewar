@@ -28,24 +28,29 @@ t_code				token_single(const t_toktype type,
 */
 
 t_code				token_quote(const t_toktype type,
-								t_line *line,
+								t_line *l,
 								t_tokenlst *lst)
 {
 	t_token		template;
 	uint16_t	start;
 
-	template_init(&template, type, line);
-	start = ++(line->index);
-	while (line->str[line->index] && line->str[line->index] != QUOTE_CHAR)
-		line->index++;
-	template.value = ft_strsub(line->str, start, line->index - start);
-	if (line->str[line->index] == QUOTE_CHAR)
+	template_init(&template, type, l);
+	if (!l->is_quote)
 	{
-		line->index++;
-		template.pad = 1;
+		start = ++(l->index);
+		l->is_quote = 1;
+	}
+	while (l->str[l->index] && l->str[l->index] != QUOTE_CHAR)
+		l->index++;
+	template.value = ft_strsub(l->str, start, l->index - start);
+	if (l->str[l->index] == QUOTE_CHAR)
+	{
+		l->index++;
+		l->is_quote = 0;
+		template.pad = END_QUOTE;
 	}
 	else
-		template.pad = 0;
+		template.pad = NO_END_QUOTE;
 	return (token_add(lst, &template, ft_strlen(template.value)));
 }
 
