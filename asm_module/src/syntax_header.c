@@ -23,6 +23,11 @@ static uint8_t		is_duplicate(t_toktype type, t_tokenlst *l, int reset)
 		error_handler(header_duplicate, l->now->previous, 0);
 		return (1);
 	}
+	if (found_name > 1 || found_comment > 1)
+	{
+		error_handler(header_duplicate, l->now->previous, 0);
+		return (1);
+	}
 	return (0);
 }
 
