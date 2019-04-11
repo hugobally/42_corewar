@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/10 14:20:22 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/11 14:55:10 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,25 @@ void	move_proccess_on_arena(int addr, int new_addr, t_graph *g)
 	add_procces_to_arena(new_addr, g);
 }
 
-void	create_arena_win(t_graph *g)
+void	add_proc_champ(t_graph *g, t_player *p)
+{
+	int			i;
+	t_player	*tmp;
+
+	tmp = p;
+	while (tmp)
+	{
+		i = 0;
+		while(i < CHAMP_MAX_SIZE)
+		{
+			write_on_arena(tmp->orig_pc + i, tmp->proc[i], tmp->p + 2, g);
+			i++;
+		}
+		tmp = tmp->next;
+	}
+}
+
+void	create_arena_win(t_graph *g, t_player *p)
 {
 	int		i;
 	int		row;
@@ -85,5 +103,6 @@ void	create_arena_win(t_graph *g)
 		i++;
 	}
 	wattroff(g->arena_win, COLOR_PAIR(EMPTY));
+	add_proc_champ(g, p);
 	wrefresh(g->arena_win);
 }

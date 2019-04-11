@@ -63,14 +63,18 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 	{
 		if (av[i][0] == '-')
 		{
-			if (av[i][1] == 'd')
+			if (!(ft_strcmp(av[i], "-dump")))
 			{
 				if ((ret = ft_right_nb(av[++i], core, 0)) != ok)
 					return (badarg);
 			}
 			else if (av[i][1] == 'n')
+			{
 				if ((ret = ft_right_nb(av[++i], core, 1)) != ok)
 					return (badarg);
+			}
+			else
+				return (badarg);
 		}
 		else
 			if ((ret = new_player(core, av[i])) != ok)

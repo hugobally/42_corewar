@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 13:47:56 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/10 16:57:37 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/11 13:31:12 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	make_win(t_core *c)
 {
-	create_arena_win(c->graph);
+	create_arena_win(c->graph, c->players);
 	create_controls_win(c->graph);
 	create_infos_win(c->graph, c);
 	create_process_win(c->graph, c->process);
