@@ -75,10 +75,13 @@ int		main(int ac, char **av)
 	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
 	ft_printf("Arena made\n");
-	if (core.visu && (ret= make_graph(&core)) != ok)
-		leave(&core, ret);
-	//make_win(&core);
-	if ((ret = the_game(&core) != ok))
-		leave(&core, ret);
+	if (core.visu)
+	{
+		if ((ret = make_graph(&core)) != ok)
+			leave(&core, ret);
+		make_win(&core);
+	}
+	ret = the_game(&core);
+	leave(&core, ret);
 	return (0);
 }

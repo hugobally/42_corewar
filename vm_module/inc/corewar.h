@@ -164,7 +164,7 @@ t_errors				ft_lldi(t_core *core, t_process *process);
 t_errors				ft_lfork(t_core *core, t_process *process);
 t_errors				ft_aff(t_core *core, t_process *process);
 void					ft_carry(t_process *process, int res);
-t_errors				ft_reg(t_params params, int *p1, int *p2, int *p3);
+t_errors				ft_reg(t_process *p, int *p1, int *p2, int *p3);
 
 
 typedef t_errors		(*t_inst_tab)(t_core *, t_process *);

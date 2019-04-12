@@ -27,8 +27,8 @@ t_errors		ft_load(t_core *core, t_process *process)
 	ft_printf("ft_load IN by %d\n", process->regs[0]);
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	if (p1 == DIR)
 		process->regs[params.p2 - 1] = params.p1;
 	else if (p1 == IND)
@@ -49,8 +49,8 @@ t_errors		ft_store(t_core *core, t_process *process)
 	ft_printf("ft_store IN by %d\n", process->regs[0]);
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	if (p2 == REG)
 		process->regs[params.p2 - 1] = (int)process->regs[params.p1 - 1];
 	else if (p2 == IND)
@@ -71,8 +71,8 @@ t_errors		ft_add(t_core *core, t_process *process)
 	(void)core;
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	process->regs[params.p3 - 1] = process->regs[params.p2 - 1] + process->regs[params.p1 - 1];
 	ft_carry(process, process->regs[params.p3 - 1]);
 	ft_printf("ft_add OUT by %d\n", process->regs[0]);

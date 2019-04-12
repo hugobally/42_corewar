@@ -12,8 +12,8 @@ t_errors	ft_sub(t_core *core, t_process *process)
 	(void)core;
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	process->regs[params.p3 - 1] = process->regs[params.p1 - 1] - process->regs[params.p2 - 1];
 	ft_carry(process, process->regs[params.p3 - 1]);
 	ft_printf("sub OUT by %d\n", process->regs[0]);
@@ -31,8 +31,8 @@ t_errors	ft_and(t_core *core, t_process *process)
 	ft_printf("and IN by %d\n", process->regs[0]);
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d, bytecode: %x, pc:%d\n", params.p1, params.p2, params.p3, params.bytecode, process->pc);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	if (p1 == REG)
 	{
 		if (p2 == REG)
@@ -76,8 +76,8 @@ t_errors	ft_or(t_core *core, t_process *process)
 	ft_printf("or IN by %d\n", process->regs[0]);
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	if (p3 == REG)
 	{
 		if (p1 == REG)
@@ -124,8 +124,8 @@ t_errors	ft_xor(t_core *core, t_process *process)
 	ft_printf("xor IN by %d\n", process->regs[0]);
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	if (p3 == REG)
 	{
 		if (p1 == REG)
