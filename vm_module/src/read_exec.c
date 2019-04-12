@@ -18,16 +18,15 @@ t_errors		ft_instructions(t_core *core, t_process *process)
 	if ((op != zjmp) || (op == zjmp && process->carry == false)) 
 		process->pc = get_pc(process->pc += process->opsize);
 	//ft_printf("after pc\n");
-	//ft_printf("after jmp pc %d, inst %d, carry %d\n", process->pc, process->instruction, process->carry);
+	ft_printf("after jmp pc %d, inst %d, carry %d\n", process->pc, process->instruction, process->carry);
 	read_instruction(core, process);
-	//ft_printf("after read pc %d, inst %d, carry %d\n", process->pc, process->instruction, process->carry);
-	//ft_printf("after read %d\n", process->instruction - 1);
+	ft_printf("after read pc %d, inst %d, carry %d\n", process->pc, process->instruction, process->carry);
 	if (process->instruction != 0)
 	{
 		tab = &(g_op_tab[process->instruction - 1]);
 		//ft_printf("after tab tab->cycles %d\n", tab->cycles);
 		process->remaining_cycles = tab->cycles;
 	}
-	//ft_printf("ft_instructions OUT remaing_cycles %d\n", process->remaining_cycles);
+	ft_printf("ft_instructions OUT remaing_cycles %d\n", process->remaining_cycles);
 	return (ok);
 }
