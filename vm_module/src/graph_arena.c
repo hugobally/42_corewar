@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/11 14:55:10 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/12 16:35:27 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	add_procces_to_arena(int addr, t_graph *g)
 
 	get_col_row(addr, &col, &row);
 	c = (mvwinch(g->arena_win, row, col) & A_COLOR) / 256;
-	mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c + 4, NULL);
+	if (c == EMPTY)
+		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, P, NULL);
+	else
+		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c + 4, NULL);
 	wrefresh(g->arena_win);
 }
 
@@ -50,7 +53,10 @@ void	remove_procces_to_arena(int addr, t_graph *g)
 
 	get_col_row(addr, &col, &row);
 	c = (mvwinch(g->arena_win, row, col) & A_COLOR) / 256;
-	mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c - 4, NULL);
+	if (c == P)
+		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, EMPTY, NULL);
+	else
+		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c - 4, NULL);
 	wrefresh(g->arena_win);
 }
 
@@ -62,16 +68,18 @@ void	move_proccess_on_arena(int addr, int new_addr, t_graph *g)
 
 void	add_proc_champ(t_graph *g, t_player *p)
 {
-	int			i;
-	t_player	*tmp;
+	unsigned int	i;
+	t_player		*tmp;
 
 	tmp = p;
 	while (tmp)
 	{
 		i = 0;
-		while(i < CHAMP_MAX_SIZE)
+		while(i < p->head.prog_size)
 		{
 			write_on_arena(tmp->orig_pc + i, tmp->proc[i], tmp->p + 2, g);
+			if (i == 0)
+				add_procces_to_arena(tmp->orig_pc, g);
 			i++;
 		}
 		tmp = tmp->next;

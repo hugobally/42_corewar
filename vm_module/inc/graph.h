@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/11 15:52:21 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/12 16:32:22 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ enum				e_collors
 	P1,
 	P2,
 	P3,
-	P4
+	P4,
+	P
 };
 
 WINDOW				*create_new_win(int h, int w, int x, int y);

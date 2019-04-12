@@ -24,12 +24,12 @@ void		kill_process(t_core *core)
 	pre = NULL;
 	tmp = core->process;
 	next = tmp->next;
-	ft_putendl("Kill_process IN");
+	//ft_putendl("Kill_process IN");
 	while (tmp != NULL)
 	{
 		if (tmp->is_alive == false)
 		{
-			ft_printf("killed, %d\n", tmp->player);
+			//ft_printf("killed, %d\n", tmp->player);
 			if (pre)
 				pre->next = next;
 			else
@@ -38,7 +38,7 @@ void		kill_process(t_core *core)
 		}
 		else
 		{
-			ft_printf("not killed, %d\n", tmp->player);
+			//ft_printf("not killed, %d\n", tmp->player);
 			tmp->is_alive = false;
 		}
 		pre = tmp;
@@ -47,7 +47,7 @@ void		kill_process(t_core *core)
 			next = tmp->next;
 	}
 	check_delta(core);
-	ft_putendl("Kill_process OUT");
+	//ft_putendl("Kill_process OUT");
 }
 
 t_errors	call_instructions(t_core *core)
@@ -55,7 +55,7 @@ t_errors	call_instructions(t_core *core)
 	t_process	*tmp;
 	t_errors	res;
 
-	ft_printf("call_instruction IN\n");
+	//ft_printf("call_instruction IN\n");
 	tmp = core->process;
 	while (tmp != NULL)
 	{
@@ -69,7 +69,7 @@ t_errors	call_instructions(t_core *core)
 				return (res);
 		tmp = tmp->next;
 	}
-	ft_printf("call_instruction OUT\n");
+	//ft_printf("call_instruction OUT\n");
 	return (ok);
 }
 
@@ -86,6 +86,8 @@ void		find_winner(t_core *core)
 		ft_printf("No one has won\n");
 }
 
+#include <unistd.h>
+
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
@@ -96,11 +98,12 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-		//if (controls(core->graph))
-		//	return (f1_exit);
-		ft_printf("Start of the loop: cycles %d\n", cycles);
-		//if (!core->graph->pause)
-		//{
+		//sleep(1);
+		if (controls(core->graph))
+			return (f1_exit);
+		//ft_printf("Start of the loop: cycles %d\n", cycles);
+		if (!core->graph->pause)
+		{
 			--cycles;
 			if (cycles > 0)
 			{
@@ -125,8 +128,12 @@ t_errors	the_game(t_core *core)
 					return (ok) ;
 				}
 			}
-		//}
+		}
 	}
+	int		ch;
 	find_winner(core);
+	while((ch = getch()) != KEY_F(1))
+	{
+	}
 	return (ok);
 }
