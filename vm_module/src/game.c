@@ -18,33 +18,33 @@ void		check_delta(t_core *core)
 void		kill_process(t_core *core)
 {
 	t_process	*pre;
-	t_process	*tmp;
-	t_process	*next;
+	t_process	*cur;
 
 	pre = NULL;
-	tmp = core->process;
-	next = tmp->next;
+	cur = core->process;
 	ft_putendl("Kill_process IN");
-	while (tmp != NULL)
+	while (cur != NULL)
 	{
-		if (tmp->is_alive == false)
+		if (cur->is_alive == false)
 		{
-			ft_printf("killed, %d\n", tmp->player);
+			ft_printf("killed, %d\n", cur->player);
 			if (pre)
-				pre->next = next;
+				pre->next = cur->next;
 			else
-				core->process = next;
-			//free(tmp);
+				core->process = cur->next;
+			free(cur);
+			cur = NULL;
 		}
 		else
 		{
-			ft_printf("not killed, %d\n", tmp->player);
-			tmp->is_alive = false;
+			ft_printf("not killed, %d\n", cur->player);
+			cur->is_alive = false;
+			pre = cur;
 		}
-		pre = tmp;
-		tmp = tmp->next;
-		if (tmp != NULL)
-			next = tmp->next;
+		if (pre != NULL)
+			cur = pre->next;
+		else
+			cur = core->process;
 	}
 	check_delta(core);
 	ft_putendl("Kill_process OUT");
