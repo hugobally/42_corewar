@@ -30,42 +30,23 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 	if (p1 == REG)
 	{
 		if (p2 == REG)
-		{
-			//process->regs[params.p3 - 1] = core->arena[get_pc((process->regs[params.p1 - 1] + process->regs[params.p2 - 1]) % IDX_MOD)];
 			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (process->regs[params.p1 - 1] + process->regs[params.p2 - 1]) % IDX_MOD), 4);
-		}
 		if (p2 == DIR)
-		{
-			//process->regs[params.p3 - 1] = core->arena[get_pc((process->regs[params.p1 - 1] + params.p2) % IDX_MOD)];
 			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (process->regs[params.p1 - 1] + params.p2) % IDX_MOD), 4);
-		}
 	}
 	if (p1 == DIR)
 	{
 		if (p2 == REG)
-		{
-			//process->regs[params.p3 - 1] = core->arena[get_pc((params.p1 + process->regs[params.p2 - 1]) % IDX_MOD)];
 			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (params.p1 + process->regs[params.p2 - 1]) % IDX_MOD), 4);
-		}
 		if (p2 == DIR)
-		{
-			//process->regs[params.p3 - 1] = core->arena[get_pc((params.p1 + params.p2) % IDX_MOD)];
 			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (params.p1 + params.p2) % IDX_MOD), 4);
-		}
 	}
 	if (p1 == IND)
 	{
 		if (p2 == REG)
-		{
-			//process->regs[params.p3 - 1] = core->arena[get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + process->regs[params.p2 - 1]) % IDX_MOD)];
 			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p1 % IDX_MOD), 4) + process->regs[params.p2 - 1]) % IDX_MOD), 4);
-		}
 		if (p2 == DIR)
-		{
-			ft_printf("p1 IND, p2 DIR\n");
-			//process->regs[params.p3 - 1] = core->arena[get_pc((core->arena[process->pc + params.p1 % IDX_MOD] + params.p2) % IDX_MOD)];
 			process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p1 % IDX_MOD), 4) + params.p2) % IDX_MOD), 4);
-		}
 	}
 	ft_printf("ldi OUT by %d\n", process->regs[0]);
 	return (ok);
@@ -88,44 +69,24 @@ t_errors			ft_sti(t_core *core, t_process *process)
 	if (p2 == REG)
 	{
 		if (p3 == REG)
-		{
-			//*((int32_t*)&(core->arena[get_pc((process->regs[params.p2 - 1] + process->regs[params.p3 - 1]) % IDX_MOD)])) = process->regs[params.p1 - 1];
 			write_val(core, get_pc(process->pc + (process->regs[params.p2 - 1] + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1]);
-		}
 		if (p3 == DIR)
-		{	//*((int32_t*)&(core->arena[get_pc((process->regs[params.p2 - 1] + params.p3) % IDX_MOD)])) = process->regs[params.p1 - 1];
 			write_val(core, get_pc(process->pc + (process->regs[params.p2 - 1] + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
-		}
 	}
 	if (p2 == DIR)
 	{
 		if (p3 == REG)
-		{
-			//*((int32_t*)&(core->arena[get_pc((params.p2 + process->regs[params.p3 - 1]) % IDX_MOD)])) = process->regs[params.p1 - 1];
 			write_val(core, get_pc(process->pc + (params.p2 + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1]);
-		}
 		if (p3 == DIR)
-		{
-			//*((int32_t*)&(core->arena[get_pc((params.p2 + params.p3) % IDX_MOD)])) = process->regs[params.p1 - 1];
 			write_val(core, get_pc(process->pc + (params.p2 + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
-			ft_printf("STOCK live arg %d\n", read_val(core, get_pc(process->pc + (params.p2 + params.p3) % IDX_MOD), 4));
-		}
 	}
 	if (p2 == IND)
 	{
 		if (p3 == REG)
-		{
-			//*((int32_t*)&(core->arena[get_pc((core->arena[get_pc(process->pc + params.p2 % IDX_MOD)] + process->regs[params.p3 - 1]) % IDX_MOD)])) = process->regs[params.p1 - 1];
 			write_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1]);
-		}
 		if (p3 == DIR)
-		{
-			//*((int32_t*)&(core->arena[get_pc((core->arena[get_pc(process->pc + params.p2 % IDX_MOD)] + params.p3) % IDX_MOD)])) = process->regs[params.p1 - 1];
 			write_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
-		}
 	}
-	//hexdump(core);
-	//getchar();
 	ft_printf("ft_sti OUT by %d\n", process->regs[0]);
 	return (ok);
 }
@@ -135,7 +96,7 @@ t_errors			ft_fork(t_core *core, t_process *process)
 	t_params	params;
 	t_process	*new_process;
 
-	ft_printf("fork IN by %d\n", process->regs[0]);
+	ft_printf("fork IN by %d, pc at %d\n", process->player, process->pc);
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	if (!(new_process = ft_memalloc(sizeof(t_process))))
@@ -143,6 +104,7 @@ t_errors			ft_fork(t_core *core, t_process *process)
 	ft_memcpy(new_process, process, sizeof(t_process));
 	new_process->pc = get_pc(new_process->pc + (params.p1 % IDX_MOD));
 	push_process(core, new_process);
+	read_instruction(core, new_process);
 	ft_printf("fork OUT by %d\n", process->regs[0]);
 	return (ok);
 }
