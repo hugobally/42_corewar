@@ -71,12 +71,12 @@ t_errors				ft_aff(t_core *core, t_process *process)
 	int			p3;
 	int			ret;
 
-	ft_printf("aff IN by %d\n", process->regs[0]);
+	ft_printf("aff IN r1 %d, r2 %d, r3 %d \n", process->regs[0], process->regs[1], process->regs[2]);
 	(void)core;
 	params = process->params;
+	ft_printf("params p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
 	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
 		return (ret);
-	ft_printf("params p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
 	ft_printf("AFF :%d\n", process->regs[params.p1 - 1] % 256);
 	ft_printf("aff OUT by %d\n", process->regs[0]);
 	return (ok);
