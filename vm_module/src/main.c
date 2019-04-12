@@ -78,7 +78,7 @@ int		main(int ac, char **av)
 	if (core.visu && (ret= make_graph(&core)) != ok)
 		leave(&core, ret);
 	//make_win(&core);
-	if ((ret = the_game(&core) != ok))
-		leave(&core, ret);
+	ret = the_game(&core);
+	leave(&core, ret);
 	return (0);
 }
