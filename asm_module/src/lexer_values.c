@@ -6,16 +6,13 @@
 
 void				find_registers(t_token *token)
 {
-	int				reg_number;
+	uint32_t		n;
 
 	if (token->type == unknown && token->value[0] == 'r')
 	{
 		token->type = reg;
-		reg_number = ft_atoi(&(token->value[1]));
-		if (!ft_isnumstring(&(token->value[1]), reg_number)
-				|| reg_number < 1
-				|| reg_number > REG_NUMBER
-				|| reg_number > 255)
+		n = ft_atoi(&(token->value[1]));
+		if (n < 1 || n > REG_NUMBER || n > 255 || token->value[1] == '+')
 		{
 			error_handler(reg_badvalue, token, 0);
 		}

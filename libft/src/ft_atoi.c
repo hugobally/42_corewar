@@ -12,34 +12,40 @@
 
 #include "libft.h"
 
-static int		get_number(const char *str, size_t i, int sign)
+static uint64_t		get_number(const char *str, size_t i)
 {
-	int			n;
+	uint64_t		n;
+	size_t			len;
 
 	n = 0;
+	len = 0;
 	while (ft_isdigit(str[i]))
 	{
-		n = n * 10 + (str[i] - '0');
+		len++;
+		if (len > 10)
+			return (0);
+		if (!(n == 0 && str[i] == '0'))
+			n = n * 10 + (str[i] - '0');
 		i++;
 	}
-	return (n * sign);
+	return (n);
 }
 
 int				ft_atoi(const char *str)
 {
 	size_t		i;
-	size_t		len;
-	int			sign;
+	int32_t		sign;
+	uint64_t	u;
 
 	i = 0;
 	while (ft_iswhitespace(str[i]))
 		i++;
 	sign = str[i] == '-' ? -1 : 1;
 	i += (str[i] == '+' || str[i] == '-') ? 1 : 0;
-	len = 0;
-	while (ft_isdigit(str[i + len]))
-		len++;
-	if (len < 1 || len > 10)
+	u = get_number(str, i);
+	if ((sign == 1 && u > 0x7FFFFFFFllu)
+			|| (sign == -1 && u > 0x7FFFFFFFllu + 1llu))
 		return (0);
-	return (get_number(str, i, sign));
+	else
+		return ((int32_t)u * sign);
 }
