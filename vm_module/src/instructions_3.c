@@ -25,8 +25,8 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 	ft_printf("ldi IN by %d\n", process->regs[0]);
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	if (p1 == REG)
 	{
 		if (p2 == REG)
@@ -64,8 +64,8 @@ t_errors			ft_sti(t_core *core, t_process *process)
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d, bytecode:%x, pc:%d\n", params.p1, params.p2, params.p3, params.bytecode, process->pc);
 	ft_printf("registre de p1 %d\n", process->regs[params.p1 - 1]);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	if (p2 == REG)
 	{
 		if (p3 == REG)
@@ -122,8 +122,8 @@ t_errors			ft_lld(t_core *core, t_process *process)
 	params = process->params;
 	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	p1 = ft_type_param(params.bytecode, 1);
-	if ((ret = ft_reg(params, &p1, &p2, &p3)) != ok)
-		return (ret);
+	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+		return (ok);
 	if (p1 == DIR)
 		process->regs[params.p2 - 1] = params.p1;
 	if (p1 == IND)
