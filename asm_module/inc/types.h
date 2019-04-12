@@ -72,6 +72,7 @@ typedef struct		s_tokenlst
 	t_token			*now;
 	t_token			*prog_start;
 	uint32_t		label_counter;
+	uint32_t		byte_size;
 }					t_tokenlst;
 
 /*

@@ -30,7 +30,6 @@ t_code					token_add(t_tokenlst *lst, const t_token *template,
 									const size_t value_size)
 {
 	t_token				*new;
-	static size_t		stored_size;
 
 	if (!(new = (t_token*)ft_memalloc(sizeof(t_token))))
 		return (error_handler(malloc, 0, 0));
@@ -44,8 +43,8 @@ t_code					token_add(t_tokenlst *lst, const t_token *template,
 	if (lst->end)
 		lst->end->next = new;
 	lst->end = new;
-	stored_size += value_size;
-	if (stored_size > MAX_INPUT_FILE_SIZE)
+	lst->byte_size += value_size;
+	if (lst->byte_size > MAX_INPUT_FILE_SIZE)
 		return (error_handler(filesize, 0, 0));
 	return (done);
 }
