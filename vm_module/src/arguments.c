@@ -53,6 +53,27 @@ t_errors	ft_right_nb(char *s, t_core *core, int flag)
 	return (ok);
 }
 
+t_errors	check_option(t_core *core, char **av, int *i, int ac)
+{
+	t_errors	ret;
+
+	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-n"))
+	{
+		if ((ret = ft_right_nb(av[++*i], core, 1)) != ok)
+			return (badarg);
+	}
+	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-dump"))
+	{
+		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
+			return (badarg);
+	}
+	else if (!ft_strcmp(av[*i], "-v"))
+		core->visu = true;
+	else
+		return (badarg);
+	return (ok);
+}
+
 t_errors	get_arguments(t_core *core, int ac, char **av)
 {
 	int			i;
@@ -63,26 +84,16 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 	{
 		if (av[i][0] == '-')
 		{
-			if (!(ft_strcmp(av[i], "-dump")))
-			{
-				if ((ret = ft_right_nb(av[++i], core, 0)) != ok)
-					return (badarg);
-			}
-			else if (av[i][1] == 'n')
-			{
-				if ((ret = ft_right_nb(av[++i], core, 1)) != ok)
-					return (badarg);
-			}
-			else
+			if (check_option(core, av, &i, ac) != ok)
 				return (badarg);
 		}
 		else
 			if ((ret = new_player(core, av[i])) != ok)
 				return (ret);
 		if (core->nb_players > MAX_PLAYERS)
-			return(badarg);
+			return (badarg);
 	}
 	if (ft_total_size(core) > MEM_SIZE)
 		return (badchamp);
-	return (ok);
+	return (core->nb_players > 0 ? ok : badarg);
 }

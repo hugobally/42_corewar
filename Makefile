@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/15 17:12:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/02 13:12:02 by rle-ru           ###   ########.fr        #
+#    Updated: 2019/04/12 10:50:23 by rle-ru           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,3 @@ fclean		:	clean
 
 .PHONY		:	re
 re			:	fclean all
-
-t			:	all
-				./corewar ex.cor ex.cor

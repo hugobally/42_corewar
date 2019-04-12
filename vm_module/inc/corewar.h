@@ -103,6 +103,7 @@ typedef struct			s_core
 	int					winner;
 	unsigned int		max_checks;
 	unsigned int		nbr_live;
+	t_bool				visu;
 }             			t_core;
 
 
