@@ -86,6 +86,19 @@ void		find_winner(t_core *core)
 		ft_printf("No one has won\n");
 }
 
+int			ft_count_process(t_process *process)
+{
+	int i;
+
+	i = 0;
+	while (process != NULL)
+	{
+		process = process->next;
+		i++;
+	}
+	return (i);
+}
+
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
@@ -98,7 +111,7 @@ t_errors	the_game(t_core *core)
 	{
 		//if (controls(core->graph))
 		//	return (f1_exit);
-		ft_printf("Start of the loop: cycles %d\n", cycles);
+		ft_printf("Start of the loop: cycles %d, nbr process :%d\n", cycles, ft_count_process(proc));
 		//if (!core->graph->pause)
 		//{
 			--cycles;
@@ -106,6 +119,7 @@ t_errors	the_game(t_core *core)
 			{
 				if ((res = call_instructions(core)) != ok)
 					return (res);
+				proc = core->process;
 			}
 			else
 			{

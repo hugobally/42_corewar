@@ -127,7 +127,6 @@ t_errors			ft_lld(t_core *core, t_process *process)
 	if (p1 == DIR)
 		process->regs[params.p2 - 1] = params.p1;
 	if (p1 == IND)
-		//process->regs[params.p2 - 1] = *((int32_t*)&(core->arena[get_pc(process->pc + params.p1)]));
 		process->regs[params.p2 - 1] = read_val(core, get_pc(process->pc + params.p1), 4);
 	ft_carry(process, process->regs[params.p2 - 1]);
 	ft_printf("lldi OUT by %d\n", process->regs[0]);

@@ -35,7 +35,7 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 	{
 		if (p2 == REG)
 			//process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(core->arena[process->pc + params.p1] + process->regs[params.p2 - 1])]));
-			process->regs[params.p3 - 1] = read_val(core, read_val(core, get_pc(process->pc + params.p1), 4) + process->regs[params.p2 - 1], 4);
+			process->regs[params.p3 - 1] = read_val(core, get_pc(read_val(core, get_pc(process->pc + params.p1), 4) + process->regs[params.p2 - 1]), 4);
 		if (p2 == DIR)
 			//process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(core->arena[process->pc + params.p1] + params.p2)]));
 			process->regs[params.p3 - 1] = read_val(core, get_pc(read_val(core, get_pc(process->pc + params.p1), 4) + params.p2), 4);
@@ -59,6 +59,7 @@ t_errors				ft_lfork(t_core *core, t_process *process)
 	ft_memcpy(new_process, process, sizeof(t_process));
 	new_process->pc = get_pc(new_process->pc + params.p1);
 	push_process(core, new_process);
+	read_instruction(core, new_process);
 	ft_printf("lfork OUT by %d\n", process->regs[0]);
 	return (ok);
 }
