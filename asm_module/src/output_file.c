@@ -5,25 +5,24 @@
 #include "types.h"
 #include "asm.h"
 
-/*
-** Reverse Endianness
-*/
-
 uint32_t		reverse_endian(uint32_t number)
 {
+	uint32_t	test_endian;
 	uint32_t	output;
 
-	output = 0;
-	output |= (number & 0x000000FF) << 24;
-	output |= (number & 0x0000FF00) << 8;
-	output |= (number & 0x00FF0000) >> 8;
-	output |= (number & 0xFF000000) >> 24;
-	return (output);
+	test_endian = 1;
+	if ((uint32_t)(((uint8_t*)&test_endian)[0]))
+	{
+		output = 0;
+		output |= (number & 0x000000FF) << 24;
+		output |= (number & 0x0000FF00) << 8;
+		output |= (number & 0x00FF0000) >> 8;
+		output |= (number & 0xFF000000) >> 24;
+		return (output);
+	}
+	else
+		return (number);
 }
-
-/*
-** 
-*/
 
 static t_code	output_instructions(t_tokenlst *lst, t_label **label_tab,
 									t_file *file)
