@@ -2,14 +2,10 @@
 #include "types.h"
 #include "errors.h"
 
-///////////////////////////////////////////////////////////////
-
 /*
 ** Lexer Pass 2 : - Assign a type to all unknown tokens
 **				  - Remove '%' and ':' tokens (no need for them anymore)
 */
-
-///////////////////////////////////////////////////////////////
 
 static void			tokens_clear_lab_char(t_tokenlst *lst)
 {
@@ -47,9 +43,9 @@ static void			tokens_clear_dir_char(t_tokenlst *lst)
 	}
 }
 
-void			tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
+void				tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 {
-	t_token		*node;
+	t_token			*node;
 
 	node = lst->start;
 	while (node)
@@ -59,7 +55,7 @@ void			tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 	}
 }
 
-t_code			lexer(t_tokenlst *lst, t_file *file)
+t_code				lexer(t_tokenlst *lst, t_file *file)
 {
 	tokens_foreach(lst, &find_labels);
 	tokens_foreach(lst, &find_opcodes);

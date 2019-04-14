@@ -4,8 +4,6 @@
 #include "macros.h"
 #include "asm.h"
 
-// Check endian of architecture ?
-
 static uint32_t		store_value(t_token *token, t_op *op,
 									int32_t val, uint8_t *buffer)
 {

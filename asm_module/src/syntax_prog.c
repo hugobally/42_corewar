@@ -2,20 +2,6 @@
 #include "errors.h"
 #include "types.h"
 
-t_token				*find_before(t_token *start, t_toktype type)
-{
-	t_token			*node;
-
-	node = start;
-	while (node)
-	{
-		if (node->type == type)
-			return (node);
-		node = node->previous;
-	}
-	return (start);
-}
-
 static uint8_t		is_valid_param(t_token *token, uint8_t ref)
 {
 	if (((token->type == dir_num || token->type == dir_label)

@@ -4,36 +4,6 @@
 #include "macros.h"
 #include "asm.h"
 
-///////////////////////////////////////////////////////////////
-
-void			debug_printtokenlst(t_tokenlst *lst)
-{
-	t_token *node;
-	node = lst->start;
-	while (node)
-	{
-		ft_printf("%30s | %c | pos %03d-%03d | pad %3d\n", \
-				node->value ? node->value : \
-					node->type != '\n' ? (char*)(&(node->type)) : "EOL", \
-				(char)(node->type) != '\n' ? (char)(node->type) : '\\', \
-				node->pos & 0x0000FFFFu, \
-				(node->pos & 0xFFFF0000u) >> 16, \
-				node->pad);
-		node = node->next;
-	}
-}
-///////////////////////////////////////////////////////////////
-
-/*
-** Lexer -> Pass 1 - SCANNER : Acquire all the tokens, either as
-** 					1) special single char
-**					2) anything else in between
-**				  Comments and whitespace are discarded
-**				  We store info about whitespace inside each token
-*/
-
-///////////////////////////////////////////////////////////////
-
 static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 {
 	uint16_t			j;

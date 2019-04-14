@@ -26,10 +26,10 @@ void			get_right_pad(t_token *template, t_line *line)
 	}
 }
 
-t_code					token_add(t_tokenlst *lst, const t_token *template,
+t_code			token_add(t_tokenlst *lst, const t_token *template,
 									const size_t value_size)
 {
-	t_token				*new;
+	t_token		*new;
 
 	if (!(new = (t_token*)ft_memalloc(sizeof(t_token))))
 		return (error_handler(malloc, 0, 0));

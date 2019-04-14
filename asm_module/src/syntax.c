@@ -3,6 +3,20 @@
 #include "types.h"
 #include "asm.h"
 
+t_token				*find_before(t_token *start, t_toktype type)
+{
+	t_token			*node;
+
+	node = start;
+	while (node)
+	{
+		if (node->type == type)
+			return (node);
+		node = node->previous;
+	}
+	return (start);
+}
+
 t_token				*skip_eol(t_token *node)
 {
 	if (node)

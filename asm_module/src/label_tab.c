@@ -2,6 +2,10 @@
 #include "types.h"
 #include "asm.h"
 
+/*
+** Access Label Tab
+*/
+
 t_label				*label_tab_fetch(t_token *token, t_label **label_tab)
 {
 	uint32_t		index;
@@ -56,7 +60,7 @@ t_code				build_label_tab(t_tokenlst *lst, t_label **label_tab)
 	t_token			*node;
 	uint32_t		size;
 	uint32_t		index;
-	
+
 	if (!(size = get_tabsize(lst)))
 		return (done);
 	if (!(*label_tab = (t_label*)ft_memalloc((size + 1u) * sizeof(t_label))))

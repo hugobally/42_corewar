@@ -8,11 +8,10 @@ void					error_warning(t_errors err, t_token *token,
 										t_file *file)
 {
 	static t_errstr		tab[2] = {
-		{bytesize, "/Invalid champion size (Max",
-			1, CHAMP_MAX_SIZE, " bytes) at"},
+		{bytesize, "/Invalid champ size (Max", 1, CHAMP_MAX_SIZE, " bytes) at"},
 		{0, 0, 0, 0, 0}
 	};
-	
+
 	if (file)
 	{
 		if (token)
@@ -45,8 +44,7 @@ void					error_parser(t_errors err, t_token *token, t_file *file)
 		{header_noquote, "Missing command parameter after", 0, 0, 0},
 		{header_badquote, "Empty quote / Bad quote format", 0, 0, 0},
 		{header_namesize, "Name is too long (Max", 1, PROG_NAME_LENGTH, ")"},
-		{header_commentsize, "Comment is too long (Max", 1,
-														COMMENT_LENGTH, ")"},
+		{header_commentsize, "Comment too long (Max", 1, COMMENT_LENGTH, ")"},
 		{header_duplicate, "Duplicate command", 0, 0, 0},
 		{expected_eol, "Expected end of instruction after", 0, 0, 0},
 		{label_duplicate, "Duplicate label", 0, 0, 0},
@@ -72,8 +70,7 @@ void					error_scanner(t_errors err, t_file *file)
 		{no_instructions, "No instructions found", 0, 0, 0},
 		{header_missing, "Missing header command", 0, 0, 0},
 		{write_crash, "Write Failure", 0, 0, 0},
-		{output_max_size, "Output is bigger than max IND value -",
-			1, MAX_OUTPUT_BYTE_SIZE, ""},
+		{output_max_size, "Outputsize > IND_MAX", 1, MAX_OUTPUT_BYTE_SIZE, ""},
 		{0, 0, 0, 0, 0}
 	};
 
@@ -81,10 +78,11 @@ void					error_scanner(t_errors err, t_file *file)
 		build_errstr_notok(err, tab, file);
 }
 
-t_code			error_handler(t_errors code, t_token *token, t_file *file)
+t_code					error_handler(t_errors code,
+										t_token *token, t_file *file)
 {
-	static int		error_count;
-	static t_file	*current_file;
+	static int			error_count;
+	static t_file		*current_file;
 
 	if (file)
 	{

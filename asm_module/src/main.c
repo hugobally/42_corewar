@@ -36,9 +36,8 @@ t_code				compile_file(t_file *file)
 	return (done);
 }
 
-int				print_usage(void)
+int					print_usage(void)
 {
-	ft_printf("\n%sUsage : ./asm file1.s file2.s [...]%s\n\n", WHT, RESET);
 	return (0);
 }
 
@@ -48,7 +47,10 @@ int					main(int argc, char **argv)
 	t_file			file;
 
 	if (argc == 1)
-		return (print_usage());
+	{
+		ft_printf("\n%sUsage : ./asm [list of files]%s\n\n", WHT, RESET);
+		return (0);
+	}
 	argnum = 1;
 	while (argnum < argc)
 	{

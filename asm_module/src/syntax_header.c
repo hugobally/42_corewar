@@ -67,14 +67,14 @@ static t_toktype	is_valid_cmd(t_tokenlst *l)
 static t_code		copy_val(t_tokenlst *l, char *dst, t_toktype type)
 {
 	size_t			len;
-	
+
 	len = 0;
 	if (is_duplicate(type, l, 0))
 		return (error);
 	while (l->now)
 	{
 		if (l->now->type == char_eol && is_valid_size(len, 1, type, l))
-				dst[len++] = '\n';
+			dst[len++] = '\n';
 		else if (l->now->type == quote)
 		{
 			if (!is_valid_size(len, ft_strlen(l->now->value), type, l))
@@ -96,10 +96,7 @@ t_code				get_header(t_tokenlst *l, header_t *h)
 
 	cmd_count = 0;
 	is_duplicate(unknown, NULL, 1);
-	if (l->start->type == char_eol)
-		l->now = skip_eol(l->start);
-	else
-		l->now = l->start;
+	l->now = (l->start->type == char_eol) ? skip_eol(l->start) : l->start;
 	while (l->now && cmd_count < 2)
 	{
 		if ((t = is_valid_cmd(l)) == unknown)

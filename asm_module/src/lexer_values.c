@@ -34,7 +34,7 @@ uint8_t				check_hex_value(t_token *token)
 			error_handler(unknown_token, token, 0);
 		return (1);
 	}
-	else 
+	else
 		return (0);
 }
 
