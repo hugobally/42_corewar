@@ -4,11 +4,16 @@ t_errors 		ft_live(t_core *core, t_process *process)
 {
 	int			player;
 	t_params	params;
+	t_player	*tmp;
 
+	tmp = core->players;
 	params = process->params;
 	//ft_printf("Live in\nparams p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
 	process->is_alive = true;
-	core->last_live_done_by = params.p1;
+	while (tmp && tmp->p != params.p1)
+		tmp = tmp->next;
+	if (tmp->p == params.p1)
+		core->last_live_done_by = params.p1;
 	core->nbr_live++;
 	core->winner = 1;
 	player = params.p1;
