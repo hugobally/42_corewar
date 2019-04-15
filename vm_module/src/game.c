@@ -104,7 +104,9 @@ t_errors	the_game(t_core *core)
 	t_process	*proc;
 	uint32_t	cycles;
 	int			res;
+	uint32_t	i;
 
+	i = 0;
 	cycles = core->max_cycle_to_die;
 	proc = core->process;
 	while (proc)
@@ -138,6 +140,11 @@ t_errors	the_game(t_core *core)
 					hexdump(core);
 					return (ok) ;
 				}
+			}
+			if (++i == core->sdump)
+			{
+				hexdump(core);
+				i = 0;
 			}
 		//}
 	}
