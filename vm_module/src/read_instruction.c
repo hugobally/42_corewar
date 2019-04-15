@@ -15,7 +15,7 @@ void				write_val(t_core *core, uint32_t pc, uint32_t size,
 		core->arena[get_pc(pc + size - i)] = *(((uint8_t*)&val) + i);
 		if (core->visu)
 		{
-			write_on_arena(get_pc(pc + size - i), *(((uint8_t*)&val) + i), player + 2, core->graph);
+			write_on_arena(get_pc(pc + size - i), *(((uint8_t*)&val) + i), player, core->graph);
 		}
 		i++;
 	}

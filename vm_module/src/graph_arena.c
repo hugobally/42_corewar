@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/12 16:35:27 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/15 16:02:41 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	write_on_arena(int addr, int v, int champ, t_graph *g)
 	int		row;
 
 	get_col_row(addr, &col, &row);
-	wattron(g->arena_win, COLOR_PAIR(champ));
+	wattron(g->arena_win, COLOR_PAIR(champ + PLAYER_DIFF));
 	mvwprintw(g->arena_win, row, col, "%.2hhx", v);
-	wattroff(g->arena_win, COLOR_PAIR(champ));
+	wattroff(g->arena_win, COLOR_PAIR(champ + PLAYER_DIFF));
 	wrefresh(g->arena_win);
 }
 
@@ -77,7 +77,7 @@ void	add_proc_champ(t_graph *g, t_player *p)
 		i = 0;
 		while(i < p->head.prog_size)
 		{
-			write_on_arena(tmp->orig_pc + i, tmp->proc[i], tmp->p + 2, g);
+			write_on_arena(tmp->orig_pc + i, tmp->proc[i], tmp->p, g);
 			if (i == 0)
 				add_procces_to_arena(tmp->orig_pc, g);
 			i++;
