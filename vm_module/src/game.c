@@ -110,10 +110,15 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-		if (core->visu && controls(core->graph))
-			return (f1_exit);
-		if (core->visu && core->graph->pause)
+		if (core->visu)
+		{
+			print_process(core->graph, core->process);
+			if (controls(core->graph))
+				return (f1_exit);
 			usleep(10000);
+		}
+		if (core->visu && core->graph->pause)
+		{}
 		else 
 		{
 			if (--cycles > 0)

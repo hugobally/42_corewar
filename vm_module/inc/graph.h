@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/15 16:02:24 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/15 19:02:23 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ enum				e_collors
 	P2,
 	P3,
 	P4,
-	P
+	P,
+	PS
 };
 
 WINDOW				*create_new_win(int h, int w, int x, int y);
@@ -65,6 +66,7 @@ void				print_champions(t_graph *g, t_player *p);
 
 void				create_registers_win(t_graph *g);
 
+void				print_process(t_graph *g, t_process *p);
 void				create_process_win(t_graph *g, t_process *p);
 
 void				print_infos(t_graph *g, t_core *c, int cycle_mod);

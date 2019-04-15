@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:16:49 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/12 16:32:05 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/15 18:35:42 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		init_ncurse(void)
 	init_pair(P3, COLOR_GREEN, COLOR_WHITE);
 	init_pair(P4, COLOR_YELLOW, COLOR_WHITE);
 	init_pair(P, COLOR_BLACK, COLOR_WHITE);
+	init_pair(PS, COLOR_BLACK, COLOR_CYAN);
 	return (0);
 }
 
@@ -50,6 +51,7 @@ int		make_graph(t_core *c)
 	c->graph = init_graph();
 	if (!c->graph)
 		return (falloc);
+	c->graph->selected_proc = c->process;
 	/*int i = 0;
 	while (i++ < MEM_SIZE)
 		write_on_arena(i, i, 2, g);

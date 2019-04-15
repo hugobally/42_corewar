@@ -89,7 +89,8 @@ typedef struct			s_graph
 	int					fps;
 	int					laps;
 	int					nb_cycle;
-	char				pause;
+	t_bool				pause;
+	t_process			*selected_proc;
 }						t_graph;
 
 typedef struct			s_core
