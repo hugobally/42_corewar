@@ -109,7 +109,7 @@ t_errors	ft_or(t_core *core, t_process *process)
 		}
 	}
 	ft_carry(process, process->regs[params.p3 - 1]);
-	ft_printf("or OUT by %d\n", process->regs[0]);
+	//ft_printf("or OUT by %d\n", process->regs[0]);
 	return(ok);
 }
 

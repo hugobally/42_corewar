@@ -41,7 +41,7 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 			process->regs[params.p3 - 1] = read_val(core, get_pc(read_val(core, get_pc(process->pc + params.p1), 4) + params.p2), 4);
 	}
 	ft_carry(process, process->regs[params.p3 - 1]);
-	ft_printf("lldi OUT by %d\n", process->regs[0]);
+	//ft_printf("lldi OUT by %d\n", process->regs[0]);
 	return (ok);
 }
 
