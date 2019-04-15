@@ -30,6 +30,7 @@ void	hexdump(t_core *core)
 		}
 		ft_putchar('\n');
 	}
-	while (!read(1, NULL, 1))
-		;
+	if (core->sdump != 0)
+		while (!read(1, NULL, 1))
+			;
 }

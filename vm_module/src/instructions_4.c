@@ -16,28 +16,28 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 	if (p1 == REG)
 	{
 		if (p2 == REG)
-			//process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(process->regs[params.p1 - 1] + process->regs[params.p2 - 1])]));
+			process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(process->regs[params.p1 - 1] + process->regs[params.p2 - 1])]));
 			process->regs[params.p3 - 1] = read_val(core, get_pc(process->regs[params.p1 - 1] + process->regs[params.p2 - 1]), 4);
 		if (p2 == DIR)
-			//process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(process->regs[params.p1 - 1] + params.p2)]));
+			process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(process->regs[params.p1 - 1] + params.p2)]));
 			process->regs[params.p3 - 1] = read_val(core, get_pc(process->regs[params.p1 - 1] + params.p2), 4);
 	}
 	if (p1 == DIR)
 	{
 		if (p2 == REG)
-			//process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(params.p1 + process->regs[params.p2 - 1])]));
+			process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(params.p1 + process->regs[params.p2 - 1])]));
 			process->regs[params.p3 - 1] = read_val(core, get_pc(params.p1 + process->regs[params.p2 - 1]), 4);
 		if (p2 == DIR)
-			//process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(params.p1 + params.p2)]));
+			process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(params.p1 + params.p2)]));
 			process->regs[params.p3 - 1] = read_val(core, get_pc(params.p1 + params.p2), 4);
 	}
 	if (p1 == IND)
 	{
 		if (p2 == REG)
-			//process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(core->arena[process->pc + params.p1] + process->regs[params.p2 - 1])]));
+			process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(core->arena[process->pc + params.p1] + process->regs[params.p2 - 1])]));
 			process->regs[params.p3 - 1] = read_val(core, get_pc(read_val(core, get_pc(process->pc + params.p1), 4) + process->regs[params.p2 - 1]), 4);
 		if (p2 == DIR)
-			//process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(core->arena[process->pc + params.p1] + params.p2)]));
+			process->regs[params.p3 - 1] = *((int32_t*)&(core->arena[get_pc(core->arena[process->pc + params.p1] + params.p2)]));
 			process->regs[params.p3 - 1] = read_val(core, get_pc(read_val(core, get_pc(process->pc + params.p1), 4) + params.p2), 4);
 	}
 	ft_carry(process, process->regs[params.p3 - 1]);

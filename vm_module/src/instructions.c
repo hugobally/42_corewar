@@ -48,7 +48,8 @@ t_errors		ft_store(t_core *core, t_process *process)
 
 	//ft_printf("ft_store IN by %d\n", process->regs[0]);
 	params = process->params;
-	//ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	//ft_printf("params p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
+	//ft_printf("registre de p1 %d\n", process->regs[params.p1 - 1]);
 	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
 		return (ok);
 	if (p2 == REG)

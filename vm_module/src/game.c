@@ -115,7 +115,7 @@ t_errors	the_game(t_core *core)
 			return (f1_exit);
 		//ft_printf("Start of the loop: cycles %d\n", cycles);
 		if (core->visu && core->graph->pause)
-			usleep(10000);
+			sleep(1);
 		else 
 		{
 			--cycles;
