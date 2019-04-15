@@ -71,16 +71,16 @@ int		main(int ac, char **av)
 	ft_bzero(&core, sizeof(t_core));
 	if ((ret = get_arguments(&core, ac, av)) != ok)
 		leave(&core, ret);
-	ft_printf("Arguments done\n");
 	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
-	ft_printf("Arena made\n");
 	if (core.visu)
 	{
 		if ((ret = make_graph(&core)) != ok)
 			leave(&core, ret);
 		make_win(&core);
 	}
+	else
+		core.graph = NULL;
 	ret = the_game(&core);
 	leave(&core, ret);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:16:49 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/11 17:13:18 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/12 16:32:05 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		init_ncurse(void)
 	init_pair(P2, COLOR_BLUE, COLOR_WHITE);
 	init_pair(P3, COLOR_GREEN, COLOR_WHITE);
 	init_pair(P4, COLOR_YELLOW, COLOR_WHITE);
+	init_pair(P, COLOR_BLACK, COLOR_WHITE);
 	return (0);
 }
 

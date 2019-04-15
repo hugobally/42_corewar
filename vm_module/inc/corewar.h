@@ -104,6 +104,7 @@ typedef struct			s_core
 	unsigned int		max_checks;
 	unsigned int		nbr_live;
 	t_bool				visu;
+	uint32_t			sdump;
 }             			t_core;
 
 
@@ -171,7 +172,7 @@ typedef t_errors		(*t_inst_tab)(t_core *, t_process *);
 extern	t_inst_tab		g_op_inst_tab[17];
 
 void					read_instruction(t_core *core, t_process *pro);
-void					write_val(t_core *core, uint32_t pc, uint32_t size, int32_t val);
+void					write_val(t_core *core, uint32_t pc, uint32_t size, int32_t val, int champ);
 int32_t					read_val(t_core *core, uint32_t pc, uint32_t size);
 
 

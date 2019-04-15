@@ -8,9 +8,9 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 	int			p3;
 	int 		ret;
 
-	ft_printf("lldi IN by %d\n", process->regs[0]);
+	//ft_printf("lldi IN by %d\n", process->regs[0]);
 	params = process->params;
-	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	//ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
 		return (ok);
 	if (p1 == REG)
@@ -41,7 +41,7 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 			process->regs[params.p3 - 1] = read_val(core, get_pc(read_val(core, get_pc(process->pc + params.p1), 4) + params.p2), 4);
 	}
 	ft_carry(process, process->regs[params.p3 - 1]);
-	ft_printf("lldi OUT by %d\n", process->regs[0]);
+	//ft_printf("lldi OUT by %d\n", process->regs[0]);
 	return (ok);
 }
 
@@ -50,17 +50,17 @@ t_errors				ft_lfork(t_core *core, t_process *process)
 	t_params	params;
 	t_process	*new_process;
 
-	ft_printf("lfork IN by %d\n", process->regs[0]);
+	//ft_printf("lfork IN by %d\n", process->regs[0]);
 	(void)core;
 	params = process->params;
-	ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	//ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
 	if (!(new_process = ft_memalloc(sizeof(t_process))))
 		return (falloc);
 	ft_memcpy(new_process, process, sizeof(t_process));
 	new_process->pc = get_pc(new_process->pc + params.p1);
 	push_process(core, new_process);
 	read_instruction(core, new_process);
-	ft_printf("lfork OUT by %d\n", process->regs[0]);
+	//ft_printf("lfork OUT by %d\n", process->regs[0]);
 	return (ok);
 }
 
@@ -72,14 +72,14 @@ t_errors				ft_aff(t_core *core, t_process *process)
 	int			p3;
 	int			ret;
 
-	ft_printf("aff IN r1 %d, r2 %d, r3 %d \n", process->regs[0], process->regs[1], process->regs[2]);
+	//ft_printf("aff IN r1 %d, r2 %d, r3 %d \n", process->regs[0], process->regs[1], process->regs[2]);
 	(void)core;
 	params = process->params;
-	ft_printf("params p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
+	//ft_printf("params p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
 	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
 		return (ok);
-	ft_printf("AFF :%d\n", process->regs[params.p1 - 1] % 256);
-	ft_printf("aff OUT by %d\n", process->regs[0]);
+	//ft_printf("AFF :%d\n", process->regs[params.p1 - 1] % 256);
+	//ft_printf("aff OUT by %d\n", process->regs[0]);
 	return (ok);
 }
 

@@ -1,10 +1,10 @@
 #include "corewar.h"
-
+#include "graph.h"
 #include "libft.h" //DEBUG
 #include <stdlib.h> //DEBUG
 
 void				write_val(t_core *core, uint32_t pc, uint32_t size,
-								int32_t val)
+								int32_t val, int player)
 {
 	uint32_t		i;
 
@@ -13,6 +13,10 @@ void				write_val(t_core *core, uint32_t pc, uint32_t size,
 	while (i <= size)
 	{
 		core->arena[get_pc(pc + size - i)] = *(((uint8_t*)&val) + i);
+		if (core->visu)
+		{
+			write_on_arena(get_pc(pc + size - i), *(((uint8_t*)&val) + i), player + 2, core->graph);
+		}
 		i++;
 	}
 }
