@@ -2,6 +2,7 @@
 #include "graph.h"
 #include <stdlib.h>
 #include <unistd.h>
+
 void		check_delta(t_core *core)
 {
 	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)
@@ -23,11 +24,9 @@ void		kill_process(t_core *core)
 	pre = NULL;
 	cur = core->process;
 	while (cur != NULL)
-	//ft_putendl("Kill_process IN");
 	{
 		if (cur->is_alive == false)
 		{
-			//ft_printf("killed, %d\n", tmp->player);
 			if (pre)
 				pre->next = cur->next;
 			else
@@ -39,15 +38,15 @@ void		kill_process(t_core *core)
 		{
 			cur->is_alive = false;
 			pre = cur;
-			//ft_printf("not killed, %d\n", tmp->player);
 		}
 		if (pre != NULL)
 			cur = pre->next;
 		else
 			cur = core->process;
+		if (cur)
+			cur->previous = pre;
 	}
 	check_delta(core);
-	//ft_putendl("Kill_process OUT");
 }
 
 t_errors	call_instructions(t_core *core)

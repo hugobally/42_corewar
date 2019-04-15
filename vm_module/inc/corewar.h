@@ -75,21 +75,22 @@ typedef struct			s_process
 	int32_t				regs[REG_NUMBER];
 	t_bool				is_alive;
 	struct s_process	*next;
+	struct s_process	*previous;
 }						t_process;
 
-typedef struct		s_graph
+typedef struct			s_graph
 {
-	WINDOW			*arena_win;
-	WINDOW			*ctrl_win;
-	WINDOW			*info_win;
-	WINDOW			*pro_win;
-	WINDOW			*reg_win;
-	WINDOW			*champ_win;
-	int				fps;
-	int				laps;
-	int				nb_cycle;
-	char			pause;
-}					t_graph;
+	WINDOW				*arena_win;
+	WINDOW				*ctrl_win;
+	WINDOW				*info_win;
+	WINDOW				*pro_win;
+	WINDOW				*reg_win;
+	WINDOW				*champ_win;
+	int					fps;
+	int					laps;
+	int					nb_cycle;
+	char				pause;
+}						t_graph;
 
 typedef struct			s_core
 {
