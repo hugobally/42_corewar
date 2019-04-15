@@ -11,6 +11,7 @@ t_errors		ft_instructions(t_core *core, t_process *process)
 	//ft_printf("ft_instructions IN %d\n", process->instruction);
 	if (process->remaining_cycles != 0)
 		return (0);
+	read_instruction(core, process);
 	if ((op = process->instruction) && (op <= 0 || op > 16))
 		op = 0;
 	if ((res = g_op_inst_tab[op](core, process)) != ok)
