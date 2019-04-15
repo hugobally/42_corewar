@@ -11,7 +11,7 @@ void	printx(unsigned char c)
 	ft_putchar(p);
 }
 
-void	hexdump(t_core *core)
+int		hexdump(t_core *core, int flag)
 {
 	uint32_t	i;
 	int			col;
@@ -30,6 +30,8 @@ void	hexdump(t_core *core)
 		}
 		ft_putchar('\n');
 	}
-	while (!read(1, NULL, 1))
-		;
+	if (flag)
+		while (!read(1, NULL, 1))
+			;
+	return (0);
 }

@@ -9,6 +9,8 @@
 # define REG 1
 # define DIR 2
 # define IND 3
+# define FLAG_DUMP 1
+# define FLAG_SDUMP 2
 
 
 typedef enum			e_errors
@@ -105,6 +107,7 @@ typedef struct			s_core
 	unsigned int		nbr_live;
 	t_bool				visu;
 	uint32_t			sdump;
+	uint8_t				flags;
 }             			t_core;
 
 
@@ -178,6 +181,6 @@ int32_t					read_val(t_core *core, uint32_t pc, uint32_t size);
 
 int						get_pc(uint32_t i);
 
-void					hexdump(t_core *core);
+int						hexdump(t_core *core, int flag);
 
 #endif
