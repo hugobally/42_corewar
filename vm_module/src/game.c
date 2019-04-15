@@ -16,13 +16,8 @@ void		check_delta(t_core *core)
 	core->nbr_live = 0;
 }
 
-void		kill_process(t_core *core)
+void		kill_process(t_core *core, t_process *pre, t_process *cur)
 {
-	t_process	*pre;
-	t_process	*cur;
-
-	pre = NULL;
-	cur = core->process;
 	while (cur != NULL)
 	{
 		if (cur->is_alive == false)
@@ -31,6 +26,8 @@ void		kill_process(t_core *core)
 				pre->next = cur->next;
 			else
 				core->process = cur->next;
+			if (cur->next)
+				cur->next->previous = pre;
 			free(cur);
 			cur = NULL;
 		}
@@ -130,7 +127,7 @@ t_errors	the_game(t_core *core)
 			else
 				while (cycles <= 0 && proc)
 				{
-					kill_process(core);
+					kill_process(core, NULL, core->process);
 					cycles = core->max_cycle_to_die;
 					proc = core->process;
 				}

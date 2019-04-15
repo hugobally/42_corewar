@@ -11,6 +11,8 @@ void		ft_carry(t_process *process, int res)
 void		push_process(t_core *core, t_process *new)
 {
 	new->next = core->process;
+	if (core->process)
+		core->process->previous = new;
 	core->process = new;
 }
 
