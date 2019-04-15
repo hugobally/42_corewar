@@ -66,11 +66,13 @@ t_errors	check_option(t_core *core, char **av, int *i, int ac)
 	}
 	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-dump"))
 	{
+		core->flags |= FLAG_DUMP;
 		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
 			return (badarg);
 	}
 	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-sdump"))
 	{
+		core->flags |= FLAG_SDUMP;
 		if ((ret = ft_right_nb(av[++*i], core, 2)) != ok)
 			return (badarg);
 	}

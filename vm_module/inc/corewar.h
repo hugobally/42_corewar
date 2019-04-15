@@ -9,6 +9,8 @@
 # define REG 1
 # define DIR 2
 # define IND 3
+# define FLAG_DUMP 1
+# define FLAG_SDUMP 2
 
 
 typedef enum			e_errors
@@ -73,21 +75,22 @@ typedef struct			s_process
 	int32_t				regs[REG_NUMBER];
 	t_bool				is_alive;
 	struct s_process	*next;
+	struct s_process	*previous;
 }						t_process;
 
-typedef struct		s_graph
+typedef struct			s_graph
 {
-	WINDOW			*arena_win;
-	WINDOW			*ctrl_win;
-	WINDOW			*info_win;
-	WINDOW			*pro_win;
-	WINDOW			*reg_win;
-	WINDOW			*champ_win;
-	int				fps;
-	int				laps;
-	int				nb_cycle;
-	char			pause;
-}					t_graph;
+	WINDOW				*arena_win;
+	WINDOW				*ctrl_win;
+	WINDOW				*info_win;
+	WINDOW				*pro_win;
+	WINDOW				*reg_win;
+	WINDOW				*champ_win;
+	int					fps;
+	int					laps;
+	int					nb_cycle;
+	char				pause;
+}						t_graph;
 
 typedef struct			s_core
 {
@@ -105,6 +108,7 @@ typedef struct			s_core
 	unsigned int		nbr_live;
 	t_bool				visu;
 	uint32_t			sdump;
+	uint8_t				flags;
 }             			t_core;
 
 
@@ -178,6 +182,6 @@ int32_t					read_val(t_core *core, uint32_t pc, uint32_t size);
 
 int						get_pc(uint32_t i);
 
-void					hexdump(t_core *core);
+int						hexdump(t_core *core, int flag);
 
 #endif

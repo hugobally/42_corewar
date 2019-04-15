@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/12 16:32:22 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/15 16:02:24 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define REG_COL 53
 # define REG_ROW 17
 
+# define PLAYER_DIFF 1
 enum				e_collors
 {
 	BASE,

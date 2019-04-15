@@ -2,6 +2,7 @@
 #include "graph.h"
 #include <stdlib.h>
 #include <unistd.h>
+
 void		check_delta(t_core *core)
 {
 	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)
@@ -23,11 +24,9 @@ void		kill_process(t_core *core)
 	pre = NULL;
 	cur = core->process;
 	while (cur != NULL)
-	//ft_putendl("Kill_process IN");
 	{
 		if (cur->is_alive == false)
 		{
-			//ft_printf("killed, %d\n", tmp->player);
 			if (pre)
 				pre->next = cur->next;
 			else
@@ -39,15 +38,15 @@ void		kill_process(t_core *core)
 		{
 			cur->is_alive = false;
 			pre = cur;
-			//ft_printf("not killed, %d\n", tmp->player);
 		}
 		if (pre != NULL)
 			cur = pre->next;
 		else
 			cur = core->process;
+		if (cur)
+			cur->previous = pre;
 	}
 	check_delta(core);
-	//ft_putendl("Kill_process OUT");
 }
 
 t_errors	call_instructions(t_core *core)
@@ -113,41 +112,28 @@ t_errors	the_game(t_core *core)
 	{
 		if (core->visu && controls(core->graph))
 			return (f1_exit);
-		//ft_printf("Start of the loop: cycles %d\n", cycles);
 		if (core->visu && core->graph->pause)
 			sleep(1);
 		else 
 		{
-			--cycles;
-			if (cycles > 0)
+			if (--cycles > 0)
 			{
 				if ((res = call_instructions(core)) != ok)
 					return (res);
 				proc = core->process;
 			}
 			else
-			{
 				while (cycles <= 0 && proc)
 				{
 					kill_process(core);
-				// ft_printf("Got out of kill_process max_cycle :%d\n", core->max_cycle_to_die);
 					cycles = core->max_cycle_to_die;
 					proc = core->process;
 				}
-			}
-			if (core->dump != 0)
-			{
-				if (--core->dump == 0)
-				{
-					hexdump(core);
-					return (ok) ;
-				}
-			}
 			if (++i == core->sdump)
-			{
-				hexdump(core);
-				i = 0;
-			}
+				i = hexdump(core, 1);
+			if (core->flags & FLAG_DUMP)
+				if (--core->dump == 0)
+					return (hexdump(core, 0));
 		}
 	}
 	int		ch;

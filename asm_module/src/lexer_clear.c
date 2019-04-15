@@ -56,7 +56,7 @@ static t_code			check_empty(t_token *node)
 
 t_code					tokens_clear(t_tokenlst *lst)
 {
-	clear_labelchar(lst);
 	clear_dirchar(lst);
+	clear_labelchar(lst);
 	return (check_empty(lst->start));
 }
