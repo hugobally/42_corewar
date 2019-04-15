@@ -104,6 +104,7 @@ typedef struct			s_core
 	unsigned int		max_checks;
 	unsigned int		nbr_live;
 	t_bool				visu;
+	uint32_t			sdump;
 }             			t_core;
 
 
