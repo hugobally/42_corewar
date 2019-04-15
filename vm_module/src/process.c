@@ -37,7 +37,7 @@ t_errors	nb_player_spec(t_core *core, t_player *new)
 	t_player *player;
 
 	player = core->players;
-	nb = core->next_player;
+	nb = -core->next_player;
 
 	while (player != NULL)
 	{
@@ -46,7 +46,7 @@ t_errors	nb_player_spec(t_core *core, t_player *new)
 		player = player->next;
 	}
 	core->next_player = 0;
-	new->p = nb;
+	new->p = -nb;
 	return (ok);
 }
 
@@ -56,7 +56,7 @@ t_errors	nb_player(t_core *core, t_player *new)
 	t_player *start;
 	t_player *player;
 
-	nb = 1;
+	nb = -1;
 	player = core->players;
 	start = player;
 	if (core->next_player)
@@ -65,7 +65,7 @@ t_errors	nb_player(t_core *core, t_player *new)
 	{
 		if (player->p == nb)
 		{
-			nb++;
+			nb--;
 			player = start;
 		}
 		player = player->next;
