@@ -40,6 +40,8 @@ void		find_registers(t_token *token);
 void		find_num(t_token *token);
 void		find_commands(t_token *token);
 t_op		*find_op(char *string);
+void		tokens_foreach(t_tokenlst *lst, void (*action)(t_token*));
+t_code		tokens_clear(t_tokenlst *lst);
 
 /*
 ** Parser

@@ -7,42 +7,6 @@
 **				  - Remove '%' and ':' tokens (no need for them anymore)
 */
 
-static void			tokens_clear_lab_char(t_tokenlst *lst)
-{
-	t_token			*node;
-	t_token			*next;
-
-	node = lst->start;
-	while (node)
-	{
-		next = node->next;
-		if (node->type == char_label)
-			token_del(node, lst);
-		node = next;
-	}
-}
-
-static void			tokens_clear_dir_char(t_tokenlst *lst)
-{
-	t_token			*node;
-	t_token			*next;
-
-	node = lst->start;
-	while (node)
-	{
-		next = node->next;
-		if (node->type == char_dir)
-		{
-			if ((node->pad & PAD_RIGHT) || !node->next
-					|| (node->next->type != dir_num
-						&& node->next->type != char_label))
-				error_handler(dir_badformat, node, 0);
-			token_del(node, lst);
-		}
-		node = next;
-	}
-}
-
 void				tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 {
 	t_token			*node;
@@ -62,10 +26,8 @@ t_code				lexer(t_tokenlst *lst, t_file *file)
 	tokens_foreach(lst, &find_registers);
 	tokens_foreach(lst, &find_commands);
 	tokens_foreach(lst, &find_num);
-	tokens_clear_dir_char(lst);
-	tokens_clear_lab_char(lst);
-	if (!lst->start)
-		return (error_handler(no_instructions, 0, 0));
+	if (tokens_clear(lst) == error)
+		return (error);
 	else
 		return (syntax(lst, file));
 }

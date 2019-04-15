@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/11 18:47:33 by hbally           ###   ########.fr        #
+#    Updated: 2019/04/15 15:18:00 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS_RAW			:=	main.c						\
 						lexer_labels.c				\
 						lexer_instructions.c		\
 						lexer_values.c				\
+						lexer_clear.c				\
 						error_handler.c				\
 						error_print.c				\
 						syntax.c					\
