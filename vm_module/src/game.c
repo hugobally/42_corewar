@@ -148,7 +148,7 @@ t_errors	the_game(t_core *core)
 				hexdump(core);
 				i = 0;
 			}
-		//}
+		}
 	}
 	int		ch;
 	find_winner(core);
