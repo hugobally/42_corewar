@@ -81,6 +81,8 @@ int		main(int ac, char **av)
 			leave(&core, ret);
 		make_win(&core);
 	}
+	else
+		core.graph = NULL;
 	ret = the_game(&core);
 	leave(&core, ret);
 	return (0);

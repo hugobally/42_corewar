@@ -22,12 +22,12 @@ void		kill_process(t_core *core)
 
 	pre = NULL;
 	cur = core->process;
-	ft_putendl("Kill_process IN");
 	while (cur != NULL)
+	//ft_putendl("Kill_process IN");
 	{
 		if (cur->is_alive == false)
 		{
-			ft_printf("killed, %d\n", cur->player);
+			//ft_printf("killed, %d\n", tmp->player);
 			if (pre)
 				pre->next = cur->next;
 			else
@@ -37,9 +37,9 @@ void		kill_process(t_core *core)
 		}
 		else
 		{
-			ft_printf("not killed, %d\n", cur->player);
 			cur->is_alive = false;
 			pre = cur;
+			//ft_printf("not killed, %d\n", tmp->player);
 		}
 		if (pre != NULL)
 			cur = pre->next;
@@ -47,7 +47,7 @@ void		kill_process(t_core *core)
 			cur = core->process;
 	}
 	check_delta(core);
-	ft_putendl("Kill_process OUT");
+	//ft_putendl("Kill_process OUT");
 }
 
 t_errors	call_instructions(t_core *core)
@@ -55,7 +55,7 @@ t_errors	call_instructions(t_core *core)
 	t_process	*tmp;
 	t_errors	res;
 
-	ft_printf("call_instruction IN\n");
+	//ft_printf("call_instruction IN\n");
 	tmp = core->process;
 	while (tmp != NULL)
 	{
@@ -69,7 +69,7 @@ t_errors	call_instructions(t_core *core)
 				return (res);
 		tmp = tmp->next;
 	}
-	ft_printf("call_instruction OUT\n");
+	//ft_printf("call_instruction OUT\n");
 	return (ok);
 }
 
@@ -111,7 +111,7 @@ t_errors	the_game(t_core *core)
 	{
 		//if (controls(core->graph))
 		//	return (f1_exit);
-		ft_printf("Start of the loop: cycles %d, nbr process :%d\n", cycles, ft_count_process(proc));
+		//ft_printf("Start of the loop: cycles %d\n", cycles);
 		//if (!core->graph->pause)
 		//{
 			--cycles;
@@ -141,6 +141,10 @@ t_errors	the_game(t_core *core)
 			}
 		//}
 	}
+//	int		ch;
 	find_winner(core);
+//	while((ch = getch()) != KEY_F(1))
+//	{
+//	}
 	return (ok);
 }
