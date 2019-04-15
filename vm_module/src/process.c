@@ -56,7 +56,7 @@ t_errors	nb_player(t_core *core, t_player *new)
 	t_player *start;
 	t_player *player;
 
-	nb = 0;
+	nb = 1;
 	player = core->players;
 	start = player;
 	if (core->next_player)

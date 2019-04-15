@@ -50,6 +50,8 @@ t_errors	ft_right_nb(char *s, t_core *core, int flag)
 		core->dump = nb;
 	if (flag == 1)
 		core->next_player = nb;
+	if (flag == 2)
+		core->sdump = nb;
 	return (ok);
 }
 
@@ -65,6 +67,11 @@ t_errors	check_option(t_core *core, char **av, int *i, int ac)
 	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-dump"))
 	{
 		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
+			return (badarg);
+	}
+	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-sdump"))
+	{
+		if ((ret = ft_right_nb(av[++*i], core, 2)) != ok)
 			return (badarg);
 	}
 	else if (!ft_strcmp(av[*i], "-v"))

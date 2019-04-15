@@ -1,4 +1,5 @@
 #include "corewar.h"
+#include "unistd.h"
 
 void	printx(unsigned char c)
 {
@@ -19,11 +20,16 @@ void	hexdump(t_core *core)
 	while (i < MEM_SIZE)
 	{
 		col = -1;
-		while (++col < 32)
+		if (i == 0)
+			ft_putstr("0x");
+		ft_printf("%#.4x : ", i);
+		while (++col < 64)
 		{
 			printx(core->arena[i++]);
 			ft_putchar(' ');
 		}
 		ft_putchar('\n');
 	}
+	while (!read(1, NULL, 1))
+		;
 }
