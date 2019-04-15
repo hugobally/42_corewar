@@ -54,7 +54,7 @@ t_errors		ft_store(t_core *core, t_process *process)
 	if (p2 == REG)
 		process->regs[params.p2 - 1] = (int)process->regs[params.p1 - 1];
 	else if (p2 == IND)
-		write_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4, process->regs[params.p1 - 1]);
+		write_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4, process->regs[params.p1 - 1], process->player);
 	//ft_printf("ft_store OUT\n");
 	return (ok);
 }

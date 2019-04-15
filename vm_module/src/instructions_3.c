@@ -73,23 +73,23 @@ t_errors			ft_sti(t_core *core, t_process *process)
 	if (p2 == REG)
 	{
 		if (p3 == REG)
-			write_val(core, get_pc(process->pc + (process->regs[params.p2 - 1] + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1]);
+			write_val(core, get_pc(process->pc + (process->regs[params.p2 - 1] + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1], process->player);
 		if (p3 == DIR)
-			write_val(core, get_pc(process->pc + (process->regs[params.p2 - 1] + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
+			write_val(core, get_pc(process->pc + (process->regs[params.p2 - 1] + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1], process->player);
 	}
 	if (p2 == DIR)
 	{
 		if (p3 == REG)
-			write_val(core, get_pc(process->pc + (params.p2 + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1]);
+			write_val(core, get_pc(process->pc + (params.p2 + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1], process->player);
 		if (p3 == DIR)
-			write_val(core, get_pc(process->pc + (params.p2 + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
+			write_val(core, get_pc(process->pc + (params.p2 + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1], process->player);
 	}
 	if (p2 == IND)
 	{
 		if (p3 == REG)
-			write_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1]);
+			write_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + process->regs[params.p3 - 1]) % IDX_MOD), 4, process->regs[params.p1 - 1], process->player);
 		if (p3 == DIR)
-			write_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1]);
+			write_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4) + params.p3) % IDX_MOD), 4, process->regs[params.p1 - 1], process->player);
 	}
 	//ft_printf("ft_sti OUT by %d\n", process->regs[0]);
 	return (ok);
