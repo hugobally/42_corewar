@@ -1,7 +1,7 @@
 #include "corewar.h"
 #include "graph.h"
 #include <stdlib.h>
-
+#include <unistd.h>
 void		check_delta(t_core *core)
 {
 	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)
@@ -109,11 +109,13 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-		//if (controls(core->graph))
-		//	return (f1_exit);
+		if (core->visu && controls(core->graph))
+			return (f1_exit);
 		//ft_printf("Start of the loop: cycles %d\n", cycles);
-		//if (!core->graph->pause)
-		//{
+		if (core->visu && core->graph->pause)
+			usleep(10000);
+		else 
+		{
 			--cycles;
 			if (cycles > 0)
 			{
@@ -139,12 +141,12 @@ t_errors	the_game(t_core *core)
 					return (ok) ;
 				}
 			}
-		//}
+		}
 	}
-//	int		ch;
+	int		ch;
 	find_winner(core);
-//	while((ch = getch()) != KEY_F(1))
-//	{
-//	}
+	while(core->visu && (ch = getch()) != KEY_F(1))
+	{
+	}
 	return (ok);
 }
