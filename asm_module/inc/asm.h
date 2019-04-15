@@ -51,6 +51,7 @@ t_code		build_label_tab(t_tokenlst *lst, t_label **label_tab);
 t_label		*label_tab_fetch(t_token *token, t_label **label_tab);
 t_code		syntax_prog(t_tokenlst *lst, t_label **label_tab, header_t *header);
 t_token		*skip_eol(t_token *node);
+t_token		*find_before(t_token *start, t_toktype type);
 
 /*
 ** Output
