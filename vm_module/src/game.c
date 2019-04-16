@@ -55,6 +55,7 @@ t_errors	call_instructions(t_core *core)
 	tmp = core->process;
 	while (tmp != NULL)
 	{
+		//ft_printf("remaining_cycles %d\n", tmp->remaining_cycles);
 		if (tmp->remaining_cycles != 0)
 		{
 			--tmp->remaining_cycles;

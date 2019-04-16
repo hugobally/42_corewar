@@ -11,7 +11,7 @@ static void		get_opcode(t_core *core, t_process *p)
 	if (opcode > 0 && opcode <= ((sizeof(g_op_tab) / sizeof(t_op)) - 1))
 	{
 		p->instruction = opcode;
-		p->remaining_cycles = g_op_tab[p->instruction - 1].cycles;
+		p->remaining_cycles = g_op_tab[p->instruction - 1].cycles - 2;
 	}
 	else
 		p->instruction = 0;
