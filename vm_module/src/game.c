@@ -112,10 +112,15 @@ t_errors	the_game(t_core *core)
 			print_process(core->graph, core->process);
 			if (controls(core->graph))
 				return (f1_exit);
-			usleep(10000);
+			if (!core->graph->pause)
+			{
+				core->graph->nb_cycle++;
+				print_infos(core->graph, core, cycles);
+			}
 		}
 		if (core->visu && core->graph->pause)
-		{}
+		{
+		}
 		else 
 		{
 			if (--cycles > 0)
