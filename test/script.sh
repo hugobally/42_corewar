@@ -17,6 +17,7 @@ RESET="\033[0m"
 # STARTUP #
 
 make -C ..
+mkdir -p champs/cor
 cp ../corewar .
 cp ../asm .
 
