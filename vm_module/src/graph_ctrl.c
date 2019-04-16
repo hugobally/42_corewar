@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:05:07 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/15 18:15:24 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/16 12:03:08 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,15 @@ int		controls(t_graph *g)
 		up_laps(g);
 	else if (ch == ' ')
 		pause(g);
-	else if (ch == 'n')
+	else if (ch == 'n' && g->selected_proc->previous)
 	{
-		if (g->selected_proc->previous)
 			g->selected_proc = g->selected_proc->previous;
+			print_registers(g);
 	}
-	else if (ch == 'm')
+	else if (ch == 'm' && g->selected_proc->next)
 	{
-		if (g->selected_proc->next)
 			g->selected_proc = g->selected_proc->next;
+			print_registers(g);
 	}
 	return (0);
 }

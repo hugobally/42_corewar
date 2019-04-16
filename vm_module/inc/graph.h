@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/16 11:41:24 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/16 12:03:37 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void				free_graph(t_graph *g);
 void				create_champions_win(t_graph *g, t_player *p);
 void				print_champions(t_graph *g, t_player *p);
 
+void				print_registers(t_graph *g);
 void				create_registers_win(t_graph *g);
 
 void				print_process(t_graph *g, t_process *p);
