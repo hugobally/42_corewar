@@ -52,8 +52,8 @@ t_errors				ft_lfork(t_core *core, t_process *process)
 		return (falloc);
 	ft_memcpy(new_process, process, sizeof(t_process));
 	new_process->pc = get_pc(new_process->pc + params.p1);
+	new_process->loading = 0;
 	push_process(core, new_process);
-	read_instruction(core, new_process, 0);
 	//ft_printf("lfork OUT by %d\n", process->regs[0]);
 	return (ok);
 }

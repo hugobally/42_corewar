@@ -2,31 +2,48 @@
 #include "corewar.h"
 #include "graph.h"
 
-t_errors		ft_instructions(t_core *core, t_process *process)
+static void		get_opcode(t_core *core, t_process *p)
 {
-	int op;
-	t_errors res;
-	t_op *tab;
+	uint32_t		opcode;
 
-	if (process->remaining_cycles != 0)
-		return (0);
-	if (core->loop != 0)
-		read_instruction(core, process, 1);
-	if ((op = process->instruction) && (op <= 0 || op > 16))
-		op = 0;
-	if ((res = g_op_inst_tab[op](core, process)) != ok)
-		return (res);
-	if ((op != zjmp) || (op == zjmp && process->carry == false))
+	p->opsize = 1;
+	opcode = (uint32_t)core->arena[get_pc(p->pc)];
+	if (opcode > 0 && opcode <= ((sizeof(g_op_tab) / sizeof(t_op)) - 1))
+	{
+		p->instruction = opcode;
+		p->remaining_cycles = g_op_tab[p->instruction - 1].cycles;
+	}
+	else
+		p->instruction = 0;
+}
+
+t_errors		ft_instructions(t_core *core, t_process *p)
+{
+	t_errors 	res;
+	
+	if (p->loading == 0)
+	{
+		get_opcode(core, p);
+		if (p->instruction)
+		{
+			p->loading = 1;
+			return (ok);
+		}
+	}
+	else
+	{
+		store_parameters(core, p);
+		if ((res = g_op_inst_tab[p->instruction](core, p)) != ok)
+			return (res);
+		p->loading = 0;
+		//set instruction et params a 0
+	}
+	if ((p->instruction != zjmp)
+			|| (p->instruction == zjmp && p->carry == false))
 	{
 		if (core->visu)
-			move_proccess_on_arena(process->pc, get_pc(process->pc + process->opsize), core->graph);
-		process->pc = get_pc(process->pc += process->opsize);
-	}
-	read_instruction(core, process, 1);
-	if (process->instruction != 0)
-	{
-		tab = &(g_op_tab[process->instruction - 1]);
-		process->remaining_cycles = tab->cycles;
+			move_proccess_on_arena(p->pc, get_pc(p->pc + p->opsize), core->graph);
+		p->pc = get_pc(p->pc += p->opsize);
 	}
 	return (ok);
 }

@@ -1,7 +1,5 @@
 #include "corewar.h"
 #include "graph.h"
-#include "libft.h" //DEBUG
-#include <stdlib.h> //DEBUG
 
 void				write_val(t_core *core, uint32_t pc, uint32_t size,
 								int32_t val, int player)
@@ -78,19 +76,18 @@ static uint8_t			fake_bytecode(uint8_t code)
 		return (0xFF);
 }
 
-static void				store_parameters(t_core *core, t_process *p)
+void				store_parameters(t_core *core, t_process *p)
 {
 	uint8_t			index;
 	t_op			*op;
 
+	ft_bzero(&(p->params), sizeof(t_params));
 	op = &(g_op_tab[p->instruction - 1]);
-	//ft_printf("op name is '%s'\n", op->name);
 	if (op->has_ocp)
 	{
 		p->params.bytecode = core->arena[get_pc(p->pc + p->opsize)];
 		p->opsize++;
 	}
-	//ft_printf("bytecode is %#x\n", p->params.bytecode);
 	index = 0;
 	while (index < op->param_num)
 	{
@@ -99,25 +96,4 @@ static void				store_parameters(t_core *core, t_process *p)
 		add_parameter(core, p, op, index);
 		index++;
 	}
-	//ft_printf("params : %d -- %d -- %d\n", p->params.p1, p->params.p2, p->params.p3);
-	//ft_printf("opcode is %d\n", p->instruction);
-}
-
-void				read_instruction(t_core *core, t_process *p, int flag)
-{
-	ft_bzero(&(p->params), sizeof(t_params));
-	p->opsize = 1;
-	//ft_printf("--- READ INSTRUCTION ---\n");
-	if (core->arena[get_pc(p->pc)] && (core->arena[get_pc(p->pc)]
-			<= (sizeof(g_op_tab) / sizeof(t_op)) - 1))
-	{
-		p->instruction = core->arena[get_pc(p->pc)];
-		if (flag == 1)
-			store_parameters(core, p);
-	}
-	else
-		p->instruction = 0;
-	//ft_printf("PC points to %p, value : %#x\n", &(core->arena[get_pc(p->pc + p->opsize)]), core->arena[get_pc(p->pc + p->opsize)]);
-	//ft_printf("--- END READ INSTRUCTION ---\n");
-	//exit(0);
 }
