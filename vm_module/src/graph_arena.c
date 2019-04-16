@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/15 19:19:26 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/16 12:03:16 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	add_procces_to_arena(int addr, t_graph *g)
 
 	get_col_row(addr, &col, &row);
 	c = (mvwinch(g->arena_win, row, col) & A_COLOR) / 256;
-	if (g->selected_proc->pc == (unsigned)addr)
-		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, PS, NULL);
-	else if (c == EMPTY)
+	//if (g->selected_proc->pc == (unsigned)addr)
+	//	mvwchgat(g->arena_win, row, col, 2, A_NORMAL, PS, NULL);
+	if (c == EMPTY)
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, P, NULL);
 	else
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c + 4, NULL);
@@ -55,9 +55,9 @@ void	remove_procces_to_arena(int addr, t_graph *g)
 
 	get_col_row(addr, &col, &row);
 	c = (mvwinch(g->arena_win, row, col) & A_COLOR) / 256;
-	if (g->selected_proc->pc == (unsigned)addr)
-		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, g->selected_proc->player + PLAYER_DIFF, NULL);
-	else if (c == P)
+	//if (g->selected_proc->pc == (unsigned)addr)
+	//	mvwchgat(g->arena_win, row, col, 2, A_NORMAL, g->selected_proc->player + PLAYER_DIFF, NULL);
+	if (c == P)
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, EMPTY, NULL);
 	else
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c - 4, NULL);
