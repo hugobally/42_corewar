@@ -19,6 +19,7 @@ t_errors	make_arena(t_core *core)
 	while (pl)
 	{
 		add_process(pl, core, cur);
+		core->last_live_done_by = pl->p;
 		if ((ret = make_process(core, cur, pl)) != ok)
 			return (ret);
 		pl = pl->next;
