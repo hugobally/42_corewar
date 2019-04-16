@@ -71,6 +71,7 @@ int		main(int ac, char **av)
 	ft_bzero(&core, sizeof(t_core));
 	if ((ret = get_arguments(&core, ac, av)) != ok)
 		leave(&core, ret);
+	introduction(core.players);
 	if ((ret = make_arena(&core)) != ok)
 		leave(&core, ret);
 	if (core.visu)

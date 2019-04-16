@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/10 14:22:38 by tlesven          ###   ########.fr        #
+#    Updated: 2019/04/16 10:51:21 by rle-ru           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME				=	../corewar
 # Raw Sources
 
 SRCS_RAW			:=	main.c							\
+						introduction.c					\
 						arguments.c						\
 						players.c						\
 						arena.c							\

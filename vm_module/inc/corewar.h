@@ -184,5 +184,6 @@ int32_t					read_val(t_core *core, uint32_t pc, uint32_t size);
 int						get_pc(uint32_t i);
 
 int						hexdump(t_core *core, int flag);
+void					introduction(t_player *player);
 
 #endif

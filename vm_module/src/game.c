@@ -77,7 +77,7 @@ void		find_winner(t_core *core)
 	while (tmp && tmp->p != core->last_live_done_by)
 		tmp = tmp->next;
 	if (tmp && core->winner)
-		ft_printf("The magnificent winner is %s\n", tmp->head.prog_name);
+		ft_printf("Contestant %d, \"%s\", has won !\n", -tmp->p, tmp->head.prog_name);
 	else
 		ft_printf("No one has won\n");
 }
