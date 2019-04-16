@@ -57,3 +57,6 @@ asm
 obj
 *.cor
 *.sw*
+
+#dossier test
+exchamps/
