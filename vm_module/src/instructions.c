@@ -12,7 +12,7 @@ t_errors 		ft_live(t_core *core, t_process *process)
 	process->is_alive = true;
 	while (tmp && tmp->p != params.p1)
 		tmp = tmp->next;
-	if (tmp->p == params.p1)
+	if (tmp && tmp->p == params.p1)
 		core->last_live_done_by = params.p1;
 	core->nbr_live++;
 	core->winner = 1;
