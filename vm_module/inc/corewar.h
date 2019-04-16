@@ -68,6 +68,7 @@ typedef struct			s_process
 	unsigned int		pc;
 	t_bool				carry;
 	unsigned int		instruction;
+	uint8_t				loading;
 	int					player;
 	int					opsize;
 	t_params			params;
@@ -152,6 +153,7 @@ t_errors				the_game(t_core *core);
 */
 
 t_errors				ft_instructions(t_core *core, t_process *process);
+void					store_parameters(t_core *core, t_process *p);
 int						ft_type_param(unsigned char bytecode, int p);
 t_errors				ft_error(t_core *core, t_process *process);
 t_errors				ft_live(t_core *core, t_process *process);
