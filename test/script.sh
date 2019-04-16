@@ -69,11 +69,12 @@ done
 
 echo ""
 printf $WHT
-read -e -p "Champion 1 : " C1
-read -e -p "Champion 2 : " C2
-read -e -p "Champion 3 : " C3
-read -e -p "Champion 4 : " C4
-read -e -p "Run for X cycles : " NUM_CYCLES
+read -e -p "Champion 1            : " C1
+read -e -p "Champion 2            : " C2
+read -e -p "Champion 3            : " C3
+read -e -p "Champion 4            : " C4
+read -e -p "Start at cycle        : " START_CYCLE
+read -e -p "Cycles [empty = inf.] : " NUM_CYCLES
 printf $RESET
 
 for file in *; do
@@ -103,10 +104,31 @@ fi
 
 MY_CMD=$(echo $REF_CMD | sed "s/corewar_ref -d/corewar -dump/")
 
-for ((i = 1 ; i <= $NUM_CYCLES ; i++)); do
-	echo "Cycle $i"
-	MY_CMD_TMP=$(echo $MY_CMD | sed "s/CYCLE/$i/")
-	REF_CMD_TMP=$(echo $REF_CMD | sed "s/CYCLE/$i/")
-	echo $MY_CMD_TMP
-	diff -s <($REF_CMD_TMP) <($MY_CMD_TMP)
+if [[ ! ${#NUM_CYCLES} -ge 1 ]]; then
+	NUM_CYCLES=2000000000
+fi
+
+if [[ ! ${#START_CYCLE} -ge 1 ]]; then
+	START_CYCLE=1
+fi
+
+i=0
+
+while [[ $i -le $NUM_CYCLES ]]; do
+	CURRENT_CYCLE=$(($START_CYCLE + $i))
+	echo "Cycle $CURRENT_CYCLE"
+	REF_OUT=$(echo $REF_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
+	MY_OUT=$(echo $MY_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
+	printf $RED
+	if ! diff -q <($REF_OUT) <($MY_OUT) &>/dev/null; then
+		diff <($REF_OUT) <($MY_OUT) &> diff.out
+		echo "Diff at cycle $CURRENT_CYCLE -- Logged to diff.out"
+		exit
+	fi
+	printf $BLU
+	if $REF_OUT | grep "won"; then
+		exit
+	fi
+	printf $RESET
+	i=$(($i + 1))
 done
