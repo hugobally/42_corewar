@@ -96,6 +96,21 @@ int			ft_count_process(t_process *process)
 	return (i);
 }
 
+int		visu_control(t_core *c, int cycles)
+{
+	if (!c->visu)
+		return (0);
+	print_process(c->graph, c->process);
+	if (controls(c->graph))
+		return (f1_exit);
+	if (!c->graph->pause)
+	{
+		c->graph->nb_cycle++;
+		print_infos(c->graph, c, cycles);
+	}
+	return (0);
+}
+
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
@@ -109,15 +124,11 @@ t_errors	the_game(t_core *core)
 	while (proc)
 	{
 		//ft_printf("Cycle %d\n", core->loop);
-		if (core->visu)
-		{
-			print_process(core->graph, core->process);
-			if (controls(core->graph))
-				return (f1_exit);
-			usleep(10000);
-		}
+		if (visu_control(core, cycles))
+			return (f1_exit);
 		if (core->visu && core->graph->pause)
-		{}
+		{
+		}
 		else 
 		{
 			if (--cycles > 0)
@@ -138,8 +149,8 @@ t_errors	the_game(t_core *core)
 			if (core->flags & FLAG_DUMP)
 				if (--core->dump == 0)
 					return (hexdump(core, 0));
-		}
 		core->loop++;
+		}
 	}
 	int		ch;
 	find_winner(core);

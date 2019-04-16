@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:03:13 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/10 17:00:08 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/16 15:20:14 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_infos(t_graph *g, t_core *c, int cycle_mod)
 {
-	mvwprintw(g->info_win, 1, 2, "%-25s%15d", "CYCLE:", g->nb_cycle);
+	mvwprintw(g->info_win, 1, 2, "%-25s%15d", "CYCLE:", c->loop);
 	mvwprintw(g->info_win, 2, 2, "%-25s%15d", "CYCLE_MOD:", cycle_mod);
 	mvwprintw(g->info_win, 3, 2, "%-25s%15d", "CYCLE_TO_DIE:", c->max_cycle_to_die);
 	wrefresh(g->info_win);

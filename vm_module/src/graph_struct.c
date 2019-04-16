@@ -21,7 +21,6 @@ t_graph		*init_graph(void)
 	g->fps = 32;
 	g->laps = 1;
 	g->pause = 1;
-	g->nb_cycle = 0;
 	g->selected_proc = NULL;
 	return (g);
 }
