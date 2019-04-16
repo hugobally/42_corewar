@@ -109,7 +109,7 @@ t_errors			ft_fork(t_core *core, t_process *process)
 	ft_memcpy(new_process, process, sizeof(t_process));
 	new_process->pc = get_pc(new_process->pc + (params.p1 % IDX_MOD));
 	push_process(core, new_process);
-	read_instruction(core, new_process);
+	read_instruction(core, new_process, 0);
 	//ft_printf("fork OUT by %d\n", process->regs[0]);
 	return (ok);
 }

@@ -107,6 +107,7 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
+		//ft_printf("Cycle %d\n", core->loop);
 		if (core->visu)
 		{
 			print_process(core->graph, core->process);
@@ -142,6 +143,7 @@ t_errors	the_game(t_core *core)
 				if (--core->dump == 0)
 					return (hexdump(core, 0));
 		}
+		core->loop++;
 	}
 	int		ch;
 	find_winner(core);

@@ -103,7 +103,7 @@ static void				store_parameters(t_core *core, t_process *p)
 	//ft_printf("opcode is %d\n", p->instruction);
 }
 
-void				read_instruction(t_core *core, t_process *p)
+void				read_instruction(t_core *core, t_process *p, int flag)
 {
 	ft_bzero(&(p->params), sizeof(t_params));
 	p->opsize = 1;
@@ -112,7 +112,8 @@ void				read_instruction(t_core *core, t_process *p)
 			<= (sizeof(g_op_tab) / sizeof(t_op)) - 1))
 	{
 		p->instruction = core->arena[get_pc(p->pc)];
-		store_parameters(core, p);
+		if (flag == 1)
+			store_parameters(core, p);
 	}
 	else
 		p->instruction = 0;
