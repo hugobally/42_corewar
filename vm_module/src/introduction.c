@@ -2,6 +2,7 @@
 
 void	introduction(t_player *player)
 {
+	ft_putendl("Introducing contestants...");
 	while (player)
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", -player->p,
