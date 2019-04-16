@@ -148,8 +148,8 @@ t_errors	the_game(t_core *core)
 			if (core->flags & FLAG_DUMP)
 				if (--core->dump == 0)
 					return (hexdump(core, 0));
-		}
 		core->loop++;
+		}
 	}
 	int		ch;
 	find_winner(core);
