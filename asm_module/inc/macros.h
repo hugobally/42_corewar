@@ -6,6 +6,7 @@
 
 # define QUOTE_CHAR 			'"'
 # define EOL_CHAR 				'\n'
+# define COMMENT_CHAR_2			';'
 
 /*
 ** Allowed characters in numerical value

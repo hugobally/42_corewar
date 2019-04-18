@@ -14,46 +14,39 @@
 
 typedef enum		e_errors
 {
-	open_error = -3,
-	read_linesize = -2,//no token, critical -- one line is > than max line size
-	read_crash = -1,//no token, critical
-	malloc = 0,//no token, critical
+	read_linesize = -2,
+	read_crash = -1,
+	malloc,
+	open_error,
 	bad_filename,
 	write_crash,
-	filesize, //no token, critical -- more than max_token tokens
+	filesize,
 	no_instructions,
-	header_missing,//name/comment not at top
+	header_missing,
 	output_max_size,
-
 	scanner_error,
-
-	label_badchar,//forbidden chars
-	label_badformat,//example : 'label : (...)' '%: label'
-	out_of_range, //> max int 
-	dir_badformat, //example : '  % 50  ' ' % ' ' % :label'
-	reg_badvalue,//r100, rBLA, etc
-	cmd_unknown,//.toto
-	unknown_token,//djsafkashf
-
+	label_badchar,
+	label_badformat,
+	out_of_range,
+	dir_badformat,
+	reg_badvalue,
+	cmd_unknown,
+	unknown_token,
 	lexer_error,
-	
-	header_noquote,//missing quote after cmd
-	header_badquote,//unterminated or empty quote
+	header_noquote,
+	header_badquote,
 	header_namesize,
 	header_commentsize,
-	header_duplicate,//.name (...) .name
-	
+	header_duplicate,
 	expected_eol,
 	expected_opcode,
-	label_duplicate, //same label appears more than once
-	label_no_match, //:label1 but label1 not found in file
-	param_invalid,//wrong parameter for instruction
-
+	label_duplicate,
+	label_no_match,
+	param_invalid,
 	parser_error,
 	warning,
-	bytesize, //champion too big
-	//special codes
-	query, // query error_handler to see if errors have occured
+	bytesize,
+	query,
 	no_error
 }					t_errors;
 
