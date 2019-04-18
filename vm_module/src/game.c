@@ -18,6 +18,7 @@ void		check_delta(t_core *core)
 
 void		kill_process(t_core *core, t_process *pre, t_process *cur)
 {
+	//ft_printf("kill process IN\n");
 	while (cur != NULL)
 	{
 		if (cur->is_alive == false)
@@ -131,23 +132,21 @@ t_errors	the_game(t_core *core)
 		}
 		else 
 		{
-			if (--cycles > 0)
-			{
-				if ((res = call_instructions(core)) != ok)
+			//ft_printf("else cycles:%d\n", cycles);
+			--cycles;
+			if ((res = call_instructions(core)) != ok)
 					return (res);
+			proc = core->process;
+			while (cycles <= 0 && proc)
+			{
+				kill_process(core, NULL, core->process);
+				cycles = core->max_cycle_to_die;
 				proc = core->process;
 			}
-			else
-				while (cycles <= 0 && proc)
-				{
-					kill_process(core, NULL, core->process);
-					cycles = core->max_cycle_to_die;
-					proc = core->process;
-				}
 			if (++i == core->sdump)
 				i = hexdump(core, 1);
 			if (core->flags & FLAG_DUMP)
-				if (--core->dump == 0)
+				if (--core->dump == 0 && proc)
 					return (hexdump(core, 0));
 		core->loop++;
 		}
