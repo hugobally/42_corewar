@@ -2,40 +2,26 @@
 
 t_errors				ft_lldi(t_core *core, t_process *process)
 {
-	t_params 	params;
-	int 		p1;
-	int 		p2;
-	int			p3;
-	int 		ret;
+	int			p1;
+	int			p2;
+	int			pa[3];
 
-	//ft_printf("lldi IN by %d\n", process->regs[0]);
-	params = process->params;
-	//ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+	p1 = 0;
+	p2 = 0;
+	ft_bzero(pa, sizeof(int) * 3);
+	if (ft_reg(process, &pa[0], &pa[1], &pa[2]) != ok)
 		return (ok);
-	if (p1 == REG)
-	{
-		if (p2 == REG)
-			process->regs[params.p3 - 1] = read_val(core, get_pc(process->regs[params.p1 - 1] + process->regs[params.p2 - 1]), 4);
-		if (p2 == DIR)
-			process->regs[params.p3 - 1] = read_val(core, get_pc(process->regs[params.p1 - 1] + params.p2), 4);
-	}
-	if (p1 == DIR)
-	{
-		if (p2 == REG)
-			process->regs[params.p3 - 1] = read_val(core, get_pc(params.p1 + process->regs[params.p2 - 1]), 4);
-		if (p2 == DIR)
-			process->regs[params.p3 - 1] = read_val(core, get_pc(params.p1 + params.p2), 4);
-	}
-	if (p1 == IND)
-	{
-		if (p2 == REG)
-			process->regs[params.p3 - 1] = read_val(core, get_pc(read_val(core, get_pc(process->pc + params.p1), 4) + process->regs[params.p2 - 1]), 4);
-		if (p2 == DIR)
-			process->regs[params.p3 - 1] = read_val(core, get_pc(read_val(core, get_pc(process->pc + params.p1), 4) + params.p2), 4);
-	}
-	ft_carry(process, process->regs[params.p3 - 1]);
-	//ft_printf("lldi OUT by %d\n", process->regs[0]);
+	if (pa[0] == REG)
+		p1 = process->regs[process->params.p1 - 1];
+	else if (pa[0] == DIR)
+		p1 = process->params.p1;
+	else if (pa[0] == IND)
+		p1 = read_val(core, get_pc(process->pc + process->params.p1), 4);
+	if (pa[1] == REG)
+		p2 = process->regs[process->params.p2 - 1];
+	else if (pa[1] == DIR)
+		p2 = process->params.p2;
+	process->regs[process->params.p3 - 1] = read_val(core, get_pc(p1 + p2), 4);
 	return (ok);
 }
 
