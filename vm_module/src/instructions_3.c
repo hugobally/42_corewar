@@ -35,9 +35,9 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 	if (ft_reg(process, &pa[0], &pa[1], &pa[2]) != ok)
 		return (ok);
 	if (pa[0] == REG)
-		p1 = read_val(core, get_pc(process->pc + (process->regs[params.p1 - 1] % IDX_MOD)), 4);
+		p1 = read_val(core, get_pc(process->pc + (process->regs[params.p1 - 1] % IDX_MOD)), REG_SIZE);
 	else if (pa[0] == DIR)
-		p1 = read_val(core, get_pc(process->pc + (params.p1 % IDX_MOD)), 4);
+		p1 = read_val(core, get_pc(process->pc + (params.p1 % IDX_MOD)), REG_SIZE);
 	else if (pa[0] == IND)
 		p1 = read_val(core, get_pc(process->pc + (read_val(core,
 			get_pc(process->pc + (params.p1 % IDX_MOD)), 4)) % IDX_MOD), 4);
@@ -45,44 +45,8 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 		p2 = process->regs[params.p2 - 1];
 	else if (pa[1] == DIR)
 		p2 = params.p2;
-	process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + ((p1 + p2) % IDX_MOD)), 4);
-	//ft_printf("ldi OUT by %d\n", process->regs[0]);
+	process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + ((p1 + p2) % IDX_MOD)), REG_SIZE);
 	return (ok);
-
-	// t_params 	params;
-	// int 		p1;
-	// int			p2;
-	// int			p3;
-	// int			ret;
-
-	// //ft_printf("ldi IN by %d\n", process->regs[0]);
-	// params = process->params;
-	// //ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
-	// if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
-	// 	return (ok);
-	// if (p1 == REG)
-	// {
-	// 	if (p2 == REG)
-	// 		process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (process->regs[params.p1 - 1] + process->regs[params.p2 - 1]) % IDX_MOD), 4);
-	// 	if (p2 == DIR)
-	// 		process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (process->regs[params.p1 - 1] + params.p2) % IDX_MOD), 4);
-	// }
-	// if (p1 == DIR)
-	// {
-	// 	if (p2 == REG)
-	// 		process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (params.p1 + process->regs[params.p2 - 1]) % IDX_MOD), 4);
-	// 	if (p2 == DIR)
-	// 		process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (params.p1 + params.p2) % IDX_MOD), 4);
-	// }
-	// if (p1 == IND)
-	// {
-	// 	if (p2 == REG)
-	// 		process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p1 % IDX_MOD), 4) + process->regs[params.p2 - 1]) % IDX_MOD), 4);
-	// 	if (p2 == DIR)
-	// 		process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + (read_val(core, get_pc(process->pc + params.p1 % IDX_MOD), 4) + params.p2) % IDX_MOD), 4);
-	// }
-	// //ft_printf("ldi OUT by %d\n", process->regs[0]);
-	// return (ok);
 }
 
 t_errors			ft_sti(t_core *core, t_process *process)
