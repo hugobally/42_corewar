@@ -3,6 +3,8 @@
 CHAMP_DIR="champs"
 COR_DIR="champs/cor"
 
+LOG_NAME="vm_log.out"
+
 # COLORS #
 
 RED="\033[1;31m"
@@ -24,7 +26,7 @@ cp ../asm .
 # COMPILE CHAMP LIST #
 
 while true; do
-	read -e -p "Recompile Champions ? " yn
+	read -e -p "Compile Champions ? " yn
 	case $yn in
 		[Yy]* )
 			ls -1 $CHAMP_DIR | grep "\.s" | sed -e "s/\.s//g" > tmp
@@ -122,8 +124,26 @@ while [[ $i -le $NUM_CYCLES ]]; do
 	MY_OUT=$(echo $MY_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
 	printf $RED
 	if ! diff -q <($REF_OUT) <($MY_OUT) &>/dev/null; then
-		diff <($REF_OUT) <($MY_OUT) &> vm_test_log.out
-		echo "Diff at cycle $CURRENT_CYCLE -- Logged to vm_test_log.out"
+		diff <($REF_OUT) <($MY_OUT) &> $LOG_NAME
+		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
+		REF_OUT=$(echo $REF_OUT | sed "s/$CURRENT_CYCLE/$(($CURRENT_CYCLE - 1))/")
+		$REF_OUT | grep "0x" | sed "s/^/REF_PREVIOUS :/" >> $LOG_NAME
+		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
+		REF_OUT=$(echo $REF_OUT | sed "s/$(($CURRENT_CYCLE - 1))/$(($CURRENT_CYCLE))/")
+		$REF_OUT | grep "0x" | sed "s/^/REF_CURRENT  :/" >> $LOG_NAME
+		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
+		REF_OUT=$(echo $REF_OUT | sed "s/$(($CURRENT_CYCLE))/$(($CURRENT_CYCLE + 1))/")
+		$REF_OUT | grep "0x" | sed "s/^/REF_NEXT     :/" >> $LOG_NAME
+		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
+		MY_OUT=$(echo $MY_OUT | sed "s/$CURRENT_CYCLE/$(($CURRENT_CYCLE - 1))/")
+		$MY_OUT | grep "0x" | sed "s/^/MY_PREVIOUS  :/" >> $LOG_NAME
+		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
+		MY_OUT=$(echo $MY_OUT | sed "s/$(($CURRENT_CYCLE - 1))/$(($CURRENT_CYCLE))/")
+		$MY_OUT | grep "0x" | sed "s/^/MY_CURRENT   :/" >> $LOG_NAME
+		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
+		MY_OUT=$(echo $MY_OUT | sed "s/$(($CURRENT_CYCLE))/$(($CURRENT_CYCLE + 1))/")
+		$MY_OUT | grep "0x" | sed "s/^/MY_NEXT      :/" >> $LOG_NAME
+		echo "Diff at cycle $CURRENT_CYCLE -- Logged to $LOG_NAME"
 		exit
 	fi
 	printf $BLU
