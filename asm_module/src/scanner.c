@@ -7,17 +7,18 @@
 static t_code			dispatcher(t_line *line, t_tokenlst *lst)
 {
 	uint16_t			j;
-	static t_dispatch	tab[4] = {
+	static t_dispatch	tab[5] = {
 		{char_label, &token_single},
 		{char_dir, &token_single},
 		{char_sep, &token_single},
 		{quote, &token_quote},
+		{0, 0}
 	};
 
 	if (line->is_quote)
 		return (token_quote(quote, line, lst));
 	j = 0;
-	while (j < 4)
+	while (tab[j].handler)
 	{
 		if (line->str[line->index] == (char)(tab[j].type))
 			return (tab[j].handler(tab[j].type, line, lst));

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+OUTPUT_FILE="asm_test_log.out"
 #sed -i '' -e "s/DIR_LAB/%:l1/g" 		test.s
 #sed -i '' -e "s/IND_LAB/:l1/g" 		test.s
 #sed -i '' -e "s/DIR/%1985229328/g" 	test.s 	
@@ -19,23 +20,23 @@ RESET="\033[0m"
 
 # DIFF REF_ASM VS MY_ASM
 
-make -C ../..
-cp ../../asm ../
+make -C ..
+cp ../asm .
 
-rm -f ../champs/*.cor
+rm -f champs/*.cor
 
-for file in ../champs/*; do
+for file in champs/*; do
 	if echo $file | grep "\.s" &>/dev/null; then
 
 		file=$(echo $file | sed "s/\.s//")
 
-		../asm $file.s &> /dev/null
+		./asm $file.s &> /dev/null
 		mine=$(echo $file | sed "s/$/_mine.cor/")
 		if [ -f $file.cor ]; then
 			mv $file.cor $mine
 		fi
 
-		../asm_ref $file.s &> /dev/null
+		./asm_ref $file.s &> /dev/null
 		ref=$(echo $file | sed "s/$/_ref.cor/")
 		if [ -f $file.cor ]; then
 			mv $file.cor $ref
@@ -50,6 +51,11 @@ for file in ../champs/*; do
 		elif ! diff -q $ref $mine &> /dev/null; then
 			printf $RED
 			echo -e "$(echo $file.s | awk -F/ '{print $NF}') : diff between mine and ref"
+			hexdump -C $ref > tmp1
+			hexdump -C $mine > tmp2
+			diff tmp1 tmp2 >> $OUTPUT_FILE
+			printf "\n\n" >> $OUTPUT_FILE
+			rm -f tmp1 tmp2
 		else
 			printf $BLU
 			echo -e "$(echo $file.s | awk -F/ '{print $NF}') : no diff"
@@ -59,4 +65,4 @@ for file in ../champs/*; do
 	printf $RESET
 done
 
-rm -f ../champs/*.cor
+rm -f champs/*.cor

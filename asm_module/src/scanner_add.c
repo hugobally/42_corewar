@@ -8,7 +8,7 @@ void			template_init(t_token *template, t_toktype type, t_line *line)
 {
 	ft_bzero(template, sizeof(t_token));
 	template->type = type;
-	if (line->str[0])
+	if (line->str && line->str[0])
 	{
 		template->pos = line->num | (((uint32_t)(line->index) + 1u) << 16);
 		if (line->index == 0 || ft_iswhitespace(line->str[line->index - 1]))
@@ -18,7 +18,7 @@ void			template_init(t_token *template, t_toktype type, t_line *line)
 
 void			get_right_pad(t_token *template, t_line *line)
 {
-	if (line->str[0])
+	if (line->str && line->str[0])
 	{
 		if (line->str[line->index + 1] == '\0'
 				|| ft_iswhitespace(line->str[line->index + 1]))

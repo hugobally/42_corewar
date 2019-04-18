@@ -15,11 +15,8 @@ t_code				token_single(const t_toktype type,
 	t_token		template;
 
 	template_init(&template, type, line);
-	if (type != char_eol)
-	{
-		get_right_pad(&template, line);
-		line->index++;
-	}
+	get_right_pad(&template, line);
+	line->index++;
 	return (token_add(lst, &template, 1));
 }
 
@@ -60,12 +57,27 @@ t_code				token_quote(const t_toktype type,
 
 static uint8_t		endofstr(char c)
 {
-	return (c == COMMENT_CHAR
-				|| c == LABEL_CHAR
-				|| c == DIRECT_CHAR
-				|| c == SEPARATOR_CHAR
-				|| c == QUOTE_CHAR
-				|| ft_iswhitespace(c));
+	static int		endchar[8] =
+	{
+		COMMENT_CHAR,
+		COMMENT_CHAR_2,
+		LABEL_CHAR,
+		DIRECT_CHAR,
+		SEPARATOR_CHAR,
+		QUOTE_CHAR,
+		EOL_CHAR,
+		0
+	};
+	int				i;
+
+	i = 0;
+	while (endchar[i] != 0)
+	{
+		if (c == endchar[i])
+			return (1);
+		i++;
+	}
+	return (ft_iswhitespace(c));
 }
 
 static t_code		token_unknown(const t_toktype type,
@@ -96,7 +108,8 @@ t_code				token_unknown_wrapper(const t_toktype type,
 		line->index++;
 		return (done);
 	}
-	else if (line->str[line->index] == '#')
+	else if (line->str[line->index] == COMMENT_CHAR
+				|| line->str[line->index] == COMMENT_CHAR_2)
 	{
 		while (line->str[line->index])
 			line->index++;

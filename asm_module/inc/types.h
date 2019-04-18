@@ -35,24 +35,22 @@ typedef struct		s_line
 
 typedef enum		e_toktype
 {
-	//CHAR literal values are for debug only
-	//Assign big values to make sure there's no overlap
-	cmd = '1',
-	cmd_name = '2',
-	cmd_comment = '3',
-	unknown = '4',
-	label = '5',
-	opcode = '6',
-	reg = '7',
-	dir_num = '8',
-	ind_num = '9',
-	dir_label = 'A',
-	ind_label = 'B',
 	char_dir = DIRECT_CHAR,
 	char_label = LABEL_CHAR,
 	char_sep = SEPARATOR_CHAR,
 	char_eol = EOL_CHAR,
-	quote = QUOTE_CHAR
+	quote = QUOTE_CHAR,
+	cmd = 0xFFFF,
+	cmd_name,
+	cmd_comment,
+	unknown,
+	label,
+	opcode,
+	reg,
+	dir_num,
+	ind_num,
+	dir_label,
+	ind_label
 }					t_toktype;
 
 typedef struct		s_token

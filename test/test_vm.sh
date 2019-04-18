@@ -122,8 +122,8 @@ while [[ $i -le $NUM_CYCLES ]]; do
 	MY_OUT=$(echo $MY_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
 	printf $RED
 	if ! diff -q <($REF_OUT) <($MY_OUT) &>/dev/null; then
-		diff <($REF_OUT) <($MY_OUT) &> diff.out
-		echo "Diff at cycle $CURRENT_CYCLE -- Logged to diff.out"
+		diff <($REF_OUT) <($MY_OUT) &> vm_test_log.out
+		echo "Diff at cycle $CURRENT_CYCLE -- Logged to vm_test_log.out"
 		exit
 	fi
 	printf $BLU
