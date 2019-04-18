@@ -146,7 +146,7 @@ t_errors	the_game(t_core *core)
 			if (++i == core->sdump)
 				i = hexdump(core, 1);
 			if (core->flags & FLAG_DUMP)
-				if (--core->dump == 0)
+				if (--core->dump == 0 && proc)
 					return (hexdump(core, 0));
 		core->loop++;
 		}
