@@ -7,6 +7,6 @@ int			ft_get_params(t_core *core, t_process *process, int p, int type)
 	else if (type == DIR)
 		return (p);
 	else if (type == IND)
-		return (core->arena[get_pc(process->pc + (p % IDX_MOD))]);
+		return (read_val(core, get_pc(process->pc + (p % IDX_MOD)), 4));
 	return (0);
 }
