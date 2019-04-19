@@ -13,7 +13,7 @@ t_errors		ft_zjmp(t_core *core, t_process *process)
 	{
 		if (core->visu)
 			move_proccess_on_arena(process->pc, process->pc + process->params.p1, core->graph);
-		process->pc = process->pc + process->params.p1;
+		process->pc = process->pc + process->params.p1 % IDX_MOD;
 	}
 	//ft_printf("zjump OUT by %d, process->pc %d\n", process->regs[0], process->pc);
 	return (ok);
