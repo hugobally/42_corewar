@@ -31,7 +31,7 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 	//ft_printf("ldi IN by %d\n", process->regs[0]);
 	ft_bzero(pa, sizeof(int) * 3);
 	params = process->params;
-	//ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	//ft_printf("params p1:%d, p2:%d, p3:%d pc %d\n", params.p1, params.p2, params.p3, process->pc);
 	if (ft_reg(process, &pa[0], &pa[1], &pa[2]) != ok)
 		return (ok);
 	if (pa[0] == REG)
@@ -55,11 +55,14 @@ t_errors			ft_sti(t_core *core, t_process *process)
 	int			p1;
 	int			p2;
 	int			pa[3];
+	t_params	params;
 
 	p1 = 0;
 	p2 = 0;
-	//ft_printf("ldi IN\n");
+	params = process->params;
+	//ft_printf("sti IN\n");
 	ft_bzero(pa, sizeof(int) * 3);
+	//ft_printf("params p1:%d, p2:%d, p3:%d pc %d\n", params.p1, params.p2, params.p3, process->pc);
 	if (ft_reg(process, &pa[0], &pa[1], &pa[2]) != ok)
 		return (ok);
 	if (pa[1] == REG)
@@ -73,7 +76,7 @@ t_errors			ft_sti(t_core *core, t_process *process)
 	else if (pa[2] == DIR)
 		p2 = process->params.p3;
 	write_val(core, get_pc(process->pc + ((p1 + p2) % IDX_MOD)), 4, process->regs[process->params.p1 - 1], process->player);
-	//ft_printf("ldi OUT by %d\n", process->regs[0]);
+	//ft_printf("sti OUT by %d\n", process->regs[0]);
 	return (0);
 }
 
