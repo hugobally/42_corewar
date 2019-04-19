@@ -23,7 +23,7 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 	{
 		if (cur->is_alive == false)
 		{
-			//ft_printf("killed\n");
+		//	ft_printf("killed\n");
 			if (pre)
 				pre->next = cur->next;
 			else
@@ -35,7 +35,7 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 		}
 		else
 		{
-			//ft_printf("not killed\n");
+		//	ft_printf("not killed\n");
 			cur->is_alive = false;
 			pre = cur;
 		}
@@ -126,7 +126,7 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-		//ft_printf("Cycle %d\n", core->loop);
+	//	ft_printf("Cycle %d\n", core->loop);
 		if (visu_control(core, cycles))
 			return (f1_exit);
 		if (core->visu && core->graph->pause)
