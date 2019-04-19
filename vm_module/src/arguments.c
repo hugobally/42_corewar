@@ -52,6 +52,8 @@ t_errors	ft_right_nb(char *s, t_core *core, int flag)
 		core->next_player = nb;
 	if (flag == 2)
 		core->sdump = nb;
+	if (flag == 3)
+		core->verbose = nb;
 	return (ok);
 }
 
@@ -76,8 +78,15 @@ t_errors	check_option(t_core *core, char **av, int *i, int ac)
 		if ((ret = ft_right_nb(av[++*i], core, 2)) != ok)
 			return (badarg);
 	}
-	else if (!ft_strcmp(av[*i], "-v"))
+	else if ((*i + 1) < ac && (!ft_strcmp(av[*i], "-v")))
+	{
+		if ((ret = ft_right_nb(av[++*i], core, 3)) != ok)
+			return (badarg);
+	}
+	else if (!ft_strcmp(av[*i], "-visu") || !ft_strcmp(av[*i], "-n"))
 		core->visu = true;
+	else if (!ft_strcmp(av[*i], "-a"))
+		core->aff = true;
 	else
 		return (badarg);
 	return (ok);

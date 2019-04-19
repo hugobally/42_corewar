@@ -112,6 +112,8 @@ typedef struct			s_core
 	uint32_t			sdump;
 	uint8_t				flags;
 	int					loop;
+	int					verbose;
+	t_bool				aff;
 }             			t_core;
 
 

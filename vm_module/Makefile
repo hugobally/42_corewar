@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/16 14:48:49 by rle-ru           ###   ########.fr        #
+#    Updated: 2019/04/19 21:58:46 by rle-ru           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,22 @@ NAME				=	../corewar
 # Raw Sources
 
 SRCS_RAW			:=	main.c							\
+						ft_live.c						\
+						ft_ld.c							\
+						ft_st.c							\
+						ft_add.c						\
+						ft_sub.c						\
+						ft_and.c						\
+						ft_or.c							\
+						ft_xor.c						\
+						ft_zjump.c						\
+						ft_ldi.c						\
+						ft_sti.c						\
+						ft_fork.c						\
+						ft_lld.c						\
+						ft_lldi.c						\
+						ft_lfork.c						\
+						ft_aff.c						\
 						introduction.c					\
 						arguments.c						\
 						players.c						\
@@ -22,9 +38,6 @@ SRCS_RAW			:=	main.c							\
 						process.c						\
 						game.c							\
 						decoding.c 						\
-						instructions.c					\
-						instructions_2.c				\
-						instructions_3.c				\
 						instructions_4.c				\
 						functions_tab.c 				\
 						read_exec.c						\
