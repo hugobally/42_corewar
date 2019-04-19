@@ -44,6 +44,8 @@ t_errors	read_header(int fd, t_player *new)
 	new->head.prog_size = reverse_endian(new->head.prog_size);
 	if (new->head.prog_size > CHAMP_MAX_SIZE)
 		return (badchamp);
+	if (new->head.magic != COREWAR_EXEC_MAGIC)
+		return (badchamp);
 	new->next = NULL;
 	return (ok);
 }
