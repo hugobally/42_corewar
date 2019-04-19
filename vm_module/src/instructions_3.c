@@ -39,14 +39,19 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 	else if (pa[0] == DIR)
 		p1 = params.p1;
 	else if (pa[0] == IND)
-		p1 = read_val(core, get_pc(process->pc + (read_val(core,
-			get_pc(process->pc + (params.p1 % IDX_MOD)), 4)) % IDX_MOD), 4);
+		p1 = read_val(core, get_pc(process->pc + (params.p1 % IDX_MOD)), 4);
 	if (pa[1] == REG)
 		p2 = process->regs[params.p2 - 1];
 	else if (pa[1] == DIR)
 		p2 = params.p2;
 	process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + ((p1 + p2) % IDX_MOD)), REG_SIZE);
 	//ft_printf("ldi out");
+	// ft_printf("P%5d | ldi %d %d r%d\n",
+	// 	-process->regs[0],
+	// 	p1,
+	// 	p2,
+	// 	process->params.p3);
+	// ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, get_pc(process->pc + (p1 + p2) % IDX_MOD));
 	return (ok);
 }
 

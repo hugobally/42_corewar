@@ -80,7 +80,7 @@ void		find_winner(t_core *core)
 	tmp = core->players;
 	while (tmp && tmp->p != core->last_live_done_by)
 		tmp = tmp->next;
-	if (tmp && core->winner)
+	if (tmp)
 		ft_printf("Contestant %d, \"%s\", has won !\n", -tmp->p, tmp->head.prog_name);
 	else
 		ft_printf("No one has won\n");
