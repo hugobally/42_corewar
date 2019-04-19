@@ -5,7 +5,7 @@ t_errors		ft_zjmp(t_core *core, t_process *process)
 {
 	t_params	params;
 
-	//ft_printf("zjump IN by %d\n", process->regs[0]);
+	//ft_printf("zjump IN by %d, carry is %d\n", process->player, process->carry);
 	params = process->params;
 	//ft_printf("params p1:%d, p2:%d, p3:%d, pc:%d\n", params.p1, params.p2, params.p3, process->pc);
 	(void)core;
@@ -46,6 +46,7 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 	else if (pa[1] == DIR)
 		p2 = params.p2;
 	process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + ((p1 + p2) % IDX_MOD)), REG_SIZE);
+	//ft_printf("ldi out");
 	return (ok);
 }
 

@@ -77,9 +77,11 @@ t_errors		ft_add(t_core *core, t_process *process)
 	(void)core;
 	params = process->params;
 	//ft_printf("params p1:%d, p2:%d, p3:%d\n", params.p1, params.p2, params.p3);
+	//ft_printf("p1 %d, p2 %d\n", process->regs[params.p1 - 1], process->regs[params.p2 - 1]);
 	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
 		return (ok);
 	process->regs[params.p3 - 1] = process->regs[params.p2 - 1] + process->regs[params.p1 - 1];
+	//ft_printf("p3 %d\n", process->regs[params.p3 - 1]);
 	ft_carry(process, process->regs[params.p3 - 1]);
 	//ft_printf("ft_add OUT by %d\n", process->regs[0]);
 	return(ok);

@@ -23,6 +23,7 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 	{
 		if (cur->is_alive == false)
 		{
+			//ft_printf("killed\n");
 			if (pre)
 				pre->next = cur->next;
 			else
@@ -34,6 +35,7 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 		}
 		else
 		{
+			//ft_printf("not killed\n");
 			cur->is_alive = false;
 			pre = cur;
 		}
@@ -56,7 +58,7 @@ t_errors	call_instructions(t_core *core)
 	tmp = core->process;
 	while (tmp != NULL)
 	{
-		//ft_printf("remaining_cycles %d\n", tmp->remaining_cycles);
+		//ft_printf("remaining_cycles %d, carry is %d\n", tmp->remaining_cycles, tmp->carry);
 		if (tmp->remaining_cycles != 0)
 		{
 			--tmp->remaining_cycles;

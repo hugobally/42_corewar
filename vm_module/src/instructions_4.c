@@ -8,6 +8,7 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 
 	p1 = 0;
 	p2 = 0;
+	//ft_printf("lldi IN \n");
 	ft_bzero(pa, sizeof(int) * 3);
 	if (ft_reg(process, &pa[0], &pa[1], &pa[2]) != ok)
 		return (ok);
@@ -22,6 +23,8 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 	else if (pa[1] == DIR)
 		p2 = process->params.p2;
 	process->regs[process->params.p3 - 1] = read_val(core, get_pc(p1 + p2), 4);
+	//ft_printf("params p1:%d, p2:%d, p3:%d\n", p1, p2, process->params.p3);
+	//ft_printf("lldi OUT by %d\n", process->player);
 	return (ok);
 }
 
