@@ -13,6 +13,6 @@ t_errors				ft_aff(t_core *core, t_process *process)
 	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
 		return (ok);
 	if (core->aff)
-		ft_printf("Aff :%d\n", process->regs[params.p1 - 1] % 256);
+		ft_printf("Aff: %c\n", process->regs[params.p1 - 1] % 256);
 	return (ok);
 }

@@ -27,10 +27,7 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 	if (core->verbose & 4)
 	{
 		ft_printf("P%5d | ldi %d %d r%d\n",
-			-process->regs[0],
-			p1,
-			p2,
-			process->params.p3);
+			-process->regs[0], p1, p2, process->params.p3);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, get_pc(process->pc + (p1 + p2) % IDX_MOD));
 	}
 	return (ok);
