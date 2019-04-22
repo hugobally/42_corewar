@@ -125,6 +125,8 @@ t_errors	the_game(t_core *core)
 	i = 0;
 	cycles = core->max_cycle_to_die;
 	proc = core->process;
+	if (core->flags & FLAG_SDUMP)
+		hexdump(core, 1);
 	while (proc)
 	{
 		core->loop++;
@@ -151,7 +153,7 @@ t_errors	the_game(t_core *core)
 			if (++i == core->sdump)
 				i = hexdump(core, 1);
 			if (core->flags & FLAG_DUMP)
-				if (--core->dump == 0 && proc)
+				if (--core->dump <= 0 && proc)
 					return (hexdump(core, 0));
 		}
 	}
