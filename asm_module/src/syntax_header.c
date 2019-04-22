@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax_header.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:58:56 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 16:00:44 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "errors.h"
 #include "types.h"
@@ -18,11 +30,6 @@ static uint8_t		is_duplicate(t_toktype type, t_tokenlst *l, int reset)
 		found_name++;
 	if (type == cmd_comment)
 		found_comment++;
-	if (found_name > 1 || found_comment > 1)
-	{
-		error_handler(header_duplicate, l->now->previous, 0);
-		return (1);
-	}
 	if (found_name > 1 || found_comment > 1)
 	{
 		error_handler(header_duplicate, l->now->previous, 0);

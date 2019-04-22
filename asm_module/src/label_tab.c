@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   label_tab.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:54:11 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 15:55:20 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "types.h"
 #include "asm.h"
 
 /*
-** Access Label Tab
+** Access
 */
 
 t_label				*label_tab_fetch(t_token *token, t_label **label_tab)
@@ -23,7 +35,7 @@ t_label				*label_tab_fetch(t_token *token, t_label **label_tab)
 }
 
 /*
-** Buid Label Tab
+** Buid
 */
 
 static uint32_t		get_tabsize(t_tokenlst *lst)

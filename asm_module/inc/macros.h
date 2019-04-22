@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   macros.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:46:14 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 15:47:41 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MACROS_H
 # define MACROS_H
+
 /*
 ** Special characters not defined in op.h
 */
@@ -7,12 +20,6 @@
 # define QUOTE_CHAR 			'"'
 # define EOL_CHAR 				'\n'
 # define COMMENT_CHAR_2			';'
-
-/*
-** Allowed characters in numerical value
-*/
-
-# define NUMERIC_CHARS			"-0123456789"
 
 /*
 ** Padding Flags

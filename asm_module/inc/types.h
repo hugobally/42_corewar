@@ -1,33 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   types.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:48:01 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 15:49:34 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TYPES_H
 # define TYPES_H
 
 # include <stdint.h>
 # include "macros.h"
 # include "libcorewar.h"
-
-/*
-** File Information Container
-*/
-
-typedef struct		s_file
-{
-	char			*name;
-	int				fd;
-	char			*out_name;
-	int				out_fd;
-}					t_file;
-
-/*
-** Line Information Container
-*/
-
-typedef struct		s_line
-{
-	char			*str;
-	uint16_t		num;
-	uint16_t		index;
-	uint8_t			is_quote;
-}					t_line;
 
 /*
 ** Tokens
@@ -82,6 +70,30 @@ typedef struct		s_label
 	t_token			*token;
 	int32_t			offset;
 }					t_label;
+
+/*
+** File Information Container
+*/
+
+typedef struct		s_file
+{
+	char			*name;
+	int				fd;
+	char			*out_name;
+	int				out_fd;
+}					t_file;
+
+/*
+** Line Information Container
+*/
+
+typedef struct		s_line
+{
+	char			*str;
+	uint16_t		num;
+	uint16_t		index;
+	uint8_t			is_quote;
+}					t_line;
 
 /*
 ** Control Flow Enums

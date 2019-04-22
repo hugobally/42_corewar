@@ -1,16 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asm.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:49:39 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 15:50:00 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ASM_H
 # define ASM_H
 
 # include "types.h"
 # include "errors.h"
 # include "string.h"
-
-/*
-**	DEBUG
-*/
-
-void		debug_printtokenlst(t_tokenlst *lst);//
-void		debug_print_label_tab(t_label **label_tab);//
 
 /*
 ** Scanner
@@ -59,13 +64,13 @@ t_token		*find_before(t_token *start, t_toktype type);
 ** Output
 */
 
-t_code			output_file(t_tokenlst *lst,
+t_code		output_file(t_tokenlst *lst,
 								t_label **label_tab,
 								header_t *header,
 								t_file *file);
-t_code			write_instruction(t_token *token, t_label **label_tab,
+t_code		write_instruction(t_token *token, t_label **label_tab,
 									t_file *file, uint32_t *offset);
-uint32_t		reverse_endian(uint32_t number);
+uint32_t	reverse_endian(uint32_t number);
 
 /*
 ** Errors

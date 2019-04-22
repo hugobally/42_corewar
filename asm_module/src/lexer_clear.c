@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer_clear.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:56:00 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 15:56:05 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "types.h"
 
@@ -46,7 +58,7 @@ static t_code			check_empty(t_token *node)
 	{
 		if (node->type == opcode)
 			found_instruction = 1;
-		node = node->next;	
+		node = node->next;
 	}
 	if (!found_instruction)
 		return (error_handler(no_instructions, 0, 0));

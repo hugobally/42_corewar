@@ -1,11 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:55:25 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 15:55:55 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "types.h"
 #include "errors.h"
-
-/*
-** Lexer Pass 2 : - Assign a type to all unknown tokens
-**				  - Remove '%' and ':' tokens (no need for them anymore)
-*/
 
 void				tokens_foreach(t_tokenlst *lst, void (*action)(t_token*))
 {

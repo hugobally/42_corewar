@@ -1,12 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scanner_tokens.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:58:09 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 15:58:41 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "types.h"
 #include "errors.h"
 #include "macros.h"
 #include "asm.h"
-
-/*
-** Add Single Char Token
-*/
 
 t_code				token_single(const t_toktype type,
 								t_line *line,
@@ -19,10 +27,6 @@ t_code				token_single(const t_toktype type,
 	line->index++;
 	return (token_add(lst, &template, 1));
 }
-
-/*
-**	Add Quote Token
-*/
 
 t_code				token_quote(const t_toktype type,
 								t_line *l,
@@ -51,14 +55,9 @@ t_code				token_quote(const t_toktype type,
 	return (token_add(lst, &template, ft_strlen(template.value)));
 }
 
-/*
-**	Add Unknown Token /
-*/
-
-static uint8_t		endofstr(char c)
+uint8_t				endofstr(char c)
 {
-	static int		endchar[8] =
-	{
+	static int		endchar[8] = {
 		COMMENT_CHAR,
 		COMMENT_CHAR_2,
 		LABEL_CHAR,
@@ -80,7 +79,7 @@ static uint8_t		endofstr(char c)
 	return (ft_iswhitespace(c));
 }
 
-static t_code		token_unknown(const t_toktype type,
+t_code				token_unknown(const t_toktype type,
 											t_line *line,
 											t_tokenlst *lst)
 {

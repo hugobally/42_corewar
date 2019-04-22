@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_print.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:52:08 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 16:01:43 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "libft.h"
 #include "errors.h"
@@ -63,10 +75,6 @@ void					print_error(char *error, uint8_t has_pos,
 			print_line(file, pos, fd);
 	}
 }
-
-/*
-** Build Error String
-*/
 
 void					build_errstr_tok(t_errors error, t_token *token,
 											t_errstr *tab, t_file *file)

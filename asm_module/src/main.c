@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 15:57:01 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/22 15:57:31 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <unistd.h>
 #include "libft.h"
@@ -34,11 +46,6 @@ t_code				compile_file(t_file *file)
 		}
 	}
 	return (done);
-}
-
-int					print_usage(void)
-{
-	return (0);
 }
 
 int					main(int argc, char **argv)
