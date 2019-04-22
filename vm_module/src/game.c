@@ -7,10 +7,10 @@ void		check_delta(t_core *core)
 {
 	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)
 	{
-		if (core->max_cycle_to_die > CYCLE_DELTA)
+		// if (core->max_cycle_to_die > CYCLE_DELTA)
 			core->max_cycle_to_die -= CYCLE_DELTA;
-		else
-			core->max_cycle_to_die = 0;
+		// else
+		// 	core->max_cycle_to_die = 0;
 		core->max_checks = MAX_CHECKS;
 	}
 	core->nbr_live = 0;
@@ -30,6 +30,10 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 				core->process = cur->next;
 			if (cur->next)
 				cur->next->previous = pre;
+			if (core->verbose & 8)
+				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+					cur->pro_name, core->loop - cur->last_live,
+					core->max_cycle_to_die);
 			free(cur);
 			cur = NULL;
 		}
@@ -117,7 +121,7 @@ int		visu_control(t_core *c, int cycles)
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
-	uint32_t	cycles;
+	int			cycles;
 	int			res;
 	uint32_t	i;
 
@@ -126,7 +130,9 @@ t_errors	the_game(t_core *core)
 	proc = core->process;
 	while (proc)
 	{
-	//	ft_printf("Cycle %d\n", core->loop);
+		core->loop++;
+		if (core->verbose & 2)
+			ft_printf("It is now cycle %d\n", core->loop);
 		if (visu_control(core, cycles))
 			return (f1_exit);
 		if (core->visu && core->graph->pause)
@@ -139,7 +145,7 @@ t_errors	the_game(t_core *core)
 			if ((res = call_instructions(core)) != ok)
 					return (res);
 			proc = core->process;
-			while (cycles <= 0 && proc)
+			if (cycles <= 0 && proc)
 			{
 				kill_process(core, NULL, core->process);
 				cycles = core->max_cycle_to_die;
@@ -150,7 +156,6 @@ t_errors	the_game(t_core *core)
 			if (core->flags & FLAG_DUMP)
 				if (--core->dump == 0 && proc)
 					return (hexdump(core, 0));
-		core->loop++;
 		}
 	}
 	int		ch;

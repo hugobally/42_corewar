@@ -18,7 +18,7 @@ t_errors			ft_lld(t_core *core, t_process *process)
 		process->regs[params.p2 - 1] = read_val(core, get_pc(process->pc + params.p1), 4);
 	ft_carry(process, process->regs[params.p2 - 1]);
 	if (core->verbose & 4)
-		ft_printf("P%5d | lld %d r%d\n", -process->regs[0], process->regs[params.p2 - 1],
+		ft_printf("P%5d | lld %d r%d\n", process->pro_name, process->regs[params.p2 - 1],
 			process->params.p2);
 	return (ok);
 }

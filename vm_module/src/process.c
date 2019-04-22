@@ -26,6 +26,7 @@ t_errors	make_process(t_core *core, uint32_t pc, t_player *pl)
 
 	if (!(new = ft_memalloc(sizeof(t_process))))
 		return (falloc);
+	new->pro_name = ++core->nb_pro;
 	new->pc = pc;
 	new->regs[0] = pl->p;
 	new->player = pl->p;

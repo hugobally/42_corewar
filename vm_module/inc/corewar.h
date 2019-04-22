@@ -75,6 +75,8 @@ typedef struct			s_process
 	unsigned int		remaining_cycles;
 	int32_t				regs[REG_NUMBER];
 	t_bool				is_alive;
+	int					last_live;
+	int					pro_name;
 	struct s_process	*next;
 	struct s_process	*previous;
 }						t_process;
@@ -103,7 +105,7 @@ typedef struct			s_core
 	t_process			*process;
 	t_graph				*graph;
 	unsigned int		dump;
-	unsigned int		max_cycle_to_die;
+	int					max_cycle_to_die;
 	int					last_live_done_by;
 	int					winner;
 	unsigned int		max_checks;
@@ -114,6 +116,7 @@ typedef struct			s_core
 	int					loop;
 	int					verbose;
 	t_bool				aff;
+	int					nb_pro;
 }             			t_core;
 
 

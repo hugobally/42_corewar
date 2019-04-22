@@ -18,7 +18,7 @@ t_errors		ft_load(t_core *core, t_process *process)
 	ft_carry(process, process->regs[params.p2 - 1]);
 	if (core->verbose & 4)
 		ft_printf("P%5d | ld %d r%d\n",
-			-process->regs[0],
+			process->pro_name,
 			process->regs[process->params.p2 - 1],
 			process->params.p2);
 	return (ok);

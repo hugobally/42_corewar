@@ -27,7 +27,7 @@ t_errors			ft_sti(t_core *core, t_process *process)
 	if (core->verbose & 4)
 	{
 		ft_printf("P%5d | sti r%d %d %d\n",
-			-process->regs[0],
+			process->pro_name,
 			process->params.p1,
 			p1,
 			p2);

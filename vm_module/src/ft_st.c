@@ -16,6 +16,6 @@ t_errors		ft_store(t_core *core, t_process *process)
 	else if (p2 == IND)
 		write_val(core, get_pc(process->pc + params.p2 % IDX_MOD), 4, process->regs[params.p1 - 1], process->player);
 	if (core->verbose & 4)
-		ft_printf("P%5d | st r%d %d\n", -process->regs[0], process->params.p1, process->params.p2);
+		ft_printf("P%5d | st r%d %d\n", process->pro_name, process->params.p1, process->params.p2);
 	return (ok);
 }
