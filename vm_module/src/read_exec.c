@@ -17,6 +17,16 @@ static void		get_opcode(t_core *core, t_process *p)
 		p->instruction = 0;
 }
 
+void			ft_verbose_dump(t_core *c, t_process *p)
+{
+	int		i;
+
+	i = -1;
+	while (++i < p->opsize)
+		ft_printf(" %.2x", c->arena[get_pc(p->pc + i)]);
+	ft_putstr(" \n");
+}
+
 t_errors		ft_instructions(t_core *core, t_process *p)
 {
 	t_errors 	res;
@@ -43,6 +53,11 @@ t_errors		ft_instructions(t_core *core, t_process *p)
 	{
 		if (core->visu)
 			move_proccess_on_arena(p->pc, get_pc(p->pc + p->opsize), core->graph);
+		if (p->opsize > 1 && core->verbose & 16)
+		{
+			ft_printf("ADV %d (0x%.4x -> 0x%.4x)", p->opsize, p->pc, get_pc(p->pc + p->opsize));
+			ft_verbose_dump(core, p);
+		}
 		p->pc = get_pc(p->pc += p->opsize);
 	}
 	return (ok);

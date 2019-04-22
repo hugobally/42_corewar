@@ -7,11 +7,10 @@ void		check_delta(t_core *core)
 {
 	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)
 	{
-		// if (core->max_cycle_to_die > CYCLE_DELTA)
-			core->max_cycle_to_die -= CYCLE_DELTA;
-		// else
-		// 	core->max_cycle_to_die = 0;
+		core->max_cycle_to_die -= CYCLE_DELTA;
 		core->max_checks = MAX_CHECKS;
+		if (core->verbose & 2)
+			ft_printf("Cycle to die is now %d\n", core->max_cycle_to_die);
 	}
 	core->nbr_live = 0;
 }
