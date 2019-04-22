@@ -15,6 +15,6 @@ t_errors			ft_fork(t_core *core, t_process *process)
 	push_process(core, new_process);
 	if (core->verbose & 4)
 		ft_printf("P%5d | fork %d (%d)\n", process->pro_name,
-		process->params.p1, process->pc + process->params.p1);
+		process->params.p1, get_pc(process->pc + process->params.p1 % IDX_MOD));
 	return (ok);
 }

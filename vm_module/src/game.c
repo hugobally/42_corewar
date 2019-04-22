@@ -85,8 +85,6 @@ void		find_winner(t_core *core)
 		tmp = tmp->next;
 	if (tmp)
 		ft_printf("Contestant %d, \"%s\", has won !\n", -tmp->p, tmp->head.prog_name);
-	else
-		ft_printf("No one has won\n");
 }
 
 int			ft_count_process(t_process *process)
