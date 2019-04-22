@@ -44,25 +44,6 @@ while [[ $i -le $NUM_CYCLES ]]; do
 	MY_OUT=$(echo $MY_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
 	if ! diff -q <($REF_OUT) <($MY_OUT) &>/dev/null; then
 		diff <($REF_OUT) <($MY_OUT) &> $LOG_NAME
-		printf "DIFF FOUND AT CYCLE $CURRENT_CYCLE" >> $LOG_NAME
-		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
-		REF_OUT=$(echo $REF_OUT | sed "s/$CURRENT_CYCLE/$(($CURRENT_CYCLE - 1))/")
-		$REF_OUT | grep "0x" | sed "s/^/REF_PREVIOUS :/" >> $LOG_NAME
-		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
-		REF_OUT=$(echo $REF_OUT | sed "s/$(($CURRENT_CYCLE - 1))/$(($CURRENT_CYCLE))/")
-		$REF_OUT | grep "0x" | sed "s/^/REF_CURRENT  :/" >> $LOG_NAME
-		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
-		REF_OUT=$(echo $REF_OUT | sed "s/$(($CURRENT_CYCLE))/$(($CURRENT_CYCLE + 1))/")
-		$REF_OUT | grep "0x" | sed "s/^/REF_NEXT     :/" >> $LOG_NAME
-		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
-		MY_OUT=$(echo $MY_OUT | sed "s/$CURRENT_CYCLE/$(($CURRENT_CYCLE - 1))/")
-		$MY_OUT | grep "0x" | sed "s/^/MY_PREVIOUS  :/" >> $LOG_NAME
-		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
-		MY_OUT=$(echo $MY_OUT | sed "s/$(($CURRENT_CYCLE - 1))/$(($CURRENT_CYCLE))/")
-		$MY_OUT | grep "0x" | sed "s/^/MY_CURRENT   :/" >> $LOG_NAME
-		printf "\n\n////////////////////////////////////////\n" >> $LOG_NAME
-		MY_OUT=$(echo $MY_OUT | sed "s/$(($CURRENT_CYCLE))/$(($CURRENT_CYCLE + 1))/")
-		$MY_OUT | grep "0x" | sed "s/^/MY_NEXT      :/" >> $LOG_NAME
 		printf $RED
 		echo "$LOG_NAME : FOUND DIFF"
 		printf $RESET
