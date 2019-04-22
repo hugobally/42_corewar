@@ -44,16 +44,18 @@ t_errors		ft_instructions(t_core *core, t_process *p)
 	{
 		store_parameters(core, p);
 		if ((res = g_op_inst_tab[p->instruction](core, p)) != ok)
+		{
 			return (res);
+		}
 		p->loading = 0;
 		//set instruction et params a 0
 	}
-	if ((p->instruction != zjmp)
+	if ((p->instruction != zjmp || !p->carry)
 			|| (p->instruction == zjmp && p->carry == false))
 	{
 		if (core->visu)
 			move_proccess_on_arena(p->pc, get_pc(p->pc + p->opsize), core->graph);
-		if (p->opsize > 1 && core->verbose & 16)
+		if ((p->opsize > 1 || p->instruction) && core->verbose & 16)
 		{
 			ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", p->opsize, p->pc, get_pc(p->pc + p->opsize));
 			ft_verbose_dump(core, p);

@@ -14,12 +14,12 @@ t_errors				ft_reg(t_process *p, int *p1, int *p2, int *p3)
 	*p3 = ft_type_param(p->params.bytecode, 3);
 	if (*p1 == REG)
 		if (p->params.p1 <= 0 || p->params.p1 > REG_NUMBER)
-			return ((p->opsize = 1));
+			return (1);
 	if (*p2 == REG)
 		if (p->params.p2 <= 0 || p->params.p2 > REG_NUMBER)
-			return ((p->opsize = 1));
+			return (1);
 	if (*p3 == REG)
 		if (p->params.p3 <= 0 || p->params.p3 > REG_NUMBER)
-			return ((p->opsize = 1));
+			return (1);
 	return (ok);
 }
