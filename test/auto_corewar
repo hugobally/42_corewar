@@ -1,0 +1,76 @@
+#!/bin/bash
+
+CHAMP_DIR="champs"
+COR_DIR="champs/cor"
+LOG_DIR="logs"
+
+# STARTUP #
+
+COR_REF="./bin/corewar_ref"
+COR_MINE="./bin/corewar"
+ASM_REF="./bin/asm_ref"
+ASM_MINE="./bin/asm"
+
+# RUN #
+
+C1=$(echo $1 | awk -F"/" '{print $NF}')
+C2=$(echo $2 | awk -F"/" '{print $NF}')
+C3=$(echo $3 | awk -F"/" '{print $NF}')
+C4=$(echo $4 | awk -F"/" '{print $NF}')
+
+LOG_NAME="$LOG_DIR/$(echo $C1 | sed "s/\.cor/\./")$(echo $C2 | sed "s/\.cor/\./")$(echo $C3 | sed "s/\.cor/\./")$(echo $C4 | sed "s/\.cor/\./")log"
+
+REF_CMD="$COR_REF -d CYCLE"
+MY_CMD="$COR_MINE -d CYCLE"
+
+if [[ ${#1} -ge 1 ]]; then
+	REF_CMD="$REF_CMD $1"
+	MY_CMD="$MY_CMD $1"
+fi
+if [[ ${#2} -ge 1 ]]; then
+	REF_CMD="$REF_CMD $2"
+	MY_CMD="$MY_CMD $2"
+fi
+if [[ ${#3} -ge 1 ]]; then
+	REF_CMD="$REF_CMD $3"
+	MY_CMD="$MY_CMD $3"
+fi
+if [[ ${#4} -ge 1 ]]; then
+	REF_CMD="$REF_CMD $4"
+	MY_CMD="$MY_CMD $4"
+fi
+
+
+if [[ -f auto.conf ]]; then
+	NUM_CYCLES=$(cat auto.conf | grep "NUM_CYCLES" | cut -d '=' -f 2)
+	START_CYCLE=$(cat auto.conf | grep "START_CYCLE" | cut -d '=' -f 2)
+else
+	NUM_CYCLES=2147483647
+	START_CYCLE=1
+fi
+
+i=0
+
+NAMES="$1 $2 $3 $4"
+
+printf "$NAMES || Running..\n"
+
+while [[ $i -le $NUM_CYCLES ]]; do
+	CURRENT_CYCLE=$(($START_CYCLE + $i))
+	REF_OUT=$(echo $REF_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
+	MY_OUT=$(echo $MY_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
+	if ! diff -q <($REF_OUT) <($MY_OUT) &>/dev/null; then
+		printf "Found Diff (Logged to $LOG_NAME) | $NAMES\n"
+		diff <($REF_OUT) <($MY_OUT) &> $LOG_NAME
+		exit
+	fi
+	if $REF_OUT | grep "won" &>/dev/null; then
+		printf "$($REF_OUT | grep "won" | sed "s/\n//") | $NAMES\n"
+		printf "Diff OK || Game ended at cycle $CURRENT_CYCLE\n" > $LOG_NAME
+		exit
+	fi
+	i=$(($i + 1))
+done
+
+printf "Stopped at cycle $CURRENT_CYCLE | Diff OK | $NAMES\n"
+printf "Diff OK | Stopped at cycle $CURRENT_CYCLE\n" > $LOG_NAME

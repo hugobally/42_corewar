@@ -45,9 +45,13 @@ void	print_error(t_errors ret)
 	else if (ret == badfile)
 		ft_putendl_fd("Bad file", 2);
 	else if (ret == badopen)
-		ft_putendl_fd("Bad open", 2);
+		ft_putendl_fd("Can't read source file", 2);
 	else if (ret == no_color)
 		ft_putendl_fd("Terminal does not support color", 2);
+	else if (ret == filesmall)
+		ft_putendl_fd("Error: File is too small to be a champion", 2);
+	else if (ret == badmagic)
+		ft_putendl_fd("Error: File has an invalid header", 2);
 	else if (ret == f1_exit)
 		ft_putendl_fd("Game exit", 2);
 }

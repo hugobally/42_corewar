@@ -41,13 +41,13 @@ t_errors	read_proc(int fd, t_player *new)
 t_errors	read_header(int fd, t_player *new)
 {
 	if (read(fd, new, sizeof(header_t)) < (ssize_t)sizeof(header_t))
-		return (badfile);
+		return (filesmall);
 	new->head.magic = reverse_endian(new->head.magic);
 	new->head.prog_size = reverse_endian(new->head.prog_size);
 	if (new->head.prog_size > CHAMP_MAX_SIZE)
 		return (champlarge);
 	if (new->head.magic != COREWAR_EXEC_MAGIC)
-		return (badchamp);
+		return (badmagic);
 	new->next = NULL;
 	return (ok);
 }

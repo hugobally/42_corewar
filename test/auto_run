@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir -p logs
+
+for file in champs/cor/*; do
+	./auto_corewar $file &
+done
