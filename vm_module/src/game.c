@@ -48,7 +48,6 @@ t_errors	the_game(t_core *core)
 	int			cycles;
 	int			res;
 	uint32_t	i;
-//	int			ch;
 
 	i = 0;
 	cycles = core->max_cycle_to_die;
@@ -57,17 +56,13 @@ t_errors	the_game(t_core *core)
 	//	hexdump(core, 1);
 	while (proc)
 	{
-		core->loop++;
-		if (core->verbose & 2)
-			ft_printf("It is now cycle %d\n", core->loop);
-		//if (visu_control(core, cycles))
-		//	return (f1_exit);
 		if (core->visu && core->graph->pause)
-		{
-		}
+			;
 		else
 		{
-			//core->loop++;
+			if (core->verbose & 2)
+				ft_printf("It is now cycle %d\n", core->loop);
+			core->loop++;
 			if (core->visu)
 				usleep(100000 / core->graph->fps);
 			--cycles;
@@ -88,8 +83,5 @@ t_errors	the_game(t_core *core)
 		}
 	}
 	find_winner(core);
-	//while (core->visu && (ch = getch()) != KEY_F(1))
-	//{
-	//}
 	return (ok);
 }

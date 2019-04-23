@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:02:57 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/23 16:36:37 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 18:21:30 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void *func_thread_ctrl(void *arg)
 
 	while(1)
 	{
-		refresh_all_wins(c->graph);
+		refresh_all_wins(c);
 		print_process(c->graph, c->process);
 		if(controls(c->graph))
 			pthread_exit(NULL);

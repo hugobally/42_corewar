@@ -6,20 +6,24 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:16:51 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/23 15:43:14 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 18:54:57 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-void	refresh_all_wins(t_graph *g)
+void	refresh_all_wins(t_core *c)
 {
-	wrefresh(g->arena_win);
-	wrefresh(g->ctrl_win);
-	wrefresh(g->info_win);
-	wrefresh(g->pro_win);
-	wrefresh(g->reg_win);
-	wrefresh(g->champ_win);
+	wrefresh(c->graph->ctrl_win);
+	wrefresh(c->graph->pro_win);
+	wrefresh(c->graph->reg_win);
+	wrefresh(c->graph->info_win);
+
+	if (!(c->loop % c->graph->laps))
+	{
+		wrefresh(c->graph->arena_win);
+		wrefresh(c->graph->champ_win);
+	}
 }
 
 WINDOW	*create_new_win(int h, int w, int x, int y)
@@ -28,7 +32,6 @@ WINDOW	*create_new_win(int h, int w, int x, int y)
 
 	win = newwin(h, w, y, x);
 	box(win, 0, 0);
-//	wrefresh(win);
 	return (win);
 }
 
