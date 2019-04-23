@@ -34,7 +34,7 @@ static void		ft_viz_verb(t_core *core, t_process *p)
 	if ((p->opsize > 1 || p->instruction) && core->verbose & 16)
 	{
 		ft_printf("ADV %d (0x%.4x -> 0x%.4x) ",
-		p->opsize, p->pc, get_pc(p->pc + p->opsize));
+		p->opsize, p->pc, p->pc + p->opsize);
 		ft_verbose_dump(core, p);
 	}
 	p->pc = get_pc(p->pc += p->opsize);
