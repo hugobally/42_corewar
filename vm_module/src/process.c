@@ -40,7 +40,7 @@ t_errors	nb_player_spec(t_core *core, t_player *new)
 	t_player	*player;
 
 	player = core->players;
-	nb = -core->next_player;
+	nb = core->next_player;
 	while (player != NULL)
 	{
 		if (player->p == nb)
