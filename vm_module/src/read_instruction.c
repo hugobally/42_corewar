@@ -13,7 +13,8 @@ void				write_val(t_core *core, uint32_t pc, uint32_t size,
 		core->arena[get_pc(pc + size - i)] = *(((uint8_t*)&val) + i);
 		if (core->visu)
 		{
-			write_on_arena(get_pc(pc + size - i), *(((uint8_t*)&val) + i), player, core->graph);
+			write_on_arena(get_pc(pc + size - i), *(((uint8_t*)&val) + i),
+			player, core->graph);
 		}
 		i++;
 	}
@@ -38,7 +39,7 @@ int32_t				read_val(t_core *core, uint32_t pc, uint32_t size)
 		return ((int32_t)val);
 }
 
-static void				add_parameter(t_core *core, t_process *p, t_op *op,
+static void			add_parameter(t_core *core, t_process *p, t_op *op,
 									uint8_t index)
 {
 	uint8_t			type;
@@ -66,7 +67,7 @@ static void				add_parameter(t_core *core, t_process *p, t_op *op,
 		p->instruction = 0;
 }
 
-static uint8_t			fake_bytecode(uint8_t code)
+static uint8_t		fake_bytecode(uint8_t code)
 {
 	if (code & T_REG)
 		return (0x55);

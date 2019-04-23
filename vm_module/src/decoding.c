@@ -2,9 +2,9 @@
 
 int					ft_type_param(unsigned char bytecode, int p)
 {
-	unsigned char mask;
-	unsigned char tmp_byte;
-	int p_tmp;
+	unsigned char	mask;
+	unsigned char	tmp_byte;
+	int				p_tmp;
 
 	p_tmp = p;
 	mask = 192;

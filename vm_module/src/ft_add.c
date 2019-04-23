@@ -12,7 +12,8 @@ t_errors		ft_add(t_core *core, t_process *process)
 	params = process->params;
 	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
 		return (ok);
-	process->regs[params.p3 - 1] = process->regs[params.p2 - 1] + process->regs[params.p1 - 1];
+	process->regs[params.p3 - 1] =
+	process->regs[params.p2 - 1] + process->regs[params.p1 - 1];
 	ft_carry(process, process->regs[params.p3 - 1]);
 	if (core->verbose & 4)
 		ft_printf("P%5d | add r%d r%d r%d\n",
@@ -20,5 +21,5 @@ t_errors		ft_add(t_core *core, t_process *process)
 			process->params.p1,
 			process->params.p2,
 			process->params.p3);
-	return(ok);
+	return (ok);
 }

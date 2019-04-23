@@ -2,9 +2,9 @@
 
 t_errors		ft_store(t_core *core, t_process *process)
 {
-	t_params 		params;
+	t_params		params;
 	int				p1;
-	int 			p2;
+	int				p2;
 	int				p3;
 	int				ret;
 
