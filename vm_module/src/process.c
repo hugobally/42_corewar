@@ -43,7 +43,7 @@ t_errors	nb_player_spec(t_core *core, t_player *new)
 	nb = core->next_player;
 	while (player != NULL)
 	{
-		if (player->p == nb)
+		if (player->p == -nb)
 			return (badarg);
 		player = player->next;
 	}
