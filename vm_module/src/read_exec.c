@@ -29,12 +29,17 @@ void			ft_verbose_dump(t_core *c, t_process *p)
 
 static void		ft_viz_verb(t_core *core, t_process *p)
 {
+	int	final;
+
+	final = p->pc;
+	while (final < 0)
+		final += MEM_SIZE;
 	if (core->visu)
 		move_proccess_on_arena(p->pc, get_pc(p->pc + p->opsize), core->graph);
 	if ((p->opsize > 1 || p->instruction) && core->verbose & 16)
 	{
 		ft_printf("ADV %d (0x%.4x -> 0x%.4x) ",
-		p->opsize, p->pc, p->pc + p->opsize);
+		p->opsize, final, final + p->opsize);
 		ft_verbose_dump(core, p);
 	}
 	p->pc = get_pc(p->pc += p->opsize);
