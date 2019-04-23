@@ -6,11 +6,21 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:16:51 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/11 14:58:11 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 15:43:14 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
+
+void	refresh_all_wins(t_graph *g)
+{
+	wrefresh(g->arena_win);
+	wrefresh(g->ctrl_win);
+	wrefresh(g->info_win);
+	wrefresh(g->pro_win);
+	wrefresh(g->reg_win);
+	wrefresh(g->champ_win);
+}
 
 WINDOW	*create_new_win(int h, int w, int x, int y)
 {
@@ -18,7 +28,7 @@ WINDOW	*create_new_win(int h, int w, int x, int y)
 
 	win = newwin(h, w, y, x);
 	box(win, 0, 0);
-	wrefresh(win);
+//	wrefresh(win);
 	return (win);
 }
 

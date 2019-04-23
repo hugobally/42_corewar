@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:01:27 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/15 18:12:07 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 15:38:03 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_process(t_graph *g, t_process *p)
 		tmp = tmp->next;
 		++i;
 	}
-	wrefresh(g->pro_win);
+	//wrefresh(g->pro_win);
 }
 
 void	create_process_win(t_graph *g, t_process *p)
@@ -42,5 +42,5 @@ void	create_process_win(t_graph *g, t_process *p)
 	g->pro_win = create_new_win(PRO_ROW, PRO_COL, ARENA_COL, 0);
 	mvwprintw(g->pro_win, 0, (PRO_COL / 2) - 7, " - PROCESS - ");
 	print_process(g, p);
-	wrefresh(g->pro_win);
+//	wrefresh(g->pro_win);
 }

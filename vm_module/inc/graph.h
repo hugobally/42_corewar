@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/16 12:03:37 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 15:59:31 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ enum				e_collors
 
 WINDOW				*create_new_win(int h, int w, int x, int y);
 
+int					init_thread(t_core *c);
+
 int					init_ncurse(void);
 int					make_graph(t_core *c);
 
@@ -70,7 +72,8 @@ void				create_registers_win(t_graph *g);
 void				print_process(t_graph *g, t_process *p);
 void				create_process_win(t_graph *g, t_process *p);
 
-void				print_infos(t_graph *g, t_core *c, int cycle_mod);
+void				print_infos(t_core *c);
+//void				print_infos(t_graph *g, t_core *c, int cycle_mod);
 void				create_infos_win(t_graph *g, t_core *c);
 
 int					controls(t_graph *g);
@@ -82,6 +85,7 @@ void				remove_procces_to_arena(int addr, t_graph *g);
 void				move_proccess_on_arena(int addr, int new_addr, t_graph *g);
 void				create_arena_win(t_graph *g, t_player *p);
 
+void				refresh_all_wins(t_graph *g);
 void				get_col_row(int addr, int *col, int *row);
 WINDOW				*create_new_win(int h, int w, int x, int y);
 #endif
