@@ -76,6 +76,11 @@ int		main(int ac, char **av)
 	t_core		core;
 	t_errors	ret;
 
+	if (ac == 1)
+	{
+		ft_usage(av[0]);
+		return (0);
+	}
 	ft_bzero(&core, sizeof(t_core));
 	if ((ret = get_arguments(&core, ac, av)) != ok)
 		leave(&core, ret);

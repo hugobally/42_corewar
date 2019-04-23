@@ -204,5 +204,6 @@ int						get_pc(uint32_t i);
 int						hexdump(t_core *core, int flag);
 void					introduction(t_player *player);
 int						ft_get_params(t_core *core, t_process *process, int p, int type);
+void					ft_usage(char *exe_name);
 
 #endif
