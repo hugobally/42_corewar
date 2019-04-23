@@ -1,6 +1,7 @@
 #!/bin/bash
 
 OUTPUT_FILE="asm_test_log.out"
+
 #sed -i '' -e "s/DIR_LAB/%:l1/g" 		test.s
 #sed -i '' -e "s/IND_LAB/:l1/g" 		test.s
 #sed -i '' -e "s/DIR/%1985229328/g" 	test.s 	
@@ -21,7 +22,7 @@ RESET="\033[0m"
 # DIFF REF_ASM VS MY_ASM
 
 make -C ..
-cp ../asm .
+cp ../asm bin/asm
 
 rm -f champs/*.cor
 
@@ -30,13 +31,13 @@ for file in champs/*; do
 
 		file=$(echo $file | sed "s/\.s//")
 
-		./asm $file.s &> /dev/null
+		./bin/asm $file.s &> /dev/null
 		mine=$(echo $file | sed "s/$/_mine.cor/")
 		if [ -f $file.cor ]; then
 			mv $file.cor $mine
 		fi
 
-		./asm_ref $file.s &> /dev/null
+		./bin/asm_ref $file.s &> /dev/null
 		ref=$(echo $file | sed "s/$/_ref.cor/")
 		if [ -f $file.cor ]; then
 			mv $file.cor $ref

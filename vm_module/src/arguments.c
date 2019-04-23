@@ -66,9 +66,15 @@ t_errors	check_option(t_core *core, char **av, int *i, int ac)
 		if ((ret = ft_right_nb(av[++*i], core, 1)) != ok)
 			return (badarg);
 	}
-	else if ((*i + 1) < ac && (!ft_strcmp(av[*i], "-dump") || !ft_strcmp(av[*i], "-d")))
+	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-dump"))
 	{
 		core->flags |= FLAG_DUMP;
+		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
+			return (badarg);
+	}
+	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-d"))
+	{
+		core->flags |= FLAG_DUMP + FLAG_DUMP64;
 		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
 			return (badarg);
 	}
@@ -83,7 +89,7 @@ t_errors	check_option(t_core *core, char **av, int *i, int ac)
 		if ((ret = ft_right_nb(av[++*i], core, 3)) != ok)
 			return (badarg);
 	}
-	else if (!ft_strcmp(av[*i], "-visu") || !ft_strcmp(av[*i], "-n"))
+	else if (!ft_strcmp(av[*i], "-visu"))
 		core->visu = true;
 	else if (!ft_strcmp(av[*i], "-a"))
 		core->aff = true;

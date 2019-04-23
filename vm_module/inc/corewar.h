@@ -11,7 +11,7 @@
 # define IND 3
 # define FLAG_DUMP 1
 # define FLAG_SDUMP 2
-
+# define FLAG_DUMP64 4
 
 typedef enum			e_errors
 {
