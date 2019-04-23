@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/19 21:58:46 by rle-ru           ###   ########.fr        #
+#    Updated: 2019/04/23 14:59:53 by rle-ru           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME				=	../corewar
 # Raw Sources
 
 SRCS_RAW			:=	main.c							\
+						ft_usage.c						\
 						ft_live.c						\
 						ft_ld.c							\
 						ft_st.c							\
@@ -56,6 +57,7 @@ SRCS_RAW			:=	main.c							\
 						graph_win.c						\
 						get_params.c					\
 						ft_game_adj.c					\
+						check_option.c 					\
 # Directories
 
 SRCSDIR   			=	src

@@ -17,8 +17,8 @@ int			ft_total_size(t_core *core)
 
 int			ft_nb_len(long nb)
 {
-	int len;
-	long tmp;
+	int		len;
+	long	tmp;
 
 	tmp = nb;
 	len = 1;
@@ -38,9 +38,9 @@ int			ft_nb_len(long nb)
 
 t_errors	ft_right_nb(char *s, t_core *core, int flag)
 {
-	int len;
-	int nb_len;
-	long nb;
+	int		len;
+	int		nb_len;
+	long	nb;
 
 	len = ft_strlen(s);
 	nb = (long)ft_atoi(s);
@@ -62,49 +62,26 @@ t_errors	check_option(t_core *core, char **av, int *i, int ac)
 {
 	t_errors	ret;
 
-	ret = 10;
-	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-n") && ret != ok)
+	ret = badarg;
+	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-n"))
 	{
-		if ((ret = ft_right_nb(av[++*i], core, 1)) != ok)
-			return (badarg);
+		ret = ft_right_nb(av[++*i], core, 1);
+		return (ret);
 	}
-	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-dump") && ret != ok)
+	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-dump"))
 	{
 		core->flags |= FLAG_DUMP;
-		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
-			return (badarg);
+		ret = ft_right_nb(av[++*i], core, 0);
+		return (ret);
 	}
-	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-d") && ret != ok)
+	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-d"))
 	{
 		core->flags |= FLAG_DUMP + FLAG_DUMP64;
-		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
-			return (badarg);
+		ret = ft_right_nb(av[++*i], core, 0);
+		return (ret);
 	}
-	if ((*i + 1) < ac && (!ft_strcmp(av[*i], "-sdump")
-	|| !ft_strcmp(av[*i], "-s")) && ret != ok)
-	{
-		core->flags |= FLAG_SDUMP;
-		if ((ret = ft_right_nb(av[++*i], core, 2)) != ok)
-			return (badarg);
-	}
-	if ((*i + 1) < ac && (!ft_strcmp(av[*i], "-v")) && ret != ok)
-	{
-		if ((ret = ft_right_nb(av[++*i], core, 3)) != ok)
-			return (badarg);
-	}
-	if (!ft_strcmp(av[*i], "-visu") && ret != ok)
-	{
-		core->visu = true;
-		ret = ok;
-	}
-	if (!ft_strcmp(av[*i], "-a") && ret != ok)
-	{
-		core->aff = true;
-		ret = ok;
-	}
-	if (ret != ok)
-		return (badarg);
-	return (ok);
+	ret = check_option_adj(core, av, i, ac);
+	return (ret);
 }
 
 t_errors	get_arguments(t_core *core, int ac, char **av)
