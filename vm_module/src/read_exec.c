@@ -33,7 +33,8 @@ static void		ft_viz_verb(t_core *core, t_process *p)
 		move_proccess_on_arena(p->pc, get_pc(p->pc + p->opsize), core->graph);
 	if ((p->opsize > 1 || p->instruction) && core->verbose & 16)
 	{
-		ft_printf("ADV %d (0x%.4x -> 0x%.4x) ", p->opsize, p->pc, get_pc(p->pc + p->opsize));
+		ft_printf("ADV %d (0x%.4x -> 0x%.4x) ",
+		p->opsize, p->pc, get_pc(p->pc + p->opsize));
 		ft_verbose_dump(core, p);
 	}
 	p->pc = get_pc(p->pc += p->opsize);
