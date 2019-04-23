@@ -2,6 +2,7 @@
 
 CHAMP_DIR="champs"
 COR_DIR="champs/cor"
+LOG_DIR="logs"
 
 # COLORS #
 
@@ -23,6 +24,7 @@ ASM_MINE="./bin/asm"
 
 make -C ..
 mkdir -p champs/cor
+mkdir -p $LOG_DIR
 cp ../corewar $COR_MINE
 cp ../asm $ASM_MINE
 
@@ -85,7 +87,7 @@ printf $RESET
 
 cd ../..
 
-LOG_NAME="$(echo $C1 | sed "s/\.cor/\./")$(echo $C2 | sed "s/\.cor/\./")$(echo $C3 | sed "s/\.cor/\./")$(echo $C4 | sed "s/\.cor/\./")log"
+LOG_NAME="$LOG_DIR/$(echo $C1 | sed "s/\.cor/\./")$(echo $C2 | sed "s/\.cor/\./")$(echo $C3 | sed "s/\.cor/\./")$(echo $C4 | sed "s/\.cor/\./")log"
 
 REF_CMD="$COR_REF -d CYCLE"
 MY_CMD="$COR_MINE -d CYCLE"
@@ -108,7 +110,7 @@ if [[ ${#C4} -ge 1 ]]; then
 fi
 
 if [[ ! ${#NUM_CYCLES} -ge 1 ]]; then
-	NUM_CYCLES=2000000000
+	NUM_CYCLES=2147483647
 fi
 
 if [[ ! ${#START_CYCLE} -ge 1 ]]; then
