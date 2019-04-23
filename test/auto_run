@@ -14,7 +14,7 @@ LOG_DIR="logs"
 clear
 
 TOTAL=0
-printf $TOTAL > total
+printf $TOTAL > total.out
 
 for file in champs/cor/*; do
 	./auto_corewar $file &
