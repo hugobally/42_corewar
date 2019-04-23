@@ -79,10 +79,13 @@ int		main(int ac, char **av)
 		if ((ret = make_graph(&core)) != ok)
 			leave(&core, ret);
 		make_win(&core);
+		ret = init_thread(&core);
 	}
 	else
+	{
 		core.graph = NULL;
-	ret = the_game(&core);
+		ret = the_game(&core);
+	}
 	leave(&core, ret);
 	return (0);
 }

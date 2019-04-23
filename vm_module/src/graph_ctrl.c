@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:05:07 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/16 12:03:08 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 15:37:32 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	up_laps(t_graph *g)
 	g->laps *= 2;
 	mvwprintw(g->ctrl_win, 2, 2, "%-25s%-10d%s",
 			"LAPS PER FRAME:", g->laps, "[ << 'k'] ['l' >> ]");
-	wrefresh(g->ctrl_win);
+//	wrefresh(g->ctrl_win);
 }
 
 void	down_laps(t_graph *g)
@@ -29,7 +29,7 @@ void	down_laps(t_graph *g)
 	g->laps /= 2;
 	mvwprintw(g->ctrl_win, 2, 2, "%-25s%-10d%s",
 			"LAPS PER FRAME:", g->laps, "[ << 'k'] ['l' >> ]");
-	wrefresh(g->ctrl_win);
+//	wrefresh(g->ctrl_win);
 }
 
 void	up_fps(t_graph *g)
@@ -39,7 +39,7 @@ void	up_fps(t_graph *g)
 	g->fps *= 2;
 	mvwprintw(g->ctrl_win, 1, 2, "%-25s%-10d%s",
 			"FRAME PER SECOND:", g->fps, "[ << 'o'] ['p' >> ]");
-	wrefresh(g->ctrl_win);
+//	wrefresh(g->ctrl_win);
 }
 
 void	down_fps(t_graph *g)
@@ -49,7 +49,7 @@ void	down_fps(t_graph *g)
 	g->fps /= 2;
 	mvwprintw(g->ctrl_win, 1, 2, "%-25s%-10d%s",
 			"FRAME PER SECOND:", g->fps, "[ << 'o'] ['p' >> ]");
-	wrefresh(g->ctrl_win);
+//	wrefresh(g->ctrl_win);
 }
 
 void	pause(t_graph *g)
@@ -57,7 +57,7 @@ void	pause(t_graph *g)
 	g->pause = g->pause ? 0 : 1;
 	mvwprintw(g->ctrl_win, 4, 2, "%-25s%-10s%s", "PAUSE:",
 			g->pause ? "ON": "OFF", "[' ']");
-	wrefresh(g->ctrl_win);
+//	wrefresh(g->ctrl_win);
 }
 
 int		controls(t_graph *g)
@@ -104,5 +104,5 @@ void	create_controls_win(t_graph *g)
 			"LIST OF PROCESS:", "[ << 'n'] ['m' >> ]");
 	mvwprintw(g->ctrl_win, 4, 2, "%-25s%-10s%s", "PAUSE:", "ON", "[' ']");
 	mvwprintw(g->ctrl_win, 5, 2, "%-35s%s", "QUIT:", "['F1']");
-	wrefresh(g->ctrl_win);
+//	wrefresh(g->ctrl_win);
 }
