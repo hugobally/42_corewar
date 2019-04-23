@@ -120,6 +120,8 @@ typedef struct			s_core
 	int					verbose;
 	t_bool				aff;
 	int					nb_pro;
+	char				*bad_arg;
+	int					bad_size;
 }             			t_core;
 
 
@@ -205,5 +207,6 @@ int						get_pc(uint32_t i);
 int						hexdump(t_core *core, int flag);
 void					introduction(t_player *player);
 int						ft_get_params(t_core *core, t_process *process, int p, int type);
+void					ft_usage(char *exe_name);
 
 #endif
