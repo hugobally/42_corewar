@@ -3,24 +3,29 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
+{
+	if (pre)
+		pre->next = cur->next;
+	else
+		core->process = cur->next;
+	if (cur->next)
+		cur->next->previous = pre;
+	if (core->verbose & 8)
+		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+	cur->pro_name, core->loop - cur->last_live,
+	core->max_cycle_to_die);
+	free(cur);
+	cur = NULL;
+}
+
 void		kill_process(t_core *core, t_process *pre, t_process *cur)
 {
 	while (cur != NULL)
 	{
 		if (cur->is_alive == false)
 		{
-			if (pre)
-				pre->next = cur->next;
-			else
-				core->process = cur->next;
-			if (cur->next)
-				cur->next->previous = pre;
-			if (core->verbose & 8)
-				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-					cur->pro_name, core->loop - cur->last_live,
-					core->max_cycle_to_die);
-			free(cur);
-			cur = NULL;
+			cur_is_dead(core, pre, cur);
 		}
 		else
 		{
@@ -43,6 +48,7 @@ t_errors	the_game(t_core *core)
 	int			cycles;
 	int			res;
 	uint32_t	i;
+	int			ch;
 
 	i = 0;
 	cycles = core->max_cycle_to_die;
@@ -59,11 +65,11 @@ t_errors	the_game(t_core *core)
 		if (core->visu && core->graph->pause)
 		{
 		}
-		else 
+		else
 		{
 			--cycles;
 			if ((res = call_instructions(core)) != ok)
-					return (res);
+				return (res);
 			proc = core->process;
 			if (cycles <= 0 && proc)
 			{
@@ -78,9 +84,8 @@ t_errors	the_game(t_core *core)
 					return (hexdump(core, 0));
 		}
 	}
-	int		ch;
 	find_winner(core);
-	while(core->visu && (ch = getch()) != KEY_F(1))
+	while (core->visu && (ch = getch()) != KEY_F(1))
 	{
 	}
 	return (ok);

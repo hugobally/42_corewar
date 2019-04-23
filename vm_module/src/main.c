@@ -65,7 +65,7 @@ void	leave(t_core *core, t_errors ret)
 
 int		main(int ac, char **av)
 {
-    t_core		core;
+	t_core		core;
 	t_errors	ret;
 
 	ft_bzero(&core, sizeof(t_core));

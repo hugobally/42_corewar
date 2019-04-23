@@ -36,12 +36,11 @@ t_errors	make_process(t_core *core, uint32_t pc, t_player *pl)
 
 t_errors	nb_player_spec(t_core *core, t_player *new)
 {
-	int nb;
-	t_player *player;
+	int			nb;
+	t_player	*player;
 
 	player = core->players;
 	nb = -core->next_player;
-
 	while (player != NULL)
 	{
 		if (player->p == nb)
@@ -55,9 +54,9 @@ t_errors	nb_player_spec(t_core *core, t_player *new)
 
 t_errors	nb_player(t_core *core, t_player *new)
 {
-	int nb;
-	t_player *start;
-	t_player *player;
+	int			nb;
+	t_player	*start;
+	t_player	*player;
 
 	nb = -1;
 	player = core->players;
