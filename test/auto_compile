@@ -12,7 +12,7 @@ LOG_DIR="logs"
 make -C ..
 mkdir -p $COR_DIR
 mkdir -p $LOG_DIR
-rm -f $LOG_DIR/*.log
+rm -f $LOG_DIR/*
 cp ../corewar $COR_MINE
 cp ../asm $ASM_MINE
 

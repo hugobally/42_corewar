@@ -4,6 +4,12 @@ CHAMP_DIR="champs"
 COR_DIR="champs/cor"
 LOG_DIR="logs"
 
+# FUNCTION #
+
+print_progress () {
+	printf "[$(ls -1 $LOG_DIR | wc -l | tr -d '\t' | tr -d ' ')/$(cat total.out)] "
+}
+
 # STARTUP #
 
 COR_REF="./bin/corewar_ref"
@@ -55,22 +61,24 @@ NAMES="$C1 $C2 $C3 $C4"
 printf "Launching $NAMES\n"
 
 while [[ $i -le $NUM_CYCLES ]]; do
-	echo $CURRENT_CYCLE
 	CURRENT_CYCLE=$(($START_CYCLE + $i))
 	REF_OUT=$(echo $REF_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
 	MY_OUT=$(echo $MY_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
 	if ! cmp <($REF_OUT) <($MY_OUT) &>/dev/null; then
-		printf "Diff KO at cycle $CURRENT_CYCLE | $NAMES\n"
 		diff <($REF_OUT) <($MY_OUT) > $LOG_NAME
+		print_progress
+		printf "Diff KO at cycle $CURRENT_CYCLE | $NAMES\n"
 		exit
 	fi
 	if $REF_OUT | grep "won" &>/dev/null; then
-		printf "$($REF_OUT | grep "won" | sed "s/\n//") | $NAMES\n"
 		printf "Diff OK | Game ended at cycle $CURRENT_CYCLE\n" > $LOG_NAME
+		print_progress
+		printf "$($REF_OUT | grep "won" | sed "s/\n//") | $NAMES\n"
 		exit
 	fi
 	i=$(($i + 1))
 done
 
-printf "Stopped at cycle $CURRENT_CYCLE | Diff OK | $NAMES\n"
 printf "Diff OK | Stopped at cycle $CURRENT_CYCLE\n" > $LOG_NAME
+print_progress
+printf "Stopped at cycle $CURRENT_CYCLE | Diff OK | $NAMES\n"
