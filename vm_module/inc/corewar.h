@@ -1,7 +1,6 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 # include <stdint.h>
-# include <stdio.h>
 # include "../../libft/inc/libft.h"
 # include "../../libcorewar/inc/libcorewar.h"
 # include <ncurses.h>
@@ -22,7 +21,11 @@ typedef enum			e_errors
 	badfile,
 	badopen,
 	no_color,
-	f1_exit
+	f1_exit,
+	codesize,
+	champlarge,
+	filesmall,
+	badmagic
 }						t_errors;
 
 typedef enum			e_instruction
@@ -43,7 +46,7 @@ typedef enum			e_instruction
 	lid,
 	lldi,
 	lforky,
-	aff,
+	aff
 }						t_instruction;
 
 typedef struct			s_params
@@ -152,6 +155,11 @@ void					push_process(t_core *core, t_process *new);
 */
 
 t_errors				the_game(t_core *core);
+t_errors				call_instructions(t_core *core);
+void					find_winner(t_core *core);
+int						ft_count_process(t_process *process);
+int						visu_control(t_core *c, int cycles);
+void					check_delta(t_core *core);
 
 /*
 ** Instructions

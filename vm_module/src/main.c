@@ -36,14 +36,22 @@ void	print_error(t_errors ret)
 		ft_putendl_fd("Malloc failed", 2);
 	else if (ret == badarg)
 		ft_putendl_fd("Bad argument", 2);
+	else if (ret == codesize)
+		ft_putendl_fd("Error: File has a code size that differ from what its header says", 2);
+	else if (ret == champlarge)
+		ft_putendl_fd("Error: File has too large a code (max 682 bytes)", 2);
 	else if (ret == badchamp)
 		ft_putendl_fd("Bad champ", 2);
 	else if (ret == badfile)
 		ft_putendl_fd("Bad file", 2);
 	else if (ret == badopen)
-		ft_putendl_fd("Bad open", 2);
+		ft_putendl_fd("Can't read source file", 2);
 	else if (ret == no_color)
 		ft_putendl_fd("Terminal does not support color", 2);
+	else if (ret == filesmall)
+		ft_putendl_fd("Error: File is too small to be a champion", 2);
+	else if (ret == badmagic)
+		ft_putendl_fd("Error: File has an invalid header", 2);
 	else if (ret == f1_exit)
 		ft_putendl_fd("Game exit", 2);
 }
@@ -65,7 +73,7 @@ void	leave(t_core *core, t_errors ret)
 
 int		main(int ac, char **av)
 {
-    t_core		core;
+	t_core		core;
 	t_errors	ret;
 
 	ft_bzero(&core, sizeof(t_core));

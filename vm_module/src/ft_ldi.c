@@ -1,5 +1,17 @@
 #include "corewar.h"
 
+static void		ft_verbose(t_core *core, t_process *process, int p1, int p2)
+{
+	if (core->verbose & 4)
+	{
+		ft_printf("P%5d | ldi %d %d r%d\n",
+			process->pro_name, p1, p2, process->params.p3);
+		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
+		p1, p2, p1 + p2,
+		get_pc(process->pc + (p1 + p2) % IDX_MOD));
+	}
+}
+
 t_errors		ft_ldi(t_core *core, t_process *process)
 {
 	t_params	params;
@@ -23,12 +35,8 @@ t_errors		ft_ldi(t_core *core, t_process *process)
 		p2 = process->regs[params.p2 - 1];
 	else if (pa[1] == DIR)
 		p2 = params.p2;
-	process->regs[params.p3 - 1] = read_val(core, get_pc(process->pc + ((p1 + p2) % IDX_MOD)), REG_SIZE);
-	if (core->verbose & 4)
-	{
-		ft_printf("P%5d | ldi %d %d r%d\n",
-			process->pro_name, p1, p2, process->params.p3);
-		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, get_pc(process->pc + (p1 + p2) % IDX_MOD));
-	}
+	process->regs[params.p3 - 1] = read_val(core,
+	get_pc(process->pc + ((p1 + p2) % IDX_MOD)), REG_SIZE);
+	ft_verbose(core, process, p1, p2);
 	return (ok);
 }
