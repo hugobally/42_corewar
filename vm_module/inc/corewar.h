@@ -120,6 +120,8 @@ typedef struct			s_core
 	int					verbose;
 	t_bool				aff;
 	int					nb_pro;
+	char				*bad_arg;
+	int					bad_size;
 }             			t_core;
 
 
