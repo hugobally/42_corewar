@@ -23,7 +23,7 @@ int		hexdump(t_core *core, int flag)
 		if (i == 0)
 			ft_putstr("0x");
 		ft_printf("%#.4x : ", i);
-		while (++col < 64)
+		while (++col < ((core->flags & FLAG_DUMP64 || flag) ? 64 : 32))
 		{
 			printx(core->arena[i++]);
 			ft_putchar(' ');
