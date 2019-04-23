@@ -36,6 +36,10 @@ void	print_error(t_errors ret)
 		ft_putendl_fd("Malloc failed", 2);
 	else if (ret == badarg)
 		ft_putendl_fd("Bad argument", 2);
+	else if (ret == codesize)
+		ft_putendl_fd("Error: File has a code size that differ from what its header says", 2);
+	else if (ret == champlarge)
+		ft_putendl_fd("Error: File has too large a code (max 682 bytes)", 2);
 	else if (ret == badchamp)
 		ft_putendl_fd("Bad champ", 2);
 	else if (ret == badfile)

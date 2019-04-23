@@ -22,7 +22,9 @@ typedef enum			e_errors
 	badfile,
 	badopen,
 	no_color,
-	f1_exit
+	f1_exit,
+	codesize,
+	champlarge
 }						t_errors;
 
 typedef enum			e_instruction
