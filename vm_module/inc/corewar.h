@@ -24,7 +24,9 @@ typedef enum			e_errors
 	no_color,
 	f1_exit,
 	codesize,
-	champlarge
+	champlarge,
+	filesmall,
+	badmagic
 }						t_errors;
 
 typedef enum			e_instruction
@@ -45,7 +47,7 @@ typedef enum			e_instruction
 	lid,
 	lldi,
 	lforky,
-	aff,
+	aff
 }						t_instruction;
 
 typedef struct			s_params
