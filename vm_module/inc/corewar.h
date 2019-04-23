@@ -11,7 +11,7 @@
 # define IND 3
 # define FLAG_DUMP 1
 # define FLAG_SDUMP 2
-
+# define FLAG_DUMP64 4
 
 typedef enum			e_errors
 {
@@ -104,7 +104,7 @@ typedef struct			s_core
 	t_player			*players;
 	t_process			*process;
 	t_graph				*graph;
-	unsigned int		dump;
+	int					dump;
 	int					max_cycle_to_die;
 	int					last_live_done_by;
 	int					winner;
