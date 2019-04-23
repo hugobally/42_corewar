@@ -68,6 +68,7 @@ while [[ $i -le $NUM_CYCLES ]]; do
 		diff <($REF_OUT) <($MY_OUT) > $LOG_NAME
 		print_progress
 		printf "Diff KO at cycle $CURRENT_CYCLE | $NAMES\n"
+		printf "Diff KO at cycle $CURRENT_CYCLE\n___\n\n" > $LOG_NAME
 		exit
 	fi
 	if $REF_OUT | grep "won" &>/dev/null; then

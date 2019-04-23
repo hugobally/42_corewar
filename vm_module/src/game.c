@@ -23,7 +23,7 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 {
 	while (cur != NULL)
 	{
-		if (cur->is_alive == false)
+		if (cur->is_alive == false || core->max_cycle_to_die < 0)
 		{
 			cur_is_dead(core, pre, cur);
 		}
