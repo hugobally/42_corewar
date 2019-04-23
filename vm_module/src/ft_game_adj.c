@@ -48,8 +48,9 @@ int			ft_count_process(t_process *process)
 	return (i);
 }
 
-int			visu_control(t_core *c, int cycles)
+int			visu_control(t_core *c, int cycles)//USELESS
 {
+	(void)cycles;
 	if (!c->visu)
 		return (0);
 	print_process(c->graph, c->process);
@@ -58,7 +59,7 @@ int			visu_control(t_core *c, int cycles)
 	if (!c->graph->pause)
 	{
 		c->graph->nb_cycle++;
-		print_infos(c->graph, c, cycles);
+		print_infos(c);
 	}
 	return (0);
 }

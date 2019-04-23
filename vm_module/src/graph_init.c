@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:16:49 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/15 18:35:42 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 16:52:52 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		init_ncurse(void)
 	if(has_colors() == FALSE)
 		return(no_color);
 	start_color();
-	cbreak();
+	//cbreak();
+	raw();
 	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 	noecho();

@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/16 12:03:16 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 15:36:07 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	write_on_arena(int addr, int v, int champ, t_graph *g)
 	wattron(g->arena_win, COLOR_PAIR(champ + PLAYER_DIFF));
 	mvwprintw(g->arena_win, row, col, "%.2hhx", v);
 	wattroff(g->arena_win, COLOR_PAIR(champ + PLAYER_DIFF));
-	wrefresh(g->arena_win);
+//	wrefresh(g->arena_win);
 }
 
 /*
@@ -44,7 +44,7 @@ void	add_procces_to_arena(int addr, t_graph *g)
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, P, NULL);
 	else
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c + 4, NULL);
-	wrefresh(g->arena_win);
+//	wrefresh(g->arena_win);
 }
 
 void	remove_procces_to_arena(int addr, t_graph *g)
@@ -61,7 +61,7 @@ void	remove_procces_to_arena(int addr, t_graph *g)
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, EMPTY, NULL);
 	else
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c - 4, NULL);
-	wrefresh(g->arena_win);
+//	wrefresh(g->arena_win);
 }
 
 void	move_proccess_on_arena(int addr, int new_addr, t_graph *g)
@@ -121,5 +121,5 @@ void	create_arena_win(t_graph *g, t_player *p)
 	}
 	wattroff(g->arena_win, COLOR_PAIR(EMPTY));
 	add_proc_champ(g, p);
-	wrefresh(g->arena_win);
+//	wrefresh(g->arena_win);
 }

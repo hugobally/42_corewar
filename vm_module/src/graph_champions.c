@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:43:59 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/15 16:04:06 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/23 15:37:06 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_champions(t_graph *g, t_player *p)
 		tmp = tmp->next;
 		i++;
 	}
-	wrefresh(g->champ_win);
+	//wrefresh(g->champ_win);
 }
 
 void	create_champions_win(t_graph *g, t_player *p)
@@ -46,5 +46,5 @@ void	create_champions_win(t_graph *g, t_player *p)
 	mvwprintw(g->champ_win, 4, 2, "%-20s%-30.30s%10s",
 			"MAIS", "BOUHOUHOU", "DEAD");
 	*/
-	wrefresh(g->champ_win);
+//	wrefresh(g->champ_win);
 }

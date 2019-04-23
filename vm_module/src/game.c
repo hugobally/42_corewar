@@ -1,7 +1,7 @@
 #include "corewar.h"
 #include "graph.h"
 #include <stdlib.h>
-#include <unistd.h>
+#include <unistd.h> //ARETIERE AVEC USLEEP
 
 void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 {
@@ -23,7 +23,7 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 {
 	while (cur != NULL)
 	{
-		if (cur->is_alive == false)
+		if (cur->is_alive == false || core->max_cycle_to_die < 0)
 		{
 			cur_is_dead(core, pre, cur);
 		}
@@ -48,25 +48,28 @@ t_errors	the_game(t_core *core)
 	int			cycles;
 	int			res;
 	uint32_t	i;
-	int			ch;
+//	int			ch;
 
 	i = 0;
 	cycles = core->max_cycle_to_die;
 	proc = core->process;
-	if (core->flags & FLAG_SDUMP)
-		hexdump(core, 1);
+	//if (core->flags & FLAG_SDUMP)
+	//	hexdump(core, 1);
 	while (proc)
 	{
 		core->loop++;
 		if (core->verbose & 2)
 			ft_printf("It is now cycle %d\n", core->loop);
-		if (visu_control(core, cycles))
-			return (f1_exit);
+		//if (visu_control(core, cycles))
+		//	return (f1_exit);
 		if (core->visu && core->graph->pause)
 		{
 		}
 		else
 		{
+			//core->loop++;
+			if (core->visu)
+				usleep(100000 / core->graph->fps);
 			--cycles;
 			if ((res = call_instructions(core)) != ok)
 				return (res);
@@ -85,8 +88,8 @@ t_errors	the_game(t_core *core)
 		}
 	}
 	find_winner(core);
-	while (core->visu && (ch = getch()) != KEY_F(1))
-	{
-	}
+	//while (core->visu && (ch = getch()) != KEY_F(1))
+	//{
+	//}
 	return (ok);
 }

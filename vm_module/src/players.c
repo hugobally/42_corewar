@@ -2,14 +2,14 @@
 #include <unistd.h>
 #include "corewar.h"
 
-uint32_t	reverse_endian(uint32_t	num)
+uint32_t	reverse_endian(uint32_t num)
 {
 	uint32_t	swapped;
 
-	swapped = ((num>>24)&0xff);
-	swapped |= ((num<<8)&0xff0000);
-	swapped |= ((num>>8)&0xff00);
-	swapped |= ((num<<24)&0xff000000);
+	swapped = ((num >> 24) & 0xff);
+	swapped |= ((num << 8) & 0xff0000);
+	swapped |= ((num >> 8) & 0xff00);
+	swapped |= ((num << 24) & 0xff000000);
 	return (swapped);
 }
 
@@ -40,7 +40,7 @@ t_errors	read_proc(int fd, t_player *new)
 
 t_errors	read_header(int fd, t_player *new)
 {
-	if (read(fd, new, sizeof(header_t)) < (ssize_t)sizeof(header_t))
+	if ((int64_t)read(fd, new, sizeof(header_t)) < (int64_t)sizeof(header_t))
 		return (filesmall);
 	new->head.magic = reverse_endian(new->head.magic);
 	new->head.prog_size = reverse_endian(new->head.prog_size);
@@ -78,6 +78,5 @@ t_errors	new_player(t_core *core, char *av)
 	if ((ret = nb_player(core, new)) != ok)
 		return (ret);
 	push_player(core, new);
-	++core->nb_players;
 	return (ok);
 }
