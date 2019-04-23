@@ -152,6 +152,11 @@ void					push_process(t_core *core, t_process *new);
 */
 
 t_errors				the_game(t_core *core);
+t_errors				call_instructions(t_core *core);
+void					find_winner(t_core *core);
+int						ft_count_process(t_process *process);
+int						visu_control(t_core *c, int cycles);
+void					check_delta(t_core *core);
 
 /*
 ** Instructions

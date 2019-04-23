@@ -1,5 +1,17 @@
 #include "corewar.h"
 
+static void				ft_verbose(t_core *core, t_process *process,
+						int p1, int p2)
+{
+	if (core->verbose & 4)
+	{
+		ft_printf("P%5d | lldi %d %d r%d\n", process->pro_name, p1, p2,
+		process->params.p3);
+		ft_printf("       | -> load from %d + %d = %d (with pc %d)\n",
+		p1, p2, p1 + p2, process->pc + p1 + p2);
+	}
+}
+
 t_errors				ft_lldi(t_core *core, t_process *process)
 {
 	int			p1;
@@ -22,10 +34,6 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 	else if (pa[1] == DIR)
 		p2 = process->params.p2;
 	process->regs[process->params.p3 - 1] = read_val(core, get_pc(p1 + p2), 4);
-	if (core->verbose & 4)
-	{
-		ft_printf("P%5d | lldi %d %d r%d\n", process->pro_name, p1, p2, process->params.p3);
-		ft_printf("       | -> load from %d + %d = %d (with pc %d)\n", p1, p2, p1 + p2, process->pc + p1 + p2);
-	}
+	ft_verbose(core, process, p1, p2);
 	return (ok);
 }

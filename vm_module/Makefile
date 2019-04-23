@@ -55,6 +55,7 @@ SRCS_RAW			:=	main.c							\
 						graph_tools.c					\
 						graph_win.c						\
 						get_params.c					\
+						ft_game_adj.c					\
 # Directories
 
 SRCSDIR   			=	src
