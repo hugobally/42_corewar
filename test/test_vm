@@ -131,9 +131,9 @@ while [[ $i -le $NUM_CYCLES ]]; do
 	printf "$CURRENT_CYCLE\n"
 	REF_OUT=$(echo $REF_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
 	MY_OUT=$(echo $MY_CMD | sed "s/CYCLE/$CURRENT_CYCLE/")
-	if ! diff -q <($REF_OUT) <($MY_OUT) &>/dev/null; then
+	if ! cmp <($REF_OUT) <($MY_OUT) &>/dev/null; then
 		printf $RED
-		printf "Found Diff (Logged to $LOG_NAME)\n"
+		printf "Diff KO at cycle $CURRENT_CYCLE (Logged to $LOG_NAME)\n"
 		diff <($REF_OUT) <($MY_OUT) &> $LOG_NAME
 		printf $RESET
 		exit

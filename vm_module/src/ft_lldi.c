@@ -35,5 +35,6 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 		p2 = process->params.p2;
 	process->regs[process->params.p3 - 1] = read_val(core, get_pc(p1 + p2), 4);
 	ft_verbose(core, process, p1, p2);
+	ft_carry(process, process->regs[process->params.p3 - 1]);
 	return (ok);
 }

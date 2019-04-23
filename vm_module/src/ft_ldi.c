@@ -8,7 +8,7 @@ static void		ft_verbose(t_core *core, t_process *process, int p1, int p2)
 			process->pro_name, p1, p2, process->params.p3);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
 		p1, p2, p1 + p2,
-		get_pc(process->pc + (p1 + p2) % IDX_MOD));
+		process->pc + (p1 + p2) % IDX_MOD);
 	}
 }
 
