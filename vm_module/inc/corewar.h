@@ -1,7 +1,6 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 # include <stdint.h>
-# include <stdio.h>
 # include "../../libft/inc/libft.h"
 # include "../../libcorewar/inc/libcorewar.h"
 # include <ncurses.h>
