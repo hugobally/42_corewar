@@ -57,7 +57,7 @@ t_errors	the_game(t_core *core)
 	//	hexdump(core, 1);
 	while (proc)
 	{
-		//core->loop++; OLD CORE LOOP
+		core->loop++;
 		if (core->verbose & 2)
 			ft_printf("It is now cycle %d\n", core->loop);
 		//if (visu_control(core, cycles))
@@ -67,8 +67,9 @@ t_errors	the_game(t_core *core)
 		}
 		else
 		{
-			core->loop++;
-			usleep(100000 / core->graph->fps);
+			//core->loop++;
+			if (core->visu)
+				usleep(100000 / core->graph->fps);
 			--cycles;
 			if ((res = call_instructions(core)) != ok)
 				return (res);
