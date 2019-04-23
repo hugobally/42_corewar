@@ -10,7 +10,7 @@ static void			ft_verbose(t_core *core, t_process *process, int p1, int p2)
 			p1,
 			p2);
 		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n",
-			p1, p2, p1 + p2, get_pc(process->pc + (p1 + p2) % IDX_MOD));
+			p1, p2, p1 + p2, process->pc + (p1 + p2) % IDX_MOD);
 	}
 }
 
