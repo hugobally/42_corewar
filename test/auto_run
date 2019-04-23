@@ -1,0 +1,23 @@
+#!/bin/bash
+
+LOG_DIR="logs"
+COR_REF="./bin/corewar_ref"
+COR_MINE="./bin/corewar"
+ASM_REF="./bin/asm_ref"
+ASM_MINE="./bin/asm"
+CHAMP_DIR="champs"
+COR_DIR="champs/cor"
+LOG_DIR="logs"
+
+./auto_compile
+
+clear
+
+TOTAL=0
+printf $TOTAL > total.out
+
+for file in champs/cor/*; do
+	./auto_corewar $file &
+	TOTAL=$((TOTAL + 1))
+	printf $TOTAL > total.out
+done

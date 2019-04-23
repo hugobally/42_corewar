@@ -30,22 +30,33 @@ void	del_players(t_core *core)
 	}
 }
 
-void	print_error(t_errors ret)
+void	print_error(t_errors ret, char *arg, int bad_size)
 {
 	if (ret == falloc)
 		ft_putendl_fd("Malloc failed", 2);
 	else if (ret == badarg)
 		ft_putendl_fd("Bad argument", 2);
+	else if (ret == codesize)
+	{
+		ft_dprintf(2, "Error: File %s has a code size ", arg);
+		ft_dprintf(2, "that differ from what its header says\n");
+	}
+	else if (ret == champlarge)
+		ft_dprintf(2,
+		"Error: File %s has too large a code (%d bytes > %d bytes)\n",
+		arg, bad_size, CHAMP_MAX_SIZE);
 	else if (ret == badchamp)
 		ft_putendl_fd("Bad champ", 2);
 	else if (ret == badfile)
 		ft_putendl_fd("Bad file", 2);
 	else if (ret == badopen)
-		ft_putendl_fd("Bad open", 2);
+		ft_dprintf(2, "Can't read source file %s\n", arg);
 	else if (ret == no_color)
 		ft_putendl_fd("Terminal does not support color", 2);
-	else if (ret == f1_exit)
-		ft_putendl_fd("Game exit", 2);
+	else if (ret == filesmall)
+		ft_dprintf(2, "Error: File %s is too small to be a champion\n", arg);
+	else if (ret == badmagic)
+		ft_dprintf(2, "Erorr: File %s has an invalid header\n", arg);
 }
 
 void	leave(t_core *core, t_errors ret)
@@ -59,7 +70,9 @@ void	leave(t_core *core, t_errors ret)
 		free_graph(core->graph);
 		endwin();
 	}
-	print_error(ret);
+	print_error(ret, core->bad_arg, core->bad_size);
+	if (ret == f1_exit)
+		ft_putendl_fd("Game exit", 2);
 	exit(0);
 }
 
@@ -68,6 +81,11 @@ int		main(int ac, char **av)
 	t_core		core;
 	t_errors	ret;
 
+	if (ac == 1)
+	{
+		ft_usage(av[0]);
+		return (0);
+	}
 	ft_bzero(&core, sizeof(t_core));
 	if ((ret = get_arguments(&core, ac, av)) != ok)
 		leave(&core, ret);

@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:58:09 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/22 15:58:41 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/23 14:22:11 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_code				token_quote(const t_toktype type,
 		start = ++(l->index);
 		l->is_quote = 1;
 	}
+	else
+		start = l->index;
 	while (l->str[l->index] && l->str[l->index] != QUOTE_CHAR)
 		l->index++;
 	template.value = ft_strsub(l->str, start, l->index - start);

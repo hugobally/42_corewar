@@ -2,8 +2,8 @@
 
 int			ft_total_size(t_core *core)
 {
-	t_player *player;
-	int size;
+	t_player	*player;
+	int			size;
 
 	size = 0;
 	player = core->players;
@@ -15,10 +15,10 @@ int			ft_total_size(t_core *core)
 	return (size);
 }
 
-int 		ft_nb_len(int nb)
+int			ft_nb_len(long nb)
 {
-	int len;
-	int tmp;
+	int		len;
+	long	tmp;
 
 	tmp = nb;
 	len = 1;
@@ -26,23 +26,24 @@ int 		ft_nb_len(int nb)
 	{
 		len++;
 		nb = -nb;
+		tmp = nb;
 	}
 	while (tmp > 9)
 	{
 		tmp = tmp / 10;
 		len++;
 	}
-	return(len);
+	return (len);
 }
 
 t_errors	ft_right_nb(char *s, t_core *core, int flag)
 {
-	int len;
-	int nb_len;
-	int nb;
+	int		len;
+	int		nb_len;
+	long	nb;
 
 	len = ft_strlen(s);
-	nb = ft_atoi(s);
+	nb = (long)ft_atoi(s);
 	nb_len = ft_nb_len(nb);
 	if (len != nb_len || (nb < 0 && flag == 0))
 		return (badarg);
@@ -61,41 +62,26 @@ t_errors	check_option(t_core *core, char **av, int *i, int ac)
 {
 	t_errors	ret;
 
+	ret = badarg;
 	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-n"))
 	{
-		if ((ret = ft_right_nb(av[++*i], core, 1)) != ok)
-			return (badarg);
+		ret = ft_right_nb(av[++*i], core, 1);
+		return (ret);
 	}
-	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-dump"))
+	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-dump"))
 	{
 		core->flags |= FLAG_DUMP;
-		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
-			return (badarg);
+		ret = ft_right_nb(av[++*i], core, 0);
+		return (ret);
 	}
-	else if ((*i + 1) < ac && !ft_strcmp(av[*i], "-d"))
+	if ((*i + 1) < ac && !ft_strcmp(av[*i], "-d"))
 	{
 		core->flags |= FLAG_DUMP + FLAG_DUMP64;
-		if ((ret = ft_right_nb(av[++*i], core, 0)) != ok)
-			return (badarg);
+		ret = ft_right_nb(av[++*i], core, 0);
+		return (ret);
 	}
-	else if ((*i + 1) < ac && (!ft_strcmp(av[*i], "-sdump") || !ft_strcmp(av[*i], "-s")))
-	{
-		core->flags |= FLAG_SDUMP;
-		if ((ret = ft_right_nb(av[++*i], core, 2)) != ok)
-			return (badarg);
-	}
-	else if ((*i + 1) < ac && (!ft_strcmp(av[*i], "-v")))
-	{
-		if ((ret = ft_right_nb(av[++*i], core, 3)) != ok)
-			return (badarg);
-	}
-	else if (!ft_strcmp(av[*i], "-visu"))
-		core->visu = true;
-	else if (!ft_strcmp(av[*i], "-a"))
-		core->aff = true;
-	else
-		return (badarg);
-	return (ok);
+	ret = check_option_adj(core, av, i, ac);
+	return (ret);
 }
 
 t_errors	get_arguments(t_core *core, int ac, char **av)
@@ -112,8 +98,10 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 				return (badarg);
 		}
 		else
+		{
 			if ((ret = new_player(core, av[i])) != ok)
 				return (ret);
+		}
 		if (core->nb_players > MAX_PLAYERS)
 			return (badarg);
 	}

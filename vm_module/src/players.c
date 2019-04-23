@@ -29,23 +29,25 @@ void		push_player(t_core *core, t_player *new)
 
 t_errors	read_proc(int fd, t_player *new)
 {
+	char		buff[1];
+
 	if (read(fd, new->proc, new->head.prog_size) < new->head.prog_size)
-		return (badfile);
-	if (read(fd, NULL, 1) > 0)
-		return (badfile);
+		return (codesize);
+	if (read(fd, buff, 1) > 0)
+		return (codesize);
 	return (ok);
 }
 
 t_errors	read_header(int fd, t_player *new)
 {
 	if (read(fd, new, sizeof(header_t)) < (ssize_t)sizeof(header_t))
-		return (badfile);
+		return (filesmall);
 	new->head.magic = reverse_endian(new->head.magic);
 	new->head.prog_size = reverse_endian(new->head.prog_size);
 	if (new->head.prog_size > CHAMP_MAX_SIZE)
-		return (badchamp);
+		return (champlarge);
 	if (new->head.magic != COREWAR_EXEC_MAGIC)
-		return (badchamp);
+		return (badmagic);
 	new->next = NULL;
 	return (ok);
 }
@@ -56,12 +58,14 @@ t_errors	new_player(t_core *core, char *av)
 	int			fd;
 	t_errors	ret;
 
+	core->bad_arg = av;
 	if (!(new = (t_player*)ft_memalloc(sizeof(t_player))))
 		return (falloc);
 	if ((fd = open(av, O_RDONLY)) < 2)
 		return (badopen);
 	if ((ret = read_header(fd, new)) != ok)
 	{
+		core->bad_size = new->head.prog_size;
 		close(fd);
 		return (ret);
 	}
