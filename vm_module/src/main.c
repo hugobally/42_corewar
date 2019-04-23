@@ -37,9 +37,14 @@ void	print_error(t_errors ret, char *arg, int bad_size)
 	else if (ret == badarg)
 		ft_putendl_fd("Bad argument", 2);
 	else if (ret == codesize)
-		ft_dprintf(2, "Error: File %s has a code size that differ from what its header says\n", arg);
+	{
+		ft_dprintf(2, "Error: File %s has a code size ", arg);
+		ft_dprintf(2, "that differ from what its header says\n");
+	}
 	else if (ret == champlarge)
-		ft_dprintf(2, "Error: File %s has too large a code (%d bytes > %d bytes)\n", arg, bad_size, CHAMP_MAX_SIZE);
+		ft_dprintf(2,
+		"Error: File %s has too large a code (%d bytes > %d bytes)\n",
+		arg, bad_size, CHAMP_MAX_SIZE);
 	else if (ret == badchamp)
 		ft_putendl_fd("Bad champ", 2);
 	else if (ret == badfile)
@@ -52,8 +57,6 @@ void	print_error(t_errors ret, char *arg, int bad_size)
 		ft_dprintf(2, "Error: File %s is too small to be a champion\n", arg);
 	else if (ret == badmagic)
 		ft_dprintf(2, "Erorr: File %s has an invalid header\n", arg);
-	else if (ret == f1_exit)
-		ft_putendl_fd("Game exit", 2);
 }
 
 void	leave(t_core *core, t_errors ret)
@@ -68,6 +71,8 @@ void	leave(t_core *core, t_errors ret)
 		endwin();
 	}
 	print_error(ret, core->bad_arg, core->bad_size);
+	if (ret == f1_exit)
+		ft_putendl_fd("Game exit", 2);
 	exit(0);
 }
 
