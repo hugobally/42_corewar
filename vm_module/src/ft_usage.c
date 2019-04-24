@@ -14,7 +14,7 @@
 
 int		ft_usage(char *exe_name, int ac)
 {
-	if (ac != 1)
+	if (ac <= 1)
 		return (1);
 	ft_printf(
 	"Usage: %s [-s N -dump N -d N -v N | -visu | -a] <champion1.cor> <...>\n",
