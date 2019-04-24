@@ -5,8 +5,6 @@ static void			ft_verbose(t_core *core, t_process *process, int p1, int p2)
 	int	final;
 
 	final = process->pc + (p1 + p2) % IDX_MOD;
-	if (final < 0)
-		final += MEM_SIZE;
 	if (core->verbose & 4)
 	{
 		ft_printf("P%5d | sti r%d %d %d\n",
