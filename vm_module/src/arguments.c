@@ -102,6 +102,7 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 			if ((ret = new_player(core, av[i])) != ok)
 				return (ret);
 			++core->nb_players;
+			core->bad_arg = av[i];
 		}
 		if (core->nb_players > MAX_PLAYERS)
 			return (badarg);

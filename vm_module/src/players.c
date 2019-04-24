@@ -60,7 +60,6 @@ t_errors	new_player(t_core *core, char *av)
 	int			fd;
 	t_errors	ret;
 
-	core->bad_arg = av;
 	if (!(new = (t_player*)ft_memalloc(sizeof(t_player))))
 		return (falloc);
 	if ((fd = open(av, O_RDONLY)) < 2)
