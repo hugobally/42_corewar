@@ -6,7 +6,7 @@
 #    By: hbally <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/15 15:18:00 by hbally           ###   ########.fr        #
+#    Updated: 2019/04/24 16:13:08 by hbally           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRCS_RAW			:=	main.c						\
 						syntax_exit.c				\
 						output_file.c				\
 						output_instruction.c		\
-						label_tab.c
+						label_tab.c					\
+						deasm.c
 
 # Directories
 
