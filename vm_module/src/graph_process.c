@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:01:27 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 16:50:05 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/24 17:07:17 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_process(t_graph *g, t_process *p)
 	int			col;
 	int			row;
 	const char	*instr[18] = {"error", "live", "load", "store", "add",
-		"sub", "and", "or", "xor", "zjmp", "ldi", "sti", "forky", "lid",
+		"sub", "and", "or", "xor", "zjmp", "ldi", "sti", "fork", "lid",
 		"lldi", "lforky", "aff"};
 
 	i = 1;
