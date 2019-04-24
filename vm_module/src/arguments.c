@@ -108,5 +108,6 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 	}
 	if (ft_total_size(core) > MEM_SIZE)
 		return (badchamp);
+	ft_if_visu(core);
 	return (core->nb_players > 0 ? ok : badarg);
 }
