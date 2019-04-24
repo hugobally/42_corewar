@@ -45,7 +45,7 @@ void		ft_if_visu(t_core *core)
 	{
 		core->verbose = 0;
 		core->dump = 0;
-		core->sdump = 0 ;
+		core->sdump = 0;
 		core->aff = 0;
 		core->flags = 0;
 	}
