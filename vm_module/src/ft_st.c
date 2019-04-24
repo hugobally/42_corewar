@@ -5,11 +5,9 @@ t_errors		ft_store(t_core *core, t_process *process)
 	t_params		params;
 	int				p1;
 	int				p2;
-	int				p3;
-	int				ret;
 
 	params = process->params;
-	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+	if (ft_reg(process, &p1, &p2, NULL) != ok)
 		return (ok);
 	if (p2 == REG)
 		process->regs[params.p2 - 1] = (int)process->regs[params.p1 - 1];

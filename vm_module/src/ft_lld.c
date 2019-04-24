@@ -5,12 +5,9 @@ t_errors			ft_lld(t_core *core, t_process *process)
 	t_params	params;
 	int			p1;
 	int			p2;
-	int			p3;
-	int			ret;
 
 	params = process->params;
-	p1 = ft_type_param(params.bytecode, 1);
-	if ((ret = ft_reg(process, &p1, &p2, &p3)) != ok)
+	if (ft_reg(process, &p1, &p2, NULL) != ok)
 		return (ok);
 	if (p1 == DIR)
 		process->regs[params.p2 - 1] = params.p1;
