@@ -12,8 +12,10 @@
 
 #include "libft.h"
 
-void	ft_usage(char *exe_name)
+int		ft_usage(char *exe_name, int ac)
 {
+	if (ac != 1)
+		return (1);
 	ft_printf(
 	"Usage: %s [-s N -dump N -d N -v N | -visu | -a] <champion1.cor> <...>\n",
 	exe_name);
@@ -35,4 +37,5 @@ void	ft_usage(char *exe_name)
 	ft_printf("          - 4 : Show operations\n");
 	ft_printf("          - 8 : Show deaths\n");
 	ft_printf("          - 16 : Show PC movements\n");
+	return (0);
 }
