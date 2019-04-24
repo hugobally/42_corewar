@@ -25,7 +25,8 @@ typedef enum			e_errors
 	codesize,
 	champlarge,
 	filesmall,
-	badmagic
+	badmagic,
+	badthread
 }						t_errors;
 
 typedef enum			e_instruction

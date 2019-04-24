@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:43:59 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/23 15:37:06 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/24 14:34:51 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	print_champions(t_graph *g, t_player *p)
 		tmp = tmp->next;
 		i++;
 	}
-	//wrefresh(g->champ_win);
 }
 
 void	create_champions_win(t_graph *g, t_player *p)
@@ -36,15 +35,4 @@ void	create_champions_win(t_graph *g, t_player *p)
 			INFO_COL + CTRL_COL, ARENA_ROW);
 	mvwprintw(g->champ_win, 0, (CHAMP_COL / 2) - 9, " - CHAMPIONS - ");
 	print_champions(g, p);
-/*	wattron(g->champ_win, COLOR_PAIR(CHAMP2));
-	mvwprintw(g->champ_win, 2, 2, "%-20s%-30.30s%10s",
-			"Coucou", "je sais dire bonjour dans 58 langues :D", "ALIVE");
-	wattron(g->champ_win, COLOR_PAIR(CHAMP3));
-	mvwprintw(g->champ_win, 3, 2, "%-20s%-30.30s%10s",
-			"Lolol", "haha", "WINNNER");
-	wattron(g->champ_win, COLOR_PAIR(CHAMP4));
-	mvwprintw(g->champ_win, 4, 2, "%-20s%-30.30s%10s",
-			"MAIS", "BOUHOUHOU", "DEAD");
-	*/
-//	wrefresh(g->champ_win);
 }

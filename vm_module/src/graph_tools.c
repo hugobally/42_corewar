@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:16:51 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/23 18:54:57 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/24 14:53:46 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	refresh_all_wins(t_core *c)
 	wrefresh(c->graph->pro_win);
 	wrefresh(c->graph->reg_win);
 	wrefresh(c->graph->info_win);
-
 	if (!(c->loop % c->graph->laps))
 	{
 		wrefresh(c->graph->arena_win);

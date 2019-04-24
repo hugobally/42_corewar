@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/24 14:22:27 by tlesven          ###   ########.fr        #
+#    Updated: 2019/04/24 14:59:30 by tlesven          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS_RAW			:=	main.c							\
 						ft_game_adj.c					\
 						graph_threads.c					\
 						check_option.c					\
+						graph_move_process.c			\
 # Directories
 
 SRCSDIR   			=	src
