@@ -53,12 +53,11 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
-	int			cycles;
 	int			res;
 	uint32_t	i;
 
 	i = 0;
-	cycles = core->max_cycle_to_die;
+	core->cycles = core->max_cycle_to_die;
 	proc = core->process;
 	//if (core->flags & FLAG_SDUMP)
 	//	hexdump(core, 1);
@@ -73,14 +72,14 @@ t_errors	the_game(t_core *core)
 				ft_printf("It is now cycle %d\n", core->loop);
 			if (core->visu)
 				usleep(100000 / core->graph->fps);
-			--cycles;
+			core->cycles = core->cycles - 1;
 			if ((res = call_instructions(core)) != ok)
 				return (res);
 			proc = core->process;
-			if (cycles <= 0 && proc)
+			if (core->cycles <= 0 && proc)
 			{
 				kill_process(core, NULL, core->process);
-				cycles = core->max_cycle_to_die;
+				core->cycles = core->max_cycle_to_die;
 				proc = core->process;
 			}
 			if (++i == core->sdump)
