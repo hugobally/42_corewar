@@ -60,9 +60,9 @@ t_errors	the_game(t_core *core)
 			;
 		else
 		{
+			core->loop++;
 			if (core->verbose & 2)
 				ft_printf("It is now cycle %d\n", core->loop);
-			core->loop++;
 			if (core->visu)
 				usleep(100000 / core->graph->fps);
 			--cycles;
