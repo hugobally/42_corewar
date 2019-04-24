@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:43:59 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 16:07:35 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/24 16:25:43 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	print_champions(t_graph *g, t_player *p)
 	while (tmp)
 	{
 		wattron(g->champ_win, COLOR_PAIR(tmp->p + PLAYER_DIFF));
-		mvwprintw(g->champ_win, i, 2, "%-20s%-30.30s%10s",
-			p->head.prog_name, p->head.comment,
-			p->is_alive ? "ALIVE" : "DEAD");
+		mvwprintw(g->champ_win, i, 2, "%-20.20s%-30.30s%10s",
+			tmp->head.prog_name, tmp->head.comment,
+			tmp->is_alive ? "ALIVE" : "DEAD");
 		tmp = tmp->next;
 		i++;
 	}

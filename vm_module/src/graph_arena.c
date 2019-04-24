@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:58:26 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/24 16:39:01 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	add_proc_champ(t_graph *g, t_player *p)
 	while (tmp)
 	{
 		i = 0;
-		while (i < p->head.prog_size)
+		while (i < tmp->head.prog_size)
 		{
 			write_on_arena(tmp->orig_pc + i, tmp->proc[i], tmp->p, g);
 			if (i == 0)

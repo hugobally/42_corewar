@@ -120,6 +120,7 @@ typedef struct			s_core
 	uint32_t			sdump;
 	uint8_t				flags;
 	int					loop;
+	int					cycles;
 	int					verbose;
 	t_bool				aff;
 	int					nb_pro;

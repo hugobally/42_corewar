@@ -6,10 +6,11 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:01:27 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:10:31 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/24 17:07:17 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "unistd.h"
 #include "graph.h"
 
 void	print_process(t_graph *g, t_process *p)
@@ -19,11 +20,12 @@ void	print_process(t_graph *g, t_process *p)
 	int			col;
 	int			row;
 	const char	*instr[18] = {"error", "live", "load", "store", "add",
-		"sub", "and", "or", "xor", "zjmp", "ldi", "sti", "forky", "lid",
+		"sub", "and", "or", "xor", "zjmp", "ldi", "sti", "fork", "lid",
 		"lldi", "lforky", "aff"};
 
 	i = 1;
 	tmp = p;
+	werase(g->pro_win);
 	while (tmp)
 	{
 		get_col_row(tmp->pc, &col, &row);
@@ -36,6 +38,7 @@ void	print_process(t_graph *g, t_process *p)
 			i, row - 1, col - 2, tmp->is_alive ? 'L' : ' ',
 			tmp->carry ? 'C' : ' ', instr[tmp->instruction],
 			tmp->remaining_cycles);
+		usleep(120);
 		tmp = tmp->next;
 		++i;
 	}
