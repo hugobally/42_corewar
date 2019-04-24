@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/23 17:03:17 by tlesven          ###   ########.fr        #
+#    Updated: 2019/04/24 14:22:27 by tlesven          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS_RAW			:=	main.c							\
 						graph_process.c					\
 						graph_infos.c					\
 						graph_ctrl.c					\
+						graph_ctrl_actions.c			\
 						graph_arena.c					\
 						graph_tools.c					\
 						graph_win.c						\

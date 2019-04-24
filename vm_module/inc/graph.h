@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/23 18:24:28 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/24 14:22:57 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ void				create_process_win(t_graph *g, t_process *p);
 void				print_infos(t_core *c);
 //void				print_infos(t_graph *g, t_core *c, int cycle_mod);
 void				create_infos_win(t_graph *g, t_core *c);
+
+void				up_laps(t_graph *g);
+void				down_laps(t_graph *g);
+void				up_fps(t_graph *g);
+void				down_fps(t_graph *g);
+void				pause_game(t_graph *g);
+void				controls2(t_graph *g, int ch);
 
 int					controls(t_graph *g);
 void				create_controls_win(t_graph *g);
