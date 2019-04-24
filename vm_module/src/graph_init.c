@@ -6,11 +6,10 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:16:49 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/23 16:52:52 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/24 14:40:29 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "corewar.h"
 #include "libft.h"
 #include "graph.h"
@@ -19,10 +18,9 @@ int		init_ncurse(void)
 {
 	initscr();
 	curs_set(0);
-	if(has_colors() == FALSE)
-		return(no_color);
+	if (has_colors() == FALSE)
+		return (no_color);
 	start_color();
-	//cbreak();
 	raw();
 	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
@@ -42,7 +40,6 @@ int		init_ncurse(void)
 	return (0);
 }
 
-
 int		make_graph(t_core *c)
 {
 	int		err;
@@ -53,15 +50,5 @@ int		make_graph(t_core *c)
 	if (!c->graph)
 		return (falloc);
 	c->graph->selected_proc = c->process;
-	/*int i = 0;
-	while (i++ < MEM_SIZE)
-		write_on_arena(i, i, 2, g);
-	add_procces_to_arena(1, g);
-	move_proccess_on_arena(1, 56, g);
-	while((ch = getch()) != KEY_F(1))
-	{
-	}
-	free_graph(g);
-	endwin();*/
 	return (0);
 }

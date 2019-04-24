@@ -13,6 +13,8 @@ t_errors	ft_live(t_core *core, t_process *process)
 	core->nbr_live++;
 	core->winner = 1;
 	process->last_live = core->loop;
+	if (tmp)
+		tmp->has_lived = true;
 	if (core->verbose & 4)
 		ft_printf("P%5d | live %d\n", process->pro_name, process->params.p1);
 	if (tmp && core->verbose & 1)

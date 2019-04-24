@@ -77,6 +77,7 @@ t_errors	new_player(t_core *core, char *av)
 	close(fd);
 	if ((ret = nb_player(core, new)) != ok)
 		return (ret);
+	new->is_alive = true;
 	push_player(core, new);
 	return (ok);
 }
