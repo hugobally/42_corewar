@@ -59,8 +59,8 @@ t_errors	the_game(t_core *core)
 	i = 0;
 	core->cycles = core->max_cycle_to_die;
 	proc = core->process;
-	//if (core->flags & FLAG_SDUMP)
-	//	hexdump(core, 1);
+	if (core->flags & FLAG_SDUMP)
+		hexdump(core, 1);
 	while (proc)
 	{
 		if (core->visu && core->graph->pause)

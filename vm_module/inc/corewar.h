@@ -169,6 +169,7 @@ void					check_delta(t_core *core);
 t_errors				check_option_adj(t_core *core, char **av, int *i, int ac);
 t_errors				ft_right_nb(char *s, t_core *core, int flag);
 int						ft_nb_len(long nb);
+void					ft_if_visu(t_core *core);
 
 /*
 ** Instructions

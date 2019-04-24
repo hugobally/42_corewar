@@ -38,3 +38,15 @@ t_errors	check_option_adj(t_core *core, char **av, int *i, int ac)
 	ret = check_option_vis(core, av, i);
 	return (ret);
 }
+
+void		ft_if_visu(t_core *core)
+{
+	if (core->visu)
+	{
+		core->verbose = 0;
+		core->dump = 0;
+		core->sdump = 0 ;
+		core->aff = 0;
+		core->flags = 0;
+	}
+}
