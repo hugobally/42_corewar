@@ -65,6 +65,8 @@ typedef	struct			s_player
 	unsigned char		proc[CHAMP_MAX_SIZE];
 	struct s_player		*next;
 	unsigned int		orig_pc;
+	t_bool				has_lived;
+	t_bool				is_alive;
 }						t_player;
 
 typedef struct			s_process

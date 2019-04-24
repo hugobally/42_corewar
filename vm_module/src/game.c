@@ -21,12 +21,12 @@ void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 
 void		kill_process(t_core *core, t_process *pre, t_process *cur)
 {
+	t_player *tmp;
+
 	while (cur != NULL)
 	{
 		if (cur->is_alive == false || core->max_cycle_to_die < 0)
-		{
 			cur_is_dead(core, pre, cur);
-		}
 		else
 		{
 			cur->is_alive = false;
@@ -38,6 +38,14 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 			cur = core->process;
 		if (cur)
 			cur->previous = pre;
+	}
+	tmp = core->players;
+	while (tmp)
+	{
+		if (tmp->has_lived == false)
+			tmp->is_alive = false;
+		tmp->has_lived = false;
+		tmp = tmp->next;
 	}
 	check_delta(core);
 }
