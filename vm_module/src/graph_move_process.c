@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:57:40 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 13:48:04 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 14:17:12 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	add_procces_to_arena(int addr, t_graph *g)
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c + 4, NULL);
 }
 
-t_bool		is_another_process(int addr, t_process *p)
+t_bool	is_another_process(int addr, t_process *p)
 {
 	t_process	*tmp;
 	int			i;
 
 	i = 0;
 	tmp = p;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->pc == (unsigned)addr)
 			i++;
@@ -53,7 +53,7 @@ void	remove_procces_to_arena(int addr, t_core *c)
 	chtype	ch;
 
 	if (is_another_process(addr, c->process))
-			return ;
+		return ;
 	get_col_row(addr, &col, &row);
 	ch = (mvwinch(c->graph->arena_win, row, col) & A_COLOR) / 256;
 	if (ch == P)

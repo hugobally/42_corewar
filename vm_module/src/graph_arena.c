@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 13:35:43 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 14:16:12 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,18 @@ void	create_arena_win(t_core *c)
 	int		i;
 	int		row;
 	int		col;
-	t_graph		*g = c->graph; //A CHANGER
-	
+
 	i = 0;
 	col = 2;
 	row = 1;
-	g->arena_win = create_new_win(ARENA_ROW, ARENA_COL, 0, 0);
-	mvwprintw(g->arena_win, 0, (ARENA_COL / 2) - 11, "%s", " - ARENA - ");
+	c->graph->arena_win = create_new_win(ARENA_ROW, ARENA_COL, 0, 0);
+	mvwprintw(c->graph->arena_win, 0, (ARENA_COL / 2) - 11,
+			"%s", " - ARENA - ");
 	init_pair(EMPTY, COLOR_BLACK, -1);
-	wattron(g->arena_win, COLOR_PAIR(EMPTY));
+	wattron(c->graph->arena_win, COLOR_PAIR(EMPTY));
 	while (i < MEM_SIZE)
 	{
-		mvwprintw(g->arena_win, row, col, "%s", "00 ");
+		mvwprintw(c->graph->arena_win, row, col, "%s", "00 ");
 		col += 3;
 		if (col > 192)
 		{
@@ -68,6 +68,6 @@ void	create_arena_win(t_core *c)
 		}
 		i++;
 	}
-	wattroff(g->arena_win, COLOR_PAIR(EMPTY));
+	wattroff(c->graph->arena_win, COLOR_PAIR(EMPTY));
 	add_proc_champ(c);
 }
