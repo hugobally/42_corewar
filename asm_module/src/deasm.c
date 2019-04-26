@@ -1,25 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   deasm.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/26 17:45:14 by hbally            #+#    #+#             */
+/*   Updated: 2019/04/26 18:06:58 by hbally           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <fcntl.h>
 #include "asm.h"
-#include "errors.h"//for colors
+#include "errors.h"
 #include "libft.h"
 #include "types.h"
 #include "libcorewar.h"
 
-t_code			deasm_error(t_file *file)
+static t_code		deasm_error(t_file *file)
 {
-	ft_dprintf(2, "%sDeassembly error with file %s%s\n",
-				RED, file->name, RESET);
+	ft_dprintf(2, "%sDeassembly error : '%s'%s\n", RED, file->name, RESET);
 	return (error);
 }
 
-/*
-** 
-*/
-
-static int16_t	build_filename(t_file *file)
+static int16_t		build_filename(t_file *file)
 {
-	size_t		name_len;
+	size_t			name_len;
 
 	name_len = ft_strlen(file->name);
 	file->fd = open(file->name, O_RDONLY);
@@ -34,25 +41,7 @@ static int16_t	build_filename(t_file *file)
 	return (done);
 }
 
-/*
-** 
-*/
-
-static uint8_t		fake_bytecode(uint8_t code)
-{
-	if (code & T_REG)
-		return (0x55);
-	else if (code & T_DIR)
-		return (0xAA);
-	else
-		return (0xFF);
-}
-
-/*
-** 
-*/
-
-static t_code		print_param(t_file *file, t_op *op,
+static int			print_param(t_file *file, t_op *op,
 									uint8_t code, uint8_t index)
 {
 	uint8_t			type;
@@ -65,38 +54,44 @@ static t_code		print_param(t_file *file, t_op *op,
 	if (type == REG_CODE)
 	{
 		read(file->fd, ptr, 1);
-		ft_dprintf(file->out_fd, "r%d", buff);
-		return (done);
+		return (ft_dprintf(file->out_fd, "r%d", buff));
 	}
+	if (type == DIR_CODE)
+		ft_dprintf(file->out_fd, "%%");
 	if (type == IND_CODE || op->compact)
 	{
 		read(file->fd, ptr + 1, 1);
 		read(file->fd, ptr, 1);
+		return (ft_dprintf(file->out_fd, "%d", *((int16_t*)ptr)));
 	}
-	else if (type == DIR_CODE)
-		read(file->fd, &buff, 4);
-	if (type == IND_CODE)
-		ft_dprintf(file->out_fd, "%d", *((int16_t*)ptr));
 	else
-		ft_dprintf(file->out_fd, "%%%d", (int32_t)reverse_endian(buff));
-	return (done);
+	{
+		read(file->fd, &buff, 4);
+		return (ft_dprintf(file->out_fd, "%d", (int32_t)reverse_endian(buff)));
+	}
 }
 
-t_code			print_op(t_file *file, t_op *op)
+static t_code		print_op(t_file *file, t_op *op)
 {
-	uint8_t		index;
-	uint8_t		bytecode;
+	uint8_t			index;
+	uint8_t			bytecode;
 
-	ft_dprintf(file->out_fd, "%s ", op->name);
+	ft_dprintf(file->out_fd, "%s\t", op->name);
 	index = 0;
 	if (op->has_ocp)
 		read(file->fd, &bytecode, 1);
 	while (index < op->param_num)
 	{
 		if (!(op->has_ocp))
-			bytecode = fake_bytecode(op->param_types[index]);
-		if (print_param(file, op, bytecode, index) == error)
-			return (error);
+		{
+			if (op->param_types[index] & T_REG)
+				bytecode = 0x55;
+			else if (op->param_types[index] & T_DIR)
+				bytecode = 0xAA;
+			else
+				bytecode = 0xFF;
+		}
+		print_param(file, op, bytecode, index);
 		index++;
 		if (index != op->param_num)
 			ft_dprintf(file->out_fd, ", ");
@@ -105,29 +100,30 @@ t_code			print_op(t_file *file, t_op *op)
 	return (done);
 }
 
-t_code			deasm(t_file *file)
+t_code				deasm(t_file *file)
 {
-	header_t	header;
-	int16_t		status;
-	uint8_t		buff;
+	header_t		header;
+	int16_t			status;
+	uint8_t			buff;
 
 	status = 0;
 	status += build_filename(file);
 	status += read(file->fd, &header, sizeof(header_t))
-				< (int64_t)sizeof(header_t);
+				< (long)sizeof(header_t);
 	status += (file->out_fd = open(file->out_name,
 				O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0644)) == -1;
 	if (status)
 		return (deasm_error(file));
 	ft_dprintf(file->out_fd, ".name \"%s\"\n", header.prog_name);
-	ft_dprintf(file->out_fd, ".comment \"%s\"\n", header.comment);
+	ft_dprintf(file->out_fd, ".comment \"%s\"\n\n", header.comment);
 	while (read(file->fd, &buff, 1) > 0)
 	{
-		ft_printf("opcode : %d\n", buff);
 		if (buff < 1 || buff > 16)
 			return (deasm_error(file));
 		if (print_op(file, &(g_op_tab[buff - 1])) == error)
-			return (error);
+			return (deasm_error(file));
 	}
+	ft_printf("%sDisassembly complete >> %s\n",
+				BLU, file->out_name, RESET);
 	return (done);
 }

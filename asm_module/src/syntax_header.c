@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:58:56 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/22 16:00:44 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/26 17:28:13 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static t_code		copy_val(t_tokenlst *l, char *dst, t_toktype type)
 		}
 		l->now = l->now->next;
 	}
-	return (error_handler(header_badquote, l->now, 0));
+	return (error_handler(badquote, l->now, 0));
 }
 
 t_code				get_header(t_tokenlst *l, header_t *h)
@@ -118,7 +118,7 @@ t_code				get_header(t_tokenlst *l, header_t *h)
 	if (cmd_count < 2)
 		return (error_handler(header_missing, 0, 0));
 	if (h->prog_name[0] == '\0')
-		return (error_handler(header_badquote, l->now, 0));
+		return (error_handler(badquote, find_before(l->now, cmd_name), 0));
 	l->prog_start = l->now;
 	return (done);
 }
