@@ -1,4 +1,5 @@
 #include "corewar.h"
+#include "graph.h"
 
 t_errors			ft_fork(t_core *core, t_process *process)
 {
@@ -10,6 +11,8 @@ t_errors			ft_fork(t_core *core, t_process *process)
 		return (falloc);
 	ft_memcpy(new_process, process, sizeof(t_process));
 	new_process->pc = get_pc(new_process->pc + (params.p1 % IDX_MOD));
+	if (core->visu)
+		add_procces_to_arena(new_process->pc, core->graph);
 	new_process->loading = 0;
 	new_process->pro_name = ++core->nb_pro;
 	push_process(core, new_process);

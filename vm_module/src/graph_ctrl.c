@@ -6,29 +6,36 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:05:07 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:23:56 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 15:47:54 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-void	controls2(t_graph *g, int ch)
+void	controls2(t_core *c, int ch)
 {
-	if (ch == 'n' && g->selected_proc->previous)
+	if (ch == 'n' && c->graph->selected_proc->previous)
 	{
-		g->selected_proc = g->selected_proc->previous;
-		print_registers(g);
+		c->graph->selected_proc = c->graph->selected_proc->previous;
+		print_process(c);
+		print_registers(c->graph);
+		wrefresh(c->graph->reg_win);
+		wrefresh(c->graph->pro_win);
 	}
-	else if (ch == 'm' && g->selected_proc->next)
+	else if (ch == 'm' && c->graph->selected_proc->next)
 	{
-		g->selected_proc = g->selected_proc->next;
-		print_registers(g);
+		c->graph->selected_proc = c->graph->selected_proc->next;
+		print_process(c);
+		print_registers(c->graph);
+		wrefresh(c->graph->reg_win);
+		wrefresh(c->graph->pro_win);
 	}
 }
 
-int		controls(t_graph *g)
+int		controls(t_core *c)
 {
 	int		ch;
+	t_graph *g = c->graph; //ARETIRER
 
 	ch = getch();
 	if (ch == ERR)
@@ -45,7 +52,7 @@ int		controls(t_graph *g)
 		up_laps(g);
 	else if (ch == ' ')
 		pause_game(g);
-	controls2(g, ch);
+	controls2(c, ch);
 	return (0);
 }
 

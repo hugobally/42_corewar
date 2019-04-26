@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:02:57 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 11:22:39 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 15:31:49 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ void	*func_thread_ctrl(void *arg)
 	c = (t_core*)arg;
 	while (1)
 	{
-		if (controls(c->graph))
+		if (controls(c))
 			pthread_exit(NULL);
-		//if (!c->graph->pause)
-		//	print_infos(c);
 	}
 	pthread_exit(NULL);
 }

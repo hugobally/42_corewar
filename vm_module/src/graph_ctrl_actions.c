@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:19:39 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:23:54 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 15:50:59 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	up_laps(t_graph *g)
 	g->laps *= 2;
 	mvwprintw(g->ctrl_win, 2, 2, "%-25s%-10d%s",
 			"LAPS PER FRAME:", g->laps, "[ << 'k'] ['l' >> ]");
+	wrefresh(g->ctrl_win);
 }
 
 void	down_laps(t_graph *g)
@@ -28,6 +29,7 @@ void	down_laps(t_graph *g)
 	g->laps /= 2;
 	mvwprintw(g->ctrl_win, 2, 2, "%-25s%-10d%s",
 			"LAPS PER FRAME:", g->laps, "[ << 'k'] ['l' >> ]");
+	wrefresh(g->ctrl_win);
 }
 
 void	up_fps(t_graph *g)
@@ -37,6 +39,7 @@ void	up_fps(t_graph *g)
 	g->fps *= 2;
 	mvwprintw(g->ctrl_win, 1, 2, "%-25s%-10d%s",
 			"FRAME PER SECOND:", g->fps, "[ << 'o'] ['p' >> ]");
+	wrefresh(g->ctrl_win);
 }
 
 void	down_fps(t_graph *g)
@@ -46,6 +49,7 @@ void	down_fps(t_graph *g)
 	g->fps /= 2;
 	mvwprintw(g->ctrl_win, 1, 2, "%-25s%-10d%s",
 			"FRAME PER SECOND:", g->fps, "[ << 'o'] ['p' >> ]");
+	wrefresh(g->ctrl_win);
 }
 
 void	pause_game(t_graph *g)

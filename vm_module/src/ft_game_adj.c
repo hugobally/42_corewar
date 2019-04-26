@@ -48,22 +48,6 @@ int			ft_count_process(t_process *process)
 	return (i);
 }
 
-int			visu_control(t_core *c, int cycles)//USELESS
-{
-	(void)cycles;
-	if (!c->visu)
-		return (0);
-	print_process(c->graph, c->process);
-	if (controls(c->graph))
-		return (f1_exit);
-	if (!c->graph->pause)
-	{
-		c->graph->nb_cycle++;
-		print_infos(c);
-	}
-	return (0);
-}
-
 void		check_delta(t_core *core)
 {
 	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)

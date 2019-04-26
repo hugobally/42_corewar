@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 13:37:28 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 15:40:56 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void				print_champions(t_graph *g, t_player *p);
 void				print_registers(t_graph *g);
 void				create_registers_win(t_graph *g);
 
-void				print_process(t_graph *g, t_process *p);
-void				create_process_win(t_graph *g, t_process *p);
+void				print_process(t_core *c);
+void				create_process_win(t_core *c);
 
 void				print_infos(t_core *c);
 //void				print_infos(t_graph *g, t_core *c, int cycle_mod);
@@ -81,9 +81,8 @@ void				down_laps(t_graph *g);
 void				up_fps(t_graph *g);
 void				down_fps(t_graph *g);
 void				pause_game(t_graph *g);
-void				controls2(t_graph *g, int ch);
 
-int					controls(t_graph *g);
+int					controls(t_core *c);
 void				create_controls_win(t_graph *g);
 
 void				write_on_arena(int addr, int v, int champ, t_graph *g);
