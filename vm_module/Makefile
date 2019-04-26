@@ -6,7 +6,7 @@
 #    By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/26 14:17:52 by hbally            #+#    #+#              #
-#    Updated: 2019/04/24 14:59:30 by tlesven          ###   ########.fr        #
+#    Updated: 2019/04/24 17:36:54 by tlesven          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ INCLUDES			:=	$(addprefix -I ,$(INCDIR))
 
 INCLIBS				:=	$(foreach LIB,$(LIBS),-L $(LIB) $(subst lib,-l,$(notdir $(LIB))))
 
-NCURSES = -lncurses
+NCURSES = -lncurses -lpthread
 
 # Main Target
 

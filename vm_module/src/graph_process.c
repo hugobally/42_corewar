@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:01:27 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 17:07:17 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 11:34:42 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	print_process(t_graph *g, t_process *p)
 	int			row;
 	const char	*instr[18] = {"error", "live", "load", "store", "add",
 		"sub", "and", "or", "xor", "zjmp", "ldi", "sti", "fork", "lid",
-		"lldi", "lforky", "aff"};
+		"lldi", "lfork", "aff"};
 
 	i = 1;
 	tmp = p;
-	werase(g->pro_win);
-	while (tmp)
+	//werase(g->pro_win);
+	while (tmp && i <= 48)
 	{
 		get_col_row(tmp->pc, &col, &row);
 		if (tmp == g->selected_proc)
@@ -38,7 +38,6 @@ void	print_process(t_graph *g, t_process *p)
 			i, row - 1, col - 2, tmp->is_alive ? 'L' : ' ',
 			tmp->carry ? 'C' : ' ', instr[tmp->instruction],
 			tmp->remaining_cycles);
-		usleep(120);
 		tmp = tmp->next;
 		++i;
 	}

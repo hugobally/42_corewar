@@ -71,7 +71,7 @@ t_errors	the_game(t_core *core)
 			if (core->verbose & 2)
 				ft_printf("It is now cycle %d\n", core->loop);
 			if (core->visu)
-				usleep(100000 / core->graph->fps);
+				usleep(1000000 / core->graph->fps);
 			core->cycles = core->cycles - 1;
 			if ((res = call_instructions(core)) != ok)
 				return (res);
@@ -87,6 +87,12 @@ t_errors	the_game(t_core *core)
 			if (core->flags & FLAG_DUMP)
 				if (--core->dump <= 0 && proc)
 					return (hexdump(core, 0));
+			if (core->visu)
+			{
+				refresh_all_wins(core);
+				print_process(core->graph, core->process);
+				print_infos(core);
+			}
 		}
 	}
 	find_winner(core);

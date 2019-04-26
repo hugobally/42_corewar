@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:22:57 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 10:12:10 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define PRO_COL 53
 # define PRO_ROW 49
 
-# define REG_COL 53
+# define REG_COL 60
 # define REG_ROW 17
 
 # define PLAYER_DIFF 6
