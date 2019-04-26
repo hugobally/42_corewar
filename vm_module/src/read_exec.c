@@ -35,7 +35,7 @@ static void		ft_viz_verb(t_core *core, t_process *p)
 	while (final < 0)
 		final += MEM_SIZE;
 	if (core->visu)
-		move_proccess_on_arena(p->pc, get_pc(p->pc + p->opsize), core->graph);
+		move_proccess_on_arena(p->pc, get_pc(p->pc + p->opsize), core);
 	if ((p->opsize > 1 || p->instruction) && core->verbose & 16)
 	{
 		ft_printf("ADV %d (0x%.4x -> 0x%.4x) ",

@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:57:40 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:59:08 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 13:48:04 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,50 @@ void	add_procces_to_arena(int addr, t_graph *g)
 	c = (mvwinch(g->arena_win, row, col) & A_COLOR) / 256;
 	if (c == EMPTY)
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, P, NULL);
+	else if (c > CHAMP4)
+		return ;
 	else
 		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c + 4, NULL);
 }
 
-void	remove_procces_to_arena(int addr, t_graph *g)
+t_bool		is_another_process(int addr, t_process *p)
+{
+	t_process	*tmp;
+	int			i;
+
+	i = 0;
+	tmp = p;
+	while(tmp)
+	{
+		if (tmp->pc == (unsigned)addr)
+			i++;
+		if (i == 2)
+			return (true);
+		tmp = tmp->next;
+	}
+	return (false);
+}
+
+void	remove_procces_to_arena(int addr, t_core *c)
 {
 	int		col;
 	int		row;
-	chtype	c;
+	chtype	ch;
 
+	if (is_another_process(addr, c->process))
+			return ;
 	get_col_row(addr, &col, &row);
-	c = (mvwinch(g->arena_win, row, col) & A_COLOR) / 256;
-	if (c == P)
-		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, EMPTY, NULL);
+	ch = (mvwinch(c->graph->arena_win, row, col) & A_COLOR) / 256;
+	if (ch == P)
+		mvwchgat(c->graph->arena_win, row, col, 2, A_NORMAL, EMPTY, NULL);
+	else if (ch == EMPTY)
+		return ;
 	else
-		mvwchgat(g->arena_win, row, col, 2, A_NORMAL, c - 4, NULL);
+		mvwchgat(c->graph->arena_win, row, col, 2, A_NORMAL, ch - 4, NULL);
 }
 
-void	move_proccess_on_arena(int addr, int new_addr, t_graph *g)
+void	move_proccess_on_arena(int addr, int new_addr, t_core *c)
 {
-	remove_procces_to_arena(addr, g);
-	add_procces_to_arena(new_addr, g);
+	remove_procces_to_arena(addr, c);
+	add_procces_to_arena(new_addr, c->graph);
 }

@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:01:27 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 11:34:42 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 13:05:06 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_process(t_graph *g, t_process *p)
 	i = 1;
 	tmp = p;
 	//werase(g->pro_win);
-	while (tmp && i <= 48)
+	while (tmp && i < 48)
 	{
 		get_col_row(tmp->pc, &col, &row);
 		if (tmp == g->selected_proc)

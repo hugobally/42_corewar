@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 10:12:10 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 13:37:28 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void				create_controls_win(t_graph *g);
 
 void				write_on_arena(int addr, int v, int champ, t_graph *g);
 void				add_procces_to_arena(int addr, t_graph *g);
-void				remove_procces_to_arena(int addr, t_graph *g);
-void				move_proccess_on_arena(int addr, int new_addr, t_graph *g);
-void				create_arena_win(t_graph *g, t_player *p);
+void				remove_procces_to_arena(int addr, t_core *c);
+void				move_proccess_on_arena(int addr, int new_addr, t_core *c);
+void				create_arena_win(t_core *c);
 
 void				refresh_all_wins(t_core *c);
 void				get_col_row(int addr, int *col, int *row);

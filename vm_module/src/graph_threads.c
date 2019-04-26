@@ -6,13 +6,16 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:02:57 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:56:26 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 11:22:39 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include "corewar.h"
 #include "graph.h"
+
+pthread_cond_t condition = PTHREAD_COND_INITIALIZER; /* Création de la condition */
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; /* Création du mutex */
 
 void	*func_thread_game(void *arg)
 {
@@ -30,12 +33,10 @@ void	*func_thread_ctrl(void *arg)
 	c = (t_core*)arg;
 	while (1)
 	{
-		refresh_all_wins(c);
-		print_process(c->graph, c->process);
 		if (controls(c->graph))
 			pthread_exit(NULL);
-		if (!c->graph->pause)
-			print_infos(c);
+		//if (!c->graph->pause)
+		//	print_infos(c);
 	}
 	pthread_exit(NULL);
 }

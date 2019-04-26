@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 16:39:01 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/26 13:35:43 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,33 @@ void	write_on_arena(int addr, int v, int champ, t_graph *g)
 	wattroff(g->arena_win, COLOR_PAIR(champ + PLAYER_DIFF));
 }
 
-void	add_proc_champ(t_graph *g, t_player *p)
+void	add_proc_champ(t_core *c)
 {
 	unsigned int	i;
 	t_player		*tmp;
 
-	tmp = p;
+	tmp = c->players;
 	while (tmp)
 	{
 		i = 0;
 		while (i < tmp->head.prog_size)
 		{
-			write_on_arena(tmp->orig_pc + i, tmp->proc[i], tmp->p, g);
+			write_on_arena(tmp->orig_pc + i, tmp->proc[i], tmp->p, c->graph);
 			if (i == 0)
-				add_procces_to_arena(tmp->orig_pc, g);
+				add_procces_to_arena(tmp->orig_pc, c->graph);
 			i++;
 		}
 		tmp = tmp->next;
 	}
 }
 
-void	create_arena_win(t_graph *g, t_player *p)
+void	create_arena_win(t_core *c)
 {
 	int		i;
 	int		row;
 	int		col;
-
+	t_graph		*g = c->graph; //A CHANGER
+	
 	i = 0;
 	col = 2;
 	row = 1;
@@ -68,5 +69,5 @@ void	create_arena_win(t_graph *g, t_player *p)
 		i++;
 	}
 	wattroff(g->arena_win, COLOR_PAIR(EMPTY));
-	add_proc_champ(g, p);
+	add_proc_champ(c);
 }
