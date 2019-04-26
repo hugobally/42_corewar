@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:52:02 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/22 15:52:04 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/26 17:27:37 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void					error_parser(t_errors err, t_token *token, t_file *file)
 {
 	static t_errstr		tab[11] = {
 		{header_noquote, "Missing command parameter after", 0, 0, 0},
-		{header_badquote, "Empty quote / Bad quote format", 0, 0, 0},
+		{badquote, "Bad command format around ", 0, 0, 0},
 		{header_namesize, "Name is too long (Max", 1, PROG_NAME_LENGTH, ")"},
 		{header_commentsize, "Comment too long (Max", 1, COMMENT_LENGTH, ")"},
 		{header_duplicate, "Duplicate command", 0, 0, 0},

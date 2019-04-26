@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:57:01 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/22 15:57:31 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/24 16:37:08 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,40 @@ t_code				compile_file(t_file *file)
 	return (done);
 }
 
+static int32_t		print_usage(void)
+{
+	ft_printf("\n%sUsage : ./asm [-d] [list of files]\n\n", WHT);
+	ft_printf("-d : Deassemble .cor source to .s destination%s\n\n", RESET);
+	return (0);
+}
+
+static int32_t		startup(int argc, char **argv, uint8_t *deasm_opt)
+{
+	if (argc == 1)
+		return (print_usage());
+	else if (!ft_strcmp(argv[1], "-d"))
+	{
+		if (argc == 2)
+			return (print_usage());
+		*deasm_opt = 1;
+		return (2);
+	}
+	else
+		return (1);
+}
+
 int					main(int argc, char **argv)
 {
 	int32_t			argnum;
 	t_file			file;
+	static uint8_t	deasm_opt;
 
-	if (argc == 1)
-	{
-		ft_printf("\n%sUsage : ./asm [list of files]%s\n\n", WHT, RESET);
-		return (0);
-	}
-	argnum = 1;
-	while (argnum < argc)
+	argnum = startup(argc, argv, &deasm_opt);
+	while (argnum && argnum < argc)
 	{
 		ft_bzero(&file, sizeof(t_file));
 		file.name = argv[argnum];
-		compile_file(&file);
+		!deasm_opt ? compile_file(&file) : deasm(&file);
 		argnum++;
 	}
 	return (0);

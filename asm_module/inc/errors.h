@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:47:47 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/22 15:47:52 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/26 17:26:55 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef enum		e_errors
 	unknown_token,
 	lexer_error,
 	header_noquote,
-	header_badquote,
+	badquote,
 	header_namesize,
 	header_commentsize,
 	header_duplicate,
