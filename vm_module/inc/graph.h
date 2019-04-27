@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 15:40:56 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 13:30:00 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void				print_registers(t_graph *g);
 void				create_registers_win(t_graph *g);
 
 void				print_process(t_core *c);
+void				erase_process(t_core *c);
 void				create_process_win(t_core *c);
 
 void				print_infos(t_core *c);

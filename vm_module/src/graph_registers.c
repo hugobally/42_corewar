@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:56:55 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:47:48 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 14:05:42 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 
 void	print_registers2(t_graph *g)
 {
-	mvwprintw(g->reg_win, 13, 2, "REGISTER [6] = %5d",
+	mvwprintw(g->reg_win, 13, 2, "REGISTER [6] = %10d",
 			g->selected_proc->regs[6]);
-	mvwprintw(g->reg_win, 15, 2, "REGISTER [7] = %5d",
+	mvwprintw(g->reg_win, 15, 2, "REGISTER [7] = %10d",
 			g->selected_proc->regs[7]);
-	mvwprintw(g->reg_win, 1, 30, "REGISTER [8] = %5d",
+	mvwprintw(g->reg_win, 1, 30, "REGISTER [8] = %10d",
 			g->selected_proc->regs[8]);
-	mvwprintw(g->reg_win, 3, 30, "REGISTER [9] = %5d",
+	mvwprintw(g->reg_win, 3, 30, "REGISTER [9] = %10d",
 			g->selected_proc->regs[9]);
-	mvwprintw(g->reg_win, 5, 30, "REGISTER [10] = %5d",
+	mvwprintw(g->reg_win, 5, 30, "REGISTER [10] = %10d",
 			g->selected_proc->regs[10]);
-	mvwprintw(g->reg_win, 7, 30, "REGISTER [11] = %5d",
+	mvwprintw(g->reg_win, 7, 30, "REGISTER [11] = %10d",
 			g->selected_proc->regs[11]);
-	mvwprintw(g->reg_win, 9, 30, "REGISTER [12] = %5d",
+	mvwprintw(g->reg_win, 9, 30, "REGISTER [12] = %10d",
 			g->selected_proc->regs[12]);
-	mvwprintw(g->reg_win, 11, 30, "REGISTER [13] = %5d",
+	mvwprintw(g->reg_win, 11, 30, "REGISTER [13] = %10d",
 			g->selected_proc->regs[13]);
-	mvwprintw(g->reg_win, 13, 30, "REGISTER [14] = %5d",
+	mvwprintw(g->reg_win, 13, 30, "REGISTER [14] = %10d",
 			g->selected_proc->regs[14]);
-	mvwprintw(g->reg_win, 15, 30, "REGISTER [15] = %5d",
+	mvwprintw(g->reg_win, 15, 30, "REGISTER [15] = %10d",
 			g->selected_proc->regs[15]);
 }
 
 void	print_registers(t_graph *g)
 {
-	mvwprintw(g->reg_win, 1, 2, "REGISTER [0] = %5d",
+	mvwprintw(g->reg_win, 1, 2, "REGISTER [0] = %10d",
 			g->selected_proc->regs[0]);
-	mvwprintw(g->reg_win, 3, 2, "REGISTER [1] = %5d",
+	mvwprintw(g->reg_win, 3, 2, "REGISTER [1] = %10d",
 			g->selected_proc->regs[1]);
-	mvwprintw(g->reg_win, 5, 2, "REGISTER [2] = %5d",
+	mvwprintw(g->reg_win, 5, 2, "REGISTER [2] = %10d",
 			g->selected_proc->regs[2]);
-	mvwprintw(g->reg_win, 7, 2, "REGISTER [3] = %5d",
+	mvwprintw(g->reg_win, 7, 2, "REGISTER [3] = %10d",
 			g->selected_proc->regs[3]);
-	mvwprintw(g->reg_win, 9, 2, "REGISTER [4] = %5d",
+	mvwprintw(g->reg_win, 9, 2, "REGISTER [4] = %10d",
 			g->selected_proc->regs[4]);
-	mvwprintw(g->reg_win, 11, 2, "REGISTER [5] = %5d",
+	mvwprintw(g->reg_win, 11, 2, "REGISTER [5] = %10d",
 			g->selected_proc->regs[5]);
 	print_registers2(g);
 	wrefresh(g->reg_win);

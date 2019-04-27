@@ -16,7 +16,10 @@ void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 	cur->pro_name, core->loop - cur->last_live,
 	core->max_cycle_to_die);
 	if (core->visu)
+	{
 		remove_procces_to_arena(cur->pc, core);
+		erase_process(core);
+	}
 	free(cur);
 	cur = NULL;
 }

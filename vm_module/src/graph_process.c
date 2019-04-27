@@ -6,12 +6,18 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:01:27 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 15:40:41 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 13:37:29 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unistd.h"
 #include "graph.h"
+
+void	erase_process(t_core *c)
+{
+	werase(c->graph->pro_win);
+	create_process_win(c);
+}
 
 void	print_process(t_core *c)
 {
@@ -34,7 +40,7 @@ void	print_process(t_core *c)
 			wattron(c->graph->pro_win, COLOR_PAIR(tmp->player + PLAYER_DIFF));
 		mvwprintw(c->graph->pro_win, i, 2,
 			"#%-5d%-2.2dx%-2.2d [%c][%c]%7s in%4d laps.",
-			i, row - 1, col - 2, tmp->is_alive ? 'L' : ' ',
+			i, row - 1, (col - 2) / 3 , tmp->is_alive ? 'L' : ' ',
 			tmp->carry ? 'C' : ' ', instr[tmp->instruction],
 			tmp->remaining_cycles);
 		tmp = tmp->next;

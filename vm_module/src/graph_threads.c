@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:02:57 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 11:49:45 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 13:48:01 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	*func_thread_ctrl(void *arg)
 	while (1)
 	{
 		if (controls(c))
+		{
+			c->visu = false;
 			pthread_exit(NULL);
+		}
 	}
 	pthread_exit(NULL);
 }
@@ -50,6 +53,8 @@ int		init_thread(t_core *c)
 	if (pthread_create(&thread_game, NULL, func_thread_game, c))
 		return (badthread);
 	if (pthread_join(thread_ctrl, NULL))
+		return (badthread);
+	if (pthread_join(thread_game, NULL))
 		return (badthread);
 	return (0);
 }
