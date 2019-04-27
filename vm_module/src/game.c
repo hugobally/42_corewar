@@ -70,10 +70,10 @@ t_errors	the_game(t_core *core)
 	{
 		if (core->visu && core->graph->proc_aff)
 		{
-			pthread_mutex_lock (&mutex); /* On verrouille le mutex */
-			pthread_cond_signal (&condition); /* On délivre le signal : condition remplie */
+			pthread_mutex_lock (&mutex);
+			pthread_cond_signal (&condition);
 			pthread_cond_wait(&condition2, &mutex);
-			 pthread_mutex_unlock (&mutex); /* On déverrouille le mutex */
+			 pthread_mutex_unlock (&mutex);
 		}
 		if (core->visu && core->graph->pause)
 			;

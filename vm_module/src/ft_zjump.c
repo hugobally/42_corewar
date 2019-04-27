@@ -13,8 +13,10 @@ t_errors		ft_zjmp(t_core *core, t_process *process)
 	if (process->carry == true)
 	{
 		if (core->visu)
+		{
 			move_proccess_on_arena(process->pc,
 			process->pc + process->params.p1, core);
+		}
 		process->pc = get_pc(process->pc + process->params.p1 % IDX_MOD);
 	}
 	return (ok);
