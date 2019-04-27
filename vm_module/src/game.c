@@ -2,11 +2,6 @@
 #include "graph.h"
 #include <stdlib.h>
 #include <unistd.h> //ARETIERE AVEC USLEEP
-#include <pthread.h>
-
-extern pthread_cond_t g_condition;
-extern pthread_cond_t g_condition2;
-extern pthread_mutex_t g_mutex;
 
 void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 {
@@ -73,28 +68,16 @@ t_errors	the_game(t_core *core)
 		hexdump(core, 1);
 	while (proc)
 	{
-		if (core->visu && core->graph->proc_aff)
-		{
-			pthread_mutex_lock (&g_mutex);
-			pthread_cond_signal (&g_condition);
-			pthread_cond_wait(&g_condition2, &g_mutex);
-			 pthread_mutex_unlock (&g_mutex);
-		}
+		game_mutex(core);
 		if (core->visu && core->graph->pause)
 			;
 		else
 		{
-			if (core->visu)
-			{
-				refresh_all_wins(core);
-				print_process(core);
-				print_infos(core);
-			}
+			game_refresh(core);
 			core->loop++;
 			if (core->verbose & 2)
 				ft_printf("It is now cycle %d\n", core->loop);
-			if (core->visu)
-				usleep(1000000 / core->graph->fps);
+			game_fps(core);
 			core->cycles = core->cycles - 1;
 			if ((res = call_instructions(core)) != ok)
 				return (res);

@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 13:30:00 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 15:40:54 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int					init_thread(t_core *c);
 
 int					init_ncurse(void);
 int					make_graph(t_core *c);
+
+void				game_mutex(t_core *c);
+void				game_refresh(t_core *c);
+void				game_fps(t_core *c);
 
 void				make_win(t_core *c);
 
