@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:56:55 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 14:05:42 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 14:46:09 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	print_registers2(t_graph *g)
 			g->selected_proc->regs[6]);
 	mvwprintw(g->reg_win, 15, 2, "REGISTER [7] = %10d",
 			g->selected_proc->regs[7]);
-	mvwprintw(g->reg_win, 1, 30, "REGISTER [8] = %10d",
+	mvwprintw(g->reg_win, 1, 30, "REGISTER [8] = %11d",
 			g->selected_proc->regs[8]);
-	mvwprintw(g->reg_win, 3, 30, "REGISTER [9] = %10d",
+	mvwprintw(g->reg_win, 3, 30, "REGISTER [9] = %11d",
 			g->selected_proc->regs[9]);
 	mvwprintw(g->reg_win, 5, 30, "REGISTER [10] = %10d",
 			g->selected_proc->regs[10]);

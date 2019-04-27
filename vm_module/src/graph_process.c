@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:01:27 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 13:37:29 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 14:28:39 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	print_process(t_core *c)
 	{
 		get_col_row(tmp->pc, &col, &row);
 		if (tmp == c->graph->selected_proc)
-			wattron(c->graph->pro_win, COLOR_PAIR(tmp->player + PLAYER_DIFF + 4));
+			wattron(c->graph->pro_win, COLOR_PAIR(tmp->player +
+						PLAYER_DIFF + 4));
 		else
 			wattron(c->graph->pro_win, COLOR_PAIR(tmp->player + PLAYER_DIFF));
 		mvwprintw(c->graph->pro_win, i, 2,
-			"#%-5d%-2.2dx%-2.2d [%c][%c]%7s in%4d laps.",
-			i, row - 1, (col - 2) / 3 , tmp->is_alive ? 'L' : ' ',
-			tmp->carry ? 'C' : ' ', instr[tmp->instruction],
-			tmp->remaining_cycles);
+			"#%-5d%-2.2dx%-2.2d [%c][%c]%7s in%4d laps.", i, row - 1,
+			(col - 2) / 3, tmp->is_alive ? 'L' : ' ', tmp->carry ? 'C' : ' ',
+			instr[tmp->instruction], tmp->remaining_cycles);
 		tmp = tmp->next;
 		++i;
 	}

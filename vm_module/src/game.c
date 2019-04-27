@@ -2,6 +2,11 @@
 #include "graph.h"
 #include <stdlib.h>
 #include <unistd.h> //ARETIERE AVEC USLEEP
+#include <pthread.h>
+
+extern pthread_cond_t g_condition;
+extern pthread_cond_t g_condition2;
+extern pthread_mutex_t g_mutex;
 
 void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 {
@@ -55,10 +60,6 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 	check_delta(core);
 }
 
-#include <pthread.h>
-extern pthread_cond_t condition;
-extern pthread_cond_t condition2;
-extern pthread_mutex_t mutex;
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
@@ -74,10 +75,10 @@ t_errors	the_game(t_core *core)
 	{
 		if (core->visu && core->graph->proc_aff)
 		{
-			pthread_mutex_lock (&mutex);
-			pthread_cond_signal (&condition);
-			pthread_cond_wait(&condition2, &mutex);
-			 pthread_mutex_unlock (&mutex);
+			pthread_mutex_lock (&g_mutex);
+			pthread_cond_signal (&g_condition);
+			pthread_cond_wait(&g_condition2, &g_mutex);
+			 pthread_mutex_unlock (&g_mutex);
 		}
 		if (core->visu && core->graph->pause)
 			;

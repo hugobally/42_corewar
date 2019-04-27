@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:02:57 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 13:48:01 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 14:41:28 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "corewar.h"
 #include "graph.h"
 
-pthread_cond_t condition = PTHREAD_COND_INITIALIZER; /* Création de la condition */
-pthread_cond_t condition2 = PTHREAD_COND_INITIALIZER; /* Création de la condition */
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; /* Création du mutex */
+pthread_cond_t g_condition = PTHREAD_COND_INITIALIZER;
+pthread_cond_t g_condition2 = PTHREAD_COND_INITIALIZER;
+pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void	*func_thread_game(void *arg)
 {

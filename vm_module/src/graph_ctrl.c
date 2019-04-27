@@ -6,52 +6,50 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:05:07 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 11:51:23 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 14:45:26 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include "graph.h"
 
-extern pthread_cond_t condition;
-extern pthread_cond_t condition2;
-extern pthread_mutex_t mutex;
-void	controls2(t_core *c, int ch)
+extern pthread_cond_t g_condition;
+extern pthread_cond_t g_condition2;
+extern pthread_mutex_t g_mutex;
+
+void	process_select_down(t_core *c)
 {
-	if (ch == 'n' && c->graph->selected_proc->previous)
-	{
-		c->graph->proc_aff = true;
-		pthread_mutex_lock(&mutex);
-		pthread_cond_wait (&condition, &mutex); /* On attend que la condition soit remplie */
-		c->graph->selected_proc = c->graph->selected_proc->previous;
-		print_process(c);
-		print_registers(c->graph);
-		wrefresh(c->graph->reg_win);
-		wrefresh(c->graph->pro_win);
-		pthread_cond_signal (&condition2); /* On délivre le signal : condition remplie */
-		pthread_mutex_unlock(&mutex);
-		c->graph->proc_aff = false;
-	}
-	else if (ch == 'm' && c->graph->selected_proc->next)
-	{
-		c->graph->proc_aff = true;
-		pthread_mutex_lock(&mutex);
-		pthread_cond_wait (&condition, &mutex); /* On attend que la condition soit remplie */
-		c->graph->selected_proc = c->graph->selected_proc->next;
-		print_process(c);
-		print_registers(c->graph);
-		wrefresh(c->graph->reg_win);
-		wrefresh(c->graph->pro_win);
-		pthread_cond_signal (&condition2); /* On délivre le signal : condition remplie */
-		pthread_mutex_unlock(&mutex);
-		c->graph->proc_aff = false;
-	}
+	c->graph->proc_aff = true;
+	pthread_mutex_lock(&g_mutex);
+	pthread_cond_wait(&g_condition, &g_mutex);
+	c->graph->selected_proc = c->graph->selected_proc->previous;
+	print_process(c);
+	print_registers(c->graph);
+	wrefresh(c->graph->reg_win);
+	wrefresh(c->graph->pro_win);
+	pthread_cond_signal(&g_condition2);
+	pthread_mutex_unlock(&g_mutex);
+	c->graph->proc_aff = false;
+}
+
+void	process_select_up(t_core *c)
+{
+	c->graph->proc_aff = true;
+	pthread_mutex_lock(&g_mutex);
+	pthread_cond_wait(&g_condition, &g_mutex);
+	c->graph->selected_proc = c->graph->selected_proc->next;
+	print_process(c);
+	print_registers(c->graph);
+	wrefresh(c->graph->reg_win);
+	wrefresh(c->graph->pro_win);
+	pthread_cond_signal(&g_condition2);
+	pthread_mutex_unlock(&g_mutex);
+	c->graph->proc_aff = false;
 }
 
 int		controls(t_core *c)
 {
 	int		ch;
-	t_graph *g = c->graph; //ARETIRER
 
 	ch = getch();
 	if (ch == ERR)
@@ -59,16 +57,19 @@ int		controls(t_core *c)
 	else if (ch == 'q')
 		return (1);
 	else if (ch == 'o')
-		down_fps(g);
+		down_fps(c->graph);
 	else if (ch == 'p')
-		up_fps(g);
+		up_fps(c->graph);
 	else if (ch == 'k')
-		down_laps(g);
+		down_laps(c->graph);
 	else if (ch == 'l')
-		up_laps(g);
+		up_laps(c->graph);
 	else if (ch == ' ')
-		pause_game(g);
-	controls2(c, ch);
+		pause_game(c->graph);
+	else if (ch == 'n' && c->graph->selected_proc->previous)
+		process_select_down(c);
+	else if (ch == 'm' && c->graph->selected_proc->next)
+		process_select_up(c);
 	return (0);
 }
 
