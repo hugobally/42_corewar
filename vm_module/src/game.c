@@ -15,7 +15,8 @@ void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 	cur->pro_name, core->loop - cur->last_live,
 	core->max_cycle_to_die);
-	remove_procces_to_arena(cur->pc, core);
+	if (core->visu)
+		remove_procces_to_arena(cur->pc, core);
 	free(cur);
 	cur = NULL;
 }
