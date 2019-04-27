@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:57:40 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 14:17:12 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 09:57:52 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	remove_procces_to_arena(int addr, t_core *c)
 	ch = (mvwinch(c->graph->arena_win, row, col) & A_COLOR) / 256;
 	if (ch == P)
 		mvwchgat(c->graph->arena_win, row, col, 2, A_NORMAL, EMPTY, NULL);
-	else if (ch == EMPTY)
+else if (ch == EMPTY || ch < P1)
 		return ;
 	else
 		mvwchgat(c->graph->arena_win, row, col, 2, A_NORMAL, ch - 4, NULL);

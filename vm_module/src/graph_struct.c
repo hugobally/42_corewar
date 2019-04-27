@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:16:25 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/15 18:09:20 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 11:35:13 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_graph		*init_graph(void)
 	g->laps = 1;
 	g->pause = 1;
 	g->selected_proc = NULL;
+	g->proc_aff = false;
 	return (g);
 }
 

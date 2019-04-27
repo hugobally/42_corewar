@@ -6,29 +6,45 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:05:07 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 15:47:54 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 11:51:23 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <pthread.h>
 #include "graph.h"
 
+extern pthread_cond_t condition;
+extern pthread_cond_t condition2;
+extern pthread_mutex_t mutex;
 void	controls2(t_core *c, int ch)
 {
 	if (ch == 'n' && c->graph->selected_proc->previous)
 	{
+		c->graph->proc_aff = true;
+		pthread_mutex_lock(&mutex);
+		pthread_cond_wait (&condition, &mutex); /* On attend que la condition soit remplie */
 		c->graph->selected_proc = c->graph->selected_proc->previous;
 		print_process(c);
 		print_registers(c->graph);
 		wrefresh(c->graph->reg_win);
 		wrefresh(c->graph->pro_win);
+		pthread_cond_signal (&condition2); /* On délivre le signal : condition remplie */
+		pthread_mutex_unlock(&mutex);
+		c->graph->proc_aff = false;
 	}
 	else if (ch == 'm' && c->graph->selected_proc->next)
 	{
+		c->graph->proc_aff = true;
+		pthread_mutex_lock(&mutex);
+		pthread_cond_wait (&condition, &mutex); /* On attend que la condition soit remplie */
 		c->graph->selected_proc = c->graph->selected_proc->next;
 		print_process(c);
 		print_registers(c->graph);
 		wrefresh(c->graph->reg_win);
 		wrefresh(c->graph->pro_win);
+		pthread_cond_signal (&condition2); /* On délivre le signal : condition remplie */
+		pthread_mutex_unlock(&mutex);
+		c->graph->proc_aff = false;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 13:02:57 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/26 15:31:49 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/27 11:49:45 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "graph.h"
 
 pthread_cond_t condition = PTHREAD_COND_INITIALIZER; /* Création de la condition */
+pthread_cond_t condition2 = PTHREAD_COND_INITIALIZER; /* Création de la condition */
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; /* Création du mutex */
 
 void	*func_thread_game(void *arg)

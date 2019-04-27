@@ -99,6 +99,7 @@ typedef struct			s_graph
 	int					laps;
 	int					nb_cycle;
 	t_bool				pause;
+	t_bool				proc_aff;
 	t_process			*selected_proc;
 }						t_graph;
 

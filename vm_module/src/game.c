@@ -15,6 +15,7 @@ void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 	cur->pro_name, core->loop - cur->last_live,
 	core->max_cycle_to_die);
+	remove_procces_to_arena(cur->pc, core);
 	free(cur);
 	cur = NULL;
 }
@@ -50,6 +51,10 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 	check_delta(core);
 }
 
+#include <pthread.h>
+extern pthread_cond_t condition;
+extern pthread_cond_t condition2;
+extern pthread_mutex_t mutex;
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
@@ -63,6 +68,13 @@ t_errors	the_game(t_core *core)
 		hexdump(core, 1);
 	while (proc)
 	{
+		if (core->visu && core->graph->proc_aff)
+		{
+			pthread_mutex_lock (&mutex); /* On verrouille le mutex */
+			pthread_cond_signal (&condition); /* On délivre le signal : condition remplie */
+			pthread_cond_wait(&condition2, &mutex);
+			 pthread_mutex_unlock (&mutex); /* On déverrouille le mutex */
+		}
 		if (core->visu && core->graph->pause)
 			;
 		else
