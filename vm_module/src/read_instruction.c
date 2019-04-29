@@ -2,7 +2,7 @@
 #include "graph.h"
 
 void				write_val(t_core *core, uint32_t pc, uint32_t size,
-								int32_t val, int player)
+								int32_t val)
 {
 	uint32_t		i;
 
@@ -14,7 +14,7 @@ void				write_val(t_core *core, uint32_t pc, uint32_t size,
 		if (core->visu)
 		{
 			write_on_arena(get_pc(pc + size - i), *(((uint8_t*)&val) + i),
-			player, core->graph);
+			core->graph->tmp_player, core->graph);
 		}
 		i++;
 	}

@@ -99,6 +99,7 @@ typedef struct			s_graph
 	int					fps;
 	int					laps;
 	int					nb_cycle;
+	int					tmp_player;
 	t_bool				pause;
 	t_bool				proc_aff;
 	t_process			*selected_proc;
@@ -205,7 +206,7 @@ typedef t_errors		(*t_inst_tab)(t_core *, t_process *);
 extern	t_inst_tab		g_op_inst_tab[17];
 
 void					read_instruction(t_core *core, t_process *pro, int flag);
-void					write_val(t_core *core, uint32_t pc, uint32_t size, int32_t val, int champ);
+void					write_val(t_core *core, uint32_t pc, uint32_t size, int32_t val);
 int32_t					read_val(t_core *core, uint32_t pc, uint32_t size);
 
 
