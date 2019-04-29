@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_game_adj.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/29 13:32:32 by alac              #+#    #+#             */
+/*   Updated: 2019/04/29 13:32:33 by alac             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 #include "graph.h"
 
@@ -44,19 +56,6 @@ void		find_winner(t_core *core)
 	if (tmp)
 		ft_printf("Contestant %d, \"%s\", has won !\n",
 		-tmp->p, tmp->head.prog_name);
-}
-
-int			ft_count_process(t_process *process)
-{
-	int i;
-
-	i = 0;
-	while (process != NULL)
-	{
-		process = process->next;
-		i++;
-	}
-	return (i);
 }
 
 void		check_delta(t_core *core)

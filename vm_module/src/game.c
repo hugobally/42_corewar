@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/29 13:36:00 by alac              #+#    #+#             */
+/*   Updated: 2019/04/29 13:36:02 by alac             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 #include "graph.h"
 #include <stdlib.h>
-#include <unistd.h> //ARETIERE AVEC USLEEP
 
 void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 {
@@ -67,21 +78,14 @@ int			ft_killed_or_not(t_core *core, t_process *proc, uint32_t *i)
 
 t_errors	ft_compress(t_core *core, t_process *proc, uint32_t *i)
 {
-	t_errors res;
-	t_process *tmp;
+	t_errors	res;
+	t_process	*tmp;
 
 	tmp = core->process;
 	game_refresh(core);
 	core->loop++;
 	if (core->verbose & 2)
-	{
 		ft_printf("It is now cycle %d\n", core->loop);
-		while (tmp)
-		{
-			ft_printf("i\n");
-			tmp = tmp->next;
-		}
-	}
 	game_fps(core);
 	core->cycles = core->cycles - 1;
 	if ((res = call_instructions(core)) != ok)

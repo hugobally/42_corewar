@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_header.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:58:56 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/26 17:28:13 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/29 14:00:07 by alac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static t_code		copy_val(t_tokenlst *l, char *dst, t_toktype type)
 	return (error_handler(badquote, l->now, 0));
 }
 
-t_code				get_header(t_tokenlst *l, header_t *h)
+t_code				get_header(t_tokenlst *l, t_header *h)
 {
 	int				cmd_count;
 	t_toktype		t;

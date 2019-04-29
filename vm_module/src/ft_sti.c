@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sti.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/29 13:34:01 by alac              #+#    #+#             */
+/*   Updated: 2019/04/29 13:34:02 by alac             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 static void			ft_verbose(t_core *core, t_process *process, int p1, int p2)
 {
 	int	final;
 
+	write_val(core, get_pc(process->pc + ((p1 + p2) % IDX_MOD)), 4,
+	process->regs[process->params.p1 - 1]);
 	final = process->pc + (p1 + p2) % IDX_MOD;
 	if (core->verbose & 4)
 	{
@@ -41,8 +55,6 @@ t_errors			ft_sti(t_core *core, t_process *process)
 		p2 = process->params.p3;
 	if (core->visu)
 		core->graph->tmp_player = process->player;
-	write_val(core, get_pc(process->pc + ((p1 + p2) % IDX_MOD)), 4,
-	process->regs[process->params.p1 - 1]);
 	ft_verbose(core, process, p1, p2);
 	return (ok);
 }
