@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   players.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:39:16 by alac              #+#    #+#             */
-/*   Updated: 2019/04/29 14:00:07 by alac             ###   ########.fr       */
+/*   Updated: 2019/04/29 14:24:43 by rle-ru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_errors	new_player(t_core *core, char *av)
 
 	if (!(new = (t_player*)ft_memalloc(sizeof(t_player))))
 		return (falloc);
+	push_player(core, new);
 	if ((fd = open(av, O_RDONLY)) < 2)
 		return (badopen);
 	if ((ret = read_header(fd, new)) != ok)
@@ -91,6 +92,5 @@ t_errors	new_player(t_core *core, char *av)
 	if ((ret = nb_player(core, new)) != ok)
 		return (ret);
 	new->is_alive = true;
-	push_player(core, new);
 	return (ok);
 }
