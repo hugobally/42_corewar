@@ -19,10 +19,8 @@
 static void				print_offset(char *line, uint32_t pos, int fd)
 {
 	uint32_t			i;
-	uint32_t			offset;
 
 	i = 0;
-	offset = 0;
 	pos = (pos & COL_MASK) >> 16;
 	while (line[i] && i < pos - 1)
 	{
