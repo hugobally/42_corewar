@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:05:07 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 14:45:26 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/29 11:07:57 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,43 @@ extern pthread_mutex_t g_mutex;
 
 void	process_select_down(t_core *c)
 {
-	c->graph->proc_aff = true;
-	pthread_mutex_lock(&g_mutex);
-	pthread_cond_wait(&g_condition, &g_mutex);
+	if (!c->graph->pause)
+	{
+		c->graph->proc_aff = true;
+		pthread_mutex_lock(&g_mutex);
+		pthread_cond_wait(&g_condition, &g_mutex);
+	}
 	c->graph->selected_proc = c->graph->selected_proc->previous;
 	print_process(c);
 	print_registers(c->graph);
 	wrefresh(c->graph->reg_win);
 	wrefresh(c->graph->pro_win);
-	pthread_cond_signal(&g_condition2);
-	pthread_mutex_unlock(&g_mutex);
-	c->graph->proc_aff = false;
+	if (!c->graph->pause)
+	{
+		pthread_cond_signal(&g_condition2);
+		pthread_mutex_unlock(&g_mutex);
+		c->graph->proc_aff = false;
+	}
 }
 
 void	process_select_up(t_core *c)
 {
-	c->graph->proc_aff = true;
-	pthread_mutex_lock(&g_mutex);
-	pthread_cond_wait(&g_condition, &g_mutex);
+	if (!c->graph->pause)
+	{
+		c->graph->proc_aff = true;
+		pthread_mutex_lock(&g_mutex);
+		pthread_cond_wait(&g_condition, &g_mutex);
+	}
 	c->graph->selected_proc = c->graph->selected_proc->next;
 	print_process(c);
 	print_registers(c->graph);
 	wrefresh(c->graph->reg_win);
 	wrefresh(c->graph->pro_win);
-	pthread_cond_signal(&g_condition2);
-	pthread_mutex_unlock(&g_mutex);
+	if (!c->graph->pause)
+	{
+		pthread_cond_signal(&g_condition2);
+		pthread_mutex_unlock(&g_mutex);
+	}
 	c->graph->proc_aff = false;
 }
 
