@@ -59,7 +59,7 @@ fi
 i=0
 
 NAMES="$C1 $C2 $C3 $C4"
-printf "Launching $NAMES\n"
+printf "Launched $NAMES\n"
 
 while [[ $i -le $NUM_CYCLE ]]; do
 	CURRENT_CYCLE=$(($START_CYCLE + $i))
