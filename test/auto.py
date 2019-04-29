@@ -1,3 +1,4 @@
+from random import shuffle
 import time
 import os
 import subprocess
@@ -10,6 +11,10 @@ os.system("./auto/auto_config")
 max_children = int(subprocess.getoutput("cat auto/auto.conf | grep NUM_PROCESSES | cut -d '=' -f 2"))
 
 dir = os.listdir(COR_DIR)
+shuffle(dir)
+
+print (dir)
+exit()
 
 total = 0
 for i in range(0, len(dir)):
