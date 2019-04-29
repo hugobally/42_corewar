@@ -6,7 +6,7 @@
 /*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:49:39 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/24 16:36:03 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/29 12:13:54 by hbally           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ t_code		scanner_exit(t_tokenlst *lst, t_errors code);
 ** Deasm
 */
 
-t_code			deasm(t_file *file);
+t_code		deasm(t_file *file);
 
 #endif
