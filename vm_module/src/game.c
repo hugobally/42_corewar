@@ -1,7 +1,6 @@
 #include "corewar.h"
 #include "graph.h"
 #include <stdlib.h>
-#include <unistd.h> //ARETIERE AVEC USLEEP
 
 void		cur_is_dead(t_core *core, t_process *pre, t_process *cur)
 {
@@ -67,8 +66,8 @@ int			ft_killed_or_not(t_core *core, t_process *proc, uint32_t *i)
 
 t_errors	ft_compress(t_core *core, t_process *proc, uint32_t *i)
 {
-	t_errors res;
-	t_process *tmp;
+	t_errors	res;
+	t_process	*tmp;
 
 	tmp = core->process;
 	game_refresh(core);
