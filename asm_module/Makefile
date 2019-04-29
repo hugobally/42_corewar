@@ -74,7 +74,7 @@ INCLIBS				:=	$(foreach LIB,$(LIBS),-L $(LIB) $(subst lib,-l,$(notdir $(LIB))))
 all					:	libs $(NAME)
 
 $(NAME)				: 	$(OBJS) $(LIBFILES)
-						$(CC) -o $@ $(CFLAGS) $(INCLIBS) $(OBJS)
+						$(CC) -o $@ $(CFLAGS) $(OBJS) $(INCLIBS)
 
 # Make Libs
 

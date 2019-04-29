@@ -103,7 +103,7 @@ NCURSES = -lncurses -lpthread
 all					:	libs $(NAME)
 
 $(NAME)				: 	$(OBJS) $(LIBFILES)
-						$(CC) -o $@ $(CFLAGS) $(INCLIBS) $(OBJS) $(NCURSES)
+						$(CC) -o $@ $(CFLAGS) $(OBJS) $(NCURSES) $(INCLIBS) 
 
 # Make Libs
 
