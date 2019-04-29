@@ -6,7 +6,7 @@
 /*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:39:16 by alac              #+#    #+#             */
-/*   Updated: 2019/04/29 13:39:19 by alac             ###   ########.fr       */
+/*   Updated: 2019/04/29 14:00:07 by alac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_errors	read_proc(int fd, t_player *new)
 
 t_errors	read_header(int fd, t_player *new)
 {
-	if ((int64_t)read(fd, new, sizeof(header_t)) < (int64_t)sizeof(header_t))
+	if ((int64_t)read(fd, new, sizeof(t_header)) < (int64_t)sizeof(t_header))
 		return (filesmall);
 	new->head.magic = reverse_endian(new->head.magic);
 	new->head.prog_size = reverse_endian(new->head.prog_size);

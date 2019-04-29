@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:41:37 by rle-ru            #+#    #+#             */
-/*   Updated: 2019/04/29 13:56:35 by rle-ru           ###   ########.fr       */
+/*   Updated: 2019/04/29 14:00:07 by alac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct			s_params
 
 typedef	struct			s_player
 {
-	header_t			head;
+	t_header			head;
 	int					p;
 	unsigned char		proc[CHAMP_MAX_SIZE];
 	struct s_player		*next;

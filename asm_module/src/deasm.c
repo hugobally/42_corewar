@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deasm.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 17:45:14 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/26 18:06:58 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/29 14:00:07 by alac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,14 @@ static t_code		print_op(t_file *file, t_op *op)
 
 t_code				deasm(t_file *file)
 {
-	header_t		header;
+	t_header		header;
 	int16_t			status;
 	uint8_t			buff;
 
 	status = 0;
 	status += build_filename(file);
-	status += read(file->fd, &header, sizeof(header_t))
-				< (long)sizeof(header_t);
+	status += read(file->fd, &header, sizeof(t_header))
+				< (long)sizeof(t_header);
 	status += (file->out_fd = open(file->out_name,
 				O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0644)) == -1;
 	if (status)

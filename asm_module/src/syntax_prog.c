@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_prog.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:00:55 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/22 16:00:58 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/29 14:00:07 by alac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_code		parse_instruction(t_tokenlst *lst, t_label **label_tab)
 }
 
 static void			parse_line(t_tokenlst *lst, t_label **label_tab,
-							header_t *header)
+							t_header *header)
 {
 	if (lst->now->type == label)
 	{
@@ -81,7 +81,7 @@ static void			parse_line(t_tokenlst *lst, t_label **label_tab,
 	lst->now = skip_eol(lst->now);
 }
 
-t_code				syntax_prog(t_tokenlst *lst, t_label **ltab, header_t *h)
+t_code				syntax_prog(t_tokenlst *lst, t_label **ltab, t_header *h)
 {
 	t_bool			warning_triggered;
 
