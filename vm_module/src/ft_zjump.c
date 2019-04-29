@@ -15,12 +15,9 @@
 
 t_errors		ft_zjmp(t_core *core, t_process *process)
 {
-	t_params	params;
-
 	if (core->verbose & 4)
 		ft_printf("P%5d | zjmp %d %s\n", process->pro_name,
 		process->params.p1, process->carry ? "OK" : "FAILED");
-	params = process->params;
 	(void)core;
 	if (process->carry == true)
 	{
