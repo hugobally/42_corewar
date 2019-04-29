@@ -81,9 +81,7 @@ int			ft_killed_or_not(t_core *core, t_process *proc, uint32_t *i)
 t_errors	ft_compress(t_core *core, t_process *proc, uint32_t *i)
 {
 	t_errors	res;
-	t_process	*tmp;
 
-	tmp = core->process;
 	game_refresh(core);
 	core->loop++;
 	if (core->verbose & 2)
