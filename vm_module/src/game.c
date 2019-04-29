@@ -55,6 +55,49 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 	check_delta(core);
 }
 
+int			ft_killed_or_not(t_core *core, t_process *proc, uint32_t *i)
+{
+	if (core->cycles <= 0 && proc)
+	{
+		kill_process(core, NULL, core->process);
+		core->cycles = core->max_cycle_to_die;
+		proc = core->process;
+	}
+	if (++*i == core->sdump)
+		*i = hexdump(core, 1);
+	if (core->flags & FLAG_DUMP)
+		if (--core->dump <= 0 && proc)
+			return (hexdump(core, 0));
+	return (1);
+}
+
+t_errors	ft_compress(t_core *core, t_process *proc, uint32_t *i)
+{
+	t_errors res;
+	t_process *tmp;
+
+	tmp = core->process;
+	game_refresh(core);
+	core->loop++;
+	if (core->verbose & 2)
+	{
+		ft_printf("It is now cycle %d\n", core->loop);
+		while (tmp)
+		{
+			ft_printf("i\n");
+			tmp = tmp->next;
+		}
+	}
+	game_fps(core);
+	core->cycles = core->cycles - 1;
+	if ((res = call_instructions(core)) != ok)
+		return (res);
+	proc = core->process;
+	if ((res = ft_killed_or_not(core, proc, i)) == 0)
+		return (du);
+	return (ok);
+}
+
 t_errors	the_game(t_core *core)
 {
 	t_process	*proc;
@@ -73,26 +116,9 @@ t_errors	the_game(t_core *core)
 			;
 		else
 		{
-			game_refresh(core);
-			core->loop++;
-			if (core->verbose & 2)
-				ft_printf("It is now cycle %d\n", core->loop);
-			game_fps(core);
-			core->cycles = core->cycles - 1;
-			if ((res = call_instructions(core)) != ok)
+			if ((res = ft_compress(core, proc, &i)) != ok)
 				return (res);
 			proc = core->process;
-			if (core->cycles <= 0 && proc)
-			{
-				kill_process(core, NULL, core->process);
-				core->cycles = core->max_cycle_to_die;
-				proc = core->process;
-			}
-			if (++i == core->sdump)
-				i = hexdump(core, 1);
-			if (core->flags & FLAG_DUMP)
-				if (--core->dump <= 0 && proc)
-					return (hexdump(core, 0));
 		}
 	}
 	find_winner(core);
