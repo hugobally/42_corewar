@@ -15,6 +15,7 @@ t_errors			ft_fork(t_core *core, t_process *process)
 		add_procces_to_arena(new_process->pc, core->graph);
 	new_process->loading = 0;
 	new_process->pro_name = ++core->nb_pro;
+	new_process->previous = NULL;
 	push_process(core, new_process);
 	if (core->verbose & 4)
 		ft_printf("P%5d | fork %d (%d)\n", process->pro_name,
