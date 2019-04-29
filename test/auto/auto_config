@@ -1,0 +1,46 @@
+#!/bin/bash
+
+BASE_DIR="./"
+AUTO_DIR="./auto/"
+LOG_DIR="logs"
+COR_REF="./bin/corewar_ref"
+COR_MINE="./bin/corewar"
+ASM_REF="./bin/asm_ref"
+ASM_MINE="./bin/asm"
+CHAMP_DIR="champs"
+COR_DIR="champs/cor"
+LOG_DIR="logs"
+
+cd $BASE_DIR
+
+while true; do
+	read -e -p "Change default config [y/n] ? " yn
+	case $yn in
+		[Yy]* )
+			read -e -p "Number of concurrent processes to launch : " NUM_PROCESSES
+			read -e -p "Start at cycle [Default 0]               : " START_CYCLE
+			read -e -p "Run for X cycles [Default MAX_INT]       : " NUM_CYCLE
+			break;;
+		[Nn]* )
+			if [ -f $AUTO_DIR/auto.conf ]; then
+				exit
+			fi
+			break;;
+	esac
+done
+
+if [[ ! ${#START_CYCLE} -ge 1 ]]; then
+	START_CYCLE=0
+fi
+if [[ ! ${#NUM_CYCLE} -ge 1 ]]; then
+	NUM_CYCLE=2147483647
+fi
+if [[ ! ${#NUM_PROCESSES} -ge 1 ]]; then
+	NUM_PROCESSES=5
+fi
+
+echo "START_CYCLE=$START_CYCLE" > $AUTO_DIR/auto.conf
+echo "NUM_CYCLE=$NUM_CYCLE" >> $AUTO_DIR/auto.conf
+echo "NUM_PROCESSES=$NUM_PROCESSES" >> $AUTO_DIR/auto.conf
+
+clear

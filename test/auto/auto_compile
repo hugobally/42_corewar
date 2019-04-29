@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BASE_DIR="./"
 LOG_DIR="logs"
 COR_REF="./bin/corewar_ref"
 COR_MINE="./bin/corewar"
@@ -9,6 +10,7 @@ CHAMP_DIR="champs"
 COR_DIR="champs/cor"
 LOG_DIR="logs"
 
+cd $BASE_DIR
 make -C ..
 mkdir -p $COR_DIR
 mkdir -p $LOG_DIR
