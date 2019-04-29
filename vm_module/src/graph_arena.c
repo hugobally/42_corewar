@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 14:07:36 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/29 14:20:16 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/26 14:16:12 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	add_proc_champ(t_core *c)
 			write_on_arena(tmp->orig_pc + i, tmp->proc[i], tmp->p, c->graph);
 			if (i == 0)
 				add_procces_to_arena(tmp->orig_pc, c->graph);
-			i+;
+			i++;
 		}
 		tmp = tmp->next;
 	}
