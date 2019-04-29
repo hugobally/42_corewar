@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lldi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:33:35 by alac              #+#    #+#             */
-/*   Updated: 2019/04/29 13:33:36 by alac             ###   ########.fr       */
+/*   Updated: 2019/04/29 15:21:56 by rle-ru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_errors				ft_lldi(t_core *core, t_process *process)
 	else if (pa[0] == DIR)
 		p1 = process->params.p1;
 	else if (pa[0] == IND)
-		p1 = read_val(core, get_pc(process->pc + process->params.p1), 4);
+		p1 = read_val(core,
+			get_pc(process->pc + process->params.p1 % IDX_MOD), 4);
 	if (pa[1] == REG)
 		p2 = process->regs[process->params.p2 - 1];
 	else if (pa[1] == DIR)
