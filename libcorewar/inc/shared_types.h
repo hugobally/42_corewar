@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   shared_types.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 13:52:53 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/05 13:51:45 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/29 13:57:01 by alac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OP_TYPE_H
-# define OP_TYPE_H
+#ifndef SHARED_TYPES_H
+# define SHARED_TYPES_H
 
 # include <stdint.h>
 
@@ -33,6 +33,6 @@ typedef struct		s_op
 	uint8_t			compact;
 }					t_op;
 
-extern t_op 		g_op_tab[17];
+extern t_op			g_op_tab[17];
 
 #endif

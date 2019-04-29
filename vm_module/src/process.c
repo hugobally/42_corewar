@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/29 13:39:42 by alac              #+#    #+#             */
+/*   Updated: 2019/04/29 13:39:43 by alac             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void		ft_carry(t_process *process, int res)
@@ -15,10 +27,6 @@ void		push_process(t_core *core, t_process *new)
 		core->process->previous = new;
 	core->process = new;
 }
-
-/*
-** Reste a initialiser les valeurs.
-*/
 
 t_errors	make_process(t_core *core, uint32_t pc, t_player *pl)
 {

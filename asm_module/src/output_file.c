@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:57:36 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/22 15:57:42 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/29 14:00:07 by alac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static t_code	build_filename(t_file *file)
 
 t_code			output_file(t_tokenlst *lst,
 							t_label **label_tab,
-							header_t *header,
+							t_header *header,
 							t_file *file)
 {
 	header->magic = reverse_endian(header->magic);
@@ -87,7 +87,7 @@ t_code			output_file(t_tokenlst *lst,
 		{
 			ft_dprintf(1, "%s%s: %sWriting output to %s%s%s\n",
 						WHT, file->name, BLU, WHT, file->out_name, RESET);
-			if (write(file->out_fd, (void*)header, sizeof(header_t)) != -1)
+			if (write(file->out_fd, (void*)header, sizeof(t_header)) != -1)
 				return (output_instructions(lst, label_tab, file));
 		}
 	}

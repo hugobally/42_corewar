@@ -6,10 +6,11 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:16:49 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/24 14:40:29 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/29 14:00:01 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include "corewar.h"
 #include "libft.h"
 #include "graph.h"
@@ -27,6 +28,7 @@ int		init_ncurse(void)
 	noecho();
 	refresh();
 	use_default_colors();
+	signal (SIGWINCH, NULL);
 	init_pair(CHAMP1, COLOR_RED, -1);
 	init_pair(CHAMP2, COLOR_BLUE, -1);
 	init_pair(CHAMP3, COLOR_GREEN, -1);

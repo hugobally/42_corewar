@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 15:58:46 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/22 15:58:47 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/29 14:00:07 by alac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ t_token				*skip_eol(t_token *node)
 
 t_code				syntax(t_tokenlst *lst, t_file *file)
 {
-	header_t		header;
+	t_header		header;
 	t_label			*label_tab;
 
 	label_tab = NULL;
-	ft_bzero(&header, sizeof(header_t));
+	ft_bzero(&header, sizeof(t_header));
 	header.magic = COREWAR_EXEC_MAGIC;
 	if (get_header(lst, &header) == error)
 		return (syntax_exit(&label_tab, parser_error));
