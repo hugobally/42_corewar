@@ -58,19 +58,6 @@ void		find_winner(t_core *core)
 		-tmp->p, tmp->head.prog_name);
 }
 
-int			ft_count_process(t_process *process)
-{
-	int i;
-
-	i = 0;
-	while (process != NULL)
-	{
-		process = process->next;
-		i++;
-	}
-	return (i);
-}
-
 void		check_delta(t_core *core)
 {
 	if (--core->max_checks == 0 || core->nbr_live >= NBR_LIVE)

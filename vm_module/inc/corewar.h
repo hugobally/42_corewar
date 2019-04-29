@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   corewar.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/29 13:41:37 by rle-ru            #+#    #+#             */
+/*   Updated: 2019/04/29 13:45:08 by rle-ru           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COREWAR_H
 # define COREWAR_H
 # include <stdint.h>
@@ -133,41 +145,29 @@ typedef struct			s_core
 
 
 /*
-** arguments.c
+** Parsing
 */
 
 t_errors				get_arguments(t_core *core, int ac, char **av);
-
-/*
-** players.c
-*/
-
 t_errors 				new_player(t_core *core, char *av);
 t_errors				nb_player(t_core *core, t_player *new);
-uint32_t				reverse_endian(uint32_t	num);
-
-/*
-** arena.c
-*/
-
 t_errors				make_arena(t_core *core);
 
 /*
-** process.c
+** Process
 */
 
 t_errors				make_process(t_core *core, uint32_t pc, t_player *pl);
 void					push_process(t_core *core, t_process *new);
 
 /*
-** game.c
+** Main loop
 */
 
 t_errors				the_game(t_core *core);
 void					ft_not_alive(t_player *tmp);
 t_errors				call_instructions(t_core *core);
 void					find_winner(t_core *core);
-int						ft_count_process(t_process *process);
 int						visu_control(t_core *c, int cycles);
 void					check_delta(t_core *core);
 t_errors				check_option_adj(t_core *core, char **av, int *i, int ac);
@@ -201,8 +201,7 @@ t_errors				ft_lfork(t_core *core, t_process *process);
 t_errors				ft_aff(t_core *core, t_process *process);
 void					ft_carry(t_process *process, int res);
 t_errors				ft_reg(t_process *p, int *p1, int *p2, int *p3);
-
-
+int						ft_get_params(t_core *core, t_process *process, int p, int type);
 typedef t_errors		(*t_inst_tab)(t_core *, t_process *);
 extern	t_inst_tab		g_op_inst_tab[17];
 
@@ -210,12 +209,14 @@ void					read_instruction(t_core *core, t_process *pro, int flag);
 void					write_val(t_core *core, uint32_t pc, uint32_t size, int32_t val);
 int32_t					read_val(t_core *core, uint32_t pc, uint32_t size);
 
+/*
+**	Tools
+*/
 
 int						get_pc(uint32_t i);
-
 int						hexdump(t_core *core, int flag);
 void					introduction(t_player *player);
-int						ft_get_params(t_core *core, t_process *process, int p, int type);
 int						ft_usage(char *exe_name, int ac);
+uint32_t				reverse_endian(uint32_t	num);
 
 #endif
