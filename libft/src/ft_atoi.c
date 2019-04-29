@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbally <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 20:00:42 by hbally            #+#    #+#             */
-/*   Updated: 2019/04/05 18:12:44 by hbally           ###   ########.fr       */
+/*   Updated: 2019/04/29 14:03:46 by rle-ru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static uint64_t		get_number(const char *str, size_t i)
 	return (n);
 }
 
-int				ft_atoi(const char *str)
+int					ft_atoi(const char *str)
 {
 	size_t		i;
 	int32_t		sign;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:28:56 by alac              #+#    #+#             */
-/*   Updated: 2019/04/29 13:28:57 by alac             ###   ########.fr       */
+/*   Updated: 2019/04/29 14:30:59 by rle-ru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ t_errors	get_arguments(t_core *core, int ac, char **av)
 		}
 		else
 		{
+			core->bad_arg = av[i];
 			if ((ret = new_player(core, av[i])) != ok)
 				return (ret);
 			++core->nb_players;
-			core->bad_arg = av[i];
 		}
 		if (core->nb_players > MAX_PLAYERS)
 			return (badarg);

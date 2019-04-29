@@ -80,7 +80,7 @@ read -e -p "Champion 2            : " C2
 read -e -p "Champion 3            : " C3
 read -e -p "Champion 4            : " C4
 read -e -p "Start at cycle        : " START_CYCLE
-read -e -p "Cycles [empty = inf.] : " NUM_CYCLES
+read -e -p "Cycles [empty = inf.] : " NUM_CYCLE
 printf $RESET
 
 # RUN #
@@ -109,8 +109,8 @@ if [[ ${#C4} -ge 1 ]]; then
 	MY_CMD="$MY_CMD $COR_DIR/$C4"
 fi
 
-if [[ ! ${#NUM_CYCLES} -ge 1 ]]; then
-	NUM_CYCLES=2147483647
+if [[ ! ${#NUM_CYCLE} -ge 1 ]]; then
+	NUM_CYCLE=2147483647
 fi
 
 if [[ ! ${#START_CYCLE} -ge 1 ]]; then
@@ -125,7 +125,7 @@ printf $WHT
 printf "$C1 $C2 $C3 $C4\n"
 printf $RESET
 
-while [[ $i -le $NUM_CYCLES ]]; do
+while [[ $i -le $NUM_CYCLE ]]; do
 	tput cup 1 1
 	CURRENT_CYCLE=$(($START_CYCLE + $i))
 	printf "$CURRENT_CYCLE\n"
