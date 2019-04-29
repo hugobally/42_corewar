@@ -6,7 +6,7 @@
 /*   By: rle-ru <rle-ru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:33:26 by alac              #+#    #+#             */
-/*   Updated: 2019/04/29 16:23:04 by rle-ru           ###   ########.fr       */
+/*   Updated: 2019/04/29 17:02:01 by rle-ru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_errors			ft_lld(t_core *core, t_process *process)
 		process->regs[params.p2 - 1] = params.p1;
 	else if (p1 == IND)
 		process->regs[params.p2 - 1] = read_val(core,
-		get_pc(process->pc + params.p1), 4);
+		get_pc(process->pc + params.p1), 2);
 	ft_carry(process, process->regs[params.p2 - 1]);
 	if (core->verbose & 4)
 		ft_printf("P%5d | lld %d r%d\n", process->pro_name,
