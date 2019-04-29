@@ -6,7 +6,7 @@
 /*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:36:00 by alac              #+#    #+#             */
-/*   Updated: 2019/04/29 13:36:02 by alac             ###   ########.fr       */
+/*   Updated: 2019/04/29 15:07:24 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 	}
 	tmp = core->players;
 	ft_not_alive(tmp);
+	if (core->visu)
+		print_champions(core);
 	check_delta(core);
 }
 
