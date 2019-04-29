@@ -15,10 +15,8 @@
 
 void	*ft_memrealloc(void *old, size_t old_size, size_t new_size)
 {
-	unsigned int	i;
 	void			*new;
 
-	i = 0;
 	new = (void*)ft_memalloc(new_size);
 	if (!new || !old)
 		return (NULL);
