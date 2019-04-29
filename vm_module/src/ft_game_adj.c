@@ -6,7 +6,7 @@
 /*   By: alac <alac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:32:32 by alac              #+#    #+#             */
-/*   Updated: 2019/04/29 13:32:33 by alac             ###   ########.fr       */
+/*   Updated: 2019/04/29 14:56:24 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,12 @@ void		find_winner(t_core *core)
 	tmp = core->players;
 	while (tmp && tmp->p != core->last_live_done_by)
 		tmp = tmp->next;
-	if (tmp)
+	if (core->visu && tmp)
+	{
+		print_champions(core);
+		refresh_all_wins(core);
+	}
+	else if (tmp)
 		ft_printf("Contestant %d, \"%s\", has won !\n",
 		-tmp->p, tmp->head.prog_name);
 }

@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 11:11:16 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 15:40:54 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/29 14:24:53 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "corewar.h"
 # include <ncurses.h>
 
-# define ARENA_COL 195 // HAVE TO CHANGE, MEM_SIZE
-# define ARENA_ROW 66 // HAVE TO CHANGE, MEM_SIZE
+# define ARENA_COL 195
+# define ARENA_ROW 66
 
 # define CTRL_COL 58
 # define CTRL_ROW 7
@@ -67,8 +67,8 @@ void				make_win(t_core *c);
 t_graph				*init_graph(void);
 void				free_graph(t_graph *g);
 
-void				create_champions_win(t_graph *g, t_player *p);
-void				print_champions(t_graph *g, t_player *p);
+void				create_champions_win(t_core *c);
+void				print_champions(t_core *c);
 
 void				print_registers(t_graph *g);
 void				create_registers_win(t_graph *g);
@@ -78,7 +78,6 @@ void				erase_process(t_core *c);
 void				create_process_win(t_core *c);
 
 void				print_infos(t_core *c);
-//void				print_infos(t_graph *g, t_core *c, int cycle_mod);
 void				create_infos_win(t_graph *g, t_core *c);
 
 void				up_laps(t_graph *g);
