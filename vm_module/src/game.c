@@ -45,13 +45,7 @@ void		kill_process(t_core *core, t_process *pre, t_process *cur)
 			cur->previous = pre;
 	}
 	tmp = core->players;
-	while (tmp)
-	{
-		if (tmp->has_lived == false)
-			tmp->is_alive = false;
-		tmp->has_lived = false;
-		tmp = tmp->next;
-	}
+	ft_not_alive(tmp);
 	check_delta(core);
 }
 

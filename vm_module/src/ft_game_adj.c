@@ -1,6 +1,17 @@
 #include "corewar.h"
 #include "graph.h"
 
+void		ft_not_alive(t_player *tmp)
+{
+	while (tmp)
+	{
+		if (tmp->has_lived == false)
+			tmp->is_alive = false;
+		tmp->has_lived = false;
+		tmp = tmp->next;
+	}
+}
+
 t_errors	call_instructions(t_core *core)
 {
 	t_process	*tmp;

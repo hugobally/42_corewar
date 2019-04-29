@@ -164,6 +164,7 @@ void					push_process(t_core *core, t_process *new);
 */
 
 t_errors				the_game(t_core *core);
+void					ft_not_alive(t_player *tmp);
 t_errors				call_instructions(t_core *core);
 void					find_winner(t_core *core);
 int						ft_count_process(t_process *process);
