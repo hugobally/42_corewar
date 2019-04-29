@@ -1,0 +1,29 @@
+#!/bin/bash
+
+BASE_DIR="."
+AUTO_DIR="./auto"
+LOG_DIR="logs"
+
+# COLORS #
+
+RED="\033[1;31m"
+GRN="\033[1;32m"
+YEL="\033[1;33m"
+BLU="\033[1;34m"
+MAG="\033[1;35m"
+CYN="\033[1;36m"
+WHT="\033[1;37m"
+RESET="\033[0m"
+
+cd $BASE_DIR
+
+printf ".\n.\n.\n.\n.\n"
+
+if ! grep "Diff KO" $LOG_DIR/* &>/dev/null; then
+	printf $BLU
+	echo "All diffs in $BASE_DIR/$LOG_DIR are OK"
+	printf $RESET
+else
+	printf $RED
+	echo "Found KO diffs in $BASE_DIR/$LOG_DIR"
+fi
