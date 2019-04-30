@@ -6,7 +6,7 @@
 /*   By: tlesven <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:19:39 by tlesven           #+#    #+#             */
-/*   Updated: 2019/04/27 11:06:53 by tlesven          ###   ########.fr       */
+/*   Updated: 2019/04/30 09:46:35 by tlesven          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void	pause_game(t_graph *g)
 	g->pause = g->pause ? 0 : 1;
 	mvwprintw(g->ctrl_win, 4, 2, "%-25s%-10s%s", "PAUSE:",
 			g->pause ? "ON" : "OFF", "[' ']");
+	if (g->pause)
+		wrefresh(g->ctrl_win);
 }
