@@ -7,13 +7,12 @@ About
 >Core War is a 1984 programming game created by D. G. Jones and A. K. Dewdney in which two or more battle programs (called "warriors") compete for control of a virtual computer.
 These battle programs are written in an abstract assembly language called Redcode.
 
-Our version
-----------
+Let's run it !
+-----
 
-##### How to use it ?
-
-* First you'll need to write a .s file with a set of assembly instructions
-    * You can find this set in either [corewar.pdf](https://raw.githubusercontent.com/kcosta42/Corewar/master/corewar.pdf) or in [corewar_en.pdf](https://raw.githubusercontent.com/kcosta42/Corewar/master/corewar_en.pdf)
-    * Or you can just use one of the many warriors in the sujet/champs directory
-* Then you'll have to compile it using the `asm` binary
-* Then just execute the `corewar` binary with your warrior(s) as arguments
+- Clone the repo
+- `make` creates two binaries :
+   - `asm` compiles 'warriors' from `.s` assembly source to `.cor` machine code
+   - `corewar` is the VM which runs the game by loading `.cor` machine code inside a memory arena
+- Compile champions contained in `./warriors/` using the `./asm warriors/*.s` command.
+- Launch a game with `./corewar -visu champs/warrior1.cor champs/warrior2.cor [...]` (1 to 4 warriors can compete at the same time inside the VM)
