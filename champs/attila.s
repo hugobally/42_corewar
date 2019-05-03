@@ -1,5 +1,5 @@
-.name "ourchamp"
-.comment ""
+.name "Attila"
+.comment "ARTHOOOOUUUUUUUUUUUR!!"
 
 fork %:yolo
 st r1, 35
