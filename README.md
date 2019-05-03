@@ -10,7 +10,7 @@ These battle programs are written in an abstract assembly language called Redcod
 Let's run it !
 -----
 
-- Clone the repo
+- Clone the repo \[NOTE: You'll need `ncurses` for this program to work\]
 - `make` creates two binaries :
    - `asm` compiles 'warriors' from `.s` assembly source to `.cor` machine code
    - `corewar` is the VM which runs the game by loading `.cor` machine code inside a memory arena
